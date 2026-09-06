@@ -1,0 +1,31 @@
+# Python & Virtual environments
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Data files & model artifacts (don't commit large datasets/models)
+data/raw/*
+!data/raw/.gitkeep
+models/*.pkl
+models/*.joblib
+models/*.pt
+models/*.pth
+!models/.gitkeep
+
+# Secrets & Kaggle API token
+.env
+kaggle.json

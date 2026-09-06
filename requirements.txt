@@ -1,0 +1,27 @@
+# Core & Interactive Notebooks
+jupyter>=1.1.0
+ipykernel>=6.29.0
+numpy>=1.26.0,<2.0.0
+scipy>=1.13.0
+pandas>=2.2.0
+
+# Visualization
+matplotlib>=3.9.0
+seaborn>=0.13.0
+
+# Machine Learning & Metrics
+scikit-learn>=1.5.0
+xgboost>=2.1.0
+joblib>=1.4.0
+
+# Neural Networks & Deep Learning
+torch>=2.4.0
+
+# NLP
+nltk>=3.9.0
+gensim>=4.3.0
+transformers>=4.44.0
+
+# Kaggle & Utility
+kaggle>=1.6.0
+python-dotenv>=1.0.0
