@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "colab-mcp": {
+      "command": "C:\\Users\\xeen\\.local\\bin\\uvx.exe",
+      "args": [
+        "git+https://github.com/googlecolab/colab-mcp"
+      ]
+    }
+  }
+}
