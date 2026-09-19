@@ -1,15 +1,17 @@
+import base64
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
 import streamlit as st
 
+from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.compose import TransformedTargetRegressor
 
 st.set_page_config(
     page_title="Lineární regrese | Coderslab ML",
@@ -98,15 +100,72 @@ def train_diamonds_models(df):
     }
     return m_simple, m_4c, m_hgb, scores, list(X_all.columns)
 
+def render_jupyter_notebook(nb_path: Path):
+    if not nb_path.exists():
+        st.warning(f"Soubor {nb_path.name} nebyl v repozitáři nalezen.")
+        return
+
+    with open(nb_path, "r", encoding="utf-8") as f:
+        nb_json = json.load(f)
+
+    with open(nb_path, "rb") as f:
+        bytes_data = f.read()
+
+    col_btn, col_info = st.columns([1, 3])
+    with col_btn:
+        st.download_button(
+            label=f"📥 Stáhnout soubor {nb_path.name}",
+            data=bytes_data,
+            file_name=nb_path.name,
+            mime="application/x-ipynb+json",
+            use_container_width=True,
+        )
+    with col_info:
+        st.caption(f"Umístění v repozitáři: `01_Regression/{nb_path.name}` | Počet buněk: {len(nb_json.get('cells', []))}")
+
+    st.markdown("---")
+
+    for cell in nb_json.get("cells", []):
+        cell_type = cell.get("cell_type")
+        source = "".join(cell.get("source", []))
+        if not source.strip():
+            continue
+
+        if cell_type == "markdown":
+            st.markdown(source)
+        elif cell_type == "code":
+            exec_count = cell.get("execution_count")
+            exec_str = f"[{exec_count}]" if exec_count is not None else "[ ]"
+            st.markdown(f"**Vstupní kód buňky `In {exec_str}`:**")
+            st.code(source, language="python")
+
+            outputs = cell.get("outputs", [])
+            if outputs:
+                with st.expander(f"Výstup buňky {exec_str}", expanded=True):
+                    for out in outputs:
+                        out_type = out.get("output_type")
+                        if out_type == "stream":
+                            text = "".join(out.get("text", []))
+                            st.text(text)
+                        elif out_type in ("execute_result", "display_data"):
+                            data = out.get("data", {})
+                            if "image/png" in data:
+                                img_bytes = base64.b64decode(data["image/png"])
+                                st.image(img_bytes)
+                            elif "text/plain" in data:
+                                st.text("".join(data["text/plain"]))
+        st.write("")
+
 # -----------------------------------------------------------------------------
 # Hlavička stránky
 # -----------------------------------------------------------------------------
 st.title("📈 Blok 1: Lineární regrese")
-st.caption("Teoretické základy, praktická implementace v Scikit-learn a interaktivní predikční simulátory.")
+st.caption("Teoretické základy, praktická implementace v Scikit-learn, interaktivní prediktory a Jupyter sešity.")
 
-tab_kc, tab_diamonds, tab_theory = st.tabs([
+tab_kc, tab_diamonds, tab_notebooks, tab_theory = st.tabs([
     "🏡 Cvičení 1: Ceny domů (King County)",
     "💎 Cvičení 2: Klenotník a diamanty",
+    "📓 Jupyter Notebooky (.ipynb)",
     "📚 Teorie & Moderní ML (09/2026)",
 ])
 
@@ -259,7 +318,6 @@ with tab_diamonds:
 
     with c_right:
         st.caption("Rozměry diamantu v milimetrech (automaticky odvozeno z karátů):")
-        # Fyzikální odhad rozměrů pro kulatý briliant
         base_x = float(np.round(6.5 * (carat ** (1 / 3)), 2))
         base_y = base_x
         base_z = float(np.round(base_x * 0.615, 2))
@@ -290,7 +348,6 @@ with tab_diamonds:
         "z": z_dim,
     }])[d_features]
 
-    pred_4c = float(m_4c_d.predict(sample_diamond)[0])
     pred_hgb_d = float(m_hgb_d.predict(sample_diamond)[0])
 
     st.markdown("#### 💵 Doporučené ocenění pro klenotníka:")
@@ -328,7 +385,33 @@ with tab_diamonds:
             st.image(str(p_out), caption="Detekce odlehlých hodnot a anomálií u diamantů")
 
 # =============================================================================
-# TAB 3: TEORIE & MODERNÍ ML (09/2026)
+# TAB 3: JUPYTER NOTEBOOKY (.ipynb)
+# =============================================================================
+with tab_notebooks:
+    st.subheader("📓 Kompletní Jupyter sešity s kódy a výstupy")
+    st.write(
+        "Zde si můžete interaktivně prohlížet celý průběh vypracování cvičení buňku po buňce "
+        "včetně formátovaného markdownu, Python kódu a vygenerovaných grafů a tabulek. "
+        "Sešity si můžete také přímo stáhnout do svého počítače."
+    )
+
+    selected_nb = st.selectbox(
+        "Zvolte cvičení pro zobrazení sešitu:",
+        [
+            "01. Cvičení 1: Lineární regrese – Nemovitosti King County (01_linear_regression_exercise_1.ipynb)",
+            "02. Cvičení 2: Lineární regrese – Klenotník a diamanty (02_linear_regression_exercise_2.ipynb)",
+        ],
+    )
+
+    if "01_linear_regression_exercise_1" in selected_nb:
+        nb_file = reg_dir / "01_linear_regression_exercise_1.ipynb"
+    else:
+        nb_file = reg_dir / "02_linear_regression_exercise_2.ipynb"
+
+    render_jupyter_notebook(nb_file)
+
+# =============================================================================
+# TAB 4: TEORIE & MODERNÍ ML (09/2026)
 # =============================================================================
 with tab_theory:
     st.subheader("📚 Teoretický rozbor a stav ML světa k 09/2026")
