@@ -1,6 +1,9 @@
 from pathlib import Path
 import numpy as np
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import streamlit as st
 
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -80,7 +83,10 @@ st.subheader("💍 Zadejte parametry diamantu (Gemologické 4C):")
 c_left, c_right = st.columns(2)
 
 with c_left:
-    carat = st.slider("Hmotnost v karátech (Carat):", min_value=0.20, max_value=3.50, value=1.00, step=0.01)
+    carat = st.slider("Hmotnost v karátech (Carat):", min_value=0.20, max_value=5.01, value=1.00, step=0.01)
+    if carat > 3.5:
+        st.info("ℹ️ **Kámen nad 3.5 ct:** Jedná se o extrémně vzácný investiční kus (v celé databázi 54 tisíc kamenů je pouze 9 takových kusů).")
+
     cut_label = st.select_slider(
         "Kvalita brusu (Cut):",
         options=["Fair", "Good", "Very Good", "Premium", "Ideal"],
@@ -152,7 +158,7 @@ with v2:
     )
 
 st.markdown("---")
-st.subheader("🔍 Gemologický paradox multikolinearity")
+st.subheader("🔍 Gemologický paradox multikolinearity a analýza dat")
 st.warning(
     """
     **Proč v základní lineární regresi vyšly záporné váhy pro délku x (-$3,675) a hloubku z (-$2,602)?**  
@@ -162,6 +168,29 @@ st.warning(
     *Moderní řešení:* Ponechat pouze `carat` a parametry 4C, nebo použít Gradient Boosting.
     """
 )
-p_out = plots_dir / "08_diamonds_outliers_detection.png"
-if p_out.exists():
-    st.image(str(p_out), caption="Detekce odlehlých hodnot a anomálií u diamantů")
+
+# Interaktivní grafy diamantů
+st.markdown("### 📊 Interaktivní diagnostika a anomálie diamantů")
+st.caption("Grafy jsou uspořádány samostatně na plnou šířku pro maximální přehlednost.")
+
+# 1. Carat vs Price interaktivní scatter
+st.markdown("#### 1. Nelineární mocninný vztah: Hmotnost v karátech vs. Cena diamantu")
+sample_d = diamonds_df.sample(n=min(2500, len(diamonds_df)), random_state=42)
+fig_carat = px.scatter(
+    sample_d,
+    x="carat",
+    y="price",
+    color="clarity",
+    title="Carat vs. Cena (zřetelný exponenciální růst)",
+    opacity=0.5,
+    hover_data=["cut", "color", "x", "y", "z"],
+    color_continuous_scale="Viridis",
+)
+fig_carat.update_layout(height=500, margin=dict(l=10, r=10, t=40, b=10))
+st.plotly_chart(fig_carat, use_container_width=True)
+
+# 2. Původní statický graf anomálií
+with st.expander("🖼️ Zobrazit detekci odlehlých hodnot a anomálií (nulové rozměry a překlepy)"):
+    p_out = plots_dir / "08_diamonds_outliers_detection.png"
+    if p_out.exists():
+        st.image(str(p_out), caption="Detekce odlehlých hodnot (x, y, z anomálie)", use_container_width=True)

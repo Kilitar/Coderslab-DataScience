@@ -1,6 +1,9 @@
 from pathlib import Path
 import numpy as np
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import streamlit as st
 
 from sklearn.compose import TransformedTargetRegressor
@@ -47,13 +50,13 @@ def train_kc_models(df):
         "Log-OLS": {"R2": r2_score(y_te, log_model.predict(X_te)), "MAE": mean_absolute_error(y_te, log_model.predict(X_te))},
         "HGB": {"R2": r2_score(y_te, hgb.predict(X_te)), "MAE": mean_absolute_error(y_te, hgb.predict(X_te))},
     }
-    return ols, scaler, log_model, hgb, scores, list(X.columns)
+    return ols, scaler, log_model, hgb, scores, list(X.columns), X_te_s, y_te
 
 st.title("🏡 Cvičení 1: Odhad cen nemovitostí (King County, USA)")
 st.caption("Predikce tržních cen domů na základě plochy, kvality stavby, lokality a počtu místností.")
 
 kc_df = load_kc_data()
-ols_kc, scaler_kc, log_kc, hgb_kc, kc_scores, kc_features = train_kc_models(kc_df)
+ols_kc, scaler_kc, log_kc, hgb_kc, kc_scores, kc_features, X_te_s_kc, y_te_kc = train_kc_models(kc_df)
 
 c1, c2, c3 = st.columns(3)
 with c1:
@@ -121,13 +124,105 @@ with r3:
     st.warning(f"**Gradient Boosting (HGB):**\n### ${max(0, pred_hgb):,.0f}")
 
 st.markdown("---")
-st.subheader("📊 Diagnostické grafy z analýzy")
-g1, g2 = st.columns(2)
-with g1:
+
+# =============================================================================
+# INTERAKTIVNÍ DASHBOARD POD SEBOU (FULL WIDTH)
+# =============================================================================
+st.subheader("📊 Diagnostický dashboard a analýza dat")
+st.write(
+    "Jednotlivé grafy jsou umístěny samostatně na plnou šířku. Jsou plně **interaktivní (Plotly)** – "
+    "můžete v nich zoomovat, najíždět myší na konkrétní body a v pravém horním rohu každého grafu "
+    "kliknout na ikonu **fullscreen** pro zvětšení na celou obrazovku."
+)
+
+# 1. GRAF: KORELAČNÍ MATICE (NA CELOU ŠÍŘKU)
+st.markdown("### 1. Interaktivní korelační matice příznaků")
+st.caption("Přejeďte myší přes buňky pro zobrazení přesného Pearsonova korelačního koeficientu mezi veličinami.")
+
+corr = kc_df.corr()
+fig_corr = px.imshow(
+    corr,
+    text_auto=".2f",
+    aspect="auto",
+    color_continuous_scale="RdBu_r",
+    zmin=-1,
+    zmax=1,
+)
+fig_corr.update_layout(
+    height=650,
+    margin=dict(l=10, r=10, t=30, b=10),
+    font=dict(size=11),
+)
+st.plotly_chart(fig_corr, use_container_width=True)
+
+with st.expander("🖼️ Zobrazit původní statický graf (PNG) v tiskové kvalitě"):
     p1 = plots_dir / "01_correlation_matrix.png"
     if p1.exists():
-        st.image(str(p1), caption="Korelační matice příznaků s cenou nemovitosti")
-with g2:
+        st.image(str(p1), caption="Původní statický Seaborn heatmap", use_container_width=True)
+
+st.markdown("---")
+
+# 2. GRAF: DIAGNOSTIKA REZIDUÍ A HOMOSKEDASTICITY (NA CELOU ŠÍŘKU)
+st.markdown("### 2. Analýza chyb a reziduí (Homoskedasticita & Normalita)")
+st.caption(
+    "Vlevo: Závislost rezidua (chyby) na predikované ceně. Zřetelný trychtýřovitý rozptyl dokazuje heteroskedasticitu "
+    "(u dražších domů dělá lineární model výrazně větší chyby). Vpravo: Histogram rozdělení chyb."
+)
+
+y_pred_kc = ols_kc.predict(X_te_s_kc)
+residuals_kc = y_te_kc - y_pred_kc
+
+# Vzorek 2000 bodů pro svižné vykreslení
+plot_sample_idx = np.random.RandomState(42).choice(len(y_pred_kc), size=min(2000, len(y_pred_kc)), replace=False)
+sample_preds = y_pred_kc[plot_sample_idx]
+sample_res = residuals_kc.iloc[plot_sample_idx]
+
+fig_res = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=("Rezidua vs Predikovaná cena (Ověření rozptylu)", "Rozdělení chyb predikce (Normalita)"),
+    horizontal_spacing=0.1
+)
+
+# Scatter plot
+fig_res.add_trace(
+    go.Scatter(
+        x=sample_preds,
+        y=sample_res,
+        mode="markers",
+        marker=dict(size=5, color="#8B5CF6", opacity=0.4),
+        name="Domy (vzorek)",
+        hovertemplate="Predikce: $%{x:,.0f}<br>Chyba: $%{y:,.0f}<extra></extra>"
+    ),
+    row=1, col=1
+)
+fig_res.add_hline(y=0, line_dash="dash", line_color="red", line_width=1.5, row=1, col=1)
+
+# Histogram
+fig_res.add_trace(
+    go.Histogram(
+        x=residuals_kc,
+        nbinsx=50,
+        marker_color="#3B82F6",
+        name="Chyby",
+        opacity=0.75,
+        hovertemplate="Chyba: $%{x:,.0f}<br>Počet: %{y}<extra></extra>"
+    ),
+    row=1, col=2
+)
+
+fig_res.update_layout(
+    height=500,
+    showlegend=False,
+    margin=dict(l=10, r=10, t=40, b=10),
+)
+fig_res.update_xaxes(title_text="Predikovaná cena ($)", row=1, col=1)
+fig_res.update_yaxes(title_text="Reziduum (Skutečnost - Predikce)", row=1, col=1)
+fig_res.update_xaxes(title_text="Chyba ($)", row=1, col=2)
+fig_res.update_yaxes(title_text="Počet domů", row=1, col=2)
+
+st.plotly_chart(fig_res, use_container_width=True)
+
+with st.expander("🖼️ Zobrazit původní statický diagnostický graf reziduí"):
     p2 = plots_dir / "04_actual_vs_predicted_residuals.png"
     if p2.exists():
-        st.image(str(p2), caption="Diagnostika reziduí (heteroskedasticita)")
+        st.image(str(p2), caption="Původní statický graf reziduí", use_container_width=True)
