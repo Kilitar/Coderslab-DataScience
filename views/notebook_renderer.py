@@ -130,7 +130,10 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
                                         {html_str}
                                     </div>
                                     """
-                                    st.components.v1.html(styled_html, height=280, scrolling=True)
+                                    if hasattr(st, "html"):
+                                        st.html(styled_html)
+                                    else:
+                                        st.markdown(styled_html, unsafe_allow_html=True)
                             elif "text/plain" in data:
                                 st.code("".join(data["text/plain"]), language="text")
             st.markdown("---")
