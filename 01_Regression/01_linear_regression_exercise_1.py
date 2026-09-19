@@ -423,7 +423,46 @@ def main() -> None:
     print("\n--- 2. Srovnání s moderním Gradient Boostingem (HistGradientBoostingRegressor) ---")
     print(f"R2 skóre (Gradient Boosting): {r2_hgb:.4f} (oproti OLS R2 {r2_test_scaled:.4f})")
     print(f"RMSE (Gradient Boosting):     ${rmse_hgb:,.2f}")
-    print(f"MAE (Gradient Boosting):      ${mae_hgb:,.2f}")
+    # D. Časová analýza & Time-Aware ML (Reálný Time-Split vs Náhodný Split)
+    print("\n--- 3. Time-Aware ML: Vliv data prodeje, sezónnosti a reálný Time-Split ---")
+    raw_df_with_date = pd.read_csv(raw_data_path)
+    clean_with_date = clean_df.copy()
+    clean_with_date["dt"] = pd.to_datetime(raw_df_with_date.loc[clean_df.index, "date"].str[:8])
+    min_date = clean_with_date["dt"].min()
+    clean_with_date["days_since_start"] = (clean_with_date["dt"] - min_date).dt.days
+    clean_with_date["month"] = clean_with_date["dt"].dt.month
+
+    time_features = list(X.columns) + ["days_since_start", "month"]
+    X_time = clean_with_date[time_features]
+
+    # Náhodný split s časovými příznaky
+    X_tr_t, X_te_t, _, _ = train_test_split(X_time, y, test_size=0.2, random_state=42)
+    ols_time_rand = LinearRegression().fit(X_tr_t, y_train)
+    y_pred_ols_time_rand = ols_time_rand.predict(X_te_t)
+    print(f"OLS s časem (Random Split): R2 = {r2_score(y_test, y_pred_ols_time_rand):.4f}, MAE = ${mean_absolute_error(y_test, y_pred_ols_time_rand):,.0f}")
+    trend_coef = ols_time_rand.coef_[time_features.index("days_since_start")]
+    print(f"Odhadnutý denní růst trhu (trend): +${trend_coef:.2f}/den (cca +${trend_coef*365:,.0f}/rok)")
+
+    # Reálný Time-Split: Trénink 2014, Testování 2015
+    split_date = pd.to_datetime("2015-01-01")
+    mask_tr = clean_with_date["dt"] < split_date
+    mask_te = clean_with_date["dt"] >= split_date
+
+    y_tr_split = clean_with_date.loc[mask_tr, "price"]
+    y_te_split = clean_with_date.loc[mask_te, "price"]
+
+    ols_base_time = LinearRegression().fit(clean_with_date.loc[mask_tr, X.columns], y_tr_split)
+    ols_time_time = LinearRegression().fit(clean_with_date.loc[mask_tr, time_features], y_tr_split)
+    hgb_time_time = HistGradientBoostingRegressor(random_state=42).fit(clean_with_date.loc[mask_tr, time_features], y_tr_split)
+
+    pred_base_time = ols_base_time.predict(clean_with_date.loc[mask_te, X.columns])
+    pred_time_time = ols_time_time.predict(clean_with_date.loc[mask_te, time_features])
+    pred_hgb_time = hgb_time_time.predict(clean_with_date.loc[mask_te, time_features])
+
+    print("\n--- Výsledky na reálném časovém rozdělení (Trénink < 2015, Test >= 2015) ---")
+    print(f"1. OLS Baseline (bez času):     R2 = {r2_score(y_te_split, pred_base_time):.4f}, MAE = ${mean_absolute_error(y_te_split, pred_base_time):,.0f}")
+    print(f"2. OLS s časem (extrapolace):    R2 = {r2_score(y_te_split, pred_time_time):.4f}, MAE = ${mean_absolute_error(y_te_split, pred_time_time):,.0f} <-- Past extrapolace!")
+    print(f"3. Gradient Boosting (HGB):      R2 = {r2_score(y_te_split, pred_hgb_time):.4f}, MAE = ${mean_absolute_error(y_te_split, pred_hgb_time):,.0f} <-- Stabilní vládce času")
 
     print("\n" + "=" * 70)
     print("VŠECHNY KROKY CVIČENÍ 1 DOKONČENY ÚSPĚŠNĚ!")
