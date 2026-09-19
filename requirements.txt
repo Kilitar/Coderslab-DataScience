@@ -1,6 +1,4 @@
-# Core & Interactive Notebooks
-jupyter>=1.1.0
-ipykernel>=6.29.0
+# Core & Data Science
 numpy>=1.26.0,<2.0.0
 scipy>=1.13.0
 pandas>=2.2.0
@@ -15,18 +13,19 @@ scikit-learn>=1.5.0
 xgboost>=2.1.0
 joblib>=1.4.0
 
-# Neural Networks & Deep Learning
-torch>=2.4.0
-
-# NLP
-nltk>=3.9.0
-gensim>=4.3.0
-transformers>=4.44.0
-
 # Web Application & Dashboard
 streamlit>=1.38.0
 
-# Kaggle & Utility
-kaggle>=1.6.0
+# Utilities
 python-dotenv>=1.0.0
 pypdf>=5.0.0
+
+# Note: Heavy libraries for future blocks (Torch, Gensim, Transformers, Kaggle, Jupyter)
+# can be installed locally via .venv or uncommented when reaching Deep Learning & NLP blocks:
+# torch>=2.4.0
+# nltk>=3.9.0
+# gensim>=4.3.0
+# transformers>=4.44.0
+# jupyter>=1.1.0
+# ipykernel>=6.29.0
+# kaggle>=1.6.0
