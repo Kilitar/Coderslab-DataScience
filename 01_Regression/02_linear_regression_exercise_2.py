@@ -346,71 +346,116 @@ def main() -> None:
     print(f"Připravený a vyčištěný dataset byl uložen do: {output_csv_path}")
 
     # =========================================================================
-    # Krok 13: VLASTNÍ ANALÝZA & MODERNÍ ROZŠÍŘENÍ (09/2026)
+    # Krok 13: VLASTNÍ ANALÝZA & GEMOLOGICKÁ MODERNIZACE (09/2026)
     # =========================================================================
     print("\n" + "=" * 75)
-    print("KROK 13: Vlastní analýza a moderní ML rozšíření pro klenotníka")
+    print("KROK 13: Vlastní analýza a gemologická modernizace pro klenotníka")
     print("=" * 75)
 
-    # A. Multikolinearita a fyzika diamantu
-    # Objem V = x * y * z je přímo svázán s hmotností (carat).
-    # Proto mají carat a x, y, z mezi sebou korelaci > 0.97!
-    v_corr = np.corrcoef(clean_diamonds_df["carat"], clean_diamonds_df["x"] * clean_diamonds_df["y"] * clean_diamonds_df["z"])[0, 1]
-    print(f"Korelace mezi hmotností (carat) a odhadnutým objemem (x*y*z): {v_corr:.4f}")
-    print("Závěr k multikolinearitě: Zahrnutí x, y, z společně s carat vytváří těžkou multikolinearitu.")
-    print("Pokud klenotník zváží kámen na přesné váze (carat), rozměry x,y,z přinášejí minimální dodatečnou informaci.")
-
-    # B. Zahrnutí 4C parametrů (Carat, Cut, Color, Clarity)
-    # Klenotník ví, že 1-karátový démant barvy D a čistoty IF má 5x vyšší hodnotu než barvy J a čistoty I1!
-    X_4c = prep_df[["carat", "cut", "color", "clarity", "depth", "table", "x", "y", "z"]]
-    X_4c_train, X_4c_test, y_4c_train, y_4c_test = train_test_split(
-        X_4c, y, test_size=0.2, random_state=42
+    # 1. Analýza 4 metodických chyb kurzu:
+    # -------------------------------------------------------------------------
+    print("\n--- 1. Čtyři zásadní metodické chyby zadání kurzu ---")
+    print(
+        "CHYBA 1: Vyřazení 4C (Cut, Color, Clarity).\n"
+        "         Kurz pracoval jen s numerickými sloupci a vynechal to nejdůležitější pro klenotníka.\n"
+        "CHYBA 2: Smazání 'depth' a 'table' kvůli 'nízké korelaci'.\n"
+        "         Pearsonova lineární korelace měří pouze monotónní přímku (depth r = -0.011).\n"
+        "         V gemologii má depth zvonovitou křivku – ideál 61-62.5 %, mimo tento rozsah ztrácí kámen 20-40 % hodnoty.\n"
+        "CHYBA 3: Umělý strop na 3.5 karátu (outlier filtr).\n"
+        "         Vyřadit kameny nad 3.5 ct znamená vyřadit nejvzácnější investiční solitéry (až 5.01 ct),\n"
+        "         kde klenotník nejvíce potřebuje spolehlivé ocenění.\n"
+        "CHYBA 4: Fyzikální multikolinearita (carat vs x, y, z).\n"
+        "         V = x * y * z a hmotnost m = hustota * V. Korelace r(carat, x*y*z) = 0.9989!\n"
+        "         To vedlo k absurdním záporným vahám pro rozměry x (-$3,675) a z (-$2,602)."
     )
 
-    lin_reg_4c = Pipeline([
-        ("scaler", StandardScaler()),
-        ("model", LinearRegression())
-    ])
-    lin_reg_4c.fit(X_4c_train, y_4c_train)
-    r2_4c = lin_reg_4c.score(X_4c_test, y_4c_test)
-    mae_4c = mean_absolute_error(y_4c_test, lin_reg_4c.predict(X_4c_test))
-    print(f"\n--- 1. Lineární model se všemi 4C parametry (Carat, Cut, Color, Clarity) ---")
-    print(f"R2 skóre s 4C parametry: {r2_4c:.4f} (zlepšení z {r2_test:.4f})")
-    print(f"MAE s 4C parametry:     ${mae_4c:,.2f} (pokles chyby o ${mae_test - mae_4c:,.2f})")
+    # 2. Vytvoření diagnostického grafu pro proporce brusu (depth & table)
+    fig, (ax_d, ax_t) = plt.subplots(1, 2, figsize=(15, 5))
+    sns.scatterplot(data=clean_diamonds_df.sample(2500, random_state=42), x="depth", y="price", alpha=0.3, ax=ax_d, color="#8b5cf6")
+    ax_d.axvspan(61.0, 62.5, color="green", alpha=0.2, label="Ideální proporce (61.0–62.5 %)")
+    ax_d.set_title("Hloubka (depth %) vs Cena – Proč je r ≈ 0?", fontweight="bold")
+    ax_d.set_xlabel("Depth (%)")
+    ax_d.set_ylabel("Cena ($)")
+    ax_d.set_xlim(55, 70)
+    ax_d.legend()
+    ax_d.grid(True, alpha=0.3)
 
-    # C. Nelineární mocninný zákon: Log-Log transformace
-    # Cena roste s hmotností exponenciálně/mocninně: Price ~ Carat^beta
-    log_log_model = TransformedTargetRegressor(
-        regressor=Pipeline([
-            ("scaler", StandardScaler()),
-            ("model", LinearRegression())
-        ]),
+    sns.scatterplot(data=clean_diamonds_df.sample(2500, random_state=42), x="table", y="price", alpha=0.3, ax=ax_t, color="#ec4899")
+    ax_t.axvspan(54.0, 57.0, color="green", alpha=0.2, label="Ideální ploška table (54–57 %)")
+    ax_t.set_title("Ploška (table %) vs Cena", fontweight="bold")
+    ax_t.set_xlabel("Table (%)")
+    ax_t.set_ylabel("Cena ($)")
+    ax_t.set_xlim(50, 70)
+    ax_t.legend()
+    ax_t.grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    gem_plot_path = plots_dir / "09_diamonds_gemology_depth_table_analysis.png"
+    plt.savefig(gem_plot_path, dpi=300)
+    plt.close()
+    print(f"Diagnostický graf proporcí brusu uložen do: {gem_plot_path}")
+
+    # 3. Systematický benchmark 5 modelů:
+    # -------------------------------------------------------------------------
+    # Dataset včetně velkých diamantů (bez umělého 3.5 ct stropu)
+    full_clean = diamonds_df[
+        (diamonds_df["x"] > 0)
+        & (diamonds_df["y"] > 0)
+        & (diamonds_df["z"] > 0)
+        & (diamonds_df["y"] < 20)
+        & (diamonds_df["z"] < 20)
+    ].copy()
+
+    full_clean["cut_num"] = full_clean["cut"].map(cut_order)
+    full_clean["color_num"] = full_clean["color"].map(color_order)
+    full_clean["clarity_num"] = full_clean["clarity"].map(clarity_order)
+
+    # Definice matic příznaků
+    X_base = full_clean[["carat", "x", "y", "z"]]
+    X_4c_only = full_clean[["carat", "cut_num", "color_num", "clarity_num"]]
+    X_all = full_clean[["carat", "cut_num", "color_num", "clarity_num", "depth", "table", "x", "y", "z"]]
+    y_full = full_clean["price"]
+
+    # Společný split
+    idx_tr, idx_te = train_test_split(full_clean.index, test_size=0.2, random_state=42)
+
+    # Model 1: Učebnicový OLS (pouze carat, x, y, z)
+    m1 = LinearRegression().fit(X_base.loc[idx_tr], y_full.loc[idx_tr])
+    p1 = m1.predict(X_base.loc[idx_te])
+
+    # Model 2: Gemologický 4C OLS (Carat, Cut, Color, Clarity)
+    m2 = Pipeline([("scaler", StandardScaler()), ("reg", LinearRegression())]).fit(X_4c_only.loc[idx_tr], y_full.loc[idx_tr])
+    p2 = m2.predict(X_4c_only.loc[idx_te])
+
+    # Model 3: Všechny příznaky OLS (+ depth, table, x, y, z)
+    m3 = Pipeline([("scaler", StandardScaler()), ("reg", LinearRegression())]).fit(X_all.loc[idx_tr], y_full.loc[idx_tr])
+    p3 = m3.predict(X_all.loc[idx_te])
+
+    # Model 4: Nelineární Log-Log model (Price ~ Carat^beta + 4C)
+    X_log_tr = X_4c_only.loc[idx_tr].copy()
+    X_log_tr["carat"] = np.log(X_log_tr["carat"])
+    X_log_te = X_4c_only.loc[idx_te].copy()
+    X_log_te["carat"] = np.log(X_log_te["carat"])
+    m4 = TransformedTargetRegressor(
+        regressor=Pipeline([("scaler", StandardScaler()), ("reg", LinearRegression())]),
         func=np.log1p,
         inverse_func=np.expm1
-    )
-    # Použijeme log(carat) jako transformovaný vstup
-    X_log = prep_df[["carat", "cut", "color", "clarity"]].copy()
-    X_log["carat"] = np.log(X_log["carat"])
-    X_log_train, X_log_test, y_log_train, y_log_test = train_test_split(
-        X_log, y, test_size=0.2, random_state=42
-    )
-    log_log_model.fit(X_log_train, y_log_train)
-    y_pred_log = log_log_model.predict(X_log_test)
-    r2_log = r2_score(y_log_test, y_pred_log)
-    mae_log = mean_absolute_error(y_log_test, y_pred_log)
-    print(f"\n--- 2. Log-Log model (Fyzikální a ekonomický model cenotvorby drahokamů) ---")
-    print(f"R2 skóre (Log-Log):     {r2_log:.4f}")
-    print(f"MAE (Log-Log):          ${mae_log:,.2f} (výrazně přesnější pro menší kameny!)")
+    ).fit(X_log_tr, y_full.loc[idx_tr])
+    p4 = m4.predict(X_log_te)
 
-    # D. Moderní nelineární tabulární benchmark: HistGradientBoostingRegressor
-    hgb_model = HistGradientBoostingRegressor(random_state=42)
-    hgb_model.fit(X_4c_train, y_4c_train)
-    y_pred_hgb = hgb_model.predict(X_4c_test)
-    r2_hgb = r2_score(y_4c_test, y_pred_hgb)
-    mae_hgb = mean_absolute_error(y_4c_test, y_pred_hgb)
-    print(f"\n--- 3. Moderní Gradient Boosting (State-of-the-Art pro tabulární data) ---")
-    print(f"R2 skóre (Gradient Boosting): {r2_hgb:.4f} (vysvětluje 98 % rozptylu cen!)")
-    print(f"MAE (Gradient Boosting):      ${mae_hgb:,.2f} (průměrná odchylka pouze 275 USD!)")
+    # Model 5: Moderní Gradient Boosting (HistGradientBoostingRegressor na všech příznacích)
+    m5 = HistGradientBoostingRegressor(random_state=42).fit(X_all.loc[idx_tr], y_full.loc[idx_tr])
+    p5 = m5.predict(X_all.loc[idx_te])
+
+    # Výpis výsledků
+    y_test_eval = y_full.loc[idx_te]
+    print("\n--- SROVNÁVACÍ BENCHMARK 5 MODELŮ PRO KLENOTNÍKA ---")
+    print(f"1. Učebnicový OLS (carat, x, y, z):     R2 = {r2_score(y_test_eval, p1):.4f}, MAE = ${mean_absolute_error(y_test_eval, p1):,.0f}")
+    print(f"2. Gemologický 4C OLS (carat + 3C):     R2 = {r2_score(y_test_eval, p2):.4f}, MAE = ${mean_absolute_error(y_test_eval, p2):,.0f}")
+    print(f"3. Plný OLS (+ depth, table, rozměry):  R2 = {r2_score(y_test_eval, p3):.4f}, MAE = ${mean_absolute_error(y_test_eval, p3):,.0f}")
+    print(f"4. Fyzikální Log-Log model (Mocninný):  R2 = {r2_score(y_test_eval, p4):.4f}, MAE = ${mean_absolute_error(y_test_eval, p4):,.0f}")
+    print(f"5. Moderní Gradient Boosting (HGB):     R2 = {r2_score(y_test_eval, p5):.4f}, MAE = ${mean_absolute_error(y_test_eval, p5):,.0f}")
+    print(f"==> Závěr: Gradient Boosting snížil průměrnou chybu o {((mean_absolute_error(y_test_eval, p1) - mean_absolute_error(y_test_eval, p5)) / mean_absolute_error(y_test_eval, p1))*100:.1f} %!")
 
     print("\n" + "=" * 75)
     print("VŠECHNY KROKY CVIČENÍ 2 DOKONČENY ÚSPĚŠNĚ!")
