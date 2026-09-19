@@ -155,7 +155,7 @@ col_a, col_b, col_c = st.columns(3)
 with col_a:
     st.info("🛡️ 1. Nulový Overfitting")
     st.write(
-        "Chyba na testovací sadě ($117,242) je prakticky identická s trénovací ($118,251). "
+        "Chyba na testovací sadě (117 242 USD) je prakticky identická s trénovací (118 251 USD). "
         "Lineární regrese se nepřeučila. Její hlavní slabinou je však **Underfitting** – neschopnost "
         "jednoduché přímky zachytit nelineární cenový skok u luxusních vil."
     )
@@ -164,8 +164,8 @@ with col_b:
     st.warning("📐 2. Proč je Adj R² téměř stejné?")
     st.write(
         f"Vzorec penalizuje faktorem $(n - 1) / (n - k - 1)$. "
-        f"Při vzorku $n = {n_train:,}$ a pouze $k = {k_vars}$ příznacích je tento faktor $1.00104$. "
-        "Adjusted R² je zásadní v medicíně u malých dat ($n=50$). U velkých moderních datasetů je rozdíl zanedbatelný."
+        f"Při vzorku n = {n_train:,} a pouze k = {k_vars} příznacích je tento faktor 1.00104. "
+        "Adjusted R² je zásadní v medicíně u malých dat (n = 50). U velkých moderních datasetů je rozdíl zanedbatelný."
     )
 
 with col_c:
@@ -207,7 +207,7 @@ models_table = pd.DataFrame([
         "Adjusted R²": f"{m_hgb['Adj_R2']:.4f}",
         "MAE ($)": f"${m_hgb['MAE']:,.0f}",
         "RMSE ($)": f"${m_hgb['RMSE']:,.0f}",
-        "Charakteristika": "🏆 State-of-the-Art: Pokles chyby na $64k!"
+        "Charakteristika": "🏆 State-of-the-Art: Pokles chyby na 64k USD!"
     }
 ])
 st.dataframe(models_table, use_container_width=True, hide_index=True)

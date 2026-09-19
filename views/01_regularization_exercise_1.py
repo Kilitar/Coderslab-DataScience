@@ -324,16 +324,16 @@ with tab3:
 st.markdown("---")
 st.markdown("### 💡 Odpovědi na otázky ze zadání cvičení")
 
-st.markdown(f"""
+st.markdown("""
 1. **Které proměnné model Lasso vynuloval?**
    - Při malých hodnotách $\\alpha \\le 100$ jsou zachovány všechny proměnné.
    - Při $\\alpha = 2500$ model jako první eliminuje `sqft_lot` (velikost pozemku) a `sqft_basement` (plocha suterénu).
    - Při $\\alpha = 5000$ nuluje navíc `sqft_lot15` (velikost pozemku sousedů).
    - Při $\\alpha = 10000$ nuluje celkem 6 proměnných: `['bedrooms', 'sqft_lot', 'floors', 'sqft_basement', 'zipcode', 'sqft_lot15']`.
 2. **Pro který regularizační koeficient $\\alpha$ je model nejlepší?**
-   - **Pro Lasso:** Nejvyšší $R^2 = 0.71188$ a nejnižší $\\text{{RMSE}} = \\$175,296.36$ dosahuje model při **$\\alpha = 500.0$** (zlepšení MAE o více než $219 oproti OLS).  
-     *Zajímavost:* Pokud sledujeme čistě MAE, při $\\alpha = 5000.0$ klesá MAE až na **$\\$116,305.87$** (úspora $936 na každém domě!), a to i přesto, že model vyhodil 3 zbytečné proměnné!
-   - **Pro Ridge:** Nejvyšší $R^2 = 0.71180$ dosahuje model při **$\\alpha = 10.0$** (MAE = $\\$117,225.38$).
+   - **Pro Lasso:** Nejvyšší $R^2 = 0.71188$ a nejnižší RMSE = 175 296 USD dosahuje model při **$\\alpha = 500.0$** (zlepšení MAE o více než 219 USD oproti OLS).  
+     *Zajímavost:* Pokud sledujeme čistě MAE, při $\\alpha = 5000.0$ klesá MAE až na **116 306 USD** (úspora 936 USD na každém domě!), a to i přesto, že model vyhodil 3 zbytečné proměnné!
+   - **Pro Ridge:** Nejvyšší $R^2 = 0.71180$ dosahuje model při **$\\alpha = 10.0$** (MAE = 117 225 USD).
 3. **Jak si vedou regularizované modely v porovnání s OLS bez regularizace?**
    - Na tomto rozsáhlém datasetu (n = 21 553, k = 18) OLS netrpí extrémním přetrénováním, protože počet vzorků mnohonásobně převyšuje počet parametrů.
    - Regularizace přesto mírně zlepšuje generalizační chybu na testovacích datech a Lasso navíc poskytuje **vysokou interpretovatelnost a redukci dimenzionality** (řídký model).

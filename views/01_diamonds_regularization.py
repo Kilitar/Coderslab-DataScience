@@ -320,16 +320,16 @@ with t3:
 st.markdown("---")
 st.markdown("### 💡 Odpovědi na otázky ze zadání cvičení")
 
-st.markdown(f"""
+st.markdown("""
 1. **Které koeficienty model Lasso vynuloval?**
    - Při $\\alpha = 10.0$ jako první nuluje `y` (šířka diamantu, která je téměř na 100 % shodná s $x$).
    - Při $\\alpha = 50.0$ dochází k zásadnímu jevu: model nuluje **5 příznaků**: `['depth', 'table', 'x', 'y', 'z']`.  
-     Všechny prostorové rozměry a proporce jsou vyřazeny a modelu zůstávají **výhradně gemologické 4C** (`carat`, `cut`, `color`, `clarity`), přičemž $R^2 = 0.90412$ (ztráta vysvětleného rozptylu je minimální, pod $0.5\\,\\%$!).
+     Všechny prostorové rozměry a proporce jsou vyřazeny a modelu zůstávají **výhradně gemologické 4C** (`carat`, `cut`, `color`, `clarity`), přičemž $R^2 = 0.90412$ (ztráta vysvětleného rozptylu je minimální, pod 0.5 %!).
    - Při $\\alpha = 200.0$ nuluje navíc `cut` a při $\\alpha = 500.0$ i `color`.
 2. **Pro které $\\alpha$ je model nejlepší?**
-   - **Lasso:** Nejvyšší $R^2 = 0.90949$ dosahuje při **$\\alpha = 0.1$** a nejnižší $\\text{{MAE}} = \\$783.83$ při **$\\alpha = 1.0$**.
+   - **Lasso:** Nejvyšší $R^2 = 0.90949$ dosahuje při **$\\alpha = 0.1$** a nejnižší MAE = 783.83 USD při **$\\alpha = 1.0$**.
    - **Ridge:** Nejvyšší $R^2 = 0.90958$ dosahuje při **$\\alpha = 10.0$** (tlumení protiběžných extrémů mezi prostorovými rozměry a karátem).
 3. **Porovnání s OLS bez regularizace:**
-   - OLS dosahuje $R^2 = 0.90947$ a $\\text{{MAE}} = \\$784.78$.
+   - OLS dosahuje $R^2 = 0.90947$ a MAE = 784.78 USD.
    - Regularizace přináší stabilizaci modelu a Lasso dokazuje, že měření rozměrů v milimetrech ($x, y, z$) nepřináší klenotníkovi téměř žádnou přidanou hodnotu, pokud zná karát a brus.
 """)

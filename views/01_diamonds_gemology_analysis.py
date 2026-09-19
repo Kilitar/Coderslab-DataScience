@@ -66,7 +66,7 @@ with c2:
     st.caption("Proporce 'depth' mají korelaci r = -0.011 (nula!). Přesto mimo ideál 61–62.5 % kámen ztrácí až 40 % ceny.")
 with c3:
     st.info("📉 3. Fyzikální paradox")
-    st.caption("Hmotnost a objem x*y*z mají korelaci 0.9989. OLS model dal rozměrům absurdní záporné váhy (-$3 675 za x).")
+    st.caption("Hmotnost a objem x*y*z mají korelaci 0.9989. OLS model dal rozměrům absurdní záporné váhy (-3 675 USD za x).")
 with c4:
     st.success("👑 4. Solitéry > 3.5 ct")
     st.caption("Umělý outlier filtr vyřadil 9 nejcennějších diamantů (až 5.01 ct), kde klenotník nejvíce riskuje.")
@@ -102,8 +102,8 @@ st.markdown(
     f"""
     > 💡 **Rozptyl ceny pro přesně stejnou hmotnost 1.00 karátu:**  
     > Dva diamanty na pultu váží na gram přesně stejně (~0.20 g).  
-    > Přesto jeden stojí **${min_1ct_price:,.0f}** a druhý **${max_1ct_price:,.0f}** (rozdíl více než osminásobek!).  
-    > Učebnicový model kurzu bez 4C parametrů by oběma přiřkl průměrnou cenu **~${median_1ct_price:,.0f}**!
+    > Přesto jeden stojí **{min_1ct_price:,.0f} USD** a druhý **{max_1ct_price:,.0f} USD** (rozdíl více než osminásobek!).  
+    > Učebnicový model kurzu bez 4C parametrů by oběma přiřkl průměrnou cenu **~{median_1ct_price:,.0f} USD**!
     """
 )
 
@@ -208,8 +208,8 @@ with col_phys_l:
         """
         **Důsledek pro OLS regresi:**  
         Matice $X^T X$ je téměř singulární. Model začne rozměry penalizovat:
-        - Koeficient délky $x$: **-$3 675 / mm**
-        - Koeficient hloubky $z$: **-$2 602 / mm**  
+        - Koeficient délky $x$: **-3 675 USD / mm**
+        - Koeficient hloubky $z$: **-2 602 USD / mm**  
         Model by klenotníkovi tvrdil: *„Pokud vybrousíte kámen o milimetr větší, jeho cena klesne o 3 600 dolarů!“*
         """
     )

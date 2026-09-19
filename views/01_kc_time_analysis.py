@@ -72,8 +72,8 @@ st.write(
     """
     Zadání kurzu datum prodeje smazalo jako nepotřebný sloupec. Když se však podíváme na agregovaná data podle měsíců,
     odhalíme **typickou sezónnost nemovitostního trhu**:
-    - **Jaro & Léto (duben–červenec):** Silná poptávka, objem prodejů přesahuje 2 200 domů za měsíc a mediánová cena dosahuje maxima ($476 500).
-    - **Zima (listopad–únor):** Trh zamrzá, objem klesá pod 1 000 domů za měsíc a mediánová cena padá až na $425 000 (propad o více než 10 %!).
+    - **Jaro & Léto (duben–červenec):** Silná poptávka, objem prodejů přesahuje 2 200 domů za měsíc a mediánová cena dosahuje maxima (476 500 USD).
+    - **Zima (listopad–únor):** Trh zamrzá, objem klesá pod 1 000 domů za měsíc a mediánová cena padá až na 425 000 USD (propad o více než 10 %!).
     """
 )
 
@@ -225,7 +225,7 @@ with t1:
     st.write(
         "V OLS modelu narostla proměnná `days_since_start` v roce 2015 do vysokých hodnot. "
         "Lineární regrese předpokládá neomezený růst po přímce, jenže v lednu 2015 nastal zimní sezónní propad cen! "
-        "OLS model tak v zimě 2015 ceny nemovitostí masivně přestřelil, což vedlo k propadu $R^2$ na 0.50 a růstu chyby na $173 000."
+        "OLS model tak v zimě 2015 ceny nemovitostí masivně přestřelil, což vedlo k propadu $R^2$ na 0.50 a růstu chyby na 173 000 USD."
     )
 
 with t2:
@@ -241,5 +241,5 @@ with t3:
     st.write(
         "Gradient Boosting (HGB) neextrapoluje lineární trend do nekonečna. "
         "Rozdělí prostor na pravidla a zachytí interakci mezi ročním obdobím a lokalitou. "
-        "I při striktním časovém rozdělení si udržel $R^2 = 0{,}88$ a průměrnou chybu kolem $71 000."
+        "I při striktním časovém rozdělení si udržel $R^2 = 0{,}88$ a průměrnou chybu kolem 71 000 USD."
     )

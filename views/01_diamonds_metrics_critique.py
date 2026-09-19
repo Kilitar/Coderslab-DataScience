@@ -115,11 +115,11 @@ with p2:
     st.markdown("##### Co se stalo při vyřazení kamenů nad 3.5 ct?")
     st.write(
         """
-        Když jsme z databáze vyřadili největší kameny (až 5.01 ct s cenami kolem $18 000), 
-        **dramaticky jsme zmenšili celkový rozptyl $\\text{SST}$** (jmenovatel zlomku)!
+        Když jsme z databáze vyřadili největší kameny (až 5.01 ct s cenami kolem 18 000 USD), 
+        **dramaticky jsme zmenšili celkový rozptyl SST** (jmenovatel zlomku)!
         
-        I když model predikuje přesněji (čitatel $\\text{SSE}$ klesl a $\\text{MAE}$ klesla z $888 na $880),
-        zmenšení jmenovatele způsobí, že podíl $\\frac{\\text{SSE}}{\\text{SST}}$ vzroste.
+        I když model predikuje přesněji (čitatel SSE klesl a MAE klesla z 888 USD na 880 USD),
+        zmenšení jmenovatele způsobí, že podíl SSE / SST vzroste.
         Hodnota $R^2 = 1 - \\frac{\\text{SSE}}{\\text{SST}}$ proto **matematicky klesne z 0.8590 na 0.8576**!
         """
     )

@@ -105,9 +105,9 @@ def load_diamonds_critique_data():
 st.markdown("### 💎 1. Zázrak regularizace: Automatická extrakce 4C")
 
 st.info("""
-**Fascinující zjištění při Lasso regularizaci ($\alpha = 50.0$):**  
+**Fascinující zjištění při Lasso regularizaci (alpha = 50.0):**  
 Bez jakéhokoliv lidského zásahu model Lasso **vynuloval přesně 5 proměnných**: `depth`, `table`, `x`, `y`, `z`.  
-V modelu zůstaly **výhradně 4C parametry klenotníka** (`carat`, `cut`, `color`, `clarity`), přičemž $R^2 = 0.90412$ (ztráta vysvětleného rozptylu oproti modelu se všemi 9 proměnnými činí pouhých **$0.5\\,\\%$**!).
+V modelu zůstaly **výhradně 4C parametry klenotníka** (`carat`, `cut`, `color`, `clarity`), přičemž $R^2 = 0.90412$ (ztráta vysvětleného rozptylu oproti modelu se všemi 9 proměnnými činí pouhých **0.5 %**!).
 """)
 
 col1, col2 = st.columns(2)

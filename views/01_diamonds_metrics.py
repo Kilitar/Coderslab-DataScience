@@ -158,7 +158,7 @@ with col_right:
 st.success(
     """
     ✅ **Proč je model po zpracování dat ve skutečnosti LEPŠÍ?**  
-    1. **Reálná chyba v dolarech (MAE) klesla:** z **$888.48 na $880.18** (model se na testu trefuje přesněji).  
+    1. **Reálná chyba v dolarech (MAE) klesla:** z **888.48 USD na 880.18 USD** (model se na testu trefuje přesněji).  
     2. **Fyzikální korektnost:** Zbavili jsme se 20 nesmyslných diamantů s rozměry 0 mm a obřích překlepů (šířka 58 mm).  
     3. **Statistický důvod poklesu R²:** $R^2 = 1 - \\text{SSE}/\\text{SST}$. Vyřazením kamenů nad 3.5 ct klesl celkový rozptyl $\\text{SST}$ (jmenovatel), což $R^2$ čistě matematicky stlačilo dolů.
     """

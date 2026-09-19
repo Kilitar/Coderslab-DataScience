@@ -85,10 +85,10 @@ with m2:
     st.caption("Náhodný split dává iluzi jistoty ($R^2=0.7118$). 5-Fold CV ukazuje rozptyl od 0.6926 do 0.7132.")
 with m3:
     st.info("📉 3. MAE vs MedAE")
-    st.caption("MAE je $117k, ale MedAE je jen $84.5k! U 50 % domů je odchylka mnohem menší než průměr.")
+    st.caption("MAE je 117k USD, ale MedAE je jen 84.5k USD! U 50 % domů je odchylka mnohem menší než průměr.")
 with m4:
     st.success("💼 4. Byznysová metrika")
-    st.caption("Říkat managementu MSE (30 mld $²) nemá smysl. WAPE = 22.2 % dává jasný finanční kontext.")
+    st.caption("Říkat managementu MSE (30 mld USD²) nemá smysl. WAPE = 22.2 % dává jasný finanční kontext.")
 
 st.markdown("---")
 
@@ -175,7 +175,7 @@ st.markdown("---")
 # =============================================================================
 # 4. MEDIAN ABSOLUTE ERROR (MedAE) VS MAE VS RMSE
 # =============================================================================
-st.subheader("📊 3. Skrytá realita chyb: MedAE ($84.5k) vs. MAE ($117k) vs. RMSE ($175k)")
+st.subheader("📊 3. Skrytá realita chyb: MedAE (84.5k USD) vs. MAE (117k USD) vs. RMSE (175k USD)")
 st.write(
     """
     Proč je mezi jednotlivými metrikami tak dramatický rozdíl?  
@@ -203,7 +203,7 @@ fig_dist.add_vline(x=res["rmse"], line_color="#EF4444", line_width=2.5, line_das
 fig_dist.update_layout(
     title="Distribuce chyb modelu a poloha metrik MedAE, MAE a RMSE",
     height=420, margin=dict(l=10, r=10, t=40, b=10),
-    xaxis=dict(title="Velikost chyby ($)", range=[0, 500000]),
+    xaxis=dict(title="Velikost chyby (USD)", range=[0, 500000]),
     yaxis=dict(title="Počet domů")
 )
 st.plotly_chart(fig_dist, use_container_width=True)
@@ -211,9 +211,9 @@ st.plotly_chart(fig_dist, use_container_width=True)
 st.info(
     f"""
     💡 **Zjištění pro management:**  
-    - **MedAE = ${res['medae']:,.0f}:** Celá **polovina všech domů** na trhu je oceněna s chybou **menší než $84 500**!  
-    - **MAE = ${res['mae']:,.0f}:** Průměr je tažen nahoru několika luxusními vilami.  
-    - **RMSE = ${res['rmse']:,.0f}:** Kvadratické umocnění dává chybě u vily za 2 miliony dolarů obrovskou váhu.
+    - **MedAE = {res['medae']:,.0f} USD:** Celá **polovina všech domů** na trhu je oceněna s chybou **menší než 84 500 USD**!  
+    - **MAE = {res['mae']:,.0f} USD:** Průměr je tažen nahoru několika luxusními vilami.  
+    - **RMSE = {res['rmse']:,.0f} USD:** Kvadratické umocnění dává chybě u vily za 2 miliony dolarů obrovskou váhu.
     """
 )
 
