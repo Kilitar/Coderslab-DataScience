@@ -3,6 +3,7 @@ import io
 import json
 import sys
 from pathlib import Path
+import pandas as pd
 import streamlit as st
 
 GITHUB_REPO = "Kilitar/Coderslab-DataScience"
@@ -105,7 +106,31 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
                                 st.image(img_bytes, caption=f"Graf z buňky In {exec_str}", use_container_width=True)
                             elif "text/html" in data:
                                 html_str = "".join(data["text/html"])
-                                st.components.v1.html(html_str, height=250, scrolling=True)
+                                try:
+                                    # Převedeme pandas HTML tabulku na nativní st.dataframe (automaticky se přizpůsobí Dark i Light mode)
+                                    dfs = pd.read_html(io.StringIO(html_str))
+                                    if dfs:
+                                        table_df = dfs[0]
+                                        # Pokud obsahuje zbytečný Unnamed index sloupec z exportu, odstraníme ho
+                                        unnamed_cols = [c for c in table_df.columns if "Unnamed: 0" in str(c)]
+                                        if unnamed_cols:
+                                            table_df = table_df.drop(columns=unnamed_cols)
+                                        st.dataframe(table_df, use_container_width=True, hide_index=True)
+                                    else:
+                                        st.markdown(html_str, unsafe_allow_html=True)
+                                except Exception:
+                                    # Fallback s explicitním adaptivním stylem písma pro tmavý režim
+                                    styled_html = f"""
+                                    <div style="color: #f1f5f9; background: transparent; font-family: monospace; font-size: 12px; overflow-x: auto;">
+                                        <style>
+                                            table {{ border-collapse: collapse; width: 100%; color: #f1f5f9 !important; }}
+                                            th, td {{ border: 1px solid #475569; padding: 6px 10px; text-align: left; color: #f1f5f9 !important; }}
+                                            th {{ background-color: rgba(255, 255, 255, 0.1); }}
+                                        </style>
+                                        {html_str}
+                                    </div>
+                                    """
+                                    st.components.v1.html(styled_html, height=280, scrolling=True)
                             elif "text/plain" in data:
                                 st.code("".join(data["text/plain"]), language="text")
             st.markdown("---")
