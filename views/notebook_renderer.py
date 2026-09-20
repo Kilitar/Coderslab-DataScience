@@ -26,12 +26,13 @@ def sanitize_markdown(source: str) -> str:
     # 2. Ošetření kolize formátu $\text{MAE} = \$783.83$ -> $\text{MAE} = 783.83\text{ USD}$
     source = re.sub(r"\$(\s*\\text\{[A-Za-z0-9_]+\}\s*=\s*)\\\$([0-9,.]+)\$", r"$\1\2\\text{ USD}$", source)
     source = re.sub(r"\\text\{([A-Za-z0-9_]+)\}\s*=\s*\\\$([0-9,.]+)", r"\\text{\1} = \2 USD", source)
-    # 3. Ochrana před měnovými dolary v textu (např. $2 000 nebo $17 000), které KaTeX parsuje jako matematiku
-    source = re.sub(r"\$(\d+(?:[ ,]\d{3})*(?:\.\d+)?)\b", r"\1 USD", source)
+    # 3. Ochrana před escapovanými dolary měny v textu
+    source = source.replace(r"\$", "USD ")
     # 4. Oprava české diakritiky v indexech matematických vzorců (např. \theta_{nové} -> \theta_{\text{nové}})
     source = source.replace(r"\theta_{nové}", r"\theta_{\text{nové}}")
     source = source.replace(r"\theta_{staré}", r"\theta_{\text{staré}}")
     return source
+
 
 
 @st.cache_data(show_spinner=False)
