@@ -4,10 +4,12 @@ import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
 import pandas as pd
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import DecisionTreeRegressor, plot_tree
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.datasets import make_regression
+import matplotlib.pyplot as plt
 
 base_dir = Path(__file__).resolve().parent.parent
 theory_md_path = base_dir / "01_Regression" / "theory" / "06_decision_tree_regression_theory.md"
@@ -43,6 +45,15 @@ with tab2:
     Vyzkoušejte si, jak se s rostoucí hloubkou stromu zjemňují schody a kdy dochází k přetrénování (**overfitting**).
     """)
 
+    dataset_choice = st.radio(
+        "Vyberte typ experimentálních dat:",
+        options=[
+            "1. Parabola ze zadání kurzu (make_regression, y = y²)",
+            "2. Nelineární sinusovka s rostoucím trendem"
+        ],
+        horizontal=True
+    )
+
     col_ctrl1, col_ctrl2, col_ctrl3 = st.columns([1, 1, 1])
 
     with col_ctrl1:
@@ -67,15 +78,23 @@ with tab2:
 
     with col_ctrl3:
         show_ols = st.checkbox("Zobrazit lineární OLS regresi pro srovnání", value=True)
-        noise_level = st.slider("Úroveň šumu v datech:", min_value=0.1, max_value=1.5, value=0.45, step=0.05)
+        noise_level = st.slider("Úroveň šumu (pro variantu 2):", min_value=0.1, max_value=1.5, value=0.45, step=0.05)
 
-    # Generování nelineárních syntetických dat
-    np.random.seed(42)
-    n_pts = 160
-    X_raw = np.sort(np.random.uniform(0.5, 10.0, n_pts))
-    # Nelineární fyzikální signál: sinusovka s rostoucím trendem
-    y_true_clean = 2.2 * np.sin(X_raw) + 0.6 * X_raw
-    y_noisy = y_true_clean + np.random.normal(0, noise_level, n_pts)
+    # Generování dat
+    if "Parabola" in dataset_choice:
+        X_mat, y_reg = make_regression(n_samples=150, n_features=1, noise=30, random_state=42)
+        y_noisy = y_reg ** 2
+        X_raw = X_mat.flatten()
+        sort_idx = np.argsort(X_raw)
+        X_raw = X_raw[sort_idx]
+        y_noisy = y_noisy[sort_idx]
+        y_true_clean = None
+    else:
+        np.random.seed(42)
+        n_pts = 160
+        X_raw = np.sort(np.random.uniform(0.5, 10.0, n_pts))
+        y_true_clean = 2.2 * np.sin(X_raw) + 0.6 * X_raw
+        y_noisy = y_true_clean + np.random.normal(0, noise_level, n_pts)
 
     X_train, X_test, y_train, y_test = train_test_split(
         X_raw.reshape(-1, 1), y_noisy, test_size=0.25, random_state=42
@@ -107,14 +126,14 @@ with tab2:
     with kpi3:
         st.metric("Testovací R²", f"{test_r2:.4f}", delta=f"{test_r2 - train_r2:+.4f}")
     with kpi4:
-        st.metric("Trénovací MSE", f"{train_mse:.3f}")
+        st.metric("Trénovací MSE", f"{train_mse:,.1f}" if train_mse > 1000 else f"{train_mse:.3f}")
     with kpi5:
-        st.metric("Testovací MSE", f"{test_mse:.3f}", delta_color="inverse")
+        st.metric("Testovací MSE", f"{test_mse:,.1f}" if test_mse > 1000 else f"{test_mse:.3f}", delta_color="inverse")
 
     # Vytvoření jemné osy pro vizualizaci hladké křivky predikce
-    X_plot = np.linspace(0.5, 10.0, 600).reshape(-1, 1)
+    x_min, x_max = float(np.min(X_raw)), float(np.max(X_raw))
+    X_plot = np.linspace(x_min, x_max, 600).reshape(-1, 1)
     y_tree_plot = tree_reg.predict(X_plot)
-    y_true_plot = 2.2 * np.sin(X_plot.flatten()) + 0.6 * X_plot.flatten()
 
     fig_tree = go.Figure()
 
@@ -132,12 +151,14 @@ with tab2:
         marker=dict(size=9, color="#F59E0B", symbol="diamond", opacity=0.85)
     ))
 
-    # 3. Skutečná generující funkce (Ground Truth)
-    fig_tree.add_trace(go.Scatter(
-        x=X_plot.flatten(), y=y_true_plot,
-        mode="lines", name="Skutečný deterministický signál f(x)",
-        line=dict(color="#10B981", width=2, dash="dash")
-    ))
+    # 3. Skutečná generující funkce (pokud je k dispozici)
+    if y_true_clean is not None:
+        y_true_plot = 2.2 * np.sin(X_plot.flatten()) + 0.6 * X_plot.flatten()
+        fig_tree.add_trace(go.Scatter(
+            x=X_plot.flatten(), y=y_true_plot,
+            mode="lines", name="Skutečný deterministický signál f(x)",
+            line=dict(color="#10B981", width=2, dash="dash")
+        ))
 
     # 4. Schodovitá predikce stromu
     fig_tree.add_trace(go.Scatter(
@@ -164,6 +185,23 @@ with tab2:
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
     st.plotly_chart(fig_tree, width="stretch")
+
+    # Vizuální stromový diagram z kurzu
+    with st.expander("🌳 Zobrazit vizuální diagram rozhodovacího stromu (`sklearn.tree.plot_tree`)", expanded=(selected_depth is not None and selected_depth <= 3)):
+        if selected_depth is None or selected_depth > 4:
+            st.info("ℹ️ Pro stromy s hloubkou větší než 4 je diagram příliš rozsáhlý pro zobrazení na obrazovce. Nastavte hloubku na 1 až 4 pro přehledný náhled.")
+        else:
+            fig_tree_arch, ax_tree = plt.subplots(figsize=(12, 5 if selected_depth >= 3 else 3.5))
+            plot_tree(
+                tree_reg,
+                feature_names=["X"],
+                filled=True,
+                rounded=True,
+                ax=ax_tree,
+                fontsize=9
+            )
+            st.pyplot(fig_tree_arch, width="stretch")
+            plt.close(fig_tree_arch)
 
     # Diagnostické hlášky podle zvolené hloubky
     if selected_depth == 1:
