@@ -269,12 +269,12 @@ fig_bar = px.bar(
     y="Feature",
     orientation="h",
     color="Status",
-    color_discrete_map={"Aktivní": "#1D3557", "Vynulováno (0.00)": "#E63946"},
+    color_discrete_map={"Aktivní": "#38BDF8", "Vynulováno (0.00)": "#EF4444"},
     title=f"Standardizované regresní koeficienty pro {'Lasso' if is_lasso else 'Ridge'} (α = {selected_alpha})",
     labels={"Coefficient": "Hodnota standardizovaného koeficientu β", "Feature": "Predikční příznak"},
     height=550,
 )
-fig_bar.add_vline(x=0, line_dash="dash", line_color="black", opacity=0.7)
+fig_bar.add_vline(x=0, line_dash="dash", line_color="gray", opacity=0.7)
 fig_bar.update_layout(margin=dict(l=20, r=20, t=40, b=20), legend_title="Stav příznaku")
 st.plotly_chart(fig_bar, width="stretch")
 

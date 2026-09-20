@@ -57,7 +57,7 @@ with tab2:
         y_pts = 35000 * x_pts + 500000 + np.random.normal(0, 300000, 60)
 
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=x_pts, y=y_pts, mode="markers", name="Historické prodeje", marker=dict(size=8, color="#1D3557")))
+        fig.add_trace(go.Scatter(x=x_pts, y=y_pts, mode="markers", name="Historické prodeje", marker=dict(size=9, color="#38BDF8", line=dict(color="#0284C7", width=1))))
         # Regresní přímka
         m, b = np.polyfit(x_pts, y_pts, 1)
         fig.add_trace(go.Scatter(x=x_pts, y=m*x_pts + b, mode="lines", name="Regresní model f(X)", line=dict(color="#E63946", width=3)))
@@ -90,7 +90,7 @@ with tab2:
         # Rozhodovací hranice
         b_x = np.linspace(20000, 85000, 50)
         b_y = 65000 - 0.5 * b_x
-        fig.add_trace(go.Scatter(x=b_x, y=b_y, mode="lines", name="Rozhodovací hranice", line=dict(color="black", dash="dash", width=2)))
+        fig.add_trace(go.Scatter(x=b_x, y=b_y, mode="lines", name="Rozhodovací hranice", line=dict(color="gray", dash="dash", width=2)))
 
         fig.update_layout(
             xaxis_title="Měsíční příjem žadatele (Kč)",
@@ -113,7 +113,7 @@ with tab2:
         c3_y = np.random.normal(75, 8, 40)
 
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=c1_x, y=c1_y, mode="markers", name="Shluk 1: Příležitostní kupci", marker=dict(size=9, color="#457B9D")))
+        fig.add_trace(go.Scatter(x=c1_x, y=c1_y, mode="markers", name="Shluk 1: Příležitostní kupci", marker=dict(size=9, color="#38BDF8")))
         fig.add_trace(go.Scatter(x=c2_x, y=c2_y, mode="markers", name="Shluk 2: VIP / Prémioví", marker=dict(size=9, color="#E76F51")))
         fig.add_trace(go.Scatter(x=c3_x, y=c3_y, mode="markers", name="Shluk 3: Lovci výprodejů", marker=dict(size=9, color="#F4A261")))
 

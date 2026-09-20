@@ -178,8 +178,8 @@ with t1:
         sample_df,
         x="Skutečná cena (USD)",
         y=selected_model,
-        opacity=0.6,
-        color_discrete_sequence=["#1D3557" if "2" in selected_model else ("#E63946" if "3 (" in selected_model else "#2A9D8F")],
+        opacity=0.7,
+        color_discrete_sequence=["#38BDF8" if "2" in selected_model else ("#EF4444" if "3 (" in selected_model else "#2DD4BF")],
         title=f"Skutečná cena vs. Predikce: {selected_model}",
         labels={"x": "Skutečná cena (USD)", "y": "Predikce modelu (USD)"}
     )

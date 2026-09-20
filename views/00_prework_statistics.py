@@ -112,9 +112,9 @@ with tab2:
             boxpoints="outliers",
             jitter=0.25,
             pointpos=-1.6,
-            marker=dict(color="#E63946", size=8, symbol="diamond"),
-            fillcolor="rgba(42, 157, 143, 0.45)",
-            line=dict(color="#2A9D8F", width=2.5),
+            marker=dict(color="#EF4444", size=9, symbol="diamond"),
+            fillcolor="rgba(56, 189, 248, 0.45)",
+            line=dict(color="#38BDF8", width=2.5),
             orientation="h"
         ),
         row=1, col=1
@@ -127,8 +127,8 @@ with tab2:
             nbinsx=50,
             name="Distribuce dat",
             marker=dict(
-                color="rgba(69, 123, 157, 0.75)",
-                line=dict(color="#1D3557", width=1)
+                color="rgba(56, 189, 248, 0.65)",
+                line=dict(color="#0284C7", width=1)
             )
         ),
         row=2, col=1
@@ -233,7 +233,7 @@ with tab3:
         y=y_val,
         mode="markers",
         name="Pozorování (X, Y)",
-        marker=dict(size=8, color="#1D3557")
+        marker=dict(size=9, color="#38BDF8", line=dict(color="#0284C7", width=1))
     ))
 
     # OLS regresní přímka přes NumPy bez externí závislosti na statsmodels

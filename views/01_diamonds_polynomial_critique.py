@@ -95,19 +95,19 @@ fig_curve = go.Figure()
 
 fig_curve.add_trace(go.Scatter(
     x=curve_df["Carat"], y=curve_df["Stupeň 1 (Lineární OLS)"],
-    mode="lines", name="Stupeň 1 (Lineární OLS)", line=dict(color="#457B9D", dash="dash")
+    mode="lines", name="Stupeň 1 (Lineární OLS)", line=dict(color="#38BDF8", dash="dash", width=2)
 ))
 fig_curve.add_trace(go.Scatter(
     x=curve_df["Carat"], y=curve_df["Stupeň 2 (Kvadratický OLS)"],
-    mode="lines", name="Stupeň 2 (Kvadratický OLS)", line=dict(color="#2A9D8F", width=3)
+    mode="lines", name="Stupeň 2 (Kvadratický OLS)", line=dict(color="#2DD4BF", width=3)
 ))
 fig_curve.add_trace(go.Scatter(
     x=curve_df["Carat"], y=curve_df["Stupeň 3 (Kubický OLS - Bez regularizace)"],
-    mode="lines", name="Stupeň 3 (Kubický OLS)", line=dict(color="#E63946", width=2)
+    mode="lines", name="Stupeň 3 (Kubický OLS)", line=dict(color="#EF4444", width=2)
 ))
 fig_curve.add_trace(go.Scatter(
     x=curve_df["Carat"], y=curve_df["Stupeň 3 + Ridge (α=100)"],
-    mode="lines", name="Stupeň 3 + Ridge (α=100)", line=dict(color="#1D3557", width=3)
+    mode="lines", name="Stupeň 3 + Ridge (α=100)", line=dict(color="#A855F7", width=3)
 ))
 
 # Vyznačení hranice extrapolace

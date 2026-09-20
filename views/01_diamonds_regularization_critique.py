@@ -210,7 +210,7 @@ for i, feat in enumerate(feature_names):
         )
     )
 
-fig_path.add_hline(y=0, line_dash="dash", line_color="black", opacity=0.8)
+fig_path.add_hline(y=0, line_dash="dash", line_color="gray", opacity=0.8)
 fig_path.update_xaxes(type="log", title="Síla regularizace α (log scale)")
 fig_path.update_yaxes(title="Standardizovaný koeficient β")
 fig_path.update_layout(
