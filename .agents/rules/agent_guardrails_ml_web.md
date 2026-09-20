@@ -76,3 +76,16 @@ Tento dokument je **závazným pravidlem (rule)** pro všechny AI agenty pracuj�
      - Kontrola integrity dat a JSON struktur (< 1 s).
   4. Po lokální validaci agent kód rovnou commitne, pushne a informuje uživatele, co bylo upraveno a kde to může v aplikaci vyzkoušet.
 
+---
+
+## 5. Standardizace ikon a struktury navigace (Streamlit UI Conventions)
+
+### Pravidlo 5.1: Striktní jednotnost ikon v postranním panelu (`app.py`)
+Pro udržení čisté a profesionální hierarchie navigace musí každá stránka v sekcích témat (01 až 05+) striktně dodržovat tyto ikony:
+- 📖 `icon="📖"`: **Teorie** (`Teorie: <Název>`) – Veškeré teoretické úvody a rozbory.
+- 🎯 `icon="🎯"`: **Výsledky zadání kurzu** (`Cvičení X: <Název> – Výsledky zadání`) – Všechny stránky s modely a výstupy požadovanými zadáním.
+- 🔬 `icon="🔬"`: **Expertní analýza & Diagnostika** (`Cvičení X: <Název> – Expertní analýza`) – Hloubkové rozbory, rezidua, srovnání.
+- 🐍 `icon="🐍"`: **Jupyter Notebook** (`Cvičení X: <Název> – Notebook`) – Stránky vykreslující `.ipynb` sešity.
+- 🎓 `icon="🎓"`: **Závěrečné shrnutí & Kvíz** celého dne / modulu.
+- **ZÁKAZ:** Nikdy nenahrazovat standardní ikonu modelu 🎯 specifickými tematickými emotikony (např. 💎, 🌲, 🏠, 🚗), pokud to narušuje jednotnou strukturu trojice / čtveřice: `📖 Teorie` -> `🎯 Výsledky zadání` -> `🔬 Expertní analýza` -> `🐍 Notebook`.
+

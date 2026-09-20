@@ -54,10 +54,10 @@ p_tree_theory = st.Page("views/01_decision_tree_theory.py", title="Teorie: Rozho
 p_tree_kc = st.Page("views/01_decision_tree_kc.py", title="Cvičení 8: Reality – Výsledky zadání", icon="🎯")
 p_tree_kc_critique = st.Page("views/01_decision_tree_kc_critique.py", title="Cvičení 8: Reality – Expertní analýza", icon="🔬")
 p_tree_kc_nb = st.Page("views/01_decision_tree_kc_nb.py", title="Cvičení 8: Reality – Notebook", icon="🐍")
-p_tree_diam = st.Page("views/01_decision_tree_diam.py", title="Cvičení 9: Diamanty – Výsledky zadání", icon="💎")
+p_tree_diam = st.Page("views/01_decision_tree_diam.py", title="Cvičení 9: Diamanty – Výsledky zadání", icon="🎯")
 p_tree_diam_critique = st.Page("views/01_decision_tree_diam_critique.py", title="Cvičení 9: Diamanty – Expertní analýza", icon="🔬")
 p_tree_diam_nb = st.Page("views/01_decision_tree_diam_nb.py", title="Cvičení 9: Diamanty – Notebook", icon="🐍")
-p_ensemble_theory = st.Page("views/01_ensemble_theory.py", title="Teorie: Ansámblové metody (RF & Boosting)", icon="🌲")
+p_ensemble_theory = st.Page("views/01_ensemble_theory.py", title="Teorie: Ansámblové metody (RF & Boosting)", icon="📖")
 
 # Závěr Dne 1: Celkové shrnutí & Kvíz
 p_day1_summary = st.Page("views/01_day_1_summary.py", title="Závěrečné shrnutí Dne 1: Velká syntéza regrese & Kvíz", icon="🎓")
