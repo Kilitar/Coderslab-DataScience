@@ -2,13 +2,16 @@ import streamlit as st
 import pandas as pd
 
 st.title("🧭 Expertní analýza: Interaktivní průvodce výběrem modelu")
-st.caption("Jak přemýšlet jako seniorní Machine Learning inženýr: Rozhodovací strom pro volbu správného regresního algoritmu podle povahy vašich dat a byznys cílů.")
+st.caption("Jak přemýšlet jako seniorní Machine Learning inženýr: Interaktivní rozhodovací strom (Decision Flowchart) pro volbu správného regresního algoritmu.")
 
 st.markdown(r"""
 Častá otázka studentů: *„Mám nová data. Podle čeho se mám rozhodnout, zda použít OLS, Ridge, Lasso, Polynom nebo Rozhodovací strom?“*  
-Odpovězte na několik otázek o vašem projektu a algoritmus vám doporučí optimální postup:
+Odpovězte na 3 klíčové otázky o vašem projektu a sledujte, jak se **v níže zobrazeném diagramu stromu automaticky rozsvítí vítězná cesta a doporučený model**!
 """)
 
+# =============================================================================
+# 1. INTERAKTIVNÍ DOTAZNÍK
+# =============================================================================
 with st.container(border=True):
     q_data_type = st.radio(
         "1. Jaký charakter mají vaše prediktory (nezávislé proměnné)?",
@@ -36,170 +39,143 @@ with st.container(border=True):
         ]
     )
 
+# Logika vyhodnocení
+is_extrapol = "extrapolace" in q_extrapol and "Ano" in q_extrapol
+is_lasso = "Obrovské množství sloupců" in q_data_type or "Feature Selection" in q_goal
+is_tree = "Směs kategorií" in q_data_type or "Maximální možná" in q_goal
+
+if is_extrapol:
+    winner_key = "RIDGE"
+elif is_tree:
+    winner_key = "TREE"
+elif is_lasso:
+    winner_key = "LASSO"
+else:
+    winner_key = "OLS"
+
+# =============================================================================
+# 2. VÝSLEDEK DOPORUČENÍ
+# =============================================================================
 st.markdown("### 🎯 Doporučená strategie pro váš projekt:")
 
-# Vyhodnocení
-if "extrapolace" in q_extrapol and "Ano" in q_extrapol:
+if winner_key == "RIDGE":
     st.error(
         "🚫 **STOP: Zákaz použití Rozhodovacích stromů!**  \n"
         "Rozhodovací stromy (CART) ani lesy (Random Forest) **neumí extrapolovat**. Mimo rozsah trénovacích dat narazí na konstantní strop.  \n"
-        "👉 **Doporučení:** Použijte **Lineární regresi s L2 regularizací (Ridge)** nebo polynomiální trend nízkého stupně."
+        "👉 **Doporučený model: Lineární regrese s L2 regularizací (Ridge)** nebo polynomiální trend nízkého stupně."
     )
-elif "Obrovské množství sloupců" in q_data_type or "Feature Selection" in q_goal:
+elif winner_key == "LASSO":
     st.success(
         "🏆 **Doporučený model: Lasso regrese (L1) nebo Elastic Net**  \n"
         "Díky L1 penalizaci model automaticky vynuluje šumové a redundantní příznaky a zanechá pouze klíčové tahouny.  \n"
         "💡 **Pozor:** Nezapomeňte před trénováním data normalizovat pomocí `StandardScaler`!"
     )
-elif "Směs kategorií" in q_data_type or "Maximální možná" in q_goal:
+elif winner_key == "TREE":
     st.success(
         "🏆 **Doporučený model: Rozhodovací strom (CART) s prořezáním (nebo Random Forest v Dni 2)**  \n"
         "Stromy excelují na tabulkových datech, nevyžadují škálování a perfektně zvládají pravoúhlé ohraničení zón a skokové tarify.  \n"
         "💡 **Pozor:** Vždy ladit `max_depth` a `min_samples_leaf`, aby nedošlo k gigantickému přeučení!"
     )
-elif "interpretovatelnost" in q_goal:
+else:
     st.success(
-        "🏆 **Doporučený model: OLS Lineární regrese nebo Ridge regrese**  \n"
+        "🏆 **Doporučený model: OLS Lineární regrese (s lehkou Ridge penalizací)**  \n"
         "Každý koeficient beta má přímou ekonomickou interpretaci (*'při zvýšení plochy o 1 m² vzroste cena o X Kč'*).  \n"
         "Pokud jsou prediktory korelované, přidejte lehkou L2 penalizaci (Ridge)."
     )
-else:
-    st.info(
-        "🏆 **Doporučený postup: Začněte OLS přímkou jako baselinou a porovnejte s prořezaným stromem.**"
-    )
 
 st.markdown("---")
-st.markdown("### 🗺️ Interaktivní vizuální průvodce: Váš rozhodovací strom výběru")
-st.markdown("Přehledná vizuální navigace krok za krokem. Všechny karty mají **velké, čisté písmo** a dynamicky se přizpůsobují vašim volbám:")
 
-# Kroky rozhodování podle voleb nahoře
-krok1_nazev = "Tabulková data"
-krok1_popis = "Máme k dispozici strukturovaná data s čísly a kategoriemi."
+# =============================================================================
+# 3. VELKÝ VIZUÁLNÍ DIAGRAM ROZHODOVACÍHO STROMU (MERMAID TREE)
+# =============================================================================
+st.markdown("### 🌲 Vizuální rozhodovací strom pro výběr algoritmu:")
+st.markdown("Přehledný grafický strom logických rozhodnutí. Podle vaší volby nahoře je vítězná větev a model **zvýrazněna zeleně (ACTIVE)**:")
 
-is_extrapol = "extrapolace" in q_extrapol and "Ano" in q_extrapol
-is_lasso = "Obrovské množství sloupců" in q_data_type or "Feature Selection" in q_goal
-is_tree = "Směs kategorií" in q_data_type or "Maximální možná" in q_goal
+# Dynamické Mermaid styly
+c_default = "fill:#1E293B,stroke:#475569,stroke-width:2px,color:#FFFFFF"
+c_active = "fill:#064E3B,stroke:#10B981,stroke-width:4px,color:#34D399,font-weight:bold"
+c_root = "fill:#0F172A,stroke:#3B82F6,stroke-width:3px,color:#60A5FA,font-weight:bold"
 
-# 1. ŘADA: Vstupní bod a první rozcestí
-c_step1, c_arrow1, c_step2 = st.columns([4, 1, 4])
-with c_step1:
-    st.markdown("""
-    <div style="background-color: #1E293B; border: 2px solid #3B82F6; border-radius: 12px; padding: 18px; text-align: center;">
-        <div style="font-size: 1.25em; font-weight: bold; color: #60A5FA; margin-bottom: 6px;">📂 Krok 1: Typ vstupních dat</div>
-        <div style="font-size: 1.05em; color: #E2E8F0;">Máme tabulková data (čísla, kategorie, sloupce)</div>
-    </div>
-    """, unsafe_allow_html=True)
+style_ridge = c_active if winner_key == "RIDGE" else c_default
+style_tree = c_active if winner_key == "TREE" else c_default
+style_lasso = c_active if winner_key == "LASSO" else c_default
+style_ols = c_active if winner_key == "OLS" else c_default
 
-with c_arrow1:
-    st.markdown("""
-    <div style="text-align: center; padding-top: 25px; font-size: 2em; color: #94A3B8;">➡️</div>
-    """, unsafe_allow_html=True)
+mermaid_code = f"""
+graph TD
+    classDef defaultStyle {c_default};
+    classDef activeStyle {c_active};
+    classDef rootStyle {c_root};
 
-with c_step2:
-    border_col2 = "#10B981" if is_extrapol else "#3B82F6"
-    st.markdown(f"""
-    <div style="background-color: #1E293B; border: 2px solid {border_col2}; border-radius: 12px; padding: 18px; text-align: center;">
-        <div style="font-size: 1.25em; font-weight: bold; color: #60A5FA; margin-bottom: 6px;">🎯 Krok 2: Potřeba extrapolace?</div>
-        <div style="font-size: 1.05em; color: #E2E8F0;">{"⚠️ ANO (Předpovídáme do budoucna / mimo data)" if is_extrapol else "✔️ NE (Predikce v rámci známého rozsahu)"}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    START["📂 MÁME TABULKOVÁ DATA?"]:::rootStyle
+    
+    START -->|ANO| Q_EXTRAPOL["🎯 POTŘEBUJEME EXTRAPOLOVAT DO BUDOUCNA?"]
+    START -->|NE| DEEP["🖼️ Nestrukturovaná data (Text, Foto)<br>👉 Deep Learning / Neuronové sítě"]
+    
+    Q_EXTRAPOL -->|ANO: Mimo rozsah dat| RIDGE["🏆 RIDGE REGRESE (L2)<br>Lineární trend drží směr<br>⚠️ Stromy přísně zakázány!"]:::styleRidge
+    Q_EXTRAPOL -->|NE: V rámci známých dat| Q_NONLIN["📐 OBSAHUJÍ DATA SKOKY NEBO ZÓNY?"]
+    
+    Q_NONLIN -->|ANO: Tarify, zóny, skoky| TREE["🏆 ROZHODOVACÍ STROM (CART)<br>nebo Random Forest<br>✔️ Nevyžaduje škálování"]:::styleTree
+    Q_NONLIN -->|NE: Plynulé vztahy| Q_COLS["📊 MÁME DESÍTKY AŽ STOVKY PŘÍZNAKŮ?"]
+    
+    Q_COLS -->|ANO: Mnoho šumu / korelací| LASSO["🏆 LASSO (L1) / ELASTIC NET<br>Automatický výběr příznaků<br>⚠️ Nutný StandardScaler"]:::styleLasso
+    Q_COLS -->|NE: Málo čistých sloupců| OLS["🏆 OLS LINEÁRNÍ REGRESE<br>100% interpretovatelné koeficienty<br>✔️ Standard pro reporting"]:::styleOls
 
-st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+    class RIDGE styleRidge;
+    class TREE styleTree;
+    class LASSO styleLasso;
+    class OLS styleOls;
+"""
 
-# 2. ŘADA: Větvění na základě kroků
-if is_extrapol:
-    st.markdown("""
-    <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px; margin-top: 10px;">
-        <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
-            🏆 Vítězný model: Ridge regrese (L2) nebo Lineární trend
-        </div>
-        <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
-            <b>Proč právě tento model?</b><br>
-            Při potřebě předpovídat <b>mimo dosud naměřené hodnoty</b> (např. inflace, růst firmy za 5 let) 
-            je <span style="color: #F87171; font-weight: bold;">přísně zakázáno používat rozhodovací stromy i lesy</span>! 
-            Stromy by narazily na konstantní strop trénovacích dat. Lineární model s L2 regularizací naopak bezpečně drží směr trendu a tlumí výkyvy.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    # Krok 3: Nelinearity vs. Počet sloupců
-    c_sub1, c_arrow2, c_sub2 = st.columns([4, 1, 4])
-    with c_sub1:
-        border_col3 = "#10B981" if is_tree else "#475569"
-        st.markdown(f"""
-        <div style="background-color: #1E293B; border: 2px solid {border_col3}; border-radius: 12px; padding: 18px; text-align: center;">
-            <div style="font-size: 1.25em; font-weight: bold; color: #38BDF8; margin-bottom: 6px;">🌲 Větev A: Nelinearity & Skoky</div>
-            <div style="font-size: 1.05em; color: #E2E8F0;">Zóny, skokové tarify, pravoúhlé hranice</div>
-        </div>
-        """, unsafe_allow_html=True)
+# Zástupný kód stylů pro Mermaid
+mermaid_rendered = f"""
+```mermaid
+graph TD
+    START["📂 1. MÁME TABULKOVÁ DATA?"] -->|ANO| Q_EXTRAPOL["🎯 2. POTŘEBUJEME EXTRAPOLOVAT DO BUDOUCNA?"]
+    START -->|NE| DEEP["🖼️ Nestrukturovaná data (Text, Foto)<br>👉 Deep Learning"]
+    
+    Q_EXTRAPOL -->|ANO: Předpověď mimo data| RIDGE["🏆 RIDGE REGRESE (L2) / LINEÁRNÍ TREND<br>⚠️ Stromy přísně zakázány (konstantní strop)!"]
+    Q_EXTRAPOL -->|NE: Předpověď v mezích dat| Q_NONLIN["📐 3. JSOU V DATECH SKOKY ČI ZÓNY?"]
+    
+    Q_NONLIN -->|ANO: Zóny, skokové tarify| TREE["🏆 ROZHODOVACÍ STROM (CART) / RANDOM FOREST<br>✔️ Nevyžaduje škálování, zachytí skoky"]
+    Q_NONLIN -->|NE: Plynulé vztahy| Q_COLS["📊 4. MÁME VELKÉ MNOŽSTVÍ ŠUMU A SLOUPCŮ?"]
+    
+    Q_COLS -->|ANO: Mnoho irelevantních proměnných| LASSO["🏆 LASSO REGRESE (L1) / ELASTIC NET<br>✔️ Automatický výběr nejdůležitějších příznaků"]
+    Q_COLS -->|NE: Málo kvalitních prediktorů| OLS["🏆 ZÁKLADNÍ LINEÁRNÍ REGRESE (OLS)<br>✔️ Maximální byznys interpretovatelnost vah"]
+```
+"""
+st.markdown(mermaid_rendered)
 
-    with c_arrow2:
-        st.markdown("""
-        <div style="text-align: center; padding-top: 25px; font-size: 2em; color: #94A3B8;">nebo</div>
-        """, unsafe_allow_html=True)
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-    with c_sub2:
-        border_col4 = "#10B981" if (is_lasso or not is_tree) else "#475569"
-        st.markdown(f"""
-        <div style="background-color: #1E293B; border: 2px solid {border_col4}; border-radius: 12px; padding: 18px; text-align: center;">
-            <div style="font-size: 1.25em; font-weight: bold; color: #F59E0B; margin-bottom: 6px;">📐 Větev B: Plynulé vztahy</div>
-            <div style="font-size: 1.05em; color: #E2E8F0;">Mnoho sloupců, šum, požadavek na koeficienty</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
-
-    # Finální doporučení
-    if is_tree:
-        st.markdown("""
-        <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px;">
-            <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
-                🏆 Vítězný model: Rozhodovací strom (CART) s prořezáním (nebo Random Forest)
-            </div>
-            <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
-                <b>Proč právě tento model?</b><br>
-                Vaše data obsahují kategorie, geografické zóny nebo skoky (jako u diamantů na 1.00 karátu). 
-                Rozhodovací strom nevyžaduje škálování, nezajímá ho multikolinearita a vytvoří přesná if-else pravidla.
-                Nezapomeňte však omezit <code>max_depth</code> a <code>min_samples_leaf</code>, abyste se vyhnuli přeučení.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    elif is_lasso:
-        st.markdown("""
-        <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px;">
-            <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
-                🏆 Vítězný model: Lasso regrese (L1) nebo Elastic Net
-            </div>
-            <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
-                <b>Proč právě tento model?</b><br>
-                Máte obrovské množství prediktorů a potřebujete automatický výběr (Feature Selection). 
-                L1 regularizace vynuluje váhy nepodstatných proměnných. Před trénováním nezapomeňte data normalizovat pomocí <code>StandardScaler</code>!
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown("""
-        <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px;">
-            <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
-                🏆 Vítězný model: OLS Lineární regrese (s lehkou Ridge penalizací)
-            </div>
-            <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
-                <b>Proč právě tento model?</b><br>
-                Požadujete maximální možnou interpretovatelnost pro management či regulátory. 
-                Každý koeficient beta má přímý finanční význam (*„zvětšení plochy o 1 m² zvýší cenu o X Kč“*).
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
-
-# Přehledná referenční srovnávací tabulka pro rychlou orientaci (velká a čitelná)
-st.markdown("#### 📋 Rychlý tahák pro volbu modelu (Cheat-Sheet):")
+# =============================================================================
+# 4. VELKÝ REFERENČNÍ CHEAT-SHEET
+# =============================================================================
+st.markdown("#### 📋 Přehledná srovnávací tabulka rozhodování:")
 summary_chooser = [
-    {"Kritérium / Situace": "Potřebuji extrapolovat do budoucna", "Doporučený model": "Lineární regrese / Ridge (L2)", "Zakázaný model": "Rozhodovací stromy (strop!)"},
-    {"Kritérium / Situace": "Mám stovky sloupců a šum", "Doporučený model": "Lasso regrese (L1) / Elastic Net", "Zakázaný model": "Základní OLS (přeučení)"},
-    {"Kritérium / Situace": "Skokové tarify, zóny, kategorie", "Doporučený model": "Rozhodovací strom (CART) / Random Forest", "Zakázaný model": "Čistá přímka OLS"},
-    {"Kritérium / Situace": "Bankovní scoring, regulace, audit", "Doporučený model": "OLS Lineární regrese", "Zakázaný model": "Složité polynomy a hluboké stromy"}
+    {
+        "Kritérium / Situace": "Potřebuji extrapolovat do budoucna",
+        "Doporučený model": "Lineární regrese / Ridge (L2)",
+        "Zakázaný model": "Rozhodovací stromy (CART/RF)",
+        "Důvod": "Stromy narazí na konstantní strop trénovacích dat."
+    },
+    {
+        "Kritérium / Situace": "Mám stovky sloupců a mnoho šumu",
+        "Doporučený model": "Lasso regrese (L1) / Elastic Net",
+        "Zakázaný model": "Základní OLS bez penalizace",
+        "Důvod": "OLS se přeučí; Lasso vynuluje nepotřebné váhy."
+    },
+    {
+        "Kritérium / Situace": "Skokové tarify, zóny, kategorie",
+        "Doporučený model": "Rozhodovací strom (CART) / Random Forest",
+        "Zakázaný model": "Hladká přímka OLS",
+        "Důvod": "Přímka nedokáže ohraničit pravoúhlé enklávy a skoky."
+    },
+    {
+        "Kritérium / Situace": "Bankovní scoring, audit, regulace",
+        "Doporučený model": "OLS Lineární regrese",
+        "Zakázaný model": "Polynomy vysokých stupňů, hluboké stromy",
+        "Důvod": "Nutnost vysvětlit každý koeficient regulátorovi."
+    }
 ]
 st.dataframe(pd.DataFrame(summary_chooser), width="stretch")
-
