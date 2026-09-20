@@ -60,3 +60,19 @@ Tento dokument je **závazným pravidlem (rule)** pro všechny AI agenty pracuj�
   - Stupeň 3 na 26 příznacích generuje $\approx 3\,654$ sloupců, což na 54k řádcích vyžaduje gigabajty paměti a vede k přeučení (overfitting) a kolapsu OLS.
 - **Správný expertní přístup v rozboru:**
   - Porovnat variantu dle zadání (učebnicový postup) s expertní variantou: polynomiální expanze pouze na spojitých fyzikálních veličinách (`carat`, `x`, `y`, `z`, `depth`, `table`) v kombinaci s regularizací (Ridge / Lasso).
+
+---
+
+## 4. Efektivita vývoje a práce agenta (Zákaz plýtvání tokeny)
+
+### Pravidlo 4.1: ZÁKAZ spouštění `browser_subagent` pro rutinní kontrolu UI
+- **Důvod:** Spouštění headless browser subagenta, klikání v aplikaci a nahrávání screenshotů spotřebovává obrovské množství tokenů (desítky tisíc na běh), trvá neúměrně dlouho a je extrémně neekonomické.
+- **Pravidlo:**
+  1. Agent **NESMÍ** autonomně spouštět `browser_subagent` pro testování toho, zda se stránka načetla nebo jak vypadá UI, pokud o to uživatel výslovně a doslovně nepožádá.
+  2. UI a funkčnost si **proklikává uživatel sám** a dává agentovi konkrétní věcnou zpětnou vazbu (např. „tato stránka je pomalá“, „zde chybí graf“, „zde je překlep“).
+  3. Validaci provádí agent **výhradně lokálně, bleskově a levně přes CLI**:
+     - Kontrola syntaxe a varování: `python -W error::SyntaxWarning -m compileall views -f` (< 1 s).
+     - Parita KaTeXu a kontrola formátu přes skript / one-liner (< 1 s).
+     - Kontrola integrity dat a JSON struktur (< 1 s).
+  4. Po lokální validaci agent kód rovnou commitne, pushne a informuje uživatele, co bylo upraveno a kde to může v aplikaci vyzkoušet.
+
