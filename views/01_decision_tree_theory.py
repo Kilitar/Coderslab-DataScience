@@ -54,31 +54,38 @@ with tab2:
         horizontal=True
     )
 
-    col_ctrl1, col_ctrl2, col_ctrl3 = st.columns([1, 1, 1])
+    with st.container(border=True):
+        col_ctrl1, col_ctrl2 = st.columns(2)
 
-    with col_ctrl1:
-        depth_option = st.select_slider(
-            "Maximální hloubka stromu (`max_depth`):",
-            options=["1 (Pařez / Stump)", "2", "3", "4", "5", "7", "Neomezeno (None)"],
-            value="3"
-        )
-        if "Neomezeno" in depth_option:
-            selected_depth = None
-        else:
-            selected_depth = int(depth_option.split()[0])
+        with col_ctrl1:
+            depth_option = st.select_slider(
+                "Maximální hloubka stromu (max_depth):",
+                options=["1 (Pařez / Stump)", "2", "3", "4", "5", "7", "Neomezeno (None)"],
+                value="3"
+            )
+            if "Neomezeno" in depth_option:
+                selected_depth = None
+            else:
+                selected_depth = int(depth_option.split()[0])
 
-    with col_ctrl2:
-        min_leaf = st.slider(
-            "Minimální počet vzorků v listu (`min_samples_leaf`):",
-            min_value=1,
-            max_value=25,
-            value=1,
-            help="Zabraňuje větvení pro izolované šumové body."
-        )
+        with col_ctrl2:
+            min_leaf = st.slider(
+                "Minimální počet vzorků v listu (min_samples_leaf):",
+                min_value=1,
+                max_value=25,
+                value=1,
+                help="Minimální počet trénovacích vzorků vyžadovaný v koncovém listu. Vyšší hodnota tlumí přetrénování na šumu."
+            )
 
-    with col_ctrl3:
-        show_ols = st.checkbox("Zobrazit lineární OLS regresi pro srovnání", value=True)
-        noise_level = st.slider("Úroveň šumu (pro variantu 2):", min_value=0.1, max_value=1.5, value=0.45, step=0.05)
+        col_opt1, col_opt2 = st.columns(2)
+        with col_opt1:
+            show_ols = st.checkbox("📈 Zobrazit referenční lineární OLS regresi pro srovnání", value=True)
+        with col_opt2:
+            if "sinusovka" in dataset_choice.lower():
+                noise_level = st.slider("Úroveň šumu (pro variantu 2):", min_value=0.1, max_value=1.5, value=0.45, step=0.05)
+            else:
+                noise_level = 0.45
+                st.caption("ℹ️ *Generátor paraboly ze zadání kurzu používá fixní náhodný šum (noise=30).*")
 
     # Generování dat
     if "Parabola" in dataset_choice:
@@ -120,7 +127,7 @@ with tab2:
     # Zobrazení metrik
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
     with kpi1:
-        st.metric("Počet listů (Segmentů)", f"{n_leaves}")
+        st.metric("Počet listů", f"{n_leaves}")
     with kpi2:
         st.metric("Trénovací R²", f"{train_r2:.4f}")
     with kpi3:
@@ -128,7 +135,13 @@ with tab2:
     with kpi4:
         st.metric("Trénovací MSE", f"{train_mse:,.1f}" if train_mse > 1000 else f"{train_mse:.3f}")
     with kpi5:
-        st.metric("Testovací MSE", f"{test_mse:,.1f}" if test_mse > 1000 else f"{test_mse:.3f}", delta_color="inverse")
+        delta_mse = test_mse - train_mse
+        st.metric(
+            "Testovací MSE",
+            f"{test_mse:,.1f}" if test_mse > 1000 else f"{test_mse:.3f}",
+            delta=f"{delta_mse:+,.1f}" if abs(delta_mse) > 1000 else f"{delta_mse:+.3f}",
+            delta_color="inverse"
+        )
 
     # Vytvoření jemné osy pro vizualizaci hladké křivky predikce
     x_min, x_max = float(np.min(X_raw)), float(np.max(X_raw))
@@ -222,13 +235,12 @@ with tab3:
     Proto jsou všechny řezy v prostoru striktně **rovnoběžné s osami souřadnic** a dělí prostor na soustavu pravoúhlých oblastí (hyperboxů).
     """)
 
-    col_2d_a, col_2d_b = st.columns([1, 1])
-
-    with col_2d_a:
-        depth_2d = st.slider("Hloubka stromu pro 2D data (`max_depth`):", min_value=1, max_value=5, value=3)
-
-    with col_2d_b:
-        st.caption("Příklad: Odhad ceny nemovitosti z **Plochy (m²)** a **Vzdálenosti od centra (km)**.")
+    with st.container(border=True):
+        col_2d_a, col_2d_b = st.columns([1, 1])
+        with col_2d_a:
+            depth_2d = st.slider("Hloubka stromu pro 2D data (max_depth):", min_value=1, max_value=5, value=3)
+        with col_2d_b:
+            st.info("💡 **Scénář 2D prostoru:** Odhad ceny nemovitosti z **Podlahové plochy ($m^2$)** a **Vzdálenosti od centra ($km$)**.")
 
     np.random.seed(101)
     n_2d = 200
