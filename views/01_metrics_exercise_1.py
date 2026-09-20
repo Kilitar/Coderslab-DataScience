@@ -115,7 +115,7 @@ tbl_train_test = pd.DataFrame([
         "Diagnostika": "✅ Nulový Overfitting (skvělá stabilita)"
     }
 ])
-st.dataframe(tbl_train_test, use_container_width=True, hide_index=True)
+st.dataframe(tbl_train_test, width="stretch", hide_index=True)
 
 # Vizualizace Train vs Test
 fig_bar = go.Figure()
@@ -141,7 +141,7 @@ fig_bar.update_layout(
     height=350,
     margin=dict(l=10, r=10, t=40, b=10)
 )
-st.plotly_chart(fig_bar, use_container_width=True)
+st.plotly_chart(fig_bar, width="stretch")
 
 st.markdown("---")
 
@@ -210,4 +210,4 @@ models_table = pd.DataFrame([
         "Charakteristika": "🏆 State-of-the-Art: Pokles chyby na 64k USD!"
     }
 ])
-st.dataframe(models_table, use_container_width=True, hide_index=True)
+st.dataframe(models_table, width="stretch", hide_index=True)

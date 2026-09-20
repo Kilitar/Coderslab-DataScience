@@ -65,6 +65,23 @@ p_reg_diam_nb = st.Page("views/01_diamonds_regularization_nb.py", title="Cvičen
 p_reg_diam_nb = st.Page("views/01_diamonds_regularization_nb.py", title="Cvičení 6: Regularizace diamantů – Jupyter Notebook (.ipynb)", icon="📓")
 ```
 
+### Pravidlo 4: Zákaz `use_container_width`, povinně používat `width="stretch"`
+V moderním Streamlitu (verze 1.40+) je parametr `use_container_width` napříč všemi komponentami (`st.dataframe`, `st.image`, `st.plotly_chart`, `st.download_button`) označen jako deprecated a zahlcuje systémové logy varováními.
+- **Pro roztažení na celou šířku:** VŽDY používat `width="stretch"`.
+- **Pro přizpůsobení obsahu:** VŽDY používat `width="content"`.
+
+```python
+# SPRÁVNĚ:
+st.dataframe(df, width="stretch", hide_index=True)
+st.plotly_chart(fig, width="stretch")
+st.image(img, width="stretch")
+st.download_button("Stáhnout", data=b, width="stretch")
+
+# ZAKÁZÁNO (generuje desítky varování v logu):
+st.dataframe(df, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
+```
+
 ---
 
 ## 3. Automatická obrana (Sanitizer) v `notebook_renderer.py`
@@ -72,3 +89,4 @@ p_reg_diam_nb = st.Page("views/01_diamonds_regularization_nb.py", title="Cvičen
 Jako systémovou pojistku pro případ, že externí nebo importovaný Jupyter sešit obsahuje nechtěné znaky, zavádíme v `views/notebook_renderer.py` automatickou sanitaci:
 1. Automatické nahrazení `\x07lpha` zpět na `\alpha`.
 2. Automatické ošetření `\$` uvnitř matematických bloků a převod na formát `USD`.
+

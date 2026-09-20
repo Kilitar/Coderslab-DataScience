@@ -187,10 +187,10 @@ fig_carat = px.scatter(
     color_continuous_scale="Viridis",
 )
 fig_carat.update_layout(height=500, margin=dict(l=10, r=10, t=40, b=10))
-st.plotly_chart(fig_carat, use_container_width=True)
+st.plotly_chart(fig_carat, width="stretch")
 
 # 2. Původní statický graf anomálií
 with st.expander("🖼️ Zobrazit detekci odlehlých hodnot a anomálií (nulové rozměry a překlepy)"):
     p_out = plots_dir / "08_diamonds_outliers_detection.png"
     if p_out.exists():
-        st.image(str(p_out), caption="Detekce odlehlých hodnot (x, y, z anomálie)", use_container_width=True)
+        st.image(str(p_out), caption="Detekce odlehlých hodnot (x, y, z anomálie)", width="stretch")

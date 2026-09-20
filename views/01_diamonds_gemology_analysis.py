@@ -183,7 +183,7 @@ fig_depth.update_yaxes(title_text="Cena diamantu ($)", row=1, col=1)
 fig_depth.update_xaxes(title_text="Ploška Table (%)", range=[50, 70], row=1, col=2)
 fig_depth.update_yaxes(title_text="Cena diamantu ($)", row=1, col=2)
 
-st.plotly_chart(fig_depth, use_container_width=True)
+st.plotly_chart(fig_depth, width="stretch")
 
 st.markdown("---")
 
@@ -223,7 +223,7 @@ with col_phys_r:
             {"Příznak": "y (šířka v mm)", "Koeficient": "+$3,761", "Vliv": "Kladný (kompenzace)"},
             {"Příznak": "z (hloubka v mm)", "Koeficient": "-$2,602", "Vliv": "Absurdně záporný ❌"},
         ]),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -276,7 +276,7 @@ benchmark_data = [
     },
 ]
 
-st.dataframe(pd.DataFrame(benchmark_data), use_container_width=True, hide_index=True)
+st.dataframe(pd.DataFrame(benchmark_data), width="stretch", hide_index=True)
 
 # Vizuální srovnání chyby
 fig_mae = go.Figure()
@@ -300,4 +300,4 @@ fig_mae.update_layout(
     margin=dict(l=10, r=10, t=40, b=10),
     yaxis_title="MAE ($)"
 )
-st.plotly_chart(fig_mae, use_container_width=True)
+st.plotly_chart(fig_mae, width="stretch")

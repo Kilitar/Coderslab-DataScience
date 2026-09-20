@@ -182,7 +182,7 @@ st.dataframe(
         "MAE": "${:,.2f}",
         "RMSE": "${:,.2f}",
     }),
-    use_container_width=True,
+    width="stretch",
 )
 
 # =============================================================================
@@ -215,7 +215,7 @@ fig_path.update_layout(
     legend=dict(orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
     hovermode="closest",
 )
-st.plotly_chart(fig_path, use_container_width=True)
+st.plotly_chart(fig_path, width="stretch")
 
 st.markdown("""
 **Pozorování z grafu Lasso Path:**

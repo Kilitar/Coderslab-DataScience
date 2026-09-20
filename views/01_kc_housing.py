@@ -153,12 +153,12 @@ fig_corr.update_layout(
     margin=dict(l=10, r=10, t=30, b=10),
     font=dict(size=11),
 )
-st.plotly_chart(fig_corr, use_container_width=True)
+st.plotly_chart(fig_corr, width="stretch")
 
 with st.expander("🖼️ Zobrazit původní statický graf (PNG) v tiskové kvalitě"):
     p1 = plots_dir / "01_correlation_matrix.png"
     if p1.exists():
-        st.image(str(p1), caption="Původní statický Seaborn heatmap", use_container_width=True)
+        st.image(str(p1), caption="Původní statický Seaborn heatmap", width="stretch")
 
 st.markdown("---")
 
@@ -220,9 +220,9 @@ fig_res.update_yaxes(title_text="Reziduum (Skutečnost - Predikce)", row=1, col=
 fig_res.update_xaxes(title_text="Chyba ($)", row=1, col=2)
 fig_res.update_yaxes(title_text="Počet domů", row=1, col=2)
 
-st.plotly_chart(fig_res, use_container_width=True)
+st.plotly_chart(fig_res, width="stretch")
 
 with st.expander("🖼️ Zobrazit původní statický diagnostický graf reziduí"):
     p2 = plots_dir / "04_actual_vs_predicted_residuals.png"
     if p2.exists():
-        st.image(str(p2), caption="Původní statický graf reziduí", use_container_width=True)
+        st.image(str(p2), caption="Původní statický graf reziduí", width="stretch")

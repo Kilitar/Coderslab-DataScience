@@ -160,7 +160,7 @@ st.dataframe(
         "Ridge Koeficient (α = 10.0)": "{:+,.2f}",
         "Rozdíl": "{:+,.2f}",
     }),
-    use_container_width=True,
+    width="stretch",
 )
 
 st.markdown("""
@@ -198,7 +198,7 @@ fig_path.update_layout(
     legend=dict(orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
     hovermode="closest",
 )
-st.plotly_chart(fig_path, use_container_width=True)
+st.plotly_chart(fig_path, width="stretch")
 
 # =============================================================================
 # SEKCE 4: KŘÍŽOVÁ VALIDACE (5-FOLD CV)
@@ -216,5 +216,5 @@ st.dataframe(
         "MAE": "${:,.2f}",
         "RMSE": "${:,.2f}",
     }),
-    use_container_width=True,
+    width="stretch",
 )

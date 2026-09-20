@@ -239,7 +239,7 @@ fig_bar = px.bar(
 )
 fig_bar.add_vline(x=0, line_dash="dash", line_color="black", opacity=0.7)
 fig_bar.update_layout(margin=dict(l=20, r=20, t=40, b=20), legend_title="Stav příznaku")
-st.plotly_chart(fig_bar, use_container_width=True)
+st.plotly_chart(fig_bar, width="stretch")
 
 # =============================================================================
 # KOMPLETNÍ SROVNÁVACÍ TABULKA NAPŘÍČ ALPHA
@@ -258,7 +258,7 @@ with tab1:
             "MAE": "${:,.2f}",
             "RMSE": "${:,.2f}",
         }),
-        use_container_width=True,
+        width="stretch",
     )
 
 with tab2:
@@ -271,7 +271,7 @@ with tab2:
             "MAE": "${:,.2f}",
             "RMSE": "${:,.2f}",
         }),
-        use_container_width=True,
+        width="stretch",
     )
 
 with tab3:
@@ -315,7 +315,7 @@ with tab3:
             "MAE": "${:,.2f}",
             "RMSE": "${:,.2f}",
         }),
-        use_container_width=True,
+        width="stretch",
     )
 
 # =============================================================================

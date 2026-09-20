@@ -20,7 +20,7 @@ if theory_md_path.exists():
         st.image(
             str(img_path),
             caption="Geometrická interpretace: Porovnání ohraničení přípustné oblasti (L2 kruh, L1 kosočtverec, L1+L2 zaoblený kosočtverec s grouping efektem) a dotyku s elipsami ztrátové funkce.",
-            use_container_width=True
+            width="stretch"
         )
         st.markdown(part2)
     else:

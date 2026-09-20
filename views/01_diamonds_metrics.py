@@ -115,7 +115,7 @@ tbl_tt = pd.DataFrame([
         "Diagnostika": "✅ Nulový Overfitting (stabilní generalizace)"
     }
 ])
-st.dataframe(tbl_tt, use_container_width=True, hide_index=True)
+st.dataframe(tbl_tt, width="stretch", hide_index=True)
 
 st.markdown("---")
 
@@ -143,7 +143,7 @@ with col_left:
             "Test RMSE": f"${m_te['RMSE']:,.2f}",
         }
     ])
-    st.dataframe(tbl_compare, use_container_width=True, hide_index=True)
+    st.dataframe(tbl_compare, width="stretch", hide_index=True)
 
 with col_right:
     st.warning(

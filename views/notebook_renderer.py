@@ -66,7 +66,7 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
             data=bytes_data,
             file_name=nb_path.name,
             mime="application/x-ipynb+json",
-            use_container_width=True,
+            width="stretch",
         )
 
     with col_info:
@@ -119,7 +119,7 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
                             data = out.get("data", {})
                             if "image/png" in data:
                                 img_bytes = base64.b64decode(data["image/png"])
-                                st.image(img_bytes, caption=f"Graf z buňky In {exec_str}", use_container_width=True)
+                                st.image(img_bytes, caption=f"Graf z buňky In {exec_str}", width="stretch")
                             elif "text/html" in data:
                                 html_str = "".join(data["text/html"])
                                 try:
@@ -131,7 +131,7 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
                                         unnamed_cols = [c for c in table_df.columns if "Unnamed: 0" in str(c)]
                                         if unnamed_cols:
                                             table_df = table_df.drop(columns=unnamed_cols)
-                                        st.dataframe(table_df, use_container_width=True, hide_index=True)
+                                        st.dataframe(table_df, width="stretch", hide_index=True)
                                     else:
                                         st.markdown(html_str, unsafe_allow_html=True)
                                 except Exception:

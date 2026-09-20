@@ -146,7 +146,7 @@ cv_df = pd.DataFrame({
 
 c_tbl, c_chart = st.columns([1, 1.6])
 with c_tbl:
-    st.dataframe(cv_df, use_container_width=True, hide_index=True)
+    st.dataframe(cv_df, width="stretch", hide_index=True)
     st.metric("Průměrné CV R²", f"{res['cv_r2'].mean():.4f} ± {res['cv_r2'].std():.4f}")
     st.metric("Průměrné CV MAE", f"${res['cv_mae'].mean():,.0f} ± ${res['cv_mae'].std():,.0f}")
 
@@ -168,7 +168,7 @@ with c_chart:
         height=320, margin=dict(l=10, r=10, t=40, b=10),
         yaxis=dict(range=[0.65, 0.75])
     )
-    st.plotly_chart(fig_cv, use_container_width=True)
+    st.plotly_chart(fig_cv, width="stretch")
 
 st.markdown("---")
 
@@ -206,7 +206,7 @@ fig_dist.update_layout(
     xaxis=dict(title="Velikost chyby (USD)", range=[0, 500000]),
     yaxis=dict(title="Počet domů")
 )
-st.plotly_chart(fig_dist, use_container_width=True)
+st.plotly_chart(fig_dist, width="stretch")
 
 st.info(
     f"""

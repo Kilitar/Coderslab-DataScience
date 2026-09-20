@@ -117,7 +117,7 @@ fig_season.add_trace(
 
 fig_season.update_layout(height=450, margin=dict(l=10, r=10, t=40, b=10), showlegend=False)
 fig_season.update_xaxes(tickangle=-45)
-st.plotly_chart(fig_season, use_container_width=True)
+st.plotly_chart(fig_season, width="stretch")
 
 st.markdown("---")
 
@@ -210,7 +210,7 @@ res_data = [
     },
 ]
 
-st.dataframe(pd.DataFrame(res_data), use_container_width=True, hide_index=True)
+st.dataframe(pd.DataFrame(res_data), width="stretch", hide_index=True)
 
 st.markdown("---")
 

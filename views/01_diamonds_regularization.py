@@ -226,7 +226,7 @@ fig_bar = px.bar(
     height=450,
 )
 fig_bar.add_vline(x=0, line_dash="dash", line_color="black", opacity=0.7)
-st.plotly_chart(fig_bar, use_container_width=True)
+st.plotly_chart(fig_bar, width="stretch")
 
 # =============================================================================
 # TABULKY VÝSLEDKŮ
@@ -245,7 +245,7 @@ with t1:
             "MAE": "${:,.2f}",
             "RMSE": "${:,.2f}",
         }),
-        use_container_width=True,
+        width="stretch",
     )
 
 with t2:
@@ -258,7 +258,7 @@ with t2:
             "MAE": "${:,.2f}",
             "RMSE": "${:,.2f}",
         }),
-        use_container_width=True,
+        width="stretch",
     )
 
 with t3:
@@ -311,7 +311,7 @@ with t3:
             "MAE": "${:,.2f}",
             "RMSE": "${:,.2f}",
         }),
-        use_container_width=True,
+        width="stretch",
     )
 
 # =============================================================================

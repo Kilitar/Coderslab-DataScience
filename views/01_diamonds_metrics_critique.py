@@ -155,7 +155,7 @@ bench_df = pd.DataFrame([
     }
     for b in bench_results
 ])
-st.dataframe(bench_df, use_container_width=True, hide_index=True)
+st.dataframe(bench_df, width="stretch", hide_index=True)
 
 # Plotly sloupcový graf chyby
 fig_err = go.Figure()
@@ -177,4 +177,4 @@ fig_err.update_layout(
     margin=dict(l=10, r=10, t=40, b=10),
     yaxis_title="Průměrná chyba MAE ($)"
 )
-st.plotly_chart(fig_err, use_container_width=True)
+st.plotly_chart(fig_err, width="stretch")

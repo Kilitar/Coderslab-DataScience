@@ -74,7 +74,7 @@ course_data = [
 
 st.dataframe(
     course_data,
-    use_container_width=True,
+    width="stretch",
     column_config={
         "Blok": st.column_config.TextColumn("Blok / Modul", width="medium"),
         "Téma": st.column_config.TextColumn("Klíčová témata", width="large"),
