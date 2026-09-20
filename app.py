@@ -49,8 +49,9 @@ p_poly_diam_model = st.Page("views/01_diamonds_polynomial.py", title="Cvičení 
 p_poly_diam_critique = st.Page("views/01_diamonds_polynomial_critique.py", title="Cvičení 7: Polynom diamantů – Expertní analýza", icon="🔬")
 p_poly_diam_nb = st.Page("views/01_diamonds_polynomial_nb.py", title="Cvičení 7: Polynom diamantů – Notebook", icon="🐍")
 
-# Téma 5: Rozhodovací stromy
+# Téma 5: Rozhodovací stromy & Ansámbly
 p_tree_theory = st.Page("views/01_decision_tree_theory.py", title="Teorie: Rozhodovací strom v regresi", icon="📖")
+p_ensemble_theory = st.Page("views/01_ensemble_theory.py", title="Teorie: Ansámblové metody (RF & Boosting)", icon="🌲")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -97,8 +98,9 @@ nav = st.navigation(
             p_poly_diam_critique,
             p_poly_diam_nb,
         ],
-        "05. Rozhodovací stromy (Decision Trees)": [
+        "05. Rozhodovací stromy & Ansámbly": [
             p_tree_theory,
+            p_ensemble_theory,
         ],
     }
 )
