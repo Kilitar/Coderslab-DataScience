@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.title("🧭 Expertní analýza: Interaktivní průvodce výběrem modelu")
 st.caption("Jak přemýšlet jako seniorní Machine Learning inženýr: Rozhodovací strom pro volbu správného regresního algoritmu podle povahy vašich dat a byznys cílů.")
