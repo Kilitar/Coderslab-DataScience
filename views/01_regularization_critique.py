@@ -137,11 +137,11 @@ lasso_reg.fit(X_train, y_train)  # <-- BEZ JAKÉHOKOLIV ŠKÁLOVÁNÍ!
 col_err1, col_err2 = st.columns(2)
 
 with col_err1:
-    st.markdown("""
+    st.markdown(r"""
     #### Proč je to v regularizaci fatální?
     1. **Různá měřítka proměnných:**  
-       - `sqft_living` (plocha domu) má hodnoty v tisících (1 000 až 5 000). Její koeficient $\\beta$ je malý (např. $\\approx 150$).
-       - `bedrooms` (počet pokojů) má hodnoty 1 až 5. Její koeficient $\\beta$ je velký (např. $\\approx 40 000$).
+       - `sqft_living` (plocha domu) má hodnoty v tisících (1 000 až 5 000). Její koeficient $\beta$ je malý (např. $\approx 150$).
+       - `bedrooms` (počet pokojů) má hodnoty 1 až 5. Její koeficient $\beta$ je velký (např. $\approx 40 000$).
     2. **Disproporční penalizace:**  
        Penalizační člen $\alpha \sum \beta_j^2$ trestá koeficient pro `bedrooms` částkou $40000^2 = 1{,}6 \times 10^9$, zatímco pro `sqft_living` pouze $150^2 = 22500$.
     3. **Důsledek v Scikit-learn:**  
@@ -170,8 +170,8 @@ with col_err2:
 st.markdown("---")
 st.markdown("### ⚠️ 2. Data Leakage (Snooping) při ladění α vs. Křížová validace")
 
-st.markdown("""
-Na snímku 17 prezentace autor hledá optimální $\\alpha$ tím, že ve smyčce volá:
+st.markdown(r"""
+Na snímku 17 prezentace autor hledá optimální $\alpha$ tím, že ve smyčce volá:
 ```python
 alphas = [0.001, 0.01, 0.1, 1, 10, 100, 1000]
 for alpha in alphas:
@@ -227,9 +227,9 @@ fig_path.update_layout(
 )
 st.plotly_chart(fig_path, width="stretch")
 
-st.markdown("""
+st.markdown(r"""
 **Pozorování z grafu Lasso Path:**
-- Při vysokých hodnotách $\\alpha > 50\\,000$ jsou **všechny váhy přesně rovny nule** (model predikuje pouhý průměr $\\bar{y}$).
+- Při vysokých hodnotách $\alpha > 50\,000$ jsou **všechny váhy přesně rovny nule** (model predikuje pouhý průměr $\bar{y}$).
 - Jako první „přežívají“ a získávají váhu ty nejvýznamnější strukturální parametry: **`sqft_living`** (obytná plocha), **`grade`** (konstrukční kvalita) a **`lat`** (zeměpisná šířka – poloha domu).
 - Méně významné či kolineární parametry (`sqft_basement`, `sqft_lot`) zůstávají dlouho vynulovány na nule.
 
