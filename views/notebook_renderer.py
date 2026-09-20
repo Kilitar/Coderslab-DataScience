@@ -107,7 +107,7 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
         st.markdown(
             f"🔗 [Zobrazit na GitHubu]({github_url}) &nbsp;|&nbsp; "
             f"Buněk: **{len(nb_json.get('cells', []))}** &nbsp;|&nbsp; "
-            f"Jádro: **Python 3.14**"
+            f"Jádro: **Python 3.11+**"
         )
 
     st.markdown("---")
