@@ -204,15 +204,31 @@ with tab2:
         if selected_depth is None or selected_depth > 4:
             st.info("ℹ️ Pro stromy s hloubkou větší než 4 je diagram příliš rozsáhlý pro zobrazení na obrazovce. Nastavte hloubku na 1 až 4 pro přehledný náhled.")
         else:
-            fig_tree_arch, ax_tree = plt.subplots(figsize=(12, 5 if selected_depth >= 3 else 3.5))
+            # Dynamické dimenzování podle hloubky, aby nedocházelo k překrývání uzlů v listech
+            if selected_depth == 1:
+                fig_size = (10, 4)
+                f_size = 10
+            elif selected_depth == 2:
+                fig_size = (14, 5)
+                f_size = 9
+            elif selected_depth == 3:
+                fig_size = (20, 6.5)
+                f_size = 7.5
+            else:  # hloubka 4
+                fig_size = (28, 8.5)
+                f_size = 6.0
+
+            fig_tree_arch, ax_tree = plt.subplots(figsize=fig_size)
             plot_tree(
                 tree_reg,
                 feature_names=["X"],
                 filled=True,
                 rounded=True,
+                precision=2,
                 ax=ax_tree,
-                fontsize=9
+                fontsize=f_size
             )
+            fig_tree_arch.tight_layout()
             st.pyplot(fig_tree_arch, width="stretch")
             plt.close(fig_tree_arch)
 
