@@ -64,7 +64,7 @@ p_day1_summary = st.Page("views/01_day_1_summary.py", title="Závěrečné shrnu
 
 # Day 1 Extras: Expertní rozšíření & Interaktivní nástroje
 p_extra_whatif = st.Page("views/01_extras_whatif.py", title="Kalkulátor cen: What-If simulátor inference", icon="🎯")
-p_extra_geo = st.Page("views/01_extras_geo_residuals.py", title="Mapa reziduí: Kde OLS a stromy chybují v Seattlu", icon="🔬")
+p_extra_geo = st.Page("views/01_extras_geo_residuals.py", title="Mapa nemovitostí: Kde OLS a stromy chybují v Seattlu", icon="🗺️")
 p_extra_gauss = st.Page("views/01_extras_gauss_markov.py", title="Diagnostika OLS: Gauss-Markov & VIF multikolinearita", icon="🔬")
 p_extra_ccp = st.Page("views/01_extras_ccp_pruning.py", title="Prořezávání stromů: Cost-Complexity Pruning (alpha)", icon="🔬")
 p_extra_chooser = st.Page("views/01_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🔬")

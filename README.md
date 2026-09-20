@@ -17,7 +17,7 @@ Základní pedagogická struktura, datové sady a cvičení v tomto projektu vyc
 Tento repozitář rozšiřuje původní osnovy kurzu o:
 - Moderní **Streamlit webovou aplikaci** s interaktivními vizualizacemi v Plotly.
 - **What-If inferenční simulátory** napojené na reálně natrénované Scikit-learn modely.
-- **Expertní diagnostiku:** Gauss-Markovovy teorémy, analýzu multikolinearity (VIF), prostorovou mapu reziduí v Seattlu a Cost-Complexity Pruning rozhodovacích stromů.
+- **Expertní diagnostiku:** Gauss-Markovovy teorémy, analýzu multikolinearity (VIF), prostorovou mapu odchylek v cenách nemovitostí v Seattlu a Cost-Complexity Pruning rozhodovacích stromů.
 - **Rigorózní metodické rozbory:** eliminaci Data Leakage, správnou práci s křížovou validací (`GridSearchCV`) a ochranu před přetrénováním.
 
 ---
@@ -38,7 +38,7 @@ flowchart TD
     D --> E[04. Polynomiální regrese & Kletba dimenzionality]
     E --> F[05. Rozhodovací stromy CART & Úvod do ansámblů]
     F --> G[06. Velká syntéza & CZ/EN Glosář]
-    G --> H[07. Day 1 Extras: Simulátory, Geografická mapa reziduí, CCP Pruning]
+    G --> H[07. Day 1 Extras: Simulátory, Geografická mapa nemovitostí, CCP Pruning]
 ```
 
 ---
@@ -69,7 +69,7 @@ Experimenty jsou prováděny na dvou reálných datových sadách z praxe:
 ## 🎛️ Hlavní interaktivní funkce (Day 1 Extras)
 
 - **🎛️ What-If simulátor inference:** Kalkulátor cen domů i diamantů volající **skutečně natrénované Scikit-learn pipeliny** v reálném čase.
-- **🗺️ Geografická mapa reziduí Seattlu:** Interaktivní mapa 1 500 nemovitostí s barevným vyznačením chyb ($y - \hat{y}$) odhalující, kde přesně OLS selhává a jak strom lokalizuje bohaté pobřežní oblasti.
+- **🗺️ Geografická mapa nemovitostí v Seattlu:** Interaktivní mapa 1 500 domů s barevným vyznačením odchylek v odhadu cen ($y - \hat{y}$) odhalující, kde přesně OLS selhává a jak strom lokalizuje bohaté pobřežní oblasti.
 - **🔬 Diagnostika Gauss-Markov:** Ověření předpokladů pro vlastnost BLUE (Best Linear Unbiased Estimator) a interaktivní analýza multikolinearity přes VIF faktor.
 - **🌲 Cost-Complexity Pruning (`ccp_alpha`):** Vizuální sledování prořezávání rozhodovacího stromu od masivního přeučení ($>36\,000$ listů) až k optimálnímu generalizovanému modelu.
 - **🌳 Průvodce výběrem modelu:** Interaktivní rozhodovací diagram v SVG pro volbu správného algoritmu v byznysové praxi.
