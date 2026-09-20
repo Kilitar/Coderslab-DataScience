@@ -68,98 +68,137 @@ else:
     )
 
 st.markdown("---")
-st.markdown("### 🗺️ Interaktivní mapa rozhodovacího stromu výběru:")
-st.markdown("Níže je přehledný vizuální diagram celého rozhodovacího procesu. Aktuální cesta podle vaší volby je **zvýrazněna zeleně**:")
+st.markdown("### 🗺️ Interaktivní vizuální průvodce: Váš rozhodovací strom výběru")
+st.markdown("Přehledná vizuální navigace krok za krokem. Všechny karty mají **velké, čisté písmo** a dynamicky se přizpůsobují vašim volbám:")
 
-# Dynamické určení aktivního uzlu pro vizualizaci
-active_choice = "ols"
-if "extrapolace" in q_extrapol and "Ano" in q_extrapol:
-    active_choice = "ridge"
-elif "Obrovské množství sloupců" in q_data_type or "Feature Selection" in q_goal:
-    active_choice = "lasso"
-elif "Směs kategorií" in q_data_type or "Maximální možná" in q_goal:
-    active_choice = "tree"
-elif "interpretovatelnost" in q_goal:
-    active_choice = "ols"
+# Kroky rozhodování podle voleb nahoře
+krok1_nazev = "Tabulková data"
+krok1_popis = "Máme k dispozici strukturovaná data s čísly a kategoriemi."
 
-import plotly.graph_objects as go
+is_extrapol = "extrapolace" in q_extrapol and "Ano" in q_extrapol
+is_lasso = "Obrovské množství sloupců" in q_data_type or "Feature Selection" in q_goal
+is_tree = "Směs kategorií" in q_data_type or "Maximální možná" in q_goal
 
-# Souřadnice uzlů
-# Úroveň 0: Kořen
-# Úroveň 1: Extrapolace vs No
-# Úroveň 2: Nelinearita vs Mnoho sloupců
-# Úroveň 3: Výsledné modely
-nodes = {
-    "root": {"x": 0.5, "y": 1.0, "label": "<b>Tabulková data?</b><br>Máme tabulku s čísly/kategoriemi", "color": "#334155", "border": "#64748B"},
-    "extrapol": {"x": 0.35, "y": 0.72, "label": "<b>Extrapolace do budoucna?</b><br>Bude se předpovídat mimo rozsah?", "color": "#334155", "border": "#64748B"},
-    "deep": {"x": 0.85, "y": 0.72, "label": "<b>Nestrukturovaná data</b><br>Text / Obrázky -> Deep Learning", "color": "#1E293B", "border": "#475569"},
-    "ridge": {"x": 0.15, "y": 0.40, "label": "🏆 <b>Ridge regrese (L2)</b><br>nebo lineární trend<br><i>(Stromy zakázány!)</i>", "color": "#065F46" if active_choice == "ridge" else "#1E293B", "border": "#10B981" if active_choice == "ridge" else "#334155"},
-    "nonlin": {"x": 0.55, "y": 0.42, "label": "<b>Nelinearity & Skoky?</b><br>Tarify, zóny, zlomy v datech?", "color": "#334155", "border": "#64748B"},
-    "tree": {"x": 0.38, "y": 0.12, "label": "🏆 <b>Rozhodovací strom (CART)</b><br>nebo Random Forest<br><i>(Nevyžaduje škálování)</i>", "color": "#065F46" if active_choice == "tree" else "#1E293B", "border": "#10B981" if active_choice == "tree" else "#334155"},
-    "cols": {"x": 0.72, "y": 0.22, "label": "<b>Mnoho sloupců / Šum?</b><br>Desítky až stovky proměnných?", "color": "#334155", "border": "#64748B"},
-    "lasso": {"x": 0.62, "y": 0.02, "label": "🏆 <b>Lasso (L1) / Elastic Net</b><br>Automatická selekce příznaků", "color": "#065F46" if active_choice == "lasso" else "#1E293B", "border": "#10B981" if active_choice == "lasso" else "#334155"},
-    "ols": {"x": 0.88, "y": 0.02, "label": "🏆 <b>OLS Lineární regrese</b><br>Maximální interpretovatelnost", "color": "#065F46" if active_choice == "ols" else "#1E293B", "border": "#10B981" if active_choice == "ols" else "#334155"}
-}
+# 1. ŘADA: Vstupní bod a první rozcestí
+c_step1, c_arrow1, c_step2 = st.columns([4, 1, 4])
+with c_step1:
+    st.markdown("""
+    <div style="background-color: #1E293B; border: 2px solid #3B82F6; border-radius: 12px; padding: 18px; text-align: center;">
+        <div style="font-size: 1.25em; font-weight: bold; color: #60A5FA; margin-bottom: 6px;">📂 Krok 1: Typ vstupních dat</div>
+        <div style="font-size: 1.05em; color: #E2E8F0;">Máme tabulková data (čísla, kategorie, sloupce)</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Hrany (spojnice)
-edges = [
-    ("root", "extrapol", "ANO (Tabulka)"),
-    ("root", "deep", "NE (Text/Foto)"),
-    ("extrapol", "ridge", "ANO (Trend mimo data)"),
-    ("extrapol", "nonlin", "NE (V rámci dat)"),
-    ("nonlin", "tree", "ANO (Skoky/Zóny)"),
-    ("nonlin", "cols", "NE (Hladké/Lineární)"),
-    ("cols", "lasso", "ANO (Mnoho šumu)"),
-    ("cols", "ols", "NE (Čisté málo sloupců)")
+with c_arrow1:
+    st.markdown("""
+    <div style="text-align: center; padding-top: 25px; font-size: 2em; color: #94A3B8;">➡️</div>
+    """, unsafe_allow_html=True)
+
+with c_step2:
+    border_col2 = "#10B981" if is_extrapol else "#3B82F6"
+    st.markdown(f"""
+    <div style="background-color: #1E293B; border: 2px solid {border_col2}; border-radius: 12px; padding: 18px; text-align: center;">
+        <div style="font-size: 1.25em; font-weight: bold; color: #60A5FA; margin-bottom: 6px;">🎯 Krok 2: Potřeba extrapolace?</div>
+        <div style="font-size: 1.05em; color: #E2E8F0;">{"⚠️ ANO (Předpovídáme do budoucna / mimo data)" if is_extrapol else "✔️ NE (Predikce v rámci známého rozsahu)"}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+
+# 2. ŘADA: Větvění na základě kroků
+if is_extrapol:
+    st.markdown("""
+    <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px; margin-top: 10px;">
+        <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
+            🏆 Vítězný model: Ridge regrese (L2) nebo Lineární trend
+        </div>
+        <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
+            <b>Proč právě tento model?</b><br>
+            Při potřebě předpovídat <b>mimo dosud naměřené hodnoty</b> (např. inflace, růst firmy za 5 let) 
+            je <span style="color: #F87171; font-weight: bold;">přísně zakázáno používat rozhodovací stromy i lesy</span>! 
+            Stromy by narazily na konstantní strop trénovacích dat. Lineární model s L2 regularizací naopak bezpečně drží směr trendu a tlumí výkyvy.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    # Krok 3: Nelinearity vs. Počet sloupců
+    c_sub1, c_arrow2, c_sub2 = st.columns([4, 1, 4])
+    with c_sub1:
+        border_col3 = "#10B981" if is_tree else "#475569"
+        st.markdown(f"""
+        <div style="background-color: #1E293B; border: 2px solid {border_col3}; border-radius: 12px; padding: 18px; text-align: center;">
+            <div style="font-size: 1.25em; font-weight: bold; color: #38BDF8; margin-bottom: 6px;">🌲 Větev A: Nelinearity & Skoky</div>
+            <div style="font-size: 1.05em; color: #E2E8F0;">Zóny, skokové tarify, pravoúhlé hranice</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c_arrow2:
+        st.markdown("""
+        <div style="text-align: center; padding-top: 25px; font-size: 2em; color: #94A3B8;">nebo</div>
+        """, unsafe_allow_html=True)
+
+    with c_sub2:
+        border_col4 = "#10B981" if (is_lasso or not is_tree) else "#475569"
+        st.markdown(f"""
+        <div style="background-color: #1E293B; border: 2px solid {border_col4}; border-radius: 12px; padding: 18px; text-align: center;">
+            <div style="font-size: 1.25em; font-weight: bold; color: #F59E0B; margin-bottom: 6px;">📐 Větev B: Plynulé vztahy</div>
+            <div style="font-size: 1.05em; color: #E2E8F0;">Mnoho sloupců, šum, požadavek na koeficienty</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+
+    # Finální doporučení
+    if is_tree:
+        st.markdown("""
+        <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px;">
+            <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
+                🏆 Vítězný model: Rozhodovací strom (CART) s prořezáním (nebo Random Forest)
+            </div>
+            <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
+                <b>Proč právě tento model?</b><br>
+                Vaše data obsahují kategorie, geografické zóny nebo skoky (jako u diamantů na 1.00 karátu). 
+                Rozhodovací strom nevyžaduje škálování, nezajímá ho multikolinearita a vytvoří přesná if-else pravidla.
+                Nezapomeňte však omezit <code>max_depth</code> a <code>min_samples_leaf</code>, abyste se vyhnuli přeučení.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    elif is_lasso:
+        st.markdown("""
+        <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px;">
+            <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
+                🏆 Vítězný model: Lasso regrese (L1) nebo Elastic Net
+            </div>
+            <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
+                <b>Proč právě tento model?</b><br>
+                Máte obrovské množství prediktorů a potřebujete automatický výběr (Feature Selection). 
+                L1 regularizace vynuluje váhy nepodstatných proměnných. Před trénováním nezapomeňte data normalizovat pomocí <code>StandardScaler</code>!
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+        <div style="background-color: #064E3B; border: 3px solid #10B981; border-radius: 16px; padding: 24px;">
+            <div style="font-size: 1.5em; font-weight: bold; color: #34D399; margin-bottom: 8px;">
+                🏆 Vítězný model: OLS Lineární regrese (s lehkou Ridge penalizací)
+            </div>
+            <div style="font-size: 1.15em; color: #F1F5F9; line-height: 1.6;">
+                <b>Proč právě tento model?</b><br>
+                Požadujete maximální možnou interpretovatelnost pro management či regulátory. 
+                Každý koeficient beta má přímý finanční význam (*„zvětšení plochy o 1 m² zvýší cenu o X Kč“*).
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
+
+# Přehledná referenční srovnávací tabulka pro rychlou orientaci (velká a čitelná)
+st.markdown("#### 📋 Rychlý tahák pro volbu modelu (Cheat-Sheet):")
+summary_chooser = [
+    {"Kritérium / Situace": "Potřebuji extrapolovat do budoucna", "Doporučený model": "Lineární regrese / Ridge (L2)", "Zakázaný model": "Rozhodovací stromy (strop!)"},
+    {"Kritérium / Situace": "Mám stovky sloupců a šum", "Doporučený model": "Lasso regrese (L1) / Elastic Net", "Zakázaný model": "Základní OLS (přeučení)"},
+    {"Kritérium / Situace": "Skokové tarify, zóny, kategorie", "Doporučený model": "Rozhodovací strom (CART) / Random Forest", "Zakázaný model": "Čistá přímka OLS"},
+    {"Kritérium / Situace": "Bankovní scoring, regulace, audit", "Doporučený model": "OLS Lineární regrese", "Zakázaný model": "Složité polynomy a hluboké stromy"}
 ]
-
-fig_flow = go.Figure()
-
-# Kreslení hran
-for src, dst, txt in edges:
-    x0, y0 = nodes[src]["x"], nodes[src]["y"]
-    x1, y1 = nodes[dst]["x"], nodes[dst]["y"]
-    fig_flow.add_trace(go.Scatter(
-        x=[x0, x1], y=[y0, y1],
-        mode="lines",
-        line=dict(color="#475569", width=2),
-        hoverinfo="none",
-        showlegend=False
-    ))
-    # Popisek hrany
-    fig_flow.add_annotation(
-        x=(x0 + x1) / 2, y=(y0 + y1) / 2,
-        text=txt,
-        showarrow=False,
-        font=dict(size=10, color="#94A3B8"),
-        bgcolor="#0F172A",
-        bordercolor="#334155",
-        borderwidth=1,
-        borderpad=3
-    )
-
-# Kreslení uzlů jako boxů s anotacemi
-for k, n in nodes.items():
-    fig_flow.add_annotation(
-        x=n["x"], y=n["y"],
-        text=n["label"],
-        showarrow=False,
-        font=dict(size=11, color="#FFFFFF"),
-        bgcolor=n["color"],
-        bordercolor=n["border"],
-        borderwidth=2.5 if "🏆" in n["label"] and ("#10B981" in n["border"] or "#065F46" in n["color"]) else 1.5,
-        borderpad=8,
-        align="center"
-    )
-
-fig_flow.update_layout(
-    xaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[-0.02, 1.02]),
-    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[-0.08, 1.08]),
-    height=580,
-    margin=dict(l=10, r=10, t=20, b=20),
-    plot_bgcolor="rgba(0,0,0,0)",
-    paper_bgcolor="rgba(0,0,0,0)"
-)
-
-st.plotly_chart(fig_flow, width="stretch")
+st.dataframe(pd.DataFrame(summary_chooser), width="stretch")
 
