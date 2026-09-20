@@ -17,8 +17,9 @@ theory_md_path = base_dir / "01_Regression" / "theory" / "06_decision_tree_regre
 st.title("🌳 Teorie 6: Rozhodovací strom v regresi (Decision Tree)")
 st.caption("Interaktivní průvodce neparametrickým modelováním: Po částech konstantní schodovitá regrese, kletba přeučení (max_depth), pravoúhlé řezy v 2D prostoru a limity extrapolace.")
 
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📖 Teoretický rozbor",
+    "💡 Příklad ze života: Jak strom přemýšlí",
     "🧪 Simulátor: Schodovitá regrese & Hloubka stromu",
     "📐 2D Rozřezání prostoru (Hyperboxy)",
     "🚨 Past extrapolace (Proč strom neumí trendy)"
@@ -35,9 +36,150 @@ with tab1:
         st.warning("Dokument 06_decision_tree_regression_theory.md nebyl nalezen.")
 
 # =============================================================================
-# TAB 2: INTERAKTIVNÍ SIMULÁTOR HLOUBKY STROMU (1D SCHODOVITÁ REGRESE)
+# TAB 2: PŘÍKLAD ZE ŽIVOTA PRO NOVÁČKY (ODHAD PLATU V IT)
 # =============================================================================
 with tab2:
+    st.markdown("### 💡 Jak strom doopravdy přemýšlí? Příklad ze života bez složité matematiky")
+    st.markdown(r"""
+    Představte si, že jste **personalista nebo vedoucí týmu** a máte určit férový nástupní plat pro nového uchazeče v Data Science / IT.
+    
+    Jak postupuje lidský mozek? **Nepočítá žádné derivace ani složité funkce.**  
+    Místo toho si v hlavě pokládá sérii logických otázek typu **ANO / NE**:
+    1. *„Má uchazeč alespoň 2.5 roku praxe?“*  
+       $\to$ Pokud **NE**, spadá do kategorie **Junior** se základní sazbou.  
+       $\to$ Pokud **ANO**, jdeme na další otázku.
+    2. *„Ovládá uchazeč produkční Cloud, Docker nebo MLOps?“*  
+       $\to$ Pokud **NE**, spadá do pásma **Standardní analytik / Medior**.  
+       $\to$ Pokud **ANO**, posouvá se do pásma **Seniorní Cloud / ML specialista** s prémiovým ohodnocením.
+    
+    Přesně toto je podstata **Rozhodovacího stromu pro regresi (DecisionTreeRegressor)**:
+    - **Otázky v uzlech:** Strom automaticky najde nejlepší prahové hodnoty (např. `Praxe <= 2.5 roku`).
+    - **Škatulky (Listy):** Každý uchazeč propadne podle svých vlastností do jedné konkrétní škatulky.
+    - **Predikce (Číslo):** Odhadem je **průměrný plat všech lidí**, kteří do této škatulky v historických datech spadli!
+    """)
+
+    with st.container(border=True):
+        st.markdown("#### 🎯 Vyzkoušejte si to: Interaktivní kalkulačka platu v IT")
+        col_u1, col_u2, col_u3 = st.columns(3)
+        with col_u1:
+            user_exp = st.slider("Vaše roky praxe v oboru:", min_value=0.0, max_value=12.0, value=3.5, step=0.5)
+        with col_u2:
+            user_cloud = st.radio("Zkušenost s Cloudem / Dockerem / MLOps:", ["Ne (pouze lokální skripty)", "Ano (produkční nasazení)"], horizontal=True)
+        with col_u3:
+            user_role = st.selectbox("Zaměření role:", ["Data Analyst", "Data Scientist / ML Engineer"])
+
+    # Generování realistické syntetické populace (180 IT profesionálů)
+    np.random.seed(42)
+    n_staff = 180
+    exp_data = np.random.uniform(0.0, 11.5, n_staff)
+    cloud_data = np.random.choice([0, 1], size=n_staff, p=[0.55, 0.45])
+    role_data = np.random.choice([0, 1], size=n_staff, p=[0.50, 0.50])
+
+    base_salary = 42000
+    salary_data = (
+        base_salary 
+        + np.where(exp_data < 2.5, exp_data * 5000, 12500 + (exp_data - 2.5) * 8000)
+        + cloud_data * (18000 + exp_data * 3500)
+        + role_data * 8000
+        + np.random.normal(0, 4500, n_staff)
+    )
+
+    df_salary = pd.DataFrame({
+        "praxe": exp_data,
+        "cloud": cloud_data,
+        "role": role_data,
+        "plat": np.round(salary_data, -2)
+    })
+
+    # Natrénujeme jednoduchý strom s max_depth=3 pro maximální interpretovatelnost
+    tree_salary = DecisionTreeRegressor(max_depth=3, random_state=42)
+    tree_salary.fit(df_salary[["praxe", "cloud", "role"]], df_salary["plat"])
+
+    # Lineární regrese pro okamžité srovnání
+    ols_salary = LinearRegression()
+    ols_salary.fit(df_salary[["praxe", "cloud", "role"]], df_salary["plat"])
+
+    # Příprava vstupu uživatele
+    u_cloud_num = 1 if "Ano" in user_cloud else 0
+    u_role_num = 1 if "ML" in user_role else 0
+    u_df = pd.DataFrame([[user_exp, u_cloud_num, u_role_num]], columns=["praxe", "cloud", "role"])
+
+    user_pred_tree = float(tree_salary.predict(u_df)[0])
+    user_pred_ols = float(ols_salary.predict(u_df)[0])
+
+    # Zobrazení výsledků kalkulátoru
+    res1, res2, res3 = st.columns(3)
+    with res1:
+        st.metric("🌳 Odhad stromu (Vaše škatulka)", f"{user_pred_tree:,.0f} Kč".replace(",", " "))
+    with res2:
+        diff_val = user_pred_ols - user_pred_tree
+        st.metric("📈 Odhad lineární regrese (Vzorec)", f"{user_pred_ols:,.0f} Kč".replace(",", " "), delta=f"{diff_val:+,.0f} Kč".replace(",", " "), delta_color="off")
+    with res3:
+        st.metric("👥 Vzorek trhu pro model", f"{n_staff} specialistů")
+
+    # Jak strom dospěl k výsledku
+    st.markdown("#### 🧭 Kudy váš profil prošel stromem?")
+    step1 = "✅ **Praxe > 2.5 roku** (větvení doprava ➔ Medior/Senior)" if user_exp >= 2.5 else "👶 **Praxe ≤ 2.5 roku** (větvení doleva ➔ Junior)"
+    step2 = "☁️ **Má Cloud/MLOps** (prémiové pásmo)" if u_cloud_num == 1 else "💻 **Bez Cloudu** (standardní tarif)"
+    st.success(f"**Rozhodovací cesta vašeho profilu:** {step1} ➔ {step2} ➔ **Průměrný plat ve vaší škatulce: {user_pred_tree:,.0f} Kč**")
+
+    # Vizuální srovnání: Skuteční kolegové vs. Schodovitá křivka
+    mask_view = (df_salary["cloud"] == u_cloud_num) & (df_salary["role"] == u_role_num)
+    df_subset = df_salary[mask_view].sort_values("praxe")
+
+    eval_exp = np.linspace(0, 12, 200)
+    eval_df = pd.DataFrame({
+        "praxe": eval_exp,
+        "cloud": np.full(200, u_cloud_num),
+        "role": np.full(200, u_role_num)
+    })
+    curve_tree = tree_salary.predict(eval_df)
+    curve_ols = ols_salary.predict(eval_df)
+
+    fig_life = go.Figure()
+    fig_life.add_trace(go.Scatter(
+        x=df_subset["praxe"], y=df_subset["plat"],
+        mode="markers", name=f"Data z trhu ({'S cloudem' if u_cloud_num else 'Bez cloudu'})",
+        marker=dict(size=8, color="#38BDF8", opacity=0.75, line=dict(color="#0284C7", width=1))
+    ))
+    fig_life.add_trace(go.Scatter(
+        x=eval_exp, y=curve_tree,
+        mode="lines", name="Rozhodovací strom (Mzdové platové schody)",
+        line=dict(color="#EF4444", width=3)
+    ))
+    fig_life.add_trace(go.Scatter(
+        x=eval_exp, y=curve_ols,
+        mode="lines", name="Lineární regrese (Přísná přímka)",
+        line=dict(color="#94A3B8", width=2, dash="dash")
+    ))
+    fig_life.add_trace(go.Scatter(
+        x=[user_exp], y=[user_pred_tree],
+        mode="markers+text", name="Váš zadaný profil",
+        text=[f"  Vy: {user_pred_tree:,.0f} Kč".replace(",", " ")],
+        textposition="top center",
+        marker=dict(size=14, color="#10B981", symbol="star", line=dict(color="white", width=2))
+    ))
+
+    fig_life.update_layout(
+        title="Platové tarify v oboru: Skutečná data vs. Schodovitá tabulka stromu vs. Přímka OLS",
+        xaxis_title="Roky praxe",
+        yaxis_title="Měsíční hrubá mzda (Kč)",
+        height=480,
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+    )
+    st.plotly_chart(fig_life, width="stretch")
+
+    st.info(
+        "🧠 **Aha-moment pro nováčka:** "
+        "Všimněte si, jak strom nevytváří hladkou přímku, ale **mzdové tarify (schody)**. "
+        "Lidé s praxí 3.5 roku a 4.8 roku spadnou do stejné škatulky a dostanou identický odhad mzdy. "
+        "Teprve když překročíte další zlomový práh seniority (např. 6 let), posune vás strom na vyšší platový schod!"
+    )
+
+# =============================================================================
+# TAB 3: INTERAKTIVNÍ SIMULÁTOR HLOUBKY STROMU (1D SCHODOVITÁ REGRESE)
+# =============================================================================
+with tab3:
     st.markdown("### 🧪 Laboratoř: Jak hloubka stromu (`max_depth`) tvaruje predikční schody")
     st.markdown(r"""
     Rozhodovací strom na rozdíl od lineární regrese **nepředpokládá přímku ani křivku**. 
@@ -241,9 +383,9 @@ with tab2:
         st.warning("⚠️ **Extrémní přeučení (Overfitting):** Strom si zapamatoval konkrétní šumové fluktuace trénovacích dat (Trénovací $R^2 \\approx 1.0$). Kolem jednotlivých bodů vytváří úzké svislé věžičky, což dramaticky zhoršuje testovací chybu!")
 
 # =============================================================================
-# TAB 3: 2D ROZŘEZÁNÍ PROSTORU NA HYPERBOXY
+# TAB 4: 2D ROZŘEZÁNÍ PROSTORU NA HYPERBOXY
 # =============================================================================
-with tab3:
+with tab4:
     st.markdown("### 📐 2D Rozřezání prostoru: Proč strom vytváří pravoúhlé bloky?")
     st.markdown(r"""
     Vícerozměrné modely (jako neuronové sítě nebo SVM) dokáží vytvářet diagonální či hladce zakřivené hranice. 
@@ -336,9 +478,9 @@ with tab3:
     )
 
 # =============================================================================
-# TAB 4: PAST EXTRAPOLACE (LIMIT ROZHODOVACÍHO STROMU)
+# TAB 5: PAST EXTRAPOLACE (LIMIT ROZHODOVACÍHO STROMU)
 # =============================================================================
-with tab4:
+with tab5:
     st.markdown("### 🚨 Zásadní úskalí: Proč rozhodovací strom nedokáže extrapolovat trendy?")
     st.markdown(r"""
     Jednou z nejnebezpečnějších vlastností stromových modelů v praxi je jejich **neschopnost extrapolace**.
