@@ -51,7 +51,7 @@ $$\mathbf{w} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}$$
 ### Metoda 2: Gradientní sestup (Gradient Descent)
 Iterativní numerická optimalizace využívaná v situacích, kdy je matice $\mathbf{X}$ příliš velká pro inverzi $(\mathbf{X}^T \mathbf{X})^{-1}$, nebo při obecných ztrátových funkcích:
 
-$$\theta_{nové} = \theta_{staré} - \alpha \cdot \frac{\partial J}{\partial \theta}$$
+$$\theta_{\text{nové}} = \theta_{\text{staré}} - \alpha \cdot \frac{\partial J}{\partial \theta}$$
 
 Kde:
 - $\alpha$ (v kódu kurzu označeno jako $L$) = rychlost učení (learning rate)
