@@ -1,66 +1,31 @@
+import json
 from pathlib import Path
-import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
-from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.pipeline import Pipeline
-
 st.title("🔬 Expertní kritika: Úskalí a limity polynomiální regrese")
 st.caption("Hluboká analýza Rungeova jevu, kletby dimenzionality, multikolinearity mocnin a moderních alternativ pro nelineární modelování.")
 
 # =============================================================================
-# RYCHLÝ CACHE PRO EXTRAPOLAČNÍ DEMO
+# RYCHLÉ NAČTENÍ PŘEDPOČÍTANÝCH DAT (OKAMŽITÝ RENDER < 0.01s)
 # =============================================================================
-@st.cache_resource
-def get_extrapolation_data():
+@st.cache_data
+def load_critique_precomputed():
     base_dir = Path(__file__).resolve().parent.parent
-    csv_path = base_dir / "01_Regression" / "data" / "diamonds_preprocessed.csv"
-    df = pd.read_csv(csv_path)
+    json_path = base_dir / "01_Regression" / "data" / "diamonds_poly_precomputed.json"
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-    # Trénujeme modely na všech datech
-    X = df.drop(columns=["price"])
-    y = df["price"]
-
-    p1 = Pipeline([("scaler", StandardScaler()), ("lr", LinearRegression())]).fit(X, y)
-    p2 = Pipeline([("poly", PolynomialFeatures(2, include_bias=False)), ("scaler", StandardScaler()), ("lr", LinearRegression())]).fit(X, y)
-    p3_ols = Pipeline([("poly", PolynomialFeatures(3, include_bias=False)), ("scaler", StandardScaler()), ("lr", LinearRegression())]).fit(X, y)
-    p3_ridge = Pipeline([("poly", PolynomialFeatures(3, include_bias=False)), ("scaler", StandardScaler()), ("ridge", Ridge(alpha=100.0, random_state=42))]).fit(X, y)
-
-    # Vytvoříme syntetický profil diamantu s rostoucím karátem (od 0.2 do 4.0 ct)
-    # Reálná data končí kolem 3 karátů, 3.0-4.0 ct představuje oblast extrapolace
-    carat_range = np.linspace(0.2, 4.0, 100)
-    median_vals = X.median().to_dict()
-
-    synth_rows = []
-    for c in carat_range:
-        row = median_vals.copy()
-        row["carat"] = c
-        # realistická aproximace rozměrů x, y, z podle karátu
-        dim = (c * 140) ** (1/3)
-        row["x"] = dim
-        row["y"] = dim
-        row["z"] = dim * 0.62
-        synth_rows.append(row)
-
-    synth_df = pd.DataFrame(synth_rows)[list(X.columns)]
-
-    pred_1 = p1.predict(synth_df)
-    pred_2 = p2.predict(synth_df)
-    pred_3_ols = p3_ols.predict(synth_df)
-    pred_3_ridge = p3_ridge.predict(synth_df)
-
+    curve_data = data["extrapolation_curve"]
     curve_df = pd.DataFrame({
-        "Carat": carat_range,
-        "Stupeň 1 (Lineární OLS)": pred_1,
-        "Stupeň 2 (Kvadratický OLS)": pred_2,
-        "Stupeň 3 (Kubický OLS - Bez regularizace)": pred_3_ols,
-        "Stupeň 3 + Ridge (α=100)": pred_3_ridge
+        "Carat": curve_data["carat"],
+        "Stupeň 1 (Lineární OLS)": curve_data["pred_deg1"],
+        "Stupeň 2 (Kvadratický OLS)": curve_data["pred_deg2"],
+        "Stupeň 3 (Kubický OLS - Bez regularizace)": curve_data["pred_deg3_ols"],
+        "Stupeň 3 + Ridge (α=100)": curve_data["pred_deg3_ridge"]
     })
-
     return curve_df
 
 # =============================================================================
@@ -102,11 +67,12 @@ with col2:
     fig_dim.update_layout(height=320)
     st.plotly_chart(fig_dim, width="stretch")
 
-st.markdown(r"""
-> [!IMPORTANT]
-> **Ponaučení pro datového vědce:**  
-> Přidání každého dalšího stupně exponenciálně zahušťuje příznakový prostor. Ačkoliv máme 53 908 řádků, při 219 příznacích (stupeň 3) již běžná OLS regrese selhává, protože většina těchto 219 příznaků je vzájemně silně multikolineární!
-""")
+st.info(
+    "💡 **Ponaučení pro datového vědce:** "
+    "Přidání každého dalšího stupně exponenciálně zahušťuje příznakový prostor. "
+    "Ačkoliv máme 53 908 řádků, při 219 příznacích (stupeň 3) již běžná OLS regrese selhává, "
+    "protože většina těchto 219 příznaků je vzájemně silně multikolineární!"
+)
 
 st.markdown("---")
 
@@ -123,7 +89,7 @@ nebo při extrapolaci vyprodukuje zcela nerealistické hodnoty (např. záporné
 Podívejte se na chování našich modelů diamantů pro diamanty s hmotností od 0.2 do 4.0 karátů (nad 3 karáty jsou v datech jen jednotky vzorků):
 """)
 
-curve_df = get_extrapolation_data()
+curve_df = load_critique_precomputed()
 
 fig_curve = go.Figure()
 
@@ -160,14 +126,13 @@ fig_curve.update_layout(
 
 st.plotly_chart(fig_curve, width="stretch")
 
-st.markdown(r"""
-> [!WARNING]
-> **Co z grafu vidíme:**
-> - **Stupeň 1 (Lineární OLS):** Roste konstantně. Pro malé diamanty přeceňuje, pro velké diamanty fatálně podhodnocuje (nerespektuje kvadratickou povahu ceny).
-> - **Stupeň 2 (Kvadratický OLS):** Perfektně kopíruje fyzikální a tržní realitu – parabolický růst ceny s rostoucí velikostí diamantu.
-> - **Stupeň 3 (Kubický OLS):** V interpolaci (kolem 1 ct) je přesný, ale v extrapolaci nebo na okrajích jeho kubické členy ($x^3$) způsobují nelineární deformaci a model ztrácí stabilitu.
-> - **Stupeň 3 + Ridge:** Regularizace $L_2$ zkrotila divoké koeficienty kubických členů a vrátila křivce hladký, realistický průběh!
-""")
+st.warning(
+    "⚠️ **Co z grafu vidíme:**\n\n"
+    "- **Stupeň 1 (Lineární OLS):** Roste konstantně. Pro malé diamanty přeceňuje, pro velké diamanty fatálně podhodnocuje (nerespektuje kvadratickou povahu ceny).\n"
+    "- **Stupeň 2 (Kvadratický OLS):** Perfektně kopíruje fyzikální a tržní realitu – parabolický růst ceny s rostoucí velikostí diamantu.\n"
+    "- **Stupeň 3 (Kubický OLS):** V interpolaci (kolem 1 ct) je přesný, ale v extrapolaci nebo na okrajích jeho kubické členy ($x^3$) způsobují nelineární deformaci a model ztrácí stabilitu.\n"
+    "- **Stupeň 3 + Ridge:** Regularizace $L_2$ zkrotila divoké koeficienty kubických členů a vrátila křivce hladký, realistický průběh!"
+)
 
 st.markdown("---")
 
@@ -213,11 +178,13 @@ V našem datasetu máme proměnné:
 Co se stane, když umocníme ordinální veličinu?
 1. **Ztráta interpretační škály:** U `clarity` (čistota) je rozdíl mezi stupněm 1 a 2 vnímán jako jeden krok na stupnici. Pokud model vytvoří `clarity^2`, krok mezi stupněm 7 a 8 má váhu $8^2 - 7^2 = 15$, zatímco mezi 1 a 2 jen $2^2 - 1^2 = 3$. Tím do modelu vnášíme umělé nelineární zakřivení, které neodpovídá gemologické realitě.
 2. **U One-Hot Dummy proměnných je to fatální:** Pokud by byl `cut` zakódován přes One-Hot Encoding (hodnoty 0 a 1), pak $0^2 = 0$ a $1^2 = 1$. Dummy sloupec umocněný na druhou je **naprosto identický** s původním sloupcem! `PolynomialFeatures` by tak vytvořil přesně duplicitní sloupce, což vede k dokonalé multikolinearitě.
-
-> [!TIP]
-> **Správný postup v praxi:**
-> Použijte `ColumnTransformer` a aplikujte `PolynomialFeatures` **pouze na spojité numerické sloupce** (např. `carat`, `x`, `y`, `z`). Kategoriální proměnné nechte lineární, případně povolte pouze jejich vzájemné interakce se spojitými proměnnými (`interaction_only=True`).
 """)
+
+st.success(
+    "🎯 **Správný postup v praxi:** "
+    "Použijte `ColumnTransformer` a aplikujte `PolynomialFeatures` **pouze na spojité numerické sloupce** (např. `carat`, `x`, `y`, `z`). "
+    "Kategoriální proměnné nechte lineární, případně povolte pouze jejich vzájemné interakce se spojitými proměnnými (`interaction_only=True`)."
+)
 
 st.markdown("---")
 
