@@ -31,7 +31,10 @@ def sanitize_markdown(source: str) -> str:
     # 4. Oprava české diakritiky v indexech matematických vzorců (např. \theta_{nové} -> \theta_{\text{nové}})
     source = source.replace(r"\theta_{nové}", r"\theta_{\text{nové}}")
     source = source.replace(r"\theta_{staré}", r"\theta_{\text{staré}}")
+    # 5. Odstranění zbytečných \text{...} kolem běžných zkratek metrik
+    source = re.sub(r"\\text\{(MAE|MSE|RMSE)\}", r"\1", source)
     return source
+
 
 
 
