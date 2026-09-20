@@ -58,20 +58,8 @@ Proč Elastic Net funguje tak elegantně, pochopíme při pohledu na tvar omezen
   - Má **ostré hroty na souřadnicových osách**, což znamená, že vrstevnice elipsy MSE se mohou dotknout osy a nastavit $\beta_j = 0$ (zachovává sparsity a feature selection).
   - Mezi hroty jsou však hrany **přísně konvexně zaoblené** (díky kvadratickému členu $L_2$), což odstraňuje singularitu a vynucuje skupinový efekt.
 
-```
-         Ridge (L2)                 Lasso (L1)              Elastic Net (L1 + L2)
-         (Hladký kruh)             (Ostrý kosočtverec)        (Zaoblený kosočtverec)
-              ▲                           ▲                           ▲
-              │                           │                           │
-           ╭──┴──╮                        │                           │
-         ╭─╯     ╰─╮                     ╱ ╲                        ╭─┴─╮
-        ─┼─────────┼─►                 ─┼───┼─►                   ─┼─────┼─►
-         ╰─╮     ╭─╯                     ╲ ╱                        ╰─┬─╯
-           ╰──┬──╯                        │                           │
-              │                           │                           │
-       (Žádné nulování)             (Ostré rohy =               (Ostré rohy = nulování
-                                    čisté nulování)            + oblouky = grouping)
-```
+![Geometrie regularizace](https://raw.githubusercontent.com/Kilitar/Coderslab-DataScience/main/01_Regression/plots/16_regularization_geometric_contours.png)
+
 
 ### Seskupovací efekt (The Grouping Effect)
 

@@ -11,6 +11,20 @@ st.caption("Kombinace L1 a L2 regularizace, řešení limitů Lassa, Grouping Ef
 if theory_md_path.exists():
     with open(theory_md_path, "r", encoding="utf-8") as f:
         content = f.read()
-    st.markdown(content)
+
+    img_path = reg_dir / "plots" / "16_regularization_geometric_contours.png"
+    marker = "![Geometrie regularizace](https://raw.githubusercontent.com/Kilitar/Coderslab-DataScience/main/01_Regression/plots/16_regularization_geometric_contours.png)"
+    if marker in content and img_path.exists():
+        part1, part2 = content.split(marker, 1)
+        st.markdown(part1)
+        st.image(
+            str(img_path),
+            caption="Geometrická interpretace: Porovnání ohraničení přípustné oblasti (L2 kruh, L1 kosočtverec, L1+L2 zaoblený kosočtverec s grouping efektem) a dotyku s elipsami ztrátové funkce.",
+            use_container_width=True
+        )
+        st.markdown(part2)
+    else:
+        st.markdown(content)
 else:
     st.warning("Dokument 04_elastic_net_theory.md nebyl nalezen.")
+
