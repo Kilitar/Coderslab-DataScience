@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -14,11 +15,46 @@ st.title("💎 Cvičení 6: Regularizace modelu diamantů (Lasso & Ridge)")
 st.caption("Aplikace regularizace L1 a L2 pro oceňování diamantů, eliminace prostorové kolinearity (x, y, z) a srovnání s OLS.")
 
 # =============================================================================
-# CACHE VÝPOČTŮ
+# CACHE VÝPOČTŮ (OKAMŽITÉ NAČTENÍ Z PŘEDPOČÍTANÝCH DAT)
 # =============================================================================
 @st.cache_data
 def load_and_run_diamonds_regularization():
     base_dir = Path(__file__).resolve().parent.parent
+    precomputed_path = base_dir / "01_Regression" / "data" / "diamonds_regularization_precomputed.json"
+
+    if precomputed_path.exists():
+        with open(precomputed_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        lasso_models = {
+            float(k): {
+                "coefs": np.array(v["coefs"]),
+                "zeroed": v["zeroed"],
+                "metrics": v["metrics"]
+            }
+            for k, v in data["lasso_models"].items()
+        }
+        ridge_models = {
+            float(k): {
+                "coefs": np.array(v["coefs"]),
+                "zeroed": v["zeroed"],
+                "metrics": v["metrics"]
+            }
+            for k, v in data["ridge_models"].items()
+        }
+
+        return (
+            data["feature_names"],
+            data["ols_metrics"],
+            lasso_models,
+            pd.DataFrame(data["lasso_metrics_list"]),
+            ridge_models,
+            pd.DataFrame(data["ridge_metrics_list"]),
+            data["n_tr"],
+            data["n_te"],
+            data["k_feat"],
+        )
+
     csv_path = base_dir / "01_Regression" / "data" / "diamonds_preprocessed.csv"
 
     df = pd.read_csv(csv_path)

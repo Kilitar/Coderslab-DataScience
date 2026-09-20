@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -15,14 +16,50 @@ st.title("🎛️ Cvičení 5: Regularizace v lineární regresi (Lasso L1 & Rid
 st.caption("Analýza vlivu hyperparametru síly regularizace α, eliminace multikolineárních příznaků a srovnání s OLS.")
 
 # =============================================================================
-# VÝPOČET A CACHOVÁNÍ VÝSLEDKŮ
+# VÝPOČET A CACHOVÁNÍ VÝSLEDKŮ (OKAMŽITÉ NAČTENÍ Z PŘEDPOČÍTANÝCH DAT)
 # =============================================================================
 @st.cache_data
 def load_and_run_regularization():
     base_dir = Path(__file__).resolve().parent.parent
+    precomputed_path = base_dir / "01_Regression" / "data" / "kc_regularization_precomputed.json"
+
+    if precomputed_path.exists():
+        with open(precomputed_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        lasso_models = {
+            float(k): {
+                "coefs": np.array(v["coefs"]),
+                "zeroed": v["zeroed"],
+                "metrics": v["metrics"]
+            }
+            for k, v in data["lasso_models"].items()
+        }
+        ridge_models = {
+            float(k): {
+                "coefs": np.array(v["coefs"]),
+                "zeroed": v["zeroed"],
+                "metrics": v["metrics"]
+            }
+            for k, v in data["ridge_models"].items()
+        }
+
+        return (
+            data["feature_names"],
+            data["ols_metrics"],
+            lasso_models,
+            pd.DataFrame(data["lasso_metrics_list"]),
+            ridge_models,
+            pd.DataFrame(data["ridge_metrics_list"]),
+            data["n_tr"],
+            data["n_te"],
+            data["k_feat"],
+        )
+
     csv_path = base_dir / "01_Regression" / "data" / "kc_house_data_preprocessed.csv"
     if not csv_path.exists():
         csv_path = base_dir / "data" / "MAL_downloadable materials_session 1" / "Day 1" / "kc_house_data_preprocessed.csv"
+
 
     df = pd.read_csv(csv_path)
     X = df.drop(columns=["price"])

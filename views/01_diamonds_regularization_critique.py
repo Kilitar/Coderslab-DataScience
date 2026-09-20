@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -14,12 +15,32 @@ st.title("🔬 Kritický rozbor & Gemologie: Regularizace diamantů")
 st.caption("Fyzikální multikolinearita rozměrů (x, y, z), automatická redukce na 4C, Ridge stabilizace a křížová validace (09/2026).")
 
 # =============================================================================
-# CACHE VÝPOČTŮ
+# CACHE VÝPOČTŮ (OKAMŽITÉ NAČTENÍ Z PŘEDPOČÍTANÝCH DAT)
 # =============================================================================
 @st.cache_data
 def load_diamonds_critique_data():
     base_dir = Path(__file__).resolve().parent.parent
+    precomputed_path = base_dir / "01_Regression" / "data" / "diamonds_critique_precomputed.json"
+
+    if precomputed_path.exists():
+        with open(precomputed_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return (
+            data["feature_names"],
+            np.array(data["alphas_path"]),
+            np.array(data["coefs_path"]),
+            np.array(data["ols_coefs"]),
+            np.array(data["ridge_coefs"]),
+            pd.DataFrame(data["cv_list"]),
+            data["best_ridge_a"],
+            data["best_lasso_a"],
+            data["best_enet_a"],
+            data["best_enet_ratio"]
+        )
+
     csv_path = base_dir / "01_Regression" / "data" / "diamonds_preprocessed.csv"
+
 
     df = pd.read_csv(csv_path)
     if "Unnamed: 0" in df.columns:
