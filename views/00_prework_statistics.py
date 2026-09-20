@@ -210,15 +210,33 @@ with tab3:
     with kpi3:
         st.metric("Rozdíl |r - ρ|", f"{abs(p_r - s_rho):.3f}")
 
-    fig_corr = px.scatter(
+    fig_corr = go.Figure()
+    fig_corr.add_trace(go.Scatter(
         x=x_val,
         y=y_val,
-        trendline="ols",
+        mode="markers",
+        name="Pozorování (X, Y)",
+        marker=dict(size=8, color="#1D3557")
+    ))
+
+    # OLS regresní přímka přes NumPy bez externí závislosti na statsmodels
+    m_fit, b_fit = np.polyfit(x_val, y_val, 1)
+    line_x = np.linspace(float(np.min(x_val)), float(np.max(x_val)), 100)
+    line_y = m_fit * line_x + b_fit
+    fig_corr.add_trace(go.Scatter(
+        x=line_x,
+        y=line_y,
+        mode="lines",
+        name=f"Lineární fit: y = {m_fit:.2f}x + {b_fit:.2f}",
+        line=dict(color="#E63946", width=2, dash="dash")
+    ))
+
+    fig_corr.update_layout(
         title=f"Vztah X vs. Y (Pearson r = {p_r:+.2f}, Spearman ρ = {s_rho:+.2f})",
-        labels={"x": "Prediktor X", "y": "Odezva Y"}
+        xaxis_title="Prediktor X",
+        yaxis_title="Odezva Y",
+        height=420
     )
-    fig_corr.update_traces(marker=dict(size=8, color="#1D3557"))
-    fig_corr.update_layout(height=420)
     st.plotly_chart(fig_corr, width="stretch")
 
     st.info(f"💡 **Analýza chování:** {note}")
