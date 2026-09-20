@@ -59,8 +59,16 @@ p_tree_diam_critique = st.Page("views/01_decision_tree_diam_critique.py", title=
 p_tree_diam_nb = st.Page("views/01_decision_tree_diam_nb.py", title="Cvičení 9: Diamanty – Notebook", icon="🐍")
 p_ensemble_theory = st.Page("views/01_ensemble_theory.py", title="Teorie: Ansámblové metody (RF & Boosting)", icon="📖")
 
-# Závěr Dne 1: Celkové shrnutí & Kvíz
-p_day1_summary = st.Page("views/01_day_1_summary.py", title="Závěrečné shrnutí Dne 1: Velká syntéza regrese & Kvíz", icon="🎓")
+# Závěr Dne 1: Celkové shrnutí & Glosář
+p_day1_summary = st.Page("views/01_day_1_summary.py", title="Závěrečné shrnutí Dne 1: Velká syntéza regrese & Glosář", icon="🎓")
+
+# Day 1 Extras: Expertní rozšíření & Interaktivní nástroje
+p_extra_whatif = st.Page("views/01_extras_whatif.py", title="Kalkulátor cen: What-If simulátor inference", icon="🎯")
+p_extra_geo = st.Page("views/01_extras_geo_residuals.py", title="Mapa reziduí: Kde OLS a stromy chybují v Seattlu", icon="🔬")
+p_extra_gauss = st.Page("views/01_extras_gauss_markov.py", title="Diagnostika OLS: Gauss-Markov & VIF multikolinearita", icon="🔬")
+p_extra_ccp = st.Page("views/01_extras_ccp_pruning.py", title="Prořezávání stromů: Cost-Complexity Pruning (alpha)", icon="🔬")
+p_extra_chooser = st.Page("views/01_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🔬")
+p_extra_cheat = st.Page("views/01_extras_cheatsheet.py", title="Tahák do kapsy: Scikit-learn Cheatsheet ke stažení", icon="📖")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -119,6 +127,14 @@ nav = st.navigation(
         ],
         "06. Závěr Dne 1 (Day 1 Summary)": [
             p_day1_summary,
+        ],
+        "07. Day 1 Extras (Expertní laboratoř)": [
+            p_extra_whatif,
+            p_extra_geo,
+            p_extra_gauss,
+            p_extra_ccp,
+            p_extra_chooser,
+            p_extra_cheat,
         ],
     }
 )
