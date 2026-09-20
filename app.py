@@ -40,6 +40,9 @@ p_reg_diam_nb = st.Page("views/01_diamonds_regularization_nb.py", title="Cvičen
 
 # Téma 4: Polynomiální regrese
 p_poly_theory = st.Page("views/01_polynomial_theory.py", title="Teorie: Polynomiální regrese", icon="📖")
+p_poly_diam_model = st.Page("views/01_diamonds_polynomial.py", title="Cvičení 7: Polynom diamantů – Výsledky zadání", icon="🎯")
+p_poly_diam_critique = st.Page("views/01_diamonds_polynomial_critique.py", title="Cvičení 7: Polynom diamantů – Expertní analýza", icon="🔬")
+p_poly_diam_nb = st.Page("views/01_diamonds_polynomial_nb.py", title="Cvičení 7: Polynom diamantů – Notebook", icon="🐍")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -77,6 +80,9 @@ nav = st.navigation(
         ],
         "04. Polynomiální regrese": [
             p_poly_theory,
+            p_poly_diam_model,
+            p_poly_diam_critique,
+            p_poly_diam_nb,
         ],
     }
 )
