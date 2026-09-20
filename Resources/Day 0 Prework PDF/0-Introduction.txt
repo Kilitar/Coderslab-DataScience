@@ -1,0 +1,33 @@
+Introduction and aim of the course
+Welcome to the Machine Learning course!
+What are you going to do?
+Welcome to the Machine Learning course, which is the final component of the Data Analyst track. In this course, we require knowledge of the programming language that you have already used in the Data Analyst course. Python is going to be the primary tool we will use to analyze data and build machine learning models. This course focuses on using Python to explore, clean and process data, and then training machine learning models with it. During the prework:
+
+you will revise the basics of Python and statistics,
+you will learn the basic concepts and tools related to machine learning,
+you will learn how to properly prepare data for a machine learning model.
+In addition, you will find out why to use Google Colab and learn about its functionalities that are going to come in handy during the course.
+
+The knowledge you gain during the prework will enable you to participate efficiently in the classes over three two-day sessions. During the classes together, we will take you through the most popular machine learning models - from theoretical introduction and implementation examples to practical implementations that will foster an even better understanding of the topics covered. At the same time, we will polish your Python code writing skills that will enable you to create effective machine learning models:
+
+processing and cleaning data using libraries such as. pandas, numPy, spaCy, and nltk;
+initializing, training, and making predictions using models based on the scikit-learn library;
+visualizing data on a variety of graphs.
+Final project
+In the Machine Learning course you will not only find tools for building machine learning models. You will also be taught what to pay attention to when preparing data for a model and choosing the best solutions for particular problems. You'll learn how to interpret the results of the model and, based on this, make decisions about the choice of the target solution. In the last class, together with the lecturer, you will create a project requiring you to prepare data for machine learning models, and then build several models and choose the most effective solution for each task. The project will integrate all the skills you acquire during the course.
+
+Organization
+Before we get into the nitty-gritty, let's get a better understanding of the course and its organization. In this and subsequent articles you'll learn:
+
+the aim of this course,
+the structure of the sessions and the topics that will be covered in them,
+the structure and arrangement of the materials,
+the order of reading the articles and doing the exercises in the prework,
+the rules of the course.
+You need to review the prepared materials carefully and thoroughly.
+Start working on your own as soon as possible to better acquire the material that is new to you. This will allow you to work efficiently during the course.
+
+The aim of the course
+The aim of the Machine Learning course is to introduce you to machine learning using one of the most popular (and easy to learn) programming languages: Python. It is a course designed for people who have been with us since the beginning of the Data Analyst track, or who already know how to analyze and visualize data and have already used Python and its libraries to analyze data. This is a course for those who want to get more in-depth knowledge, providing an introduction to a field that is increasingly adopted by many companies around the world.
+
+We are certain that with our materials and thanks to working with our lecturers, with whom you'll interact during the course, you're going to enjoy learning and stimulate your curiosity. We also believe that you'll be able to apply the knowledge and skills you've gained to the professional challenges you'll face after graduation.

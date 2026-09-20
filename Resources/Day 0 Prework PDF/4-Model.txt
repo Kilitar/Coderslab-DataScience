@@ -1,0 +1,79 @@
+What is a model?
+Introduction
+Throughout the course, you constantly come across the terms "machine learning," "variables," "prediction" or "model."
+
+We know that machine learning is a field of artificial intelligence that is based on developing algorithms that allow machines (computers) to learn from experience, data, or patterns without being programmed directly by humans. Variables (or features) are properties that can take on different values in a sample or population. Variables describe the phenomenon we are analyzing (such as a product or process). Based on the variables, we are able to conduct data analysis and draw conclusions from these studies. In simplest terms, prediction is the process of predicting outcomes based on data.
+
+And what actually is a model?
+
+Model and modeling definition
+A model is a simplified representation of reality, the purpose of which is to facilitate the understanding, analysis and simulation of the phenomena or processes we study. Models can be used in various fields (e.g., economics, engineering or medicine) and in different ways (e.g., using mathematical equations or graphical representations).
+
+In the context of data, modeling is the process by which models of data are created to represent its structure, properties, and the relationships between them.
+
+Imagine that you are learning to draw and your goal is to draw a portrait of your mother. Assuming this is your first ever drawing, you start by drawing simple objects such as circles, rectangles or lines. You will use these shapes to draw the portrait.
+
+As you add more shapes to the picture, the portrait begins to resemble your mom. We can view the basic shapes in the context of the model as the data used to create the model. The model, in turn, is like a portrait, where each shape represents some information.
+
+In fact, data modeling involves collecting different types of data, such as numbers, words, images, and then organizing them in a way that helps us understand or predict certain things. Similar to a portrait, where shapes represent facial features (e.g. eyes, nose, mouth), data models help us understand and discover patterns in the information we collect.
+
+For example - statistical modeling can help us understand what factors influence product sales in an online store.
+
+Model parameters and hyperparameters
+Model parameters are values that are internally adjusted by a learning algorithm to minimize error. The values of these parameters are set automatically by the learning algorithm during the learning (training) process. Examples of such parameters are the weights between neurons in a neural network, or parameters in a linear regression, such as the intercept and slope coefficient.
+
+On the other hand, in modeling there is the concept of model hyperparameters. These are parameters that must be set before the learning process begins and are not directly related to the model. Model hyperparameters determine how the learning algorithm works. Examples of model hyperparameters include the number of layers in a neural network, the number of neurons in each layer, the learning rate, the regularization factor and many others.
+
+Optimization of hyperparameters is an important step in the data modeling process, because correct setting of hyperparameters can significantly improve model performance. In the rest of the course, we will talk about the hyperparameters of each model and how to select them.
+
+Multidimensional modeling
+Multidimensional data modeling, also known as multivariate analysis, involves analyzing the relationship between multiple variables simultaneously. In this approach, data are represented in a multidimensional space, where each variable is responsible for one dimension. The models used in multivariate analysis tend to be more complicated, as they take into account a greater number of variables and thus more relationships between them.
+
+As the number of dimensions increases, the difficulty of imagining (or visualizing) how given points in the data are located in relation to each other increases. On a daily basis, we are used to visualizations that take into account one, two or three dimensions. The increasing number of dimensions makes visualizations difficult to do and, above all, loses readability. When building machine learning models, we usually have to deal with complex relationships that take into account multiple dimensions of data.
+
+What is a model - 1-dimensional visualization
+
+Fig. Example of visualization of one variable (one-dimensional). Histogram showing the number of wines by sulphate content..
+
+What is a model - 2-dimensional visualization
+
+Fig. Example of visualization of two variables (two-dimensional). Scatter plot showing the relationship between sulphate content and alcohol content of wine..
+
+What is a model - 3-dimensional visualization
+
+Fig. Example of visualization of three variables (three-dimensional). Three-dimensional scatter plot showing the relationship between alcohol content, residual sugar and acidity of wine..
+
+What is a model - 4-dimensional visualization
+
+Fig. Example of visualization of four variables (four-dimensional). A scatter plot showing the relationship between alcohol content, residual sugar and acidity, as well as the type of wine (white/red). The fourth dimension is encoded with the color of points.
+
+What is a model - 5-dimensional visualization
+
+Fig Example of visualization of five variables (five-dimensional). Bubble chart showing the relationship between alcohol content, residual sugar and acidity, as well as wine type (white/red) and the amount of sulphur dioxide in the wine. The fourth dimension is encoded with the color of points, and the fifth dimension is encoded by point size.
+
+PS. If you are interested in multi-dimensional data visualization, the charts above were generated using code from this article.
+
+Linear regression model
+We have explained in a general way what a model and the modeling process is. Now let's look at a linear regression model to better understand the issue and the meaning of modeling. Let's consider the simplest linear regression model, that is, one in which one dependent variable has a relationship with an independent variable.
+
+Suppose we want to study how a change in temperature affects energy consumption in a house. In this particular case, the independent variable is the temperature of the house, and energy consumption is the dependent variable. The purpose of the linear regression model is to find the relationship between the two variables.
+
+We mentioned that a model is a representation of reality that can be represented by mathematical equations. The linear regression model has the general formula of:
+
+y = a * x + b + e
+
+Where:
+
+y is the dependent variable, which in our case is energy consumption
+x is the independent variable, that is, in our case, temperature
+The a and b are model parameters that are selected during model development to best reflect the relationship between x and y. The parameter a determines the angle of the straight line describing the linear regression, and b - its offset.
+The e is the irreducible error, which is due to the natural variability of the data and cannot be fully accounted for by the model
+To build a linear regression model, we need to find the parameters a and b that best fit the equation to our data.
+
+Assuming that we had data for the last 3 months on ambient temperature and energy consumption at home, we were able to determine a model that has the equation:
+
+y = -0.5 * x + 10.
+
+The above equation is not a formula that gives unambiguous true results, but an estimation. For this reason, it does not take into account the irreducible error e. For each observation, it can take a different value, depending on the differences between the estimate and the specific true value. Having determined the equation of the regression model, we can use it for daily estimates of energy consumption. For example - if the weather forecast says that on a given day the temperature will be 20 degrees Celsius, we will not use any energy. If the temperature drops by 10 degrees and is 10 degrees Celsius, we will use about 5 kWh of energy. Of course, the result will not be perfectly consistent with the above formula, because we still have to take into account the irreducible error, which is related to the natural variability of the data.
+
+Nevertheless, we have a model that approximates energy consumption. It can potentially be used to control costs associated with a real estate property.

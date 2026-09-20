@@ -1,0 +1,168 @@
+Statistical tools skills in Python
+Introduction
+In previous articles, we revised some of the concepts and measures associated with statistics. Statistics plays an important role in data analysis and machine learning. Without statistics, it would be difficult to understand what conclusions can be drawn from data or how machine learning models work. No matter what tools we have we are always using statistics. In the "Machine Learning" course, our technology stack includes Python and programming libraries written in this language to effectively analyze data. For this reason, we will present what functions are implemented in each tool.
+
+Statistics in Python
+Python as a programming language has a fair number of built-in tools. However, in the context of statistics, Python has a limited number of ready-to-use methods. We have the min and max functions, which return respectively the minimum and maximum value of the set on which they can be called. They can be used, for example, with tuples or lists. So what about the other basic statistical measures? To calculate them, you need to use a number of built-in tools, since we can't call, for example, mean(numbers) on a list storing numeric values. In that case, let's see how we can implement the calculation of mean, median or variance.
+
+Mean
+Let's first define a structure in Python that will store the set of numeric values for which we will calculate statistical measures. We'll give our list gpt_response_times, which will store values specifying the response times in seconds to 10 test questions, from the recently popular ChatGPT:
+
+# Define gpt_response_times list
+gpt_response_times = [3.74, 29.977, 9.401, 34.669, 1.117, 6.76, 29.259, 33.058, 10.98, 21.921]
+
+We know that the mean is the sum of the values of a given set divided by the number of elements in it. Using the built-in sum and len methods, we can calculate the mean as follows:
+
+# Calculation of the arithmetic mean
+mean = sum(gpt_response_times) / len(gpt_response_times)
+print("Average ChatGPT response time:", mean)
+
+Median
+The median is the middle value that divides a sorted data set into two equal parts. If the set has an even number of elements, the median is the arithmetic mean of the two middle elements. Knowing the rules for calculating the median, we can proceed to calculate it using Python methods:
+
+# Calculation of median
+n = len(gpt_response_times)
+index = n // 2
+
+# Check if number of elements is odd or even.
+# If there is the remainder of dividing the number of elements in the list, median is value at the index.
+# Otherwise, we need to get two middle values from list and calculate arithmetic mean
+
+if n % 2:
+    median = sorted(gpt_response_times)[index]
+else:
+    median = sum(sorted(gpt_response_times)[index - 1:index + 1]) / 2
+print("Median ChatGPT response time:", median)
+
+Mode
+The mode, is the value that occurs most often. In the analyzed set, we check how many times the same values occur. If the number of different values is equal, the first element in the list is returned:
+
+# Calculation of mode
+mode = max(set(gpt_response_times), key = gpt_response_times.count)
+print("Mode ChatGPT response time:", mode)
+
+Variance
+One of the popular statistical measures, very important in machine learning, is the variance. As we know, variance determines the variability in our data. To calculate it, we need to sum the difference between each element of the set and the average value, squared. Then, we divide the result by the number of elements of the set minus 1 (if we are calculating the sample variance). When calculating the variance for a population, we divide the result by the number of elements in the set.
+
+# Calculation of variance
+variance = sum((resp_time - mean) ** 2 for resp_time in gpt_response_times) / (len(gpt_response_times) - 1)
+print("Variance ChatGPT response times:", variance)
+
+Standard deviation
+A statistical measure derived directly from the variance is the standard deviation, which is the square root of the variance:
+
+# Calculation of standard deviation
+stdev = variance ** 0.5
+print("Standard deviation of ChatGPT response times:", stdev)
+
+We have demonstrated how selected statistical measures can be calculated using Python alone. In practice, we use much simpler and computationally optimized methods.
+
+Statistics in NumPy
+NumPy (Numerical Python) is a Python language library for numerical computation that provides fast and efficient handling of multidimensional arrays and other data structures. NumPy includes many tools for performing advanced mathematical operations, such as linear algebra, Fourier transforms, random number generation and more. NumPy has an easy-to-use implementation of many statistical tools that will help us when working with data.
+
+To take advantage of the methods NumPy offers us, we will convert our gpt_response_time list to an array.
+
+import numpy as np
+gpt_response_times = np.array(gpt_response_times)
+
+Now let's use the NumPy library methods to calculate analogous values to pure Python:
+
+# NumPy - arithetmic mean calculation
+mean = np.mean(gpt_response_times)
+
+# NumPy - median calculation
+median = np.median(gpt_response_times)
+
+# NumPy - variance calculation
+var = np.var(gpt_response_times)
+
+# NumPy - standard deviation calculation
+stddev = np.std(gpt_response_times)
+
+# Return min and max value from given array
+min_value = np.min(gpt_response_times)
+max_value = np.max(gpt_response_times)
+
+A keen eye will notice that in the above code there is no method that calculates the mode. This is because NumPy does not have an implemented method that calculates such a value. Nevertheless, having a NumPy array, we can use the stats module from the scipy library, which is also used to perform complex mathematical calculations:
+
+# SciPy - mode calculation
+from scipy import stats
+
+mode = stats.mode(gpt_response_times)
+
+In addition, we can count the values of selected quartiles and percentiles in our array:
+
+# NumPy - percentiles (10th and 90th) and quartiles (1st and 3rd)
+
+percentiles = np.percentile(gpt_response_times, [10, 90])
+quantiles = np.quantile(gpt_response_times, [0.25, 0.75])
+
+Meanwhile, we have obtained a second NumPy array that stores response times for the same 10 questions, but for ChatGPT using the new GPT-4 model. This allows us to calculate the correlation:
+
+# Define list with GPT-4 response times
+gpt_4_response_times = np.array([7.176, 3.193, 10.829, 7.9, 11.754, 9.936, 6.128, 3.699, 6.209, 18.967])
+
+# Calculate matrix correlation and let's consider only this correlation, calculated between two arrays.
+# Let's skip the correlation of an array with itself, because it always equals 1.
+correlation = np.corrcoef(gpt_4_response_times, gpt_response_times)[0, 1]
+
+What needs to be emphasized is that we can also apply the presented statistical measures in the context of arrays, or multidimensional arrays.
+
+Statistics in Pandas
+A number of statistical methods have also been used in the Pandas library. These methods, used in the context of a data frame, can be called on the entire data frame (and will then return the desired statistical measures for columns containing numeric values) or on individual/selected columns. Let's create a synthetic data frame using the random module from the NumPy library:
+
+import pandas as pd
+import numpy as np
+
+# Create dictionary for 5 columns, where each stores 100 random generated values
+data = {'feature_1': np.random.rand(100),
+        'feature_2': np.random.rand(100),
+        'feature_3': np.random.rand(100),
+        'feature_4': np.random.rand(100),
+        'feature_5': np.random.rand(100)}
+
+# Create Pandas DataFrame
+random_df = pd.DataFrame(data)
+
+Using the .count() method, we can count the number of observations in each column:
+
+# Pandas - rows (observations) count
+count = random_df.count()
+
+In addition, we will calculate similar statistical measures to those of NumPy and pure Python: mean, median, variance and standard deviation
+
+# Pandas - mean by column
+mean_by_col = random_df.mean()
+
+# Pandas - median by column
+median_by_col = random_df.median()
+
+# Pandas - standard deviation by column
+std_by_col = random_df.std()
+
+# Pandas - variance by column (only two columns)
+var_by_col = random_df[["feature_1", "feature_2"]].var()
+
+As you can see, implementing these methods in NumPy and Pandas is much simpler to use than writing functions from scratch.
+
+Pandas also allows you to calculate quantiles for each column:
+
+# Pandas - quantiles calculation by column
+quantiles_by_col = random_df.quantile([0.25, 0.5, 0.75])
+
+Pandas also has a built-in .describe() method that, for columns storing numeric values, returns a statistical summary containing the values of the most important statistical measures:
+
+random_df.describe()
+
+We can also calculate a correlation matrix between numeric variables using the .corr() method. We can visualize the results using, for example, the seaborn library, which we learned in the "Data Visualization" course:
+
+import seaborn as sns
+
+# Pandas - calculating correlation matrix
+corr_matrix = random_df.corr()
+
+# Generate heatmap using Pandas DataFrame
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+
+Summary
+In this article, we covered how to calculate basic statistical measures in Python using pure Python, as well as its libraries - NumPy and Pandas. We learned how to calculate the mean, median, mod, variance or standard deviation. We also know how to generate a correlation matrix between variables that are either NumPy arrays or numeric variables in DataFrame. Finally, we also revised how to generate an array containing a certain number of random values.

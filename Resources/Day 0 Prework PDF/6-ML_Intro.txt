@@ -1,0 +1,93 @@
+Machine learning - introduction
+Introduction
+Machine learning is a scientific field that is an integral part of artificial intelligence. There is no denying that it is currently one of the most important and fastest growing technologies in the world. Each year represents tremendous progress, but there are certainly still reserves in fully realizing the potential of machine learning. Machine learning is a tool that allows us to transform various types of data into tangible knowledge. Machine learning models are used to automatically find patterns based on data with different levels of complexity. For data that has many dimensions (variables), discovering these patterns manually would be nearly impossible.
+
+Traditional systems vs machine learning systems
+Before machine learning became popular and began to be used to create applications and systems, programmers created them based on rules (of course, these systems are still the most common). By a rule we mean an instruction according to which the rest of the program is executed, such as:
+
+if x % 2 == 0:
+  y = x**2
+  print(y)
+else:
+  y = x
+  print(y)
+
+Above we have an example of a simple rule - in the case when the number x is even, then y is the square of x, otherwise y takes the value of x.
+
+In the case of machine learning, we would rely on data and answers - we could create a table with two columns: x and y:
+
+x	y
+1	1
+5	5
+6	36
+12	144
+20	400
+4	16
+3	3
+Such data could be used to create a machine learning model that would learn the rule by which the value of y (the dependent variable) is calculated. Below you will find an illustration that shows the difference between the two approaches:
+
+Machine learning vs. traditional approach
+
+Glossary of the basic machine learning terms
+Dataset - a set of sample data that contains variables (also called: features) that are important for finding a solution to a defined problem.
+
+Features - elements in the data that make it possible to understand the analyzed problem. Features are passed to the machine learning algorithm so that it can learn to recognize patterns
+
+Model - a representation of the phenomenon as learned by the machine learning algorithm. The model learns from the data passed to the algorithm during training (also called: learning). For example, a decision tree algorithm would create a decision tree model after training.
+
+Training (also called: learning) is the process by which a machine learning model acquires the ability to recognize patterns, relationships or dependencies in input data. As a result, it is able to perform predictive, classifying or generative tasks (e.g., a language model answering questions posed by a user). The process involves adjusting the parameters of the model based on the training data, which is usually split, according to the principle: input data - output data. The goal of training is to reduce the cost function, which measures the difference between predicted and actual values.
+
+Overfitting - a phenomenon that occurs when the model adjusts too closely to the training data, also learning from noise in the data that is not important in solving the problem. In this case, the model achieves high performance on the training data, but performs poorly on the target (test) data. This is because it is unable to generalize well enough for the cases it does not know.
+
+Underfitting - a phenomenon that occurs when a model is unable to learn sufficiently the patterns present in the training data. Underfitting results in poor performance on both training and test data.
+
+What does the model creation process look like?
+Defining the problem - the first step in which we need to define and understand the problem we will be solving
+Collecting data - knowing what problem we will be solving, we can determine what data we will need and take care of collecting them - based on them we will teach our algorithm
+Data Preparation and Exploration - the data should be cleaned and processed in such a way as to extract the relevant variables from the point of view of learning the algorithm. At this point, we divide the data into subsets: training, validation and testing (or only training and testing).
+Training - also called: learning; the moment when the algorithm learns by showing it the training data collected and prepared and becomes a model.
+Evaluation - checking how well the model works on validation (or test) data.
+Fine tuning - adjusting the model to give the best possible results
+Types of machine learning
+In machine learning, there are many approaches that can be used when solving a problem. In general, there are four main types:
+
+Supervised learning
+Unsupervised learning
+Semi-supervised learning
+Reinforcement learning
+Supervised and unsupervised learning are the most common types of machine learning, which are already fairly well understood. Semi-supervised learning and reinforcement learning are newer approaches, but more complicated. Their use in many cases yields very good results.
+
+There is a theory circulating in the machine learning community known as "No Free Lunch," which states that there is no single algorithm that can work equally well for problems of different types. Each problem has its own characteristics, so there are many algorithms. Their number will continue to grow, due to the need to adapt the algorithm to different problems.
+
+Supervised learning
+The goal of supervised learning is to teach (train) the model the patterns that exist between the input data (independent variables) and the output data (dependent variables).
+
+For example: in the context of real estate, the input data can be parameters such as area, number of floors, geographic location, year of construction, and the output data can be, for example, the price of this property. In this case, the goal of supervised learning will be to find rules to determine the relationship between the parameters of the property and its price. We pass data on sample properties to the algorithm during the learning process, specifying exactly the input and output data. In this way, we teach the model what decisions it should make. When we get new data in which the price of the property is not specified, using variables storing information about: area, number of floors, location and year of construction, we can get a prediction about the price of that house.
+
+In supervised learning, it is very important for the model to be able to generalize the data, that is, to cope with the new data coming to it in order to make the right predictions. If overtrained, the model may be unable to properly predict values for data it has not seen before.
+
+What needs to be kept in mind with supervised learning is that the supervision we provide (because we influence what data we teach the algorithm with) introduces an element of bias. The model can reproduce patterns based on data it has seen before, so it is very important that the data be reliable and free of bias. It can be said that providing enough data (this characterizes supervised learning) that is of adequate quality is the most difficult part in machine learning.
+
+Unsupervised learning
+In unsupervised learning, we teach patterns to the model, but in this case we only have input data available. The observations in the data are not labeled with the sample results the model is supposed to strive for. Unsupervised learning allows us to discover patterns in our data that are completely unnoticeable at first glance.
+
+Let's imagine that we have been provided with several hundred photos from various sports events. Our task is to organize the photos in a logical way. However, we do not know which events the photos are from.
+
+As we look through the photos, we begin to look for similarities between them such as people, environment or time of day. After a while, you notice certain patterns that allow you to group the photos into different categories - such as. "World Cup in Qatar," "ski jumping" or "basketball game." This approach is very similar to what we do in unsupervised learning. The model learns to recognize patterns in the input data without having information about the output (answers, results) - which is the opposite of supervised learning.
+
+Semi-supervised learning
+Semi-supervised learning is such a method of machine learning that combines the features of supervised and unsupervised learning in terms of the data we provide to the algorithm. It uses both labeled (with answers, results) and unlabeled data to improve model performance. It works well when we have a limited amount of labeled data and acquiring more is impossible or uneconomical.
+
+An example of the application of semi-supervised learning can be building of a model for cancer diagnosis based on X-rays. To prepare a labeled set, a considerable amount of expert time is needed, which is a high cost. It should be remembered that such a dataset must be prepared extremely precisely, since the trained algorithm would have to decide whether someone has cancer or not. Using semi-supervised learning, we can operate on a small labeled set and then use it to apply to a larger number of images. For unlabeled photos, the algorithm will look for similarities between them and photos that are labeled with correct answers. As a result, the model will be able to increasingly recognize whether a photo shows an organ with cancerous changes or not.
+
+Reinforcement learning
+Reinforcement learning is a branch of machine learning in which trained models are taught to make decisions. Admittedly, in supervised learning, for example, the model also makes decisions (e.g., in the case of classification), but here it is done somewhat differently. This type of learning is less common and much more complex than the previously discussed methods.
+
+Reinforcement learning can be compared to how humans learn. Throughout our lives we perform hundreds of actions, during which we receive positive and negative feedback, which we use (or at least should) as an element that influences what steps we will take in the future. Reinforcement learning aims to move away from the standard approach to model training, where we have the data feed process. Instead, we benefit from the use of dynamic environments, which is an analogy to the real world, where as humans we have to make different decisions.
+
+In this method, positive and negative feedback is used to reinforce a certain type of behavior. The agent, who is responsible for teaching, explores the environment and receives a reward (or punishment) for the action performed. The agent's goal is to learn such a strategy so that it can maximize the sum of rewards in the long run. This is another thing that makes this type of learning different from supervised learning, where the focus is on achieving immediate success after the training process. Here, the agent focuses on optimizing the long-term outcome.
+
+A good example are games: algorithmic "players" using reinforcement learning have achieved higher levels of skill in video games, chess, or a popular game in China - Go. You can read about the use of reinforcement learning here or watch a video with a sample of the possibilities.
+
+Summary
+We have finished the introduction to the knowledge closely related to machine learning during this course. We learned what machine learning is and the differences between ML and traditional systems. We learned the basic concepts of machine learning and the process we follow to create models. We know that machine learning is a vast field, and that due to the way the model is trained, we can distinguish four types: supervised, unsupervised, semi-supervised and reinforcement learning. We know what characterizes these approaches and how the model learns to make the best possible decisions in each of them.

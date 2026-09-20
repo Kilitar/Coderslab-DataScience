@@ -1,0 +1,105 @@
+Machine learning and Python - why it is the best match?
+Machine learning and Python - why it is the best match?
+Machine learning is a field built on top of two other fields: mainly mathematics and computer science. As the name suggests, it relies on the ability of a machine (computer) to learn certain patterns based on past data in an automatic manner.
+
+What exactly does it mean that a computer learns? Actually, what learns is a program or a set of applications that together form a single system running on a computer. Developing computer applications (whether they run on traditional computers, mobile devices, but also on powerful machines in cloud environments) requires knowledge of specific tools, written in a specific programming language.
+
+This issue looks similar in the case of applications using machine learning: they can be developed in various programming languages, and increasingly as "out of the box" solutions, provided, for example, by companies such as. OpenAI, or cloud providers (Amazon, Azure, Google). In the context of machine learning, the term "out of the box" refers to an off-the-shelf solution that does not require significant modification before it can be used. This means that the model is configured and optimized to run under general conditions, without the need for significant modifications.
+
+During the Data Lab track, we managed to learn a lot of tools related to data analysis including a programming language: Python. According to a GitHub article The top programming languages among the 500 languages used to build applications on GitHub, Python was the second most popular programming language in 2022.
+
+Python - ranking of programming languages
+
+Source: GitHub Octoverse
+
+Comparing year-on-year, its usage grew by 22.5%. Of course, a big part of this growth is due to the development of technologies based on machine learning, since Python is a very good software language precisely in the context of machine learning.
+
+Where does the statement that Python is the best choice for developing software using machine learning algorithms really come from?
+
+1. Low barrier to entry
+The job of a data analyst, data engineer or data scientist requires a person in this profession to deal with masses of data that must be processed in a convenient and efficient manner. As such, the low barrier to entry allows more data analysts to quickly get used to Python and start using it to analyze data and build machine learning models. Python has a simple syntax, which translates into fewer lines of code, as well as greater readability, making it easier to write and debug code.
+
+2. Multi-platform
+Python is easy to learn and convenient to use, but it also offers great flexibility in terms of the platform it can run on: Windows, macOS, Linux, Unix and a dozen other less popular systems offer Python support. This feature allows the developed applications to be ported between platforms requiring few code changes. This brings savings of resources (money, time) for testing applications on different environments.
+
+3. Large community
+With the increasing use of Python for developing various types of applications, the community of people who use it is growing. A large community of people using Python is an important thing in terms of learning and solving problems we may encounter while writing code. As a result, programmers and analysts using Python (regardless of their level of expertise) have access to a wealth of resources on the Web (such as StackOverFlow or StackExchange) where they can find solutions to potential problems they encounter when developing in Python. Online forums also give users the opportunity to share their problem and discuss optimal solutions with other users. Problems related to machine learning-based solutions can sometimes be hard to solve, so it's good to have a place where you can get feedback and help.
+
+4. Flexibility
+Python is a great choice for machine learning because, as a language, it is flexible:
+
+Allows object-oriented programming (OOP) or scripting
+Doesn't require recompilation of source code; people writing in Python can make any changes they want and check the effect of those changes
+5. Huge ecosystem of libraries for ML/AI
+The large selection of libraries is one of the main reasons why Python is the most popular programming language used in developing machine learning solutions. A library is a module (or group of modules) published by developers/organizations. Modules contain prepared code that gives users access to certain functions. Machine learning requires continuous processing of data, and Python libraries allow users to access, process, and transform data. Below you will find a list of examples of popular libraries that are used in machine learning projects:
+
+Scikit-learn - creating supervised (classification and regression) and unsupervised (e.g. clustering, anomaly detection) machine learning models.
+Pandas - comprehensive data analysis, from the ability to load data from various sources through data merging, filtering and transformation, to saving in selected formats
+NumPy - a library for performing calculations on multidimensional vectors and matrices
+Keras - a library for deep learning, providing speed of computation, using the GPU in addition to the main processor (CPU)
+TensorFlow - allows you to work with deep learning from the configuration stage to training and using neural networks with huge data sets
+PyTorch - a C-based library, often used in developing solutions based on natural language processing and image recognition
+Matplotlib - creation of various types of graphs: e.g. line, column, point, histograms
+Plotly - creation of interactive visualizations
+Seaborn - creation of many types of charts (including custom ones), which can be freely modified
+NLTK, spaCy - libraries for advanced natural language processing
+xgboost - library for building models based on ensemble methods (boosting)
+PyBrain - library used to build solutions based on neural networks, as well as unsupervised learning, and reinforcement learning solutions
+Caffe - a library for deep learning that allows switching between CPU and GPU and processing more than 60 million images per day using nVidia K40 processor.
+6. Visualizing data
+We have said that Python offers many libraries, and some of them are very good visualization tools. For those working with data, the ability to present data in a readable form is essential. Libraries such as matplotlib, seaborn and plotly allow data analysts to create charts in order to better understand the analyzed data, and to present it later.
+
+7. Interpretability and ease of code reading
+Python is a programming language that is known for its easy to read code.
+
+Python's syntax is clear and concise. To achieve a goal, there is no need to write long lines of code. The blocks of code are indented, making the code easier to understand
+The naming of functions and methods is clear and intuitive, making the code much more understandable
+Python has many built-in functions: it greatly reduces the time required to create code
+Python has extensive documentation (often with usage examples that allow you to understand the code you are using)
+Below is the code in Python language:
+
+def get_primes(n):
+    """
+    Function returns list of prime numbers in range from 0 to n.
+    """
+    primes = []
+    for num in range(2, n + 1):
+        for i in range(2, num):
+            if (num % i) == 0:
+                break
+        else:
+            primes.append(num)
+    return primes
+
+# Call function and print result
+print(get_primes(100))
+
+The code above is a function named get_prime_numbers, which takes a single argument n, specifying a range of numbers from 0 to n, which are prime numbers (divisible by 1 and itself). The prime numbers will be stored in the variable primes (which is a list), and then for each number in the range from 2 to n we check if it is divisible by any number from 2 to number - 1. If number is divisible by any number, it means that it is not a prime number and we move on to the next number. If it is not, we add number to the list of primes.
+
+Python	R	Julia
+Created in	1991	1993	2012
+Readability and ease of code interpretation	Python is distinguished by very good code readability. The syntax resembles the syntax of natural language that people use every day.	R language code can be considered readable, but its readability is as good as in Python and Julia.	Julia is very similar to Python in this aspect and also has very readable code.
+Samplesyntax	if x > y: print("x is bigger than y")	if (x > y) { print("x is bigger than y") }	if x > y println("x is bigger than y")
+Greatest strength	One of the most popular programming languages, which has very strong support for machine learning and artificial intelligence. Also used in other applications such as security, games and web application development.	Good support for data exploration and statistical analysis applications. Can be an alternative to SAS or SPSS. Popular in the scientific (academic) community.	Julia is a programming language that was created to process large volumes of data, including for machine learning. The speed of code in Julia is similar to that in C, and is many times faster than Python or R.
+Support for machine learning solutions	Python has many machine learning libraries for data processing (including natural language) and machine learning (NumPy, scikit-learn, Pandas, Tensorflow, etc.)	R has many libraries available, especially for mathematics and statistics.	Julia, due to the fact that it is a rather new language, does not have many mature libraries. Nevertheless, a library PyCall.jl has been created for Julia users, which allows Python libraries to be used in Julia. In this case, Julia's advantage over other programming languages - performance speed - is lost.
+Beginner support	Python is characterized by a huge base of tutorials and community support on the Internet, which is very helpful in solving the problems of novice programmers.	R, like Python, is characterized by high availability of materials to help beginners learn.	Julia is relatively new, which is why the community and availability of materials is not so good
+Disadvantages: what about Python is not necessarily good
+Performance
+Python is an interpreted language, which means it is not as fast as compiled languages such as C++ or Java. Due to certain aspects of its implementation, Python can be slower compared to other languages, especially for tasks that require a lot of computing power. In such cases, it is often necessary to use optimizations or libraries written in low-level languages.
+
+Large memory consumption
+Python can be demanding in terms of memory consumption. This is mainly due to the fact that Python has a more elaborate object-oriented structure than some other languages, which involves some memory overhead. This means that if you work with large data sets or perform memory-intensive calculations, Python may not be the best choice.
+
+Multithreading problems
+A thread refers to a lightweight process that can be executed in parallel or concurrently with other threads within a single program. A thread is the basic execution unit in multithreaded programming. GIL (Global Interpreter Lock) is a mechanism used in the Python interpreter that restricts simultaneous execution of multiple threads at the interpreter level. In practice, this means that in the standard CPython implementation that is most commonly used, only one thread can execute Python code at a time. This poses a limitation for applications that are heavily dependent on multithreading and require parallel execution.
+
+Compatible versions
+Python has several versions, such as Python 2 and Python 3, which are not fully compatible with each other. Moving from Python 2 to Python 3 may require some changes to code and libraries, which can be disruptive to existing projects. Admittedly, Python 2 has already been officially declared obsolete, but there is a chance of encountering code written for to this version.
+
+No support for low-level programming
+Python is a high-level language that focuses on simplicity and readability. This means that it does not offer the same level of control of low-level programming as languages such as C++ or Rust. If you are developing applications that require direct memory access or hardware-level optimizations, Python may not be the best tool. However, keep in mind that many of these drawbacks can be mitigated by using the right tools and libraries, such as numPy, pandas or Cython, which are optimized for performance or allow integration with low-level code.
+
+Summary
+In this article, we answered the question "Why is Python and machine learning a good combination?". We described the strengths of Python, and also compared it with Julia and R taking into account some important issues from the point of view of machine learning and the proficiency level of a person who wants to develop solutions in this language.
+
+We hope that now you know why Python is a great choice in our case. Let's move on to describing the environment where we will run our code written in Python, namely Google Colab.

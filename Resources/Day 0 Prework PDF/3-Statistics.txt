@@ -1,0 +1,119 @@
+Basics of statistics - revision
+Introduction
+Machine learning is a branch of artificial intelligence that combines several different fields, such as statistics, mathematics and computer science. Statistics is a branch of science that deals with analyzing data and drawing conclusions based on it. When the term machine learning was not yet so popular, the set of issues related to it was described as multivariate statistics. We covered the most important statistical concepts in the course Introduction to Data Analysis, but for the purposes of this course, we will revise the most important ones.
+
+Descriptive statistics
+Descriptive statistics allows you to analyze and describe numerical data. Within descriptive statistics, we distinguish two groups: measures of central tendency and measures of dispersion (or variability).
+
+Measures of central tendency are designed to determine the value that best describes the data.
+
+Arithmetic mean - the value obtained by dividing the sum of all values by the number of observations. The mean is the most commonly used measure of central tendency
+The median - the value that divides a data set into two equal parts. The median is less sensitive to outliers, making it a better measure of central tendency when outliers are present
+The mode - the value that occurs most frequently in a data set.
+The second group are measures of variability, which determine how much the data differ from each other. There are several basic measures of variability:
+
+variance - a measure that determines the dispersion of data around the arithmetic mean. It is calculated as the arithmetic mean of the squares of the deviations of individual observations from the arithmetic mean. Variance is a measure that uses the squares of values, hence it is not intuitive to interpret.
+Standard deviation - a measure that determines the dispersion of data just like variance; it is the square root of the variance. Reducing the variance to the original units makes the standard deviation easier to interpret.
+Range - is the difference between the largest and smallest values in a data set. The calculation of the range is straightforward, but it is important to remember that it is susceptible to outliers that can affect its final value.
+Quartiles - values that divide a data set into four equal parts. There are three quartiles: Q1 (25th percentile), Q2 (median), Q3 (75th percentile).
+Correlation
+Correlation is a statistical measure that describes the relationship between two variables. Correlation describes the strength and direction of the relationship between variables, that is, whether an increase in one variable results in an increase or decrease in the other, or whether there is no relationship between the two. The most commonly used measure of correlation is the Pearson coefficient, which measures the linear relationship between variables. It takes values from -1 to 1, where -1 means perfect negative correlation, 0 means no correlation, and 1 means perfect positive correlation.
+
+Basics of statistics - population vs. sample
+
+The term correlation can be incorrectly used in the context of causality. Correlation refers to the degree to which variables are related - it measures the strength and direction of the relationship.
+
+Causality refers to the cause-and-effect relationship between two variables. We then examine whether a change in one variable is the direct cause of a change in the other variable. Determining causality is much more difficult and requires other methods, such as cross-sectional or panel methods in surveys.
+
+Correlation can provide clues about the relationship between variables, but cannot prove causality. Correlation describes the statistical relationship between variables, while causality studies the cause-and-effect relationship between them.
+
+Example
+We have a dataset in which we have information on energy levels and consumption of caffeinated beverages. Calculating the correlation, we got a result of 0.8, which can be considered, a strong statistical relationship between the amount of caffeinated drinks consumed and energy levels. However, this does not mean that the cause of high energy levels is the consumption of large amounts of caffeinated drinks.
+
+In order to establish causality, we should conduct an experiment in which we would give caffeinated beverages to one group and people in the other group would not consume them.
+
+By monitoring the energy levels of both groups for a specified period of time, we could draw a conclusion about causality if the group drinking caffeinated beverages actually had higher energy levels.
+
+Probability
+Probability is a measure that determines how likely an event is to occur. It can be expressed on a scale of 0 to 1, where 0 means no probability and 1 means certainty.
+
+An example of the use of probability would be the occurrence of a disease in a population. Suppose there is a population of 10,000 people and 500 of them have a particular disease. The probability that a randomly selected person from this population will become ill is 500/10000 = 0.05 or 5%.
+
+The concept of probability also appears in many machine learning concepts. For example, we have a logistic regression model that classifies the content of a message as containing offensive content or not. The intermediate result (before the sigmoid function transformation), can be interpreted as the probability of an event occurring (in this case, the probability that the email content is offensive or not).
+
+You can deepen your knowledge of how the concept of probability is used in machine learning by reading this article.
+
+Normal distribution
+The normal distribution, also known as the Gaussian distribution or bell curve, is the probability distribution of a continuous numerical variable. The normal distribution describes many natural processes, such as human height, intelligence test scores, and stock prices.
+
+What distinguishes the normal distribution is that it is symmetrical around the arithmetic mean, which is also the median and dominant of the distribution. The curve of the distribution is bell-shaped, and its maximum is located in the axis of symmetry. The slope to the left and right of the mean is identical.
+
+The normal distribution can be described by the following quantities:
+
+mean - the normal distribution curve is formed around it. Half of the value is larger than the mean, and the other half is smaller (in this case it is the same as the median).
+standard deviation - a measure of the spread of values around the mean. The larger the standard deviation, the more the values are dispersed around the mean, and the curve has increasingly longer tails
+skewness - a measure of the asymmetry of the distribution curve. For a normal distribution, it is 0, because the bell curve visualizing a normal distribution is symmetric
+kurtosis - a measure of the flattening of the distribution curve. For a normal distribution, it is 0. When it is positive, the curve is more pointed, which means that the values of the variable are more concentrated and there is a greater chance of outliers. When the kurtosis value is negative, the curve is flatter, and the chance of outliers decreases.
+Strongly simplifying, a normal distribution is a graph that looks like a bell, showing how often different values occur.
+
+When we talk about the mean, we mean the number that shows where the center of the bell is. Standard deviation is a measure that describes how values are scattered around the mean. The larger its value, the wider the bell is.
+
+Skewness tells us whether the bell is even on both sides or more convex on either side. Kurtosis, in turn, determines how thick the "tails" of the bell are.
+
+Basics of statistics - normal distribution
+
+With the area under the distribution curve is 100%, it is assumed that:
+
+68% of the observations in the data are within µ +/- ?
+95.4% of the observations in the data are within µ +/- 2 * ?
+99.6% of the observations in the data are within µ +/- 3 * ?
+Suppose we are given data of runners who participated in a marathon. The distribution of the runners' performance is represented by a normal distribution. We know that the average time was 4h 20 min (260 min) and the standard deviation was 30 min. What percentage of runners completed the marathon with a time of more than 3h 20 min, but less than 4h 50 min?
+
+Basics of statistics - normal distribution - example
+
+According to the normal distribution curve, we see that 3h 20 min is a time 60 min away from the mean (2 standard deviations). 4h 50 min is a time one standard deviation away from the mean, but in the opposite direction. From this, it follows that 81.8% of athletes achieved a time between 3h 20 min and 4h 50 min.
+
+Statistical inference
+Inferential statistics is a branch of statistics that deals with making inferences about a population based on a sample. Researchers use mathematical methods such as estimation or hypothesis testing to assess how well a sample represents a population.
+
+A population is a set of all observations that have a particular characteristic or characteristics of interest to us. For example, a population could be all the people living in a country or all the employees of a particular company. The population can be large or small in size, depending on the scope of the study.
+
+A sample is a subset of the population, chosen randomly or not randomly, that is intended to represent the entire population. A sample is used to estimate population characteristics, such as the mean or standard deviation. For example, we may select a random sample of 500 employees of a company to estimate the average salary of all employees.
+
+Basics of statistics - normal distribution - example
+
+Selecting a sample is an important step when conducting a survey, as its proper selection is important for the accuracy and reliability of conclusions about the population. Sample selection can be random: that is, based on a random selection of individuals from the population, or the opposite: that is, based on specific criteria, such as age, gender or education level. The sample should be representative of the entire population, which among other things says that it reflects the diversity of the variable in the population. The larger the sample, the lower the chance of random errors, and thus the higher the accuracy of the estimation of population variables.
+
+Examples of applications of inferential statistics are:
+
+scientific research
+market research
+social research
+In the "Introduction to Data Analysis" course we covered topics related to A/B testing (hypothesis testing), which is used, for example, to test the introduction of new functionalities in products based on web applications.
+
+Important terms to learn and remember
+Dependent and Independent variables
+Dependent variable - an outcome that is measured during a test and depends on changes in the independent variable.
+
+Independent variable - a factor that affects the outcome of the study.
+
+Let's say we are studying the effect of time spent exercising on blood cholesterol levels. In this case, the independent variable is the time spent exercising, and the dependent variable is the blood cholesterol level.
+
+Quantitative variables: discrete and continuous
+In the course "Introduction to Data Analysis" we touched on the classification of variables by their nature. So let's recall how we divide quantitative variables:
+
+continuous variables - variables that are measured and can take almost any numerical value, such as length, height or temperature
+discrete variables - variables that are counted and have a finite number of values, such as the number of products in a shipment, the number of reviews
+Multicollinearity
+Multicollinearity is a phenomenon in data analysis in which two or more variables have a strong correlation with each other. This means that one independent variable can be predicted based on the values of another independent variable or a combination of several variables. Multicollinearity is problematic because it is difficult to determine which variable actually influences the dependent variable.
+
+This phenomenon also influences the fact that the parameters determined by the model (e.g., directional coefficients and free expression in a linear regression) can be unstable and imprecise. Small changes in the training data can lead to large differences in the estimation of these parameters. This, in turn, leads to the generation of large changes in prediction results.
+
+Multicollinearity is a problem in linear regression, for example. However, it can be controlled by a reliably performed exploratory data analysis and calculation of correlations between variables. To avoid the error associated with multicollinearity in training the model, we should not take independent variables that are highly correlated with each other.
+
+Other procedures to reduce the effect of multicollinearity include standardization of variables or principal component analysis. Standardization offsets the effect of scale, which can affect multicollinearity, and principal component analysis (PCA) allows us to identify variables that are relevant to the regression model and eliminate those that are unimportant or highly correlated with each other.
+
+You can learn more about multicollinearity in this article.
+
+Summary
+In this article, we revised the most important concepts related to statistics that have already appeared in courses from the Data Lab track. We revisited information about measures of central trend and dispersion, as well as important information about normal distribution. We also refreshed the concepts of sample and population. We know what independent and dependent variables are, as well as discrete and continuous variables. In the course of the next material in this module, we will learn how to calculate the various statistical measures using Python.

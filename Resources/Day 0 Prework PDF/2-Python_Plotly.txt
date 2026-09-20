@@ -1,0 +1,282 @@
+Python - what skills do you need?
+Introduction
+In previous materials, we established that we would use the Python programming language in the Machine Learning course. In the Data Lab track, we have already had the opportunity to use Python and several libraries. During the courses "Python - Data Analysis" and "Data Visualization" we used:
+
+Pandas
+Matplotlib
+Plotly
+NumPy
+We will also use these libraries during the "Machine Learning" course. As a reminder, we will go through the most important functionalities that will be useful during the course.
+
+Pandas
+Let's assume that we have received a dataset in .csv format and want to analyze it using the pandas library. The first important thing will be to import the library using an alias:
+
+import pandas as pd
+
+The next step is to load the .csv file as a dataframe using pandas:
+
+police_data = pd.read_csv("police.csv")
+
+To start working with the data, we should first see what it looks like. In the cell, just enter the name of the variable that the dataframe is assigned to:
+
+police_data
+
+Python - stops data
+
+We can see what our data looks like: here we have information about vehicle stops: time and date, gender, age, and race of the driver, as well as the reason the car was pulled over and some other data. We can display all the column names on the screen using the following piece of code:
+
+print(police_data.columns)
+
+Looking at the displayed column (variable) names, we know more or less what data we have. Let's use pandas' other built-in methods to find out a little more:
+
+police_data.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 91741 entries, 0 to 91740
+Data columns (total 15 columns):
+ #   Column              Non-Null Count  Dtype
+---  ------              --------------  -----
+ 0   stop_date           91741 non-null  object
+ 1   stop_time           91741 non-null  object
+ 2   county_name         0 non-null      float64
+ 3   driver_gender       86406 non-null  object
+ 4   driver_age_raw      86414 non-null  float64
+ 5   driver_age          86120 non-null  float64
+ 6   driver_race         86408 non-null  object
+ 7   violation_raw       86408 non-null  object
+ 8   violation           86408 non-null  object
+ 9   search_conducted    91741 non-null  bool
+ 10  search_type         3196 non-null   object
+ 11  stop_outcome        86408 non-null  object
+ 12  is_arrested         86408 non-null  object
+ 13  stop_duration       86408 non-null  object
+ 14  drugs_related_stop  91741 non-null  bool
+dtypes: bool(2), float64(3), object(10)
+memory usage: 9.3+ MB
+
+Using the .info() method, we see the name of the column, the number of rows that have this column completed and the type of data that is stored in it. What is striking is the 0 non-empty values (all rows are empty) for the country_name variable. This shows that none of the stops has the information about the county where it was made. In addition, the search_type column also has a lot of missing information - only 3196 of the 91741 rows (observations) are completed. The two variables mentioned above do not carry much information, so we will drop them from the dataset:
+
+police_data = police_data.drop(columns=["county_name", "search_type"], axis=1)
+
+We removed from the set the two variables that we considered unnecessary due to large gaps in the data. We see that we still have some blank values in most of the columns, but they are quite complete. We could try supplementing this data with, for example, the most frequent value, but this might distort the data a bit. The column that has the most empty values still has a high completion (93.9% of the values are non-empty). Therefore, we will remove all rows that have at least one empty value.
+
+police_data.dropna(inplace=True)
+
+Looking at the result of the .info() method called on our data frame, we see that many of the columns have the "object" type. "object" is the default data type in pandas, if the library was unable to properly recognize the type when loading the data frame. Looking at the values of the variables, you can see that we have three columns that store True/False values, that is, they are of type bool. Using the code below, we can change the data type in these columns:
+
+boolean_columns = ["search_conducted", "is_arrested", "drugs_related_stop"]
+for column in boolean_columns:
+  police_data[column] = police_data[column].astype("bool")
+
+For the rest of the variables, we can do it in an analogous way, specifying the appropriate type, such as int or float or category as an argument in the as_type method. Setting the appropriate data type affects how much memory a data frame occupies, which with large data sets can make a difference in computation performance.
+
+In our dataset, we have the stopped drivers' year of birth (driver_age_raw) and their age at the time of the stop (driver_age). Based on this, we can count the year of the stop. In Pandas, we can do this similarly to adding two numbers in pure Python:
+
+police_data["stop_year"] = police_data["driver_age_raw"] + police_data["driver_age"]
+
+This is how we created a new variable, specifying the year of the violation. Alternatively, we could have done this using the year attribute, converting the stop_date column to a date beforehand.
+
+police_data["stop_year"] = pd.to_datetime(police_data["stop_date"]).dt.year
+
+In Pandas, we can also filter the data. Suppose we would like to display only those rows that pertain to stopped male drivers:
+
+police_data[(police_data["driver_gender"] == "M")]
+
+When filtering, you can also use logical conditions, that is, combine filter criteria or return results that meet one of the conditions. You can also return data that is the opposite of the specified condition. If we wanted to display data only for men over 25, we could achieve it like this:
+
+police_data[(police_data["driver_gender"] == "M") & (police_data["driver_age"] > 25)]
+
+Changing the sign from & (and) to | (or), we would get data on all male drivers and those over 25 - including women.
+
+police_data[(police_data["driver_gender"] == "M") | (police_data["driver_age"] > 25)]
+
+It is very possible that we would like to group our data based on some variable, such as violation_raw. We can see that the data in this column are text strings. In this type of data, there may be errors (e.g. typos) or values that are not unified (e.g. they start with a capital letter in one case and a lowercase letter in another. Using Pandas, we can normalize these values, e.g. by case:
+
+police_data["violation_raw"] = police_data["violation_raw"].str.lower().str.strip()
+
+Let's now check for duplicate values in the processed column:
+
+print(police_data["violation_raw"].unique())
+
+As we can see, the list of 12 violations is unique - there are no duplicates here due to case or typos. If there are typos, we could use the .replace() method, by which we would replace the incorrect values with the correct ones. It could look like this:
+
+police_data["violation_raw"] = police_data["violation_raw"].replace({"speding": "speeding"})
+
+OK, we have a normalized list of violations. Let's see how many violations of each type we have:
+
+violation_count = police_data["violation_raw"].value_counts()
+
+Our calculations show that the most stops were for speeding. Let's see how it looked by gender:
+
+violation_count_by_sex = police_data.groupby(['violation_raw', 'driver_gender'], as_index=False).size()
+
+If we wanted to see what the average age of the person stopped by gender was, we could achieve this as follows:
+
+mean_age = police_data[["driver_age", "driver_gender"]].groupby(["driver_gender"]).agg({"driver_age": "mean"})
+
+Matplotlib
+From our dataset, we can make helpful visualizations to help us interpret our data quickly and effectively. Pandas has good integration with the matplotlib library. We can make charts by calling the .plot() method directly on the data frame. First, let's visualize the number of violations by type:
+
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+violation_graph = police_data["violation_raw"].value_counts().plot(kind="bar", color="orange")
+
+Python - violation chart
+
+Let's now see if the number of violations increases over time:
+
+plt.figure(figsize=(10, 6))
+
+stop_count_by_year = police_data["stop_year"].astype("int").value_counts().sort_index()
+stop_count_by_year_graph = stop_count_by_year.plot(kind="line", color="blue")
+
+Python - violation chart over time
+
+The line chart shows us that there has been a sharp increase in the number of violations from 2005 to 2006. This may be because we don't have data from the beginning of 2005. Then we see a decline from 2006 to 2010. In subsequent years we see alternating increases and decreases.
+
+We also have the option to generate other visualizations than the common column or line charts. Let's see what the age of men and women who were stopped looks like from a statistical perspective. Initially, we need to filter the data by gender, and then create a new DataFrame from two Series objects (a Series is a single column from a DataFrame). Then using the new DataFrame, we can apply two different box plots to one figure object:
+
+
+# create two Series objects for both gender data
+men_age_data = police_data[police_data["driver_gender"] == "M"]["driver_age"]
+women_age_data = police_data[police_data["driver_gender"] == "F"]["driver_age"]
+
+# create DataFrame based on created Series objects
+age_data = pd.DataFrame({"men_age": men_age_data, "women_age": women_age_data})
+
+# adjust figure size for figure that have two plots
+plt.rcParams["figure.figsize"] = [10, 6]
+# plot two box plots: showing men and women age statistics
+age_data.plot(kind="box")
+
+Python - box plots
+
+Plotly
+Matplotlib allows us to quickly create basic static visualizations. These types of visualizations are good when we are working on some analysis and want to quickly check selected relationships and the charts are only for us. When we need to show the graphs to a wider audience, that's when it's a good idea to make interactive visualizations that are a bit more aesthetically pleasing and easier to interpret. In Python, we can use the plotly library, which we learned about in the "Data Visualization" course.
+
+Let's recall how we can make a column chart. Suppose we want to look at the number of violation by stop outcome:
+
+import plotly.express as px
+
+stop_outcome_count = police_data["stop_outcome"].value_counts().reset_index().rename(columns={"index": "stop_outcome", "stop_outcome": "count"})
+stop_outcome_plot = px.bar(data_frame=stop_outcome_count, x="stop_outcome", y="count")
+
+Python - stop outcome charts
+
+Let's generate another chart using our dataset. Let's check how many violations were committed by drivers in December 2015, broken down by race (driver_race). To do this, we will filter the data and then count the occurrences for the pair of variables stop_date and driver_race. We will also perform the reset_index operation because using the value_counts() method results in changing the DataFrame to Series. After performing this operation, we will sort the values against stop_date and rename the columns to better describe the data in our DataFrame. Finally, we will create a graph so that there are as many lines on the graph as there are races, which will show the number of violations over time for each of them.
+
+stop_outcome_by_race = police_data[["stop_date", "driver_race"]].value_counts().reset_index().rename(columns={0: "count"}).sort_values(by="stop_date")
+stop_outcome_by_race_plot = px.line(data_frame=stop_outcome_by_race[stop_outcome_by_race["stop_date"] > "2015-12-01"],
+                                    x="stop_date",
+                                    y="count",
+                                    color="driver_race")
+
+Python - line charts by race
+
+We will revise two more charts that are not particularly applicable to the dataset we have been working on. So let's create a simple set consisting of 4 numeric variables: A, B, C, D:
+
+# import necessary libraries
+import pandas as pd
+import plotly.express as px
+
+# example data
+data = {
+    'A': [10, 20, 30, 40, 50, 55, 62, 87, 90],
+    'B': [100, 120, 150, 60, 70, 42, 45, 79, 2],
+    'C': [12, 40, 65, 15, 24, 11, 27, 74, 12],
+    'D': [50, 93, 20, -5, 110, -12, -30, 45, 5]
+}
+
+The dictionary with the numeric data stored in the data variable will be used to create a data frame, and then calculate the correlation matrix between the variables. Here we will use Pearson correlation (which, by the way, is the default for the .corr() method), which we have already encountered during the Data Lab track.
+
+# create dataframe
+df = pd.DataFrame(data)
+
+# calculate correlation matrix
+correlation_matrix = df.corr(method="pearson")
+
+Finally, we can use the imshow() method to which we will pass our data frame, set the chart title and include labels for each square in the correlation matrix, which will show the value of the correlation between one variable and another. By passing the value of True to the text_auto argument, we would make it display the number without rounding. To round the number and thus improve the readability of the chart we will use the .xf notation, where x is the number of decimal places:
+
+# correlation matrix plot
+fig = px.imshow(correlation_matrix,
+                x=correlation_matrix.columns,
+                y=correlation_matrix.index,
+                title="Correlation matrix",
+                text_auto=".4f")
+
+# show plot
+fig.show()
+
+Python - correlation matrix
+
+Based on our original data frame df, we can create a scatter plot for the variables "A" and "B", which will show the relationship between the two variables. The scatter plot in Plotly is created very simply, using the .scatter() method.
+
+scatter_plot = px.scatter(data_frame=df, x="A", y="B")
+
+Python - scatter plot
+
+NumPy
+Finally, we are left with the NumPy library, which is used to perform numerical calculations, including working with multidimensional arrays, matrices, and mathematical functions. To create an array using NumPy, use the .array() method:
+
+import NumPy as np
+
+# create array
+arr = np.array([1, 2, 3, 4, 5])
+
+In addition to arrays, you can create multidimensional arrays, or matrices:
+
+# Creating a 2D array (matrix)
+matrix = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+NumPy also allows you to create arrays of specific dimensions filled with zeros or ones:
+
+# create array with given size with 0s
+zeros_np = np.zeros((3, 3))
+# create array with given size with 1s
+ones_np = np.ones((3, 3))
+
+The .linspace() method allows you to create an array with evenly spaced values that come from a specified range:
+
+# create an array with evenly spaced values in a specified range
+evenly_array = np.linspace(0, 10, 5)
+
+You can also create arrays with random values of specified dimensions:
+
+# array with random values
+random_array = np.random.rand(3, 3)
+
+NumPy allows you to perform simple mathematical operations on arrays:
+
+# math functions
+sin_arr = np.sin(arr)
+sqrt_arr = np.sqrt(arr)
+sum_arr= np.sum(arr)
+
+And also operations on matrices:
+
+# matrix operations
+multiplied_matrix = np.dot(matrix, ones_np)  # matrix multiplying
+transposed_matrix = np.transpose(matrix)  # matrix transpose
+
+We can select columns or rows to extract from arrays and matrices:
+
+# indexing and slicing
+arr_sliced = arr[2:4]  # slice "a" array from index 2 to 4 (without 4)
+matrix_sliced = matrix[:, 1]  # slice second column from matrix
+
+Arrays can also be reshaped:
+
+# reshape array
+reshaped_arr = arr.reshape(1, -1)  # transform "arr" array to matrix with one-row
+
+In this article, we revised selected functions of four libraries: Pandas, Matplotlib, Plotly and NumPy, which may prove useful in the "Machine Learning" course. The goal of our course is to learn the theory and tools directly related to machine learning, so we require your knowledge to include the basics of Python and the libraries we work with during data analysis. It may happen that you forgot something. It may happen that you need to revise a method or maybe you come across something new: a great solution is to use the documentation. Below you will find links to the documentation of each library:
+
+Pandas documentation: https://pandas.pydata.org/docs/
+
+Plotly documentation: https://plotly.com/python/
+
+Matplotlib documentation: https://matplotlib.org
+
+NumPy (1.2.4) documentation: https://NumPy.org/doc/1.24/user/basics.html

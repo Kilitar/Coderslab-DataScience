@@ -10,6 +10,11 @@ st.set_page_config(
 # Definice stránek
 p_home = st.Page("views/00_home.py", title="Přehled kurzu a sylabus", icon="🏠", default=True)
 
+# Téma 0: Prework – Základy Data Science & ML
+p_prework_foundations = st.Page("views/00_prework_foundations.py", title="01. Co je Data Science & ML", icon="🚀")
+p_prework_stats = st.Page("views/00_prework_statistics.py", title="02. Statistika & Python stack", icon="📊")
+p_prework_workflow = st.Page("views/00_prework_workflow.py", title="03. Příprava dat & Scikit-learn", icon="🛠️")
+
 # Téma 1: Lineární regrese & OLS
 p_theory = st.Page("views/01_theory.py", title="Teorie: Lineární regrese & OLS", icon="📖")
 p_kc_model = st.Page("views/01_kc_housing.py", title="Cvičení 1: Reality – Výsledky zadání", icon="🎯")
@@ -52,6 +57,11 @@ nav = st.navigation(
     {
         "Úvod & Přehled kurzu": [
             p_home,
+        ],
+        "00. Prework: Úvod do Data Science & ML": [
+            p_prework_foundations,
+            p_prework_stats,
+            p_prework_workflow,
         ],
         "01. Lineární regrese (OLS)": [
             p_theory,
