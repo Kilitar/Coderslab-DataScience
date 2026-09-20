@@ -1,12 +1,27 @@
 import base64
 import io
 import json
+import re
 import sys
 from pathlib import Path
 import pandas as pd
 import streamlit as st
 
 GITHUB_REPO = "Kilitar/Coderslab-DataScience"
+
+def sanitize_markdown(source: str) -> str:
+    """
+    Automaticky čistí a opravuje časté kolize KaTeX, nezpracované Python escape sekvence (ASCII bell)
+    a kolize měnových symbolů ($) s matematickými delimitery.
+    """
+    if not source:
+        return source
+    # 1. Odstranění ASCII Bell (\x07) vzniklého z ne-raw \alpha v Pythonu
+    source = source.replace("\x07lpha", r"\alpha")
+    # 2. Ošetření kolize formátu $\text{MAE} = \$783.83$ -> $\text{MAE} = 783.83\text{ USD}$
+    source = re.sub(r"\$(\s*\\text\{[A-Za-z0-9_]+\}\s*=\s*)\\?\$([0-9,.]+)\$", r"$\1\2\\text{ USD}$", source)
+    source = re.sub(r"\\text\{([A-Za-z0-9_]+)\}\s*=\s*\\?\$([0-9,.]+)", r"\\text{\1} = \2 USD", source)
+    return source
 
 def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
     """
@@ -81,7 +96,8 @@ def render_jupyter_notebook(nb_rel_path: str, title: str, description: str):
             continue
 
         if cell_type == "markdown":
-            st.markdown(source)
+            clean_source = sanitize_markdown(source)
+            st.markdown(clean_source)
             st.write("")
         elif cell_type == "code":
             exec_count = cell.get("execution_count")

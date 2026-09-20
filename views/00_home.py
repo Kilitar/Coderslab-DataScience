@@ -88,11 +88,10 @@ st.markdown("---")
 st.subheader("🌲 Navigace v postranním panelu:")
 st.info(
     """
-    👈 **V levém menu nyní najdete přehledný strom sekcí:**
-    - **01. Lineární regrese**
-      - 🏡 **Cvičení 1: Nemovitosti King County** (interaktivní odhadce tržní ceny)
-      - 💎 **Cvičení 2: Klenotník a diamanty** (oceňovací kalkulačka dle 4C)
-      - 📓 **Jupyter sešity (.ipynb)** (interaktivní prohlížeč kódu a výstupů + stažení)
-      - 📚 **Teorie & Moderní ML (09/2026)** (teoretický rozbor, OLS vzorce a moderní AI metody)
+    👈 **V levém menu jsou témata organizována do tematických modulů (Teorie + Cvičení pohromadě):**
+    - **01. Lineární regrese (OLS)**: Teorie OLS & Gradient Descent + Cvičení 1 (Reality) a Cvičení 2 (Diamanty)
+    - **02. Metriky regresních modelů**: Teorie $R^2$, MAE, RMSE + Cvičení 3 (Metriky reality) a Cvičení 4 (Metriky diamantů & $R^2$ paradox)
+    - **03. Regularizace (Lasso, Ridge, Elastic Net)**: Teorie L1/L2 + Teorie Elastic Net + Cvičení 5 (Reality) a Cvičení 6 (Diamanty)
+    - **04. Polynomiální regrese**: Teorie nelineárního mapování, Rungeho fenomén a moderní spliny
     """
 )
