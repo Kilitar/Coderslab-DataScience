@@ -37,7 +37,7 @@ with tab_overview:
         with st.container(border=True):
             st.markdown("#### 2. Metriky kvality modelu")
             st.markdown(r"""
-            - **$R^2$ (Koeficient determinace):** Podíl vysvětleného rozptylu ($0 \dots 1$).
+            - **$R^2$ (Koeficient determinace):** Podíl vysvětleného rozptylu. Na trénovací sadě s interceptem nabývá hodnot $0 \dots 1$. Na testovací sadě může nabývat i záporných hodnot ($R^2 \in (-\infty, 1]$), pokud je model horší než pouhé tipování průměru $\bar{y}$.
             - **Adjusted $R^2$:** Penalizace za nadbytečný počet prediktorů.
             - **MAE:** Průměrná absolutní chyba v původních jednotkách (robustní vůči extrémům).
             - **MSE / RMSE:** Kvadratická penalizace velkých chyb; citlivá na odlehlé body.
@@ -190,7 +190,7 @@ with tab_car_example:
 
     st.markdown("""
     #### 💡 Anatomie pohledu jednotlivých modelů na grafu:
-    1. **Lineární přímka (červená přerušovaná):** Zcela ignoruje růst veteránů a u 30letého auta předpovídá nesmyslnou zápornou cenu!
+    1. **Lineární přímka (červená přerušovaná):** Zcela ignoruje U-křivku. Snaží se najít kompromis mezi novými auty a veterány, takže je téměř vodorovná: u nového vozu těžce podhodnotí cenu (odhadne jen ~300 tis. místo 750 tis. Kč) a u veterána ji rovněž podstřelí (~225 tis. místo 450 tis. Kč)!
     2. **Polynom 2. stupně (modrá křivka):** Krásně vystihuje U-křivku (propad a následný nárůst), ale u nového vozu podstřeluje strmost propadu.
     3. **Přeučený polynom 8. stupně (růžová tečkovaná):** Divoce osciluje kolem šumu a na pravém okraji exploduje nahoru (Rungeho jev).
     4. **Rozhodovací strom (zelené schody):** Vytváří stabilní zóny: *„do 2 let = 700k, 3-7 let = 400k, 8-18 let = 150k, 19+ let = 350k“*. Žádná extrapolace do záporu, žádné nekonečno!
@@ -216,10 +216,12 @@ with tab_benchmarks:
     with col_b2:
         st.markdown("#### 💎 Dataset 2: Diamanty (`diamonds.csv`)")
         bench_diam = [
-            {"Model": "OLS Lineární regrese (Cvičení 2)", "Test R²": "0.88 - 0.92", "Test RMSE": "1 150 - 1 400 USD", "Poznámka": "Základní lineární odhad"},
-            {"Model": "Lasso regularizace 4Cs (Cvičení 6)", "Test R²": "0.9250", "Test RMSE": "1 120 USD", "Poznámka": "Výběr klíčových vlastností"},
-            {"Model": "Polynomiální regrese 3. st. (Cvičení 7)", "Test R²": "0.9550", "Test RMSE": "850 USD", "Poznámka": "Nelineární křivky"},
-            {"Model": "Optimální rozhodovací strom (Cvičení 9)", "Test R²": "0.9787", "Test RMSE": "584 USD", "Poznámka": "🏆 Skoky u kulatých karátů (carat >= 1.0)"}
+            {"Model": "OLS Lineární regrese (Cvičení 2)", "Test R²": "0.9095", "Test RMSE": "1 172.5 USD", "Poznámka": "Základní lineární odhad"},
+            {"Model": "Lasso / Ridge regularizace 4Cs (Cvičení 6)", "Test R²": "0.9095", "Test RMSE": "1 172.1 USD", "Poznámka": "Stabilizace vah a multikolinearity"},
+            {"Model": "Polynom 2. stupně (Kvadratický OLS, Cvičení 7)", "Test R²": "0.9655", "Test RMSE": "723.7 USD", "Poznámka": "Optimální stupeň, 54 příznaků"},
+            {"Model": "Polynom 3. stupně (Surový kubický OLS, Cvičení 7)", "Test R²": "0.8591", "Test RMSE": "1 463.0 USD", "Poznámka": "⚠️ Kolaps variance / multikolinearita (219 příznaků)"},
+            {"Model": "Polynom 3. stupně + Ridge α=100 (Cvičení 7)", "Test R²": "0.9744", "Test RMSE": "623.2 USD", "Poznámka": "🏆 Regularizace L2 zkrotila 219 příznaků"},
+            {"Model": "Optimální rozhodovací strom (Cvičení 9)", "Test R²": "0.9785", "Test RMSE": "587.0 USD", "Poznámka": "🏆 Zachycení skoků u kulatých karátů (carat >= 1.0)"}
         ]
         st.dataframe(pd.DataFrame(bench_diam), width="stretch")
 
@@ -335,7 +337,7 @@ with tab_dict:
             "kategorie": "Metriky a vyhodnocování",
             "cz": "Koeficient determinace (R²)",
             "en": "Coefficient of Determination (R-squared)",
-            "definice": "Číslo mezi 0 a 1 vyjadřující, jaké procento celkového rozptylu cílové proměnné model dokázal vysvětlit: R² = 1 - (SS_res / SS_tot).",
+            "definice": "Míra vyjadřující podíl celkového rozptylu cílové proměnné vysvětlený modelem: R² = 1 - (SS_res / SS_tot). Na trénovacích datech s absolutním členem leží v intervalu [0, 1]. Na nových testovacích datech může nabývat i záporných hodnot (-∞, 1], pokud model predikuje hůře než triviální průměr cílové proměnné ȳ.",
             "kontext": "Hodnota 0.79 znamená, že model vysvětlil 79 % cenových rozdílů mezi domy; zbylých 21 % je nepozorovaný šum nebo chybějící proměnné.",
             "reseni": "Pozor na porovnávání na trénovací sadě (R² tam vždy roste s přidáním jakéhokoliv sloupce – proto existuje Adjusted R²)."
         },

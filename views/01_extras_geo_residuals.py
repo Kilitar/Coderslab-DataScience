@@ -26,11 +26,11 @@ with st.container(border=True):
     st.markdown("### 💡 O co na této mapě jde a jak ji číst?")
     st.markdown("""
     Při trénování jsme zjistili, že **Rozhodovací strom je o 35 000 USD přesnější než Lineární regrese**.  
-    Tato mapa ukazuje **1 500 skutečných domů v Seattlu a okolí** a barvou znázorňuje, **jak moc se model spletl**:
+    Tato mapa ukazuje **1 500 skutečných domů v Seattlu a okolí** a barvou znázorňuje relativní chybu $\\frac{y - \\hat{y}}{y} \\times 100\\,\\%$:
 
-    - 🔴 **Červená tečka = Model dům těžce PODHODNOTIL** (dům je ve skutečnosti mnohem dražší, než model tipoval – např. luxusní čtvrť u jezera).
-    - ⚪ **Bílá / Světlá tečka = Model se TREFIL PŘESNĚ** (chyba do ±10 %).
-    - 🔵 **Modrá tečka = Model dům těžce NADHODNOTIL** (model tipoval vysokou cenu, ale lokalita je levnější).
+    - 🔴 **Červená tečka (+50 % a více) = Model dům PODHODNOTIL** (skutečná cena $y$ je vyšší než predikce $\\hat{y}$, např. prestižní čtvrti u jezera).
+    - ⚪ **Bílá / Světlá tečka = Model se TREFIL PŘESNĚ** (odchylka do ±10 %).
+    - 🔵 **Modrá tečka (-50 % a méně) = Model dům NADHODNOTIL** (model odhadl vyšší cenu než je skutečnost; $y < \\hat{y}$).
     """)
 
 # Výběr modelu a typu zobrazení
@@ -119,10 +119,10 @@ fig_map.update_layout(
     height=620,
     margin=dict(l=0, r=0, t=40, b=0),
     coloraxis_colorbar=dict(
-        title="Odchylka predikce",
+        title="Relativní odchylka",
         ticksuffix=" %",
         tickvals=[-50, -25, 0, 25, 50],
-        ticktext=["<-50% (Podhodnoceno)", "-25%", "Trefa (0 %)", "+25%", ">+50% (Nadhodnoceno)"]
+        ticktext=["<-50% (Nadhodnoceno)", "-25%", "Trefa (0 %)", "+25%", ">+50% (Podhodnoceno)"]
     )
 )
 

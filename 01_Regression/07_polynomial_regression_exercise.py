@@ -119,7 +119,7 @@ def run_polynomial_regression_analysis():
             "scaler": scaler,
             "poly": poly,
             "feature_list": feature_list,
-            "pred_sample": [float(p) for p in pred_te[:200]]
+            "pred_te": pred_te
         }
 
     # 4. Expertní srovnání: Regularizovaný polynom stupně 3 (Ridge alpha=100)
@@ -190,11 +190,11 @@ def run_polynomial_regression_analysis():
     y_test_sample = [float(y_test.iloc[i]) for i in sample_indices]
     sample_plot_data = {
         "actual": y_test_sample,
-        "pred_deg1": [float(trained_models[1]["pred_sample"][i]) for i in range(200)],
-        "pred_deg2": [float(trained_models[2]["pred_sample"][i]) for i in range(200)],
-        "pred_deg3": [float(trained_models[3]["pred_sample"][i]) for i in range(200)],
-        "pred_ridge3": [float(pred_te_ridge3[sample_indices[i]]) for i in range(200)],
-        "pred_hgb": [float(pred_te_hgb[sample_indices[i]]) for i in range(200)],
+        "pred_deg1": [float(trained_models[1]["pred_te"][i]) for i in sample_indices],
+        "pred_deg2": [float(trained_models[2]["pred_te"][i]) for i in sample_indices],
+        "pred_deg3": [float(trained_models[3]["pred_te"][i]) for i in sample_indices],
+        "pred_ridge3": [float(pred_te_ridge3[i]) for i in sample_indices],
+        "pred_hgb": [float(pred_te_hgb[i]) for i in sample_indices],
     }
 
     # 7. Uložení JSON cache pro bleskové načtení ve Streamlitu

@@ -29,7 +29,8 @@ tab1, tab2, tab3 = st.tabs([
 with tab1:
     st.markdown("### 📊 Rozdělení reziduí: Gaussovský zvon vs. Těžký pravý chvost")
     st.markdown(r"""
-    Teoretický předpoklad lineární regrese zní: **Rezidua musí mít normální rozdělení $e \sim \mathcal{N}(0, \sigma^2)$**.  
+    V klasickém lineárním modelu je předpoklad **normality chyb $\varepsilon \sim \mathcal{N}(0, \sigma^2)$** klíčový pro **statistické testy hypotéz** ($t$-testy významnosti koeficientů, $F$-testy spolehlivosti modelu a konfidenční intervaly).  
+    *(Pozor na častý omyl: Pro samotný Gauss-Markovův teorém a vlastnost BLUE – nejlepší lineární nestranný odhad – normalita chyb **není vyžadována**, postačují sférické chyby, exogenita a linearita!)*  
     Zde je skutečný histogram reziduí OLS na testovacích datech King County:
     """)
 
@@ -100,12 +101,24 @@ with tab2:
 # TAB 3: CHECKLIST
 # =============================================================================
 with tab3:
-    st.markdown("### 🛡️ Rychlý checklist pro datového analytika: 4 předpoklady OLS")
+    st.markdown("### 🛡️ Teoretický rámec: Gauss-Markovův teorém (BLUE) vs. Statistická inference")
     st.markdown(r"""
-    | Předpoklad | Co znamená v teorii | Jak se projevil na našich datech | Řešení v praxi |
+    Podle **Gauss-Markovova teorému** je odhad metodou nejmenších čtverců (OLS) $\hat{\boldsymbol{\beta}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}$ 
+    **nejlepším lineárním nestranným odhadem (BLUE – Best Linear Unbiased Estimator)**, pokud jsou splněny následující 4 podmínky:
+
+    | Podmínka Gauss-Markov (BLUE) | Matematická formulace | Co znamená v praxi | Jak se projevila na našich datech |
     | :--- | :--- | :--- | :--- |
-    | **1. Linearita parametrů** | Vztah mezi $X$ a $Y$ lze popsat lineární kombinací | U diamantů selhala (cena roste kubicky s karáty) | Polynomiální regrese, Decision Tree |
-    | **2. Homoskedasticita** | Rozptyl chyb je konstantní $\text{Var}(\varepsilon) = \sigma^2$ | Porušena: u luxusních domů rozptyl chyb prudce roste | Logaritmická transformace $\log(y)$, WLS |
-    | **3. Žádná multikolinearita** | Prediktory nejsou lineární kombinací jiných | Porušena: `sqft_living` = `sqft_above` + `basement` | Ridge (L2) regularizace, odstranění sloupce |
-    | **4. Normalita chyb** | Rezidua pocházejí z normálního rozdělení | Pravostranně zešikmeno kvůli vilám u vody | Robustní regrese (Huber), stromy |
+    | **1. Linearita v parametrech** | $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}$ | Model je lineární kombinací vah $\beta_j$ | U diamantů selhala bez transformace (cena roste kubicky) |
+    | **2. Striktní exogenita** | $\mathbb{E}[\boldsymbol{\varepsilon} \mid \mathbf{X}] = \mathbf{0}$ | Rezidua nemají systematický vztah k $X$ | Opomenutí lokality v King County vedlo k systematickým chybám |
+    | **3. Plná sloupcová hodnost** | $\text{rank}(\mathbf{X}) = p$ (žádná perfektní multikolinearita) | Žádný sloupec není přesnou kopií/kombinací jiného | `sqft_living` $\approx$ `sqft_above` + `basement` (vysoký VIF $\to$ Ridge) |
+    | **4. Sférická rezidua (Homoskedasticita & Nekorelovanost)** | $\text{Var}(\boldsymbol{\varepsilon} \mid \mathbf{X}) = \sigma^2 \mathbf{I}$ | Konstantní rozptyl chyb a nulová autokorelace $\text{Cov}(\varepsilon_i, \varepsilon_j) = 0$ | Porušena: u luxusních domů rozptyl chyb prudce roste (trychtýř) |
+
+    ---
+
+    #### ⚠️ Důležité upřesnění k normalitě chyb:
+    - **Normalita chyb $\boldsymbol{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \sigma^2 \mathbf{I})$ NENÍ podmínkou Gauss-Markovova teorému!**  
+      I bez normality je OLS stále **BLUE** (má nejmenší rozptyl mezi všemi lineárními nestrannými odhady).
+    - **Kdy je normalita nutná?**  
+      Normalita je nezbytná pro **statistickou inferenci na konečných vzorcích**: výpočet $p$-hodnot v $t$-testech koeficientů, $F$-testech celého modelu a pro přesné konfidenční intervaly spolehlivosti. (U obřích vzorků díky Centrální limitní větě – CLT – konvergují odhady k normalitě asymptoticky).
     """)
+

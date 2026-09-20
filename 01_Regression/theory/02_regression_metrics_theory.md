@@ -16,11 +16,12 @@ Kde:
 - $y_i$ = skutečná hodnota závislé proměnné (ground truth)
 - $\hat{y}_i$ = hodnota predikovaná modelem
 
-### Vlastnosti ideálních reziduí (Gauss-Markovovy předpoklady):
-1. **Nulová střední hodnota:** $\mathbb{E}[e] = 0$ (model není systematicky vychýlený nahoru ani dolů).
-2. **Homoskedasticita:** Rozptyl reziduí je konstantní napříč všemi hodnotami predikcí ($\text{Var}(e_i) = \sigma^2$).
-3. **Absence autokorelace:** Rezidua jsou vzájemně nezávislá ($\text{Cov}(e_i, e_j) = 0$ pro $i \ne j$).
-4. **Normalita:** Rezidua mají přibližně normální rozdělení $e \sim \mathcal{N}(0, \sigma^2)$.
+### Vlastnosti ideálních reziduí (Gauss-Markovovy předpoklady pro BLUE):
+1. **Nulová střední hodnota (Striktní exogenita):** $\mathbb{E}[e \mid X] = 0$ (model není systematicky vychýlený nahoru ani dolů).
+2. **Homoskedasticita:** Rozptyl reziduí je konstantní napříč všemi hodnotami predikcí ($\text{Var}(e_i \mid X) = \sigma^2$).
+3. **Absence autokorelace:** Rezidua jsou vzájemně nekorelovaná ($\text{Cov}(e_i, e_j \mid X) = 0$ pro $i \ne j$).
+
+*(Důležitá poznámka: Předpoklad normálního rozdělení $e \sim \mathcal{N}(0, \sigma^2)$ **není součástí Gauss-Markovova teorému** – OLS je nejlepším lineárním nestranným odhadem BLUE i bez normality. Normalita je nutná pouze pro přesné statistické $t$-testy, $F$-testy a konfidenční intervaly na konečných vzorcích).*
 
 Protože při tisících pozorováních nelze zkoumat chyby jednotlivě, zavádějí se **agregované souhrnné metriky**.
 
