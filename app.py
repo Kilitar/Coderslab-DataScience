@@ -59,6 +59,9 @@ p_tree_diam_critique = st.Page("views/01_decision_tree_diam_critique.py", title=
 p_tree_diam_nb = st.Page("views/01_decision_tree_diam_nb.py", title="Cvičení 9: Diamanty – Notebook", icon="🐍")
 p_ensemble_theory = st.Page("views/01_ensemble_theory.py", title="Teorie: Ansámblové metody (RF & Boosting)", icon="🌲")
 
+# Závěr Dne 1: Celkové shrnutí & Kvíz
+p_day1_summary = st.Page("views/01_day_1_summary.py", title="Závěrečné shrnutí Dne 1: Velká syntéza regrese & Kvíz", icon="🎓")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -113,6 +116,9 @@ nav = st.navigation(
             p_tree_diam_critique,
             p_tree_diam_nb,
             p_ensemble_theory,
+        ],
+        "06. Závěr Dne 1 (Day 1 Summary)": [
+            p_day1_summary,
         ],
     }
 )
