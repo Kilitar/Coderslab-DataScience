@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -14,12 +15,28 @@ st.title("🔬 Kritický rozbor a MLOps: Regularizace v praxi")
 st.caption("Matematické nástrahy neškálovaných modelů, prevence Data Leakage při ladění hyperparametrů, Lasso Path a Elastic Net.")
 
 # =============================================================================
-# CACHE VÝPOČTŮ
+# CACHE VÝPOČTŮ (Okamžité načtení z předpočítaných dat)
 # =============================================================================
 @st.cache_data
 def load_critique_data():
     base_dir = Path(__file__).resolve().parent.parent
+    json_path = base_dir / "01_Regression" / "data" / "kc_reg_critique_precomputed.json"
+    if json_path.exists():
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return (
+            data["feature_names"],
+            np.array(data["alphas_path"]),
+            np.array(data["coefs_path"]),
+            pd.DataFrame(data["cv_list"]),
+            data["best_ridge_alpha"],
+            data["best_lasso_alpha"],
+            data["best_enet_alpha"],
+            data["best_enet_l1_ratio"],
+        )
+
     csv_path = base_dir / "01_Regression" / "data" / "kc_house_data_preprocessed.csv"
+
     if not csv_path.exists():
         csv_path = base_dir / "data" / "MAL_downloadable materials_session 1" / "Day 1" / "kc_house_data_preprocessed.csv"
 
@@ -89,10 +106,6 @@ def load_critique_data():
         best_lasso_alpha,
         best_enet_alpha,
         best_enet_l1_ratio,
-        X_train,
-        X_test,
-        y_train,
-        y_test
     )
 
 
@@ -105,11 +118,8 @@ def load_critique_data():
     best_lasso_alpha,
     best_enet_alpha,
     best_enet_l1_ratio,
-    X_train,
-    X_test,
-    y_train,
-    y_test,
 ) = load_critique_data()
+
 
 # =============================================================================
 # SEKCE 1: ABSOLUTNÍ METODICKÁ CHYBA – ABSENCE ŠKÁLOVÁNÍ
@@ -133,7 +143,7 @@ with col_err1:
        - `sqft_living` (plocha domu) má hodnoty v tisících (1 000 až 5 000). Její koeficient $\\beta$ je malý (např. $\\approx 150$).
        - `bedrooms` (počet pokojů) má hodnoty 1 až 5. Její koeficient $\\beta$ je velký (např. $\\approx 40 000$).
     2. **Disproporční penalizace:**  
-       Penalizační člen $\\alpha \\sum \\beta_j^2$ trestá koeficient pro `bedrooms` částkou $40 000^2 = 1{,}6 \\times 10^9$, zatímco pro `sqft_living` pouze $150^2 = 22\\,500$.
+       Penalizační člen $\alpha \sum \beta_j^2$ trestá koeficient pro `bedrooms` částkou $40000^2 = 1{,}6 \times 10^9$, zatímco pro `sqft_living` pouze $150^2 = 22500$.
     3. **Důsledek v Scikit-learn:**  
        Algoritmus Coordinate Descent na neškálovaných datech **vůbec nekonverguje** a vyhazuje `ConvergenceWarning` a `LinAlgWarning`! Proměnné s malými čísly jsou brutálně zdecimovány, zatímco proměnné s velkými čísly nepociťují téměř žádnou regularizaci.
     """)
@@ -151,7 +161,7 @@ with col_err2:
     ```
     > [!TIP]
     > **Zlaté pravidlo pro produkční kód:**  
-    > Před jakoukoliv regularizací ($L_1$, $L_2$, Elastic Net, Ridge, Lasso) je **standardizace všech numerických příznaků (`StandardScaler`) matematickou povinností**!
+    > Před jakoukoliv regularizací (L1, L2, Elastic Net, Ridge, Lasso) je **standardizace všech numerických příznaků (`StandardScaler`) matematickou povinností**!
     """)
 
 # =============================================================================
@@ -179,8 +189,8 @@ Knihovna Scikit-learn pro tento účel nabízí optimalizované třídy `RidgeCV
 st.dataframe(
     cv_comparison.style.format({
         "R2": "{:.5f}",
-        "MAE": "${:,.2f}",
-        "RMSE": "${:,.2f}",
+        "MAE": "{:,.2f} USD",
+        "RMSE": "{:,.2f} USD",
     }),
     width="stretch",
 )

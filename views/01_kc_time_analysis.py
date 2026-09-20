@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -13,6 +14,7 @@ from sklearn.model_selection import train_test_split
 
 st.title("⏱️ Cvičení 1: Časová analýza, Sezónnost & Time-Split")
 st.caption("Proč je smazání data prodeje v kurzu metodická chyba a jak se projeví reálný časový split v praxi.")
+
 
 # =============================================================================
 # NAČTENÍ DAT A VYČIŠTĚNÍ
@@ -138,78 +140,86 @@ st.markdown(
     """
 )
 
-# Výpočet modelů
-feats_base = [c for c in df_time.columns if c not in [
-    'id', 'date', 'price', 'dt', 'days_since_start', 'year_month', 'month', 'quarter'
-]]
-feats_time = feats_base + ['days_since_start', 'month']
+# Výpočet modelů a metrik (Předpočítáno pro bleskové načtení)
+@st.cache_data
+def get_time_analysis_results():
+    base_dir = Path(__file__).resolve().parent.parent
+    json_path = base_dir / "01_Regression" / "data" / "kc_time_analysis_precomputed.json"
+    if json_path.exists():
+        with open(json_path, "r", encoding="utf-8") as f:
+            return json.load(f)
 
-# Random Split
-X_tr_b, X_te_b, y_tr, y_te = train_test_split(df_time[feats_base], df_time['price'], test_size=0.2, random_state=42)
-X_tr_t, X_te_t, _, _ = train_test_split(df_time[feats_time], df_time['price'], test_size=0.2, random_state=42)
+    feats_base = [c for c in df_time.columns if c not in [
+        'id', 'date', 'price', 'dt', 'days_since_start', 'year_month', 'month', 'quarter'
+    ]]
+    feats_time = feats_base + ['days_since_start', 'month']
 
-ols_b_rand = LinearRegression().fit(X_tr_b, y_tr)
-ols_t_rand = LinearRegression().fit(X_tr_t, y_tr)
-hgb_rand = HistGradientBoostingRegressor(random_state=42).fit(df_time.loc[X_tr_t.index, feats_time], y_tr)
+    # Random Split
+    X_tr_b, X_te_b, y_tr, y_te = train_test_split(df_time[feats_base], df_time['price'], test_size=0.2, random_state=42)
+    X_tr_t, X_te_t, _, _ = train_test_split(df_time[feats_time], df_time['price'], test_size=0.2, random_state=42)
 
-# Time-based Split (2014 vs 2015)
-split_date = pd.to_datetime('2015-01-01')
-mask_tr = df_time['dt'] < split_date
-mask_te = df_time['dt'] >= split_date
+    ols_b_rand = LinearRegression().fit(X_tr_b, y_tr)
+    ols_t_rand = LinearRegression().fit(X_tr_t, y_tr)
+    hgb_rand = HistGradientBoostingRegressor(random_state=42).fit(df_time.loc[X_tr_t.index, feats_time], y_tr)
 
-y_tr_time = df_time.loc[mask_tr, 'price']
-y_te_time = df_time.loc[mask_te, 'price']
+    # Time-based Split (2014 vs 2015)
+    split_date = pd.to_datetime('2015-01-01')
+    mask_tr = df_time['dt'] < split_date
+    mask_te = df_time['dt'] >= split_date
 
-ols_b_time = LinearRegression().fit(df_time.loc[mask_tr, feats_base], y_tr_time)
-ols_t_time = LinearRegression().fit(df_time.loc[mask_tr, feats_time], y_tr_time)
-hgb_time = HistGradientBoostingRegressor(random_state=42).fit(df_time.loc[mask_tr, feats_time], y_tr_time)
+    y_tr_time = df_time.loc[mask_tr, 'price']
+    y_te_time = df_time.loc[mask_te, 'price']
 
-# Metriky
-res_data = [
-    {
-        "Metoda rozdělení": "Náhodný split (Učebnicový)",
-        "Model": "1. OLS Baseline (bez data)",
-        "R² skóre": f"{r2_score(y_te, ols_b_rand.predict(X_te_b)):.4f}",
-        "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te, ols_b_rand.predict(X_te_b)):,.0f}",
-        "Hodnocení": "Falešně optimistický (data leakage)"
-    },
-    {
-        "Metoda rozdělení": "Náhodný split (Učebnicový)",
-        "Model": "2. OLS s časem (trend + měsíc)",
-        "R² skóre": f"{r2_score(y_te, ols_t_rand.predict(X_te_t)):.4f}",
-        "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te, ols_t_rand.predict(X_te_t)):,.0f}",
-        "Hodnocení": f"Trend: +$97.1/den (~$35k roční inflace)"
-    },
-    {
-        "Metoda rozdělení": "Náhodný split (Učebnicový)",
-        "Model": "3. Gradient Boosting (HGB)",
-        "R² skóre": f"{r2_score(y_te, hgb_rand.predict(X_te_t)):.4f}",
-        "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te, hgb_rand.predict(X_te_t)):,.0f}",
-        "Hodnocení": "Špičkový výsledek na náhodných datech"
-    },
-    {
-        "Metoda rozdělení": "🚨 Reálný Time-Split (Trénink 2014 → Test 2015)",
-        "Model": "1. OLS Baseline (bez data)",
-        "R² skóre": f"{r2_score(y_te_time, ols_b_time.predict(df_time.loc[mask_te, feats_base])):.4f}",
-        "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te_time, ols_b_time.predict(df_time.loc[mask_te, feats_base])):,.0f}",
-        "Hodnocení": "Pokles kvality kvůli posunu trhu v roce 2015"
-    },
-    {
-        "Metoda rozdělení": "🚨 Reálný Time-Split (Trénink 2014 → Test 2015)",
-        "Model": "2. OLS s časem (trend + měsíc)",
-        "R² skóre": f"{r2_score(y_te_time, ols_t_time.predict(df_time.loc[mask_te, feats_time])):.4f}",
-        "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te_time, ols_t_time.predict(df_time.loc[mask_te, feats_time])):,.0f}",
-        "Hodnocení": "💥 Kolaps modelu: Past lineární extrapolace!"
-    },
-    {
-        "Metoda rozdělení": "🚨 Reálný Time-Split (Trénink 2014 → Test 2015)",
-        "Model": "3. Gradient Boosting (HGB)",
-        "R² skóre": f"{r2_score(y_te_time, hgb_time.predict(df_time.loc[mask_te, feats_time])):.4f}",
-        "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te_time, hgb_time.predict(df_time.loc[mask_te, feats_time])):,.0f}",
-        "Hodnocení": "🏆 Vítěz reality: Drží vysokou přesnost"
-    },
-]
+    ols_b_time = LinearRegression().fit(df_time.loc[mask_tr, feats_base], y_tr_time)
+    ols_t_time = LinearRegression().fit(df_time.loc[mask_tr, feats_time], y_tr_time)
+    hgb_time = HistGradientBoostingRegressor(random_state=42).fit(df_time.loc[mask_tr, feats_time], y_tr_time)
 
+    return [
+        {
+            "Metoda rozdělení": "Náhodný split (Učebnicový)",
+            "Model": "1. OLS Baseline (bez data)",
+            "R² skóre": f"{r2_score(y_te, ols_b_rand.predict(X_te_b)):.4f}",
+            "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te, ols_b_rand.predict(X_te_b)):,.0f}",
+            "Hodnocení": "Falešně optimistický (data leakage)"
+        },
+        {
+            "Metoda rozdělení": "Náhodný split (Učebnicový)",
+            "Model": "2. OLS s časem (trend + měsíc)",
+            "R² skóre": f"{r2_score(y_te, ols_t_rand.predict(X_te_t)):.4f}",
+            "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te, ols_t_rand.predict(X_te_t)):,.0f}",
+            "Hodnocení": f"Trend: +$97.1/den (~$35k roční inflace)"
+        },
+        {
+            "Metoda rozdělení": "Náhodný split (Učebnicový)",
+            "Model": "3. Gradient Boosting (HGB)",
+            "R² skóre": f"{r2_score(y_te, hgb_rand.predict(X_te_t)):.4f}",
+            "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te, hgb_rand.predict(X_te_t)):,.0f}",
+            "Hodnocení": "Špičkový výsledek na náhodných datech"
+        },
+        {
+            "Metoda rozdělení": "🚨 Reálný Time-Split (Trénink 2014 → Test 2015)",
+            "Model": "1. OLS Baseline (bez data)",
+            "R² skóre": f"{r2_score(y_te_time, ols_b_time.predict(df_time.loc[mask_te, feats_base])):.4f}",
+            "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te_time, ols_b_time.predict(df_time.loc[mask_te, feats_base])):,.0f}",
+            "Hodnocení": "Pokles kvality kvůli posunu trhu v roce 2015"
+        },
+        {
+            "Metoda rozdělení": "🚨 Reálný Time-Split (Trénink 2014 → Test 2015)",
+            "Model": "2. OLS s časem (trend + měsíc)",
+            "R² skóre": f"{r2_score(y_te_time, ols_t_time.predict(df_time.loc[mask_te, feats_time])):.4f}",
+            "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te_time, ols_t_time.predict(df_time.loc[mask_te, feats_time])):,.0f}",
+            "Hodnocení": "💥 Kolaps modelu: Past lineární extrapolace!"
+        },
+        {
+            "Metoda rozdělení": "🚨 Reálný Time-Split (Trénink 2014 → Test 2015)",
+            "Model": "3. Gradient Boosting (HGB)",
+            "R² skóre": f"{r2_score(y_te_time, hgb_time.predict(df_time.loc[mask_te, feats_time])):.4f}",
+            "MAE (Průměrná chyba)": f"${mean_absolute_error(y_te_time, hgb_time.predict(df_time.loc[mask_te, feats_time])):,.0f}",
+            "Hodnocení": "🏆 Vítěz reality: Drží vysokou přesnost"
+        },
+    ]
+
+res_data = get_time_analysis_results()
 st.dataframe(pd.DataFrame(res_data), width="stretch", hide_index=True)
 
 st.markdown("---")

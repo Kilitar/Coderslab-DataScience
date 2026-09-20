@@ -1,0 +1,44 @@
+[
+  {
+    "Metoda rozd\u011blen\u00ed": "N\u00e1hodn\u00fd split (U\u010debnicov\u00fd)",
+    "Model": "1. OLS Baseline (bez data)",
+    "R\u00b2 sk\u00f3re": "0.7012",
+    "MAE (Pr\u016fm\u011brn\u00e1 chyba)": "",
+    "Hodnocen\u00ed": "Fale\u0161n\u011b optimistick\u00fd (data leakage)"
+  },
+  {
+    "Metoda rozd\u011blen\u00ed": "N\u00e1hodn\u00fd split (U\u010debnicov\u00fd)",
+    "Model": "2. OLS s \u010dasem (trend + m\u011bs\u00edc)",
+    "R\u00b2 sk\u00f3re": "0.7026",
+    "MAE (Pr\u016fm\u011brn\u00e1 chyba)": "",
+    "Hodnocen\u00ed": "Trend: +.1/den (~ ro\u010dn\u00ed inflace)"
+  },
+  {
+    "Metoda rozd\u011blen\u00ed": "N\u00e1hodn\u00fd split (U\u010debnicov\u00fd)",
+    "Model": "3. Gradient Boosting (HGB)",
+    "R\u00b2 sk\u00f3re": "0.8800",
+    "MAE (Pr\u016fm\u011brn\u00e1 chyba)": "",
+    "Hodnocen\u00ed": "\u0160pi\u010dkov\u00fd v\u00fdsledek na n\u00e1hodn\u00fdch datech"
+  },
+  {
+    "Metoda rozd\u011blen\u00ed": "\ud83d\udea8 Re\u00e1ln\u00fd Time-Split (Tr\u00e9nink 2014 \u2192 Test 2015)",
+    "Model": "1. OLS Baseline (bez data)",
+    "R\u00b2 sk\u00f3re": "0.6799",
+    "MAE (Pr\u016fm\u011brn\u00e1 chyba)": "",
+    "Hodnocen\u00ed": "Pokles kvality kv\u016fli posunu trhu v roce 2015"
+  },
+  {
+    "Metoda rozd\u011blen\u00ed": "\ud83d\udea8 Re\u00e1ln\u00fd Time-Split (Tr\u00e9nink 2014 \u2192 Test 2015)",
+    "Model": "2. OLS s \u010dasem (trend + m\u011bs\u00edc)",
+    "R\u00b2 sk\u00f3re": "0.5286",
+    "MAE (Pr\u016fm\u011brn\u00e1 chyba)": "",
+    "Hodnocen\u00ed": "\ud83d\udca5 Kolaps modelu: Past line\u00e1rn\u00ed extrapolace!"
+  },
+  {
+    "Metoda rozd\u011blen\u00ed": "\ud83d\udea8 Re\u00e1ln\u00fd Time-Split (Tr\u00e9nink 2014 \u2192 Test 2015)",
+    "Model": "3. Gradient Boosting (HGB)",
+    "R\u00b2 sk\u00f3re": "0.8782",
+    "MAE (Pr\u016fm\u011brn\u00e1 chyba)": "",
+    "Hodnocen\u00ed": "\ud83c\udfc6 V\u00edt\u011bz reality: Dr\u017e\u00ed vysokou p\u0159esnost"
+  }
+]
