@@ -77,7 +77,7 @@ with tab2:
             x="Metoda škálování",
             y="Transformovaná hodnota",
             color="Metoda škálování",
-            points="all",
+            points="outliers",
             title="Srovnání distribucí po transformaci různými škálovači"
         )
         fig_box.update_layout(height=450, showlegend=False)

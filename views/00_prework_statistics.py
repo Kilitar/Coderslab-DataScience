@@ -2,6 +2,7 @@ from pathlib import Path
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.express as px
+from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -94,20 +95,47 @@ with tab2:
     with m_col5:
         st.metric("Šikmost (Skewness)", f"{skew_val:+.2f}")
 
-    # Graf: Histogram hustoty + Boxplot
-    fig_dist = go.Figure()
+    # Sdružený graf: Horní panel Boxplot (30 % výšky) + Dolní panel Histogram (70 % výšky) se sdílenou osou X
+    fig_combined = make_subplots(
+        rows=2, cols=1,
+        shared_xaxes=True,
+        row_heights=[0.30, 0.70],
+        vertical_spacing=0.04,
+        subplot_titles=("Krabicový graf (Boxplot – mezichvartilové rozpětí IQR)", "Histogram četností s polohou Průměru a Mediánu")
+    )
 
-    # Histogram
-    fig_dist.add_trace(go.Histogram(
-        x=samples,
-        nbinsx=45,
-        name="Distribuce dat",
-        marker_color="#457B9D",
-        opacity=0.75
-    ))
+    # 1. Boxplot (Horní panel)
+    fig_combined.add_trace(
+        go.Box(
+            x=samples,
+            name="Boxplot",
+            boxpoints="outliers",
+            jitter=0.25,
+            pointpos=-1.6,
+            marker=dict(color="#E63946", size=8, symbol="diamond"),
+            fillcolor="rgba(42, 157, 143, 0.45)",
+            line=dict(color="#2A9D8F", width=2.5),
+            orientation="h"
+        ),
+        row=1, col=1
+    )
+
+    # 2. Histogram (Dolní panel)
+    fig_combined.add_trace(
+        go.Histogram(
+            x=samples,
+            nbinsx=50,
+            name="Distribuce dat",
+            marker=dict(
+                color="rgba(69, 123, 157, 0.75)",
+                line=dict(color="#1D3557", width=1)
+            )
+        ),
+        row=2, col=1
+    )
 
     # Vertikální linka pro průměr (červená)
-    fig_dist.add_vline(
+    fig_combined.add_vline(
         x=mean_val,
         line_width=3,
         line_dash="dash",
@@ -117,7 +145,7 @@ with tab2:
     )
 
     # Vertikální linka pro medián (zelená)
-    fig_dist.add_vline(
+    fig_combined.add_vline(
         x=median_val,
         line_width=3,
         line_dash="solid",
@@ -126,25 +154,14 @@ with tab2:
         annotation_position="top left"
     )
 
-    fig_dist.update_layout(
-        title="Histogram rozdělení s vyznačením Průměru vs. Mediánu",
-        xaxis_title="Hodnota veličiny",
-        yaxis_title="Četnost (Počet pozorování)",
-        height=380,
-        showlegend=False
+    fig_combined.update_layout(
+        height=580,
+        showlegend=False,
+        xaxis2_title="Hodnota veličiny",
+        yaxis2_title="Počet pozorování",
+        margin=dict(l=40, r=40, t=50, b=40)
     )
-    st.plotly_chart(fig_dist, width="stretch")
-
-    # Boxplot
-    fig_box = px.box(
-        x=samples,
-        points="all",
-        title="Odpovídající Boxplot (Krabicový graf)",
-        labels={"x": "Hodnota veličiny"},
-        height=220
-    )
-    fig_box.update_traces(marker_color="#1D3557")
-    st.plotly_chart(fig_box, width="stretch")
+    st.plotly_chart(fig_combined, width="stretch")
 
     if add_outlier >= 300:
         st.warning(
