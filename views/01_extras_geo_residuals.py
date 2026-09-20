@@ -63,30 +63,57 @@ df_plot["chyba_procenta"] = df_plot[res_col].apply(lambda x: f"{x:+.1f} %")
 # Výběr mapového podkladu
 style_key = "carto-positron" if "positron" in map_style else ("open-street-map" if "open-street" in map_style else "carto-darkmatter")
 
-fig_map = px.scatter_mapbox(
-    df_plot,
-    lat="lat",
-    lon="long",
-    color="err_pct",
-    color_continuous_scale="RdBu_r",
-    range_color=[-50, 50],
-    size_max=9,
-    zoom=9.5,
-    center={"lat": 47.56, "lon": -122.25},
-    mapbox_style=style_key,
-    hover_name="skutecna_cena",
-    hover_data={
-        "lat": False,
-        "long": False,
-        "err_pct": False,
-        "predikce_modelu": True,
-        "chyba_v_usd": True,
-        "chyba_procenta": True,
-        "sqft_living": True,
-        "grade": True
-    },
-    title=f"Skutečná mapa chyb: {sel_model}"
-)
+# Plotly 6.0+ přejmenovalo scatter_mapbox na scatter_map a parametr mapbox_style na map_style
+if hasattr(px, "scatter_map"):
+    fig_map = px.scatter_map(
+        df_plot,
+        lat="lat",
+        lon="long",
+        color="err_pct",
+        color_continuous_scale="RdBu_r",
+        range_color=[-50, 50],
+        size_max=9,
+        zoom=9.5,
+        center={"lat": 47.56, "lon": -122.25},
+        map_style=style_key,
+        hover_name="skutecna_cena",
+        hover_data={
+            "lat": False,
+            "long": False,
+            "err_pct": False,
+            "predikce_modelu": True,
+            "chyba_v_usd": True,
+            "chyba_procenta": True,
+            "sqft_living": True,
+            "grade": True
+        },
+        title=f"Skutečná mapa chyb: {sel_model}"
+    )
+else:
+    fig_map = px.scatter_mapbox(
+        df_plot,
+        lat="lat",
+        lon="long",
+        color="err_pct",
+        color_continuous_scale="RdBu_r",
+        range_color=[-50, 50],
+        size_max=9,
+        zoom=9.5,
+        center={"lat": 47.56, "lon": -122.25},
+        mapbox_style=style_key,
+        hover_name="skutecna_cena",
+        hover_data={
+            "lat": False,
+            "long": False,
+            "err_pct": False,
+            "predikce_modelu": True,
+            "chyba_v_usd": True,
+            "chyba_procenta": True,
+            "sqft_living": True,
+            "grade": True
+        },
+        title=f"Skutečná mapa chyb: {sel_model}"
+    )
 
 fig_map.update_layout(
     height=620,
