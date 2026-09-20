@@ -5,14 +5,14 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 st.title("🎓 Závěrečné shrnutí Dne 1: Kompletní přehled regrese")
-st.caption("Syntéza prvního dne kurzu Machine Learning: Od jednoduché lineární přímky až po nelineární stromy, srovnávací benchmarky na reálných datech a interaktivní kvíz.")
+st.caption("Syntéza prvního dne kurzu Machine Learning: Od jednoduché lineární přímky až po nelineární stromy, srovnávací benchmarky na reálných datech a komplexní česko-anglický glosář pojmů.")
 
-tab_overview, tab_comparison, tab_car_example, tab_benchmarks, tab_quiz = st.tabs([
+tab_overview, tab_comparison, tab_car_example, tab_benchmarks, tab_dict = st.tabs([
     "📑 Přehled kapitol (Day 1)",
     "⚖️ Velké srovnání architektur",
     "🚗 Příklad z praxe: Křivky 4 modelů",
     "📊 Reálné benchmarky (Reality & Diamanty)",
-    "🧠 Závěrečný test znalostí (Kvíz)"
+    "📚 Glosář klíčových pojmů (CZ / EN Dictionary)"
 ])
 
 # =============================================================================
@@ -224,63 +224,175 @@ with tab_benchmarks:
         st.dataframe(pd.DataFrame(bench_diam), width="stretch")
 
 # =============================================================================
-# TAB 5: INTERAKTIVNÍ KVÍZ
+# TAB 5: KOMPLEXNÍ GLOSÁŘ POJMŮ (CZ / EN DICTIONARY)
 # =============================================================================
-with tab_quiz:
-    st.markdown("### 🧠 Otestujte své znalosti: Kvíz na závěr Dne 1")
-    st.caption("Klikněte na správnou odpověď a ihned zkontrolujte, zda jste připraveni na zkoušku.")
+with tab_dict:
+    st.markdown("### 📚 Komplexní glosář klíčových pojmů Machine Learningu (CZ / EN)")
+    st.markdown(r"""
+    Slovník nejdůležitějších pojmů, se kterými se v praxi setkáte. Každý pojem obsahuje **český i anglický název**, 
+    přesnou definici, souvislosti s regresními modely a praktický příklad.
+    """)
 
-    # Otázka 1
-    st.markdown("##### 1. Jaký je hlavní rozdíl mezi L1 (Lasso) a L2 (Ridge) regularizací?")
-    q1 = st.radio(
-        "Vyberte správné tvrzení:",
-        [
-            "L2 regularizace dokáže nastavit koeficienty přesně na nulu, zatímco L1 je pouze zmenšuje.",
-            "L1 regularizace (Lasso) dokáže vynulovat váhy méně důležitých příznaků a provádí Feature Selection, zatímco L2 (Ridge) váhy pouze scvrkává k nule.",
-            "Mezi L1 a L2 není žádný matematický rozdíl, pouze používají jiný název balíčku v Scikit-learn."
-        ],
-        key="quiz_q1"
-    )
-    if st.button("Zkontrolovat otázku 1"):
-        if "L1 regularizace (Lasso) dokáže vynulovat" in q1:
-            st.success("✅ Správně! Lasso přidává absolutní hodnotu vah (|w|), což geometricky vede k rohovému řešení a přesnému vynulování méně důležitých příznaků.")
-        else:
-            st.error("❌ Špatně. Pamatujte: L1 = Lasso = součet absolutních hodnot = NULOVÁNÍ vah. L2 = Ridge = čtverce = SCVRKÁVÁNÍ vah.")
+    # Databáze pojmů
+    glossary_items = [
+        {
+            "kategorie": "Chování a chyby modelů",
+            "cz": "Přeučení (Přetrénování)",
+            "en": "Overfitting",
+            "definice": "Stav, kdy se model naučil trénovací data 'nazpaměť' včetně náhodného šumu a lokálních výkyvů. Na trénovacích datech má perfektní metriky (např. R² = 1.0), ale na nových testovacích datech zcela selhává.",
+            "kontext": "Typický pro neomezené stromy (35 pater u King County s 16k listy) nebo polynomy vysokých stupňů.",
+            "reseni": "Prořezání stromu (max_depth, min_samples_leaf), regularizace (L1/L2), křížová validace (K-Fold CV), přidání více dat."
+        },
+        {
+            "kategorie": "Chování a chyby modelů",
+            "cz": "Nedoučení",
+            "en": "Underfitting",
+            "definice": "Stav, kdy je model příliš jednoduchý na to, aby zachytil skutečné zákonitosti v datech. Má vysokou chybu jak na trénovací, tak na testovací sadě.",
+            "kontext": "Aplikace základní OLS přímky na parabolickou nebo schodovitou závislost (např. ceny veteránů nebo skokové karáty).",
+            "reseni": "Zvýšení kapacity modelu, přidání nelineárních členů (polynom), přechod na rozhodovací stromy, tvorba lepších příznaků (Feature Engineering)."
+        },
+        {
+            "kategorie": "Chování a chyby modelů",
+            "cz": "Kompromis mezi vychýlením a rozptylem",
+            "en": "Bias-Variance Tradeoff",
+            "definice": "Fundamentální dilema v ML. Celková chyba se skládá z: (1) Bias (chyba z příliš zjednodušujících předpokladů) a (2) Variance (citlivost modelu na malé změny v trénovacích datech).",
+            "kontext": "Lineární regrese má vysoký bias a nízkou variance. Hluboký strom má nulový bias, ale obrovskou variance.",
+            "reseni": "Nalezení sladkého bodu (Sweet Spot) pomocí hyperparametrů nebo ansámblových metod (Random Forest, Gradient Boosting)."
+        },
+        {
+            "kategorie": "Matematika a regularizace",
+            "cz": "Regularizace",
+            "en": "Regularization",
+            "definice": "Metoda omezování složitosti modelu přidáním penalizačního členu (pokuty) k chybové účelové funkci: Ztráta = MSE + Pokuta(váhy).",
+            "kontext": "Zabraňuje vahám beta narůst do obřích hodnot u korelovaných nebo vysokodimenzionálních dat.",
+            "reseni": "L1 (Lasso), L2 (Ridge) nebo jejich kombinace (Elastic Net)."
+        },
+        {
+            "kategorie": "Matematika a regularizace",
+            "cz": "L1 regularizace (Lasso)",
+            "en": "L1 Regularization (Least Absolute Shrinkage and Selection Operator)",
+            "definice": "Penalizace úměrná součtu absolutních hodnot koeficientů: α · Σ|β_j|. Díky tvaru diamantového omezení v geometrii dokáže nastavit nevýznamné váhy přesně na 0.",
+            "kontext": "Funguje jako automatický výběr nejdůležitějších příznaků (Feature Selection) u datasetů s mnoha proměnnými.",
+            "reseni": "Využijte, pokud máte podezření, že většina sloupců je irelevantní šum."
+        },
+        {
+            "kategorie": "Matematika a regularizace",
+            "cz": "L2 regularizace (Ridge / Tichonov)",
+            "en": "L2 Regularization (Ridge Regression)",
+            "definice": "Penalizace úměrná součtu čtverců koeficientů: α · Σ(β_j)². Stlačuje (scvrkává) váhy směrem k nule, ale žádnou nevynuluje úplně.",
+            "kontext": "Klíčový nástroj pro stabilizaci regrese při silné multikolinearitě (když spolu vlastnosti domu či diamantu silně korelují).",
+            "reseni": "Využijte, pokud chcete zachovat všechny příznaky, ale zabránit divokým výkyvům koeficientů."
+        },
+        {
+            "kategorie": "Příprava dat & Data Leakage",
+            "cz": "Únik informací z dat",
+            "en": "Data Leakage",
+            "definice": "Závažná metodologická chyba, kdy se informace z testovací (nebo validační) sady neúmyslně dostanou do procesu trénování modelu.",
+            "kontext": "Spuštění StandardScaleru nebo PolynomialFeatures na celém datasetu PŘED rozdělením na train/test.",
+            "reseni": "Vždy nejprve rozdělit data (train_test_split) a scaler fitovat POUZE na train sadě (scaler.fit_transform(X_train), na test jen scaler.transform(X_test))."
+        },
+        {
+            "kategorie": "Příprava dat & Data Leakage",
+            "cz": "Multikolinearita",
+            "en": "Multicollinearity",
+            "definice": "Stav, kdy jsou dva nebo více prediktorů v lineární regresi vzájemně silně korelované (jeden lze téměř přesně předpovědět z druhého).",
+            "kontext": "Např. rozměry diamantu x, y, z a váha carat, nebo sqft_living a sqft_above u domů.",
+            "reseni": "Měření přes VIF (Variance Inflation Factor), odstranění redundantních sloupců nebo nasazení Ridge/Lasso regularizace."
+        },
+        {
+            "kategorie": "Příprava dat & Data Leakage",
+            "cz": "Kletba dimenzionality",
+            "en": "Curse of Dimensionality",
+            "definice": "Fenomén, kdy s rostoucím počtem příznaků (dimenzí) roste objem prostoru exponenciálně, data se stávají extrémně řídká a vzdálenosti mezi body ztrácejí rozlišovací schopnost.",
+            "kontext": "Vytvoření polynomu 3. stupně na 26 sloupcích diamantů vygenerovalo 3 654 sloupců, což vedlo ke zhroucení OLS a gigantické spotřebě RAM.",
+            "reseni": "Redukce dimenzionality (PCA), selekce příznaků (Lasso), doménový výběr pouze fyzikálních proměnných."
+        },
+        {
+            "kategorie": "Architektura rozhodovacích stromů",
+            "cz": "Prořezávání stromu",
+            "en": "Tree Pruning",
+            "definice": "Technika redukce velikosti a hloubky rozhodovacího stromu odstraněním větví, které nepřinášejí statisticky významné zlepšení generalizace.",
+            "kontext": "Pre-pruning (zastavení růstu pomocí max_depth, min_samples_leaf) a Post-pruning (Cost-Complexity Pruning přes parametr ccp_alpha).",
+            "reseni": "U diamantů jsme snížili počet listů z 36 792 na 1 840, čímž chyba RMSE klesla o 131 USD."
+        },
+        {
+            "kategorie": "Architektura rozhodovacích stromů",
+            "cz": "Důležitost příznaků (MDI)",
+            "en": "Feature Importance (Mean Decrease in Impurity)",
+            "definice": "Metrika vyjadřující relativní přínos každého příznaku pro celkovou přesnost stromu. Počítá se jako celkový pokles nečistoty (MSE) napříč všemi uzly, kde byl daný příznak vybrán k dělení.",
+            "kontext": "U diamantů tvořily carat a y přes 75 % veškerého rozhodování; u domů dominovaly sqft_living a grade.",
+            "reseni": "Rychlá identifikace klíčových byznys driverů bez nutnosti složité statistické analýzy."
+        },
+        {
+            "kategorie": "Architektura rozhodovacích stromů",
+            "cz": "Neschopnost extrapolace",
+            "en": "Inability to Extrapolate",
+            "definice": "Zásadní vlastnost rozhodovacích stromů: model nedokáže předpovědět hodnotu ležící mimo rozsah trénovacích dat. Jeho predikce je v listu vždy konstantním průměrem.",
+            "kontext": "Pokud má nejdražší dům v trénovacích datech 7 mil. USD, strom pro zámek za 50 mil. USD nikdy nepředpoví více než 7 mil. USD (narazí na konstantní strop).",
+            "reseni": "Pokud je nutná extrapolace rostoucího trendu do budoucna, volit lineární/polynomiální modely nebo hybridní přístupy."
+        },
+        {
+            "kategorie": "Metriky a vyhodnocování",
+            "cz": "Koeficient determinace (R²)",
+            "en": "Coefficient of Determination (R-squared)",
+            "definice": "Číslo mezi 0 a 1 vyjadřující, jaké procento celkového rozptylu cílové proměnné model dokázal vysvětlit: R² = 1 - (SS_res / SS_tot).",
+            "kontext": "Hodnota 0.79 znamená, že model vysvětlil 79 % cenových rozdílů mezi domy; zbylých 21 % je nepozorovaný šum nebo chybějící proměnné.",
+            "reseni": "Pozor na porovnávání na trénovací sadě (R² tam vždy roste s přidáním jakéhokoliv sloupce – proto existuje Adjusted R²)."
+        },
+        {
+            "kategorie": "Metriky a vyhodnocování",
+            "cz": "Průměrná absolutní chyba",
+            "en": "Mean Absolute Error (MAE)",
+            "definice": "Průměr absolutních hodnot odchylek: (1/n) · Σ|y_i - ŷ_i|. Měří se přímo v původních jednotkách (USD, Kč, kg).",
+            "kontext": "Pokud je MAE u diamantů 308 USD, v průměru se model plete o 308 USD na jednom diamantu.",
+            "reseni": "Ideální metrika pro prezentaci managementu a byznys zadavatelům, protože je intuitivní a nedeformují ji extrémy."
+        },
+        {
+            "kategorie": "Metriky a vyhodnocování",
+            "cz": "Odmocnina z průměrné čtvercové chyby",
+            "en": "Root Mean Squared Error (RMSE)",
+            "definice": "Odmocnina z průměru čtverců chyb: √[(1/n) · Σ(y_i - ŷ_i)²]. Rovněž v původních jednotkách, ale penalizuje velké chyby mnohem přísněji než MAE.",
+            "kontext": "Pokud je RMSE výrazně vyšší než MAE (např. RMSE 584 USD vs. MAE 308 USD), model má několik závažných selhání na odlehlých hodnotách.",
+            "reseni": "Standardní metrika v soutěžích (Kaggle) a v úlohách, kde je velká chyba kriticky nebezpečná."
+        }
+    ]
 
-    st.divider()
+    # Interaktivní filtrování a vyhledávání
+    col_f1, col_f2 = st.columns([2, 3])
+    with col_f1:
+        categories = ["Všechny kategorie"] + sorted(list(set(item["kategorie"] for item in glossary_items)))
+        sel_cat = st.selectbox("Filtrovat dle kategorie:", categories)
+    with col_f2:
+        search_query = st.text_input("🔍 Vyhledat pojem (česky nebo anglicky):", placeholder="např. overfitting, regularizace, leakage...")
 
-    # Otázka 2
-    st.markdown("##### 2. Proč rozhodovací strom (DecisionTreeRegressor) nepotřebuje škálování dat (`StandardScaler`)?")
-    q2 = st.radio(
-        "Vyberte správné tvrzení:",
-        [
-            "Protože strom interně vždy všechna data automaticky převede na interval <0, 1>.",
-            "Protože rozhodovací strom dělí prostor podle prahových podmínek (x_j <= s), což závisí pouze na pořadí hodnot a je zcela nezávislé na měřítku proměnné.",
-            "Škálování je nutné i pro stromy, bez něj strom selže s chybou ConvergenceWarning."
-        ],
-        key="quiz_q2"
-    )
-    if st.button("Zkontrolovat otázku 2"):
-        if "záleží pouze na pořadí hodnot" in q2 or "x_j <= s" in q2:
-            st.success("✅ Přesně tak! Dělicí podmínka 'carat <= 1.0' funguje naprosto stejně, ať už jsou karáty v jednotkách, gramech nebo logaritmu.")
-        else:
-            st.error("❌ Špatně. Stromy pracují s pořadím prvků (monotónní dělení), nikoliv se vzdálenostmi v eukleidovském prostoru.")
+    # Filtrování dat
+    filtered_items = glossary_items
+    if sel_cat != "Všechny kategorie":
+        filtered_items = [i for i in filtered_items if i["kategorie"] == sel_cat]
+    if search_query:
+        q = search_query.lower()
+        filtered_items = [
+            i for i in filtered_items
+            if q in i["cz"].lower() or q in i["en"].lower() or q in i["definice"].lower()
+        ]
 
-    st.divider()
+    st.caption(f"Zobrazeno {len(filtered_items)} z {len(glossary_items)} klíčových pojmů")
 
-    # Otázka 3
-    st.markdown("##### 3. Co se stane s rozhodovacím stromem, pokud mu nezadáte žádné omezující hyperparametry (`max_depth=None`, `min_samples_leaf=1`)?")
-    q3 = st.radio(
-        "Vyberte správné tvrzení:",
-        [
-            "Model dosáhne ideálního stavu a generalizuje nejlépe na nová data.",
-            "Strom se dramaticky přeučí (overfitting): naroste do obří hloubky a vytvoří listy s jediným vzorkem (Train R² = 1.0, ale na testovacích datech chybuje).",
-            "Model se odmítne natrénovat a vyhodí chybu MemoryError."
-        ],
-        key="quiz_q3"
-    )
-    if st.button("Zkontrolovat otázku 3"):
-        if "Strom se dramaticky přeučí" in q3:
-            st.success("✅ Vynikající! To jsme viděli u diamantů: výchozí strom vytvořil 36 792 listů a téměř v každém měl jediný diamant. Teprve prořezáním jsme snížili chybu o 130 USD.")
-        else:
-            st.error("❌ Špatně. Neomezený strom se učí data nazpaměť včetně šumu (extrémní overfitting).")
+    # Vykreslení karet pojmů
+    for item in filtered_items:
+        with st.container(border=True):
+            head_col1, head_col2 = st.columns([3, 2])
+            with head_col1:
+                st.markdown(f"#### 📖 {item['cz']}")
+                st.markdown(f"🇬🇧 **Anglický termín:** `{item['en']}`")
+            with head_col2:
+                st.markdown(f"<div style='text-align: right;'><span style='background-color: #334155; padding: 4px 10px; border-radius: 8px; font-size: 0.85em;'>📁 {item['kategorie']}</span></div>", unsafe_allow_html=True)
+            
+            st.markdown(f"**Definice:** {item['definice']}")
+            
+            c_box1, c_box2 = st.columns(2)
+            with c_box1:
+                st.info(f"🔎 **V kontextu regrese:**\n{item['kontext']}")
+            with c_box2:
+                st.success(f"🛠️ **Jak řešit v praxi:**\n{item['reseni']}")
+

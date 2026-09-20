@@ -98,13 +98,22 @@ V rámci celodenního praktického maratonu jsme otestovali všechny algoritmy n
 
 ---
 
-## 6. Příprava na Kvíz (Checklist klíčových znalostí)
+## 6. Komplexní česko-anglický glosář klíčových pojmů (CZ / EN Dictionary)
 
-Před spuštěním závěrečného testu si ověřte následující koncepty:
-
-- [x] **Rozdíl mezi L1 a L2:** Lasso (L1) dělá výběr příznaků nulováním vah; Ridge (L2) váhy pouze scvrkává k nule, ale žádnou úplně nevyřadí.
-- [x] **Proč škálovat před regularizací:** Bez `StandardScaler` by proměnná s velkými čísly (např. rozloha v mm²) byla penalizována jinak než proměnná v malých číslech (počet koupelen).
-- [x] **Co způsobuje vysoký stupeň polynomu:** Přeučení (overfitting) a Rungeho jev – divoké oscilace na okrajích dat.
-- [x] **Jak strom počítá predikci:** V listovém uzlu spočte aritmetický průměr hodnot všech trénovacích vzorků, které do něj spadly.
-- [x] **Proč strom nepotřebuje škálování:** Dělení se provádí porovnáním $x_j \le s$, což je invariantní vůči monotónním transformacím.
-- [x] **Co dělá `min_samples_leaf`:** Zabraňuje stromu tvořit listy s 1 nebo 2 vzorky, čímž zásadně omezuje přetrénování.
+| Český termín | Anglický termín | Kategorie | Význam a definice | Vztah k regresi & Řešení |
+| :--- | :--- | :--- | :--- | :--- |
+| **Přeučení (Přetrénování)** | **Overfitting** | Chování modelů | Model se naučil trénovací data „nazpaměť“ včetně šumu a na nových datech selhává ($R^2_{\text{train}} \gg R^2_{\text{test}}$). | Typické pro neomezené stromy (35 pater u reality) nebo vysoké stupně polynomu. **Řešení:** prořezání (`max_depth`, `min_samples_leaf`), regularizace L1/L2. |
+| **Nedoučení** | **Underfitting** | Chování modelů | Model je příliš jednoduchý a nedokáže zachytit zákonitosti dat; má vysokou chybu na train i test sadě. | Aplikace OLS přímky na parabolická data (ceny veteránů) nebo skoky u diamantů. **Řešení:** polynom, nelineární stromy, Feature Engineering. |
+| **Kompromis vychýlení a rozptylu** | **Bias-Variance Tradeoff** | Chování modelů | Celková chyba se skládá z chyby zjednodušení (Bias) a citlivosti na trénovací data (Variance). | OLS má vysoký bias a nízkou variance; hluboký strom nulový bias, ale obrovskou variance. Cílem je nalézt optimum. |
+| **Regularizace** | **Regularization** | Matematika & Optimalizace | Penalizace složitosti modelu přidáním pokuty za velikost koeficientů do účelové funkce ($\text{Loss} = \text{MSE} + \text{Penalty}$). | Zabraňuje explozím vah u korelovaných nebo vysokodimenzionálních dat. |
+| **L1 regularizace (Lasso)** | **L1 Regularization (Lasso)** | Regularizace | Penalizace součtu absolutních hodnot: $\alpha \sum \|\beta_j\|$. Způsobuje přesné nulování vah. | Provádí **Feature Selection** (výběr nejdůležitějších vlastností). Vyžaduje `StandardScaler`. |
+| **L2 regularizace (Ridge)** | **L2 Regularization (Ridge)** | Regularizace | Penalizace součtu čtverců vah: $\alpha \sum \beta_j^2$. Scvrkává váhy k nule, ale nenuluje je úplně. | Řeší **multikolinearitu** a stabilizuje numerické výpočty. Vyžaduje `StandardScaler`. |
+| **Únik informací** | **Data Leakage** | Metodologie dat | Informace z testovací sady neúmyslně proniknou do trénování (např. fitování scaleru na všech datech). | Zkresluje výsledky; model vypadá skvěle v laboratoři, ale selže v produkci. **Řešení:** vždy `train_test_split` jako první krok. |
+| **Multikolinearita** | **Multicollinearity** | Příprava dat | Vysoká vzájemná korelace mezi dvěma či více prediktory (např. rozměry $x, y, z$ a váha `carat`). | Nestabilní koeficienty $\beta$ v OLS, obrovské směrodatné odchylky. Měří se přes VIF; řeší se odstraněním nebo Ridge regresi. |
+| **Kletba dimenzionality** | **Curse of Dimensionality** | Příprava dat | S rostoucím počtem sloupců objem prostoru roste exponenciálně a data jsou extrémně řídká. | Polynom 3. stupně vygeneroval na diamantech 3 654 sloupců a zahltil paměť. **Řešení:** PCA, Lasso výběr. |
+| **Prořezávání stromu** | **Tree Pruning** | Rozhodovací stromy | Omezení růstu nebo odstranění větví stromu, které nezlepšují zobecnění. | Pre-pruning (`max_depth`, `min_samples_leaf`) snížil počet listů diamantů z 36 792 na 1 840 a srazil RMSE o 131 USD. |
+| **Důležitost příznaků (MDI)** | **Feature Importance (MDI)** | Rozhodovací stromy | Celkový pokles nečistoty (MSE) napříč všemi uzly stromu způsobený daným prediktorem. | Rychlá identifikace byznys tahounů: u diamantů `carat` a `y` tvoří $>75\,\%$, u domů `sqft_living` a `grade`. |
+| **Neschopnost extrapolace** | **Inability to Extrapolate** | Rozhodovací stromy | Strom neumí předpovědět hodnotu mimo rozsah trénovacích dat (predikce je v listu konstantním průměrem). | Pro vilu za 50 mil. USD strom předpoví maximálně 7 mil. USD (narazí na strop trénovací sady). |
+| **Koeficient determinace ($R^2$)** | **$R^2$ Score** | Metriky kvality | Podíl rozptylu cílové proměnné vysvětlený modelem ($0 \dots 1$). | $R^2 = 0.79$ znamená 79 % vysvětlené variability. Na trénovacích datech sledujte Adjusted $R^2$. |
+| **Průměrná absolutní chyba (MAE)** | **Mean Absolute Error (MAE)** | Metriky kvality | Průměrná absolutní odchylka v reálných jednotkách: $\frac{1}{n} \sum \|y_i - \hat{y}_i\|$. | Snadno vysvětlitelná byznysu (např. průměrná chyba 308 USD na diamantu); nedeformují ji extrémy. |
+| **Odmocnina z MSE (RMSE)** | **Root Mean Squared Error (RMSE)** | Metriky kvality | Odmocnina z průměru čtverců chyb: $\sqrt{\frac{1}{n} \sum (y_i - \hat{y}_i)^2}$. | Mnohem přísněji penalizuje ojedinělé obří chyby než MAE. Standardní metrika pro modelování cen nemovitostí. |
