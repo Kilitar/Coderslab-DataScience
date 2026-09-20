@@ -355,10 +355,10 @@ with tab3:
                 f_size = 9
             elif selected_depth == 3:
                 fig_size = (20, 6.5)
-                f_size = 7.5
+                f_size = 8
             else:  # hloubka 4
                 fig_size = (28, 8.5)
-                f_size = 6.0
+                f_size = 6
 
             fig_tree_arch, ax_tree = plt.subplots(figsize=fig_size)
             plot_tree(
@@ -368,7 +368,7 @@ with tab3:
                 rounded=True,
                 precision=2,
                 ax=ax_tree,
-                fontsize=f_size
+                fontsize=int(f_size)
             )
             fig_tree_arch.tight_layout()
             st.pyplot(fig_tree_arch, width="stretch")
