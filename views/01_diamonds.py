@@ -143,7 +143,7 @@ with v1:
     st.success(
         f"""
         **Férová tržní hodnota (AI Gradient Boosting):**  
-        # ${max(300, pred_hgb_d):,.0f} USD
+        # {max(300, pred_hgb_d):,.0f} USD
         """
     )
 with v2:
@@ -152,8 +152,8 @@ with v2:
     st.info(
         f"""
         **Doporučené výkupní a prodejní pásmo (marže klenotníka):**  
-        - **Výkupní cena:** ${buy_min:,.0f} USD  
-        - **Doporučená prodejní cena:** ${sell_rec:,.0f} USD
+        - **Výkupní cena:** {buy_min:,.0f} USD  
+        - **Doporučená prodejní cena:** {sell_rec:,.0f} USD
         """
     )
 
@@ -161,7 +161,7 @@ st.markdown("---")
 st.subheader("🔍 Gemologický paradox multikolinearity a analýza dat")
 st.warning(
     """
-    **Proč v základní lineární regresi vyšly záporné váhy pro délku x (-$3,675) a hloubku z (-$2,602)?**  
+    **Proč v základní lineární regresi vyšly záporné váhy pro délku x (\u20133 675 USD/mm) a hloubku z (\u20132 602 USD/mm)?**  
     Protože hmotnost v karátech je fyzikálně svázána s objemem kamene ($V \\approx x \\cdot y \\cdot z$). 
     Korelace mezi `carat` a odhadnutým objemem je **0.9989**. OLS se v přítomnosti takto extrémní 
     multikolinearity snaží váhy odečítat, což vede k fyzikálnímu nesmyslu.  

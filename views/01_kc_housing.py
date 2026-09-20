@@ -117,11 +117,11 @@ pred_hgb = hgb_kc.predict(input_df)[0]
 st.markdown("#### 💰 Výsledný odhad tržní ceny:")
 r1, r2, r3 = st.columns(3)
 with r1:
-    st.success(f"**Lineární regrese (OLS):**\n### ${max(0, pred_ols):,.0f}")
+    st.success(f"**Lineární regrese (OLS):**\n### {max(0, pred_ols):,.0f} USD")
 with r2:
-    st.info(f"**Log-Normal OLS:**\n### ${max(0, pred_log):,.0f}")
+    st.info(f"**Log-Normal OLS:**\n### {max(0, pred_log):,.0f} USD")
 with r3:
-    st.warning(f"**Gradient Boosting (HGB):**\n### ${max(0, pred_hgb):,.0f}")
+    st.warning(f"**Gradient Boosting (HGB):**\n### {max(0, pred_hgb):,.0f} USD")
 
 st.markdown("---")
 
