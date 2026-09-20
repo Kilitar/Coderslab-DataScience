@@ -258,6 +258,7 @@ with tab3:
     grid_sqft = np.linspace(30, 160, 100)
     grid_dist = np.linspace(1, 25, 100)
     mesh_x, mesh_y = np.meshgrid(grid_sqft, grid_dist)
+    grid_points = np.c_[mesh_x.ravel(), mesh_y.ravel()]
     grid_df = pd.DataFrame(grid_points, columns=["sqft", "dist"])
     grid_preds = tree_2d.predict(grid_df).reshape(mesh_x.shape)
 
