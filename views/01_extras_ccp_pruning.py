@@ -63,6 +63,12 @@ fig_ccp.update_layout(
 )
 st.plotly_chart(fig_ccp, width="stretch")
 
+st.warning(
+    "⚠️ **Metodická poznámka:** Křivka testovacího $R^2$ zde slouží k názorné pedagogické demonstraci bodu prořezání. "
+    "V profesionální praxi se optimální `ccp_alpha` ladí výhradně křížovou validací na trénovacích datech (`GridSearchCV`), "
+    "aby testovací sada zůstala nedotčená pro finální nestranné hodnocení."
+)
+
 st.markdown("### 🎚️ Prozkoumejte detaily prořezání:")
 sel_alpha_slider = st.select_slider(
     "Vyberte hodnotu ccp_alpha:",

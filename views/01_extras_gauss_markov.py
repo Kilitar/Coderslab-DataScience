@@ -51,9 +51,10 @@ with tab1:
     st.plotly_chart(fig_hist, width="stretch")
 
     st.warning(
-        r"⚠️ **Závěr diagnostiky:** Rozdělení má **výrazný pravý chvost (Right Skewness)**. "
-        r"U běžných domů je chyba soustředěna kolem 0, ale u luxusních vil model chybuje o více než 1 milion USD! "
-        r"Dochází k **heteroskedasticitě (rozšiřující se trychtýř chyb)**, což je důvod, proč se v praxi často používá logaritmická transformace ceny $\log(\text{price})$."
+        r"⚠️ **Závěr diagnostiky:** Rozdělení vykazuje **výrazný pravý chvost (Right Skewness)**. "
+        r"U běžných domů je chyba soustředěna kolem nuly, ale u luxusních vil model podhodnocuje o více než 1 milion USD! "
+        r"*(Metodické upřesnění: Samotný histogram reziduí nedokazuje heteroskedasticitu – k jejímu průkazu slouží bodový graf reziduí vůči predikované ceně $\hat{y}$, kde se objevuje rozšiřující se trychtýř rozptylu chyb).* "
+        r"Proto se v praxi pro stabilizaci rozptylu často modeluje logaritmus ceny $\log(\text{price})$."
     )
 
 # =============================================================================
@@ -92,9 +93,11 @@ with tab2:
     st.plotly_chart(fig_vif, width="stretch")
 
     st.info(
-        "🧠 **Proč `sqft_living` a `sqft_above` vykazují vysoký VIF?**  \n"
-        "Protože `sqft_living` je v podstatě součtem `sqft_above` (nadzemní plocha) + `sqft_basement` (suterén)! "
-        "Je to dokonalý učebnicový příklad multikolinearity, který vyřešila až **Ridge regularizace (L2)** v Cvičení 5."
+        "🧠 **Proč `sqft_living`, `sqft_above` a `sqft_basement` vykazují extrémní VIF?**  \n"
+        "Hodnota **999** v grafu je **vizualizační strop (cap)**. Všech 21 613 nemovitostí v King County splňuje přesnou matematickou identitu:  \n"
+        "$$\\text{sqft\\_living} = \\text{sqft\\_above} + \\text{sqft\\_basement}$$  \n"
+        "Při společném zahrnutí všech tří proměnných do OLS je matice $\\mathbf{X}^T \\mathbf{X}$ singulární a teoretická hodnota je $\\text{VIF} = \\infty$ (dokonalá multikolinearita). "
+        "Tento problém se v praxi řeší buď vynecháním součtového sloupce, nebo nasazením **Ridge regularizace (L2)**."
     )
 
 # =============================================================================

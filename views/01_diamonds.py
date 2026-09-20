@@ -85,7 +85,7 @@ c_left, c_right = st.columns(2)
 with c_left:
     carat = st.slider("Hmotnost v karátech (Carat):", min_value=0.20, max_value=5.01, value=1.00, step=0.01)
     if carat > 3.5:
-        st.info("ℹ️ **Kámen nad 3.5 ct:** Jedná se o extrémně vzácný investiční kus (v celé databázi 54 tisíc kamenů je pouze 9 takových kusů).")
+        st.warning("⚠️ **Pozor na rozsah trénovacích dat:** Kameny nad 3.5 ct byly z předzpracovaného trénovacího datasetu odstraněny jako extrémní odlehlé hodnoty. Predikce pro > 3.5 ct představuje extrapolaci mimo trénovací doménu!")
 
     cut_label = st.select_slider(
         "Kvalita brusu (Cut):",
@@ -142,8 +142,9 @@ v1, v2 = st.columns([1, 1])
 with v1:
     st.success(
         f"""
-        **Férová tržní hodnota (AI Gradient Boosting):**  
-        # {max(300, pred_hgb_d):,.0f} USD
+        **Výukový odhad tržní hodnoty (HistGradientBoosting):**  
+        # {max(300, pred_hgb_d):,.0f} USD  
+        *(Model natrénován na historickém vzorku 53 908 diamantů)*
         """
     )
 with v2:
@@ -151,9 +152,10 @@ with v2:
     sell_rec = max(350, pred_hgb_d * 1.15)
     st.info(
         f"""
-        **Doporučené výkupní a prodejní pásmo (marže klenotníka):**  
-        - **Výkupní cena:** {buy_min:,.0f} USD  
-        - **Doporučená prodejní cena:** {sell_rec:,.0f} USD
+        **Ilustrativní obchodní pásmo (marže klenotníka):**  
+        - **Výkupní cena (-18 %):** {buy_min:,.0f} USD  
+        - **Doporučená prodejní cena (+15 %):** {sell_rec:,.0f} USD  
+        *(Ilustrativní modelová heuristika, nikoli statistický interval spolehlivosti)*
         """
     )
 

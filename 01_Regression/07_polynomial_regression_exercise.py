@@ -197,12 +197,42 @@ def run_polynomial_regression_analysis():
         "pred_hgb": [float(pred_te_hgb[i]) for i in sample_indices],
     }
 
+    # Křivka extrapolace karátu pro expertní kritiku (0.2 až 4.0 karátů při mediánu ostatních příznaků)
+    carat_range = np.linspace(0.2, 4.0, 100)
+    median_vals = X_train.median(axis=0).values
+    X_extrap = pd.DataFrame(
+        np.tile(median_vals, (len(carat_range), 1)),
+        columns=feature_names
+    )
+    X_extrap["carat"] = carat_range
+
+    X_ext_sc1 = trained_models[1]["scaler"].transform(X_extrap)
+    pred_ext_deg1 = trained_models[1]["model"].predict(X_ext_sc1)
+
+    X_ext_p2 = trained_models[2]["poly"].transform(X_extrap)
+    X_ext_sc2 = trained_models[2]["scaler"].transform(X_ext_p2)
+    pred_ext_deg2 = trained_models[2]["model"].predict(X_ext_sc2)
+
+    X_ext_p3 = trained_models[3]["poly"].transform(X_extrap)
+    X_ext_sc3 = trained_models[3]["scaler"].transform(X_ext_p3)
+    pred_ext_deg3_ols = trained_models[3]["model"].predict(X_ext_sc3)
+    pred_ext_deg3_ridge = ridge_deg3.predict(X_ext_sc3)
+
+    extrapolation_curve = {
+        "carat": carat_range.tolist(),
+        "pred_deg1": [float(v) for v in pred_ext_deg1],
+        "pred_deg2": [float(v) for v in pred_ext_deg2],
+        "pred_deg3_ols": [float(v) for v in pred_ext_deg3_ols],
+        "pred_deg3_ridge": [float(v) for v in pred_ext_deg3_ridge],
+    }
+
     # 7. Uložení JSON cache pro bleskové načtení ve Streamlitu
     output_json = {
         "original_features": feature_names,
         "metrics_table": models_results,
         "top_features_deg2": top_features,
         "sample_plot_data": sample_plot_data,
+        "extrapolation_curve": extrapolation_curve,
         "winner_degree": 2,
         "winner_r2": models_results[1]["Test_R2"],
         "winner_mae": models_results[1]["Test_MAE"],

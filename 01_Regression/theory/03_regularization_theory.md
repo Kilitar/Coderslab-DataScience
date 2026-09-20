@@ -75,7 +75,7 @@ Představme si optimalizaci ve 2D prostoru pro dva parametry $(\beta_1, \beta_2)
 > - Pokud je $X_2 = \text{bedrooms}$ v rozsahu $[1, 5]$ (koeficient je obrovský, např. $40\,000$), penalizace $\beta_2^2 = 1\,600\,000\,000$.
 > 
 > *Výsledek:* Model s neškálovanými daty zdecimuje proměnné s malými číselnými hodnotami (jako počet pokojů či pater) a bude tolerovat proměnné s velkými čísly.  
-> **Zlaté pravidlo aplikovaného ML:** **Před použitím L1/L2 regularizace je STANDARDNÍ ŠKÁLOVÁNÍ (StandardScaler) MATEMATICKOU NUTNOSTÍ.**
+> **Zlaté pravidlo aplikovaného ML:** Před použitím L1/L2 regularizace je **škálování příznaků (např. pomocí StandardScaler či RobustScaler) v praxi zásadní podmínkou férové penalizace**, aby jednotky a měřítka proměnných neurčovaly jejich nespravedlivé potlačení.
 
 > [!WARNING]
 > ### 2. Data Leakage při ladění hyperparametru $\alpha$ na testovací sadě!
@@ -157,31 +157,39 @@ from sklearn.metrics import mean_absolute_error, r2_score
 # 1. Definice gridu pro regularizaci (logaritmická škála)
 alphas = np.logspace(-3, 3, 50)
 
-# 2. Vytvoření robustní Pipeline s křížovou validací (5-Fold CV)
-ridge_pipe = Pipeline([
+# 2. Dvě úrovně ochrany před únikem dat (Data Leakage):
+
+# Varianta A: RidgeCV uvnitř Pipeline (vhodné pro rychlé prototypování)
+# -> Scaler se naučí jednou na celém X_train; vnější testovací sada X_test je striktně izolována.
+# -> Upozornění: Uvnitř interních foldů RidgeCV sdílejí validační podmnožiny statistiky celého X_train.
+ridge_cv_pipe = Pipeline([
     ('scaler', StandardScaler()),
     ('model', RidgeCV(alphas=alphas, cv=5, scoring='neg_mean_squared_error'))
 ])
 
-lasso_pipe = Pipeline([
+# Varianta B: GridSearchCV obalující celou Pipeline (100% rigorózní izolace bez fold-leakage)
+# -> StandardScaler se bezpečně učí znovu uvnitř každého jednotlivého foldu z jeho 4/5 trénovacích dat.
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Ridge, Lasso
+
+strict_pipe = Pipeline([
     ('scaler', StandardScaler()),
-    ('model', LassoCV(alphas=alphas, cv=5, max_iter=5000, random_state=42))
+    ('model', Ridge())
 ])
+grid_ridge = GridSearchCV(
+    estimator=strict_pipe,
+    param_grid={'model__alpha': alphas},
+    cv=5,
+    scoring='neg_mean_squared_error',
+    n_jobs=-1
+)
 
-# 3. Trénování (StandardScaler se bezpečně učí JEN na trénovacích datech v každém foldu)
-ridge_pipe.fit(X_train, y_train)
-lasso_pipe.fit(X_train, y_train)
+# 3. Trénování a nalezení optimálního alpha
+grid_ridge.fit(X_train, y_train)
+best_alpha_ridge = grid_ridge.best_params_['model__alpha']
+print(f"Optimální Ridge alpha (GridSearchCV): {best_alpha_ridge:.4f}")
 
-# 4. Zjištění optimálního alpha
-best_alpha_ridge = ridge_pipe.named_steps['model'].alpha_
-best_alpha_lasso = lasso_pipe.named_steps['model'].alpha_
-print(f"Optimální Ridge alpha: {best_alpha_ridge:.4f}")
-print(f"Optimální Lasso alpha: {best_alpha_lasso:.4f}")
-
-# 5. Vyhodnocení na nezávislém testovacím vzorku
-y_pred_ridge = ridge_pipe.predict(X_test)
-y_pred_lasso = lasso_pipe.predict(X_test)
-
+# 4. Jednorázové finální vyhodnocení na zapečetěném testovacím vzorku
+y_pred_ridge = grid_ridge.predict(X_test)
 print(f"Ridge Test MAE: ${mean_absolute_error(y_test, y_pred_ridge):,.2f} | R²: {r2_score(y_test, y_pred_ridge):.4f}")
-print(f"Lasso Test MAE: ${mean_absolute_error(y_test, y_pred_lasso):,.2f} | R²: {r2_score(y_test, y_pred_lasso):.4f}")
 ```

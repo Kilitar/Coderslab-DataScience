@@ -7,7 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 st.title("🗺️ Mapa Seattlu: Kde přesně modely dělají chyby?")
-st.caption("Porovnání Lineární regrese vs. Rozhodovacího stromu na skutečné mapě King County: Proč strom ušetřil 35 000 USD na každém domě?")
+st.caption("Porovnání Lineární regrese vs. Rozhodovacího stromu na skutečné mapě King County: Jak rozdělení prostoru do geografických zón snížilo celkovou chybu RMSE o téměř 35 000 USD.")
 
 @st.cache_data
 def load_geo_data():
@@ -25,7 +25,7 @@ df_geo = load_geo_data()
 with st.container(border=True):
     st.markdown("### 💡 O co na této mapě jde a jak ji číst?")
     st.markdown("""
-    Při trénování jsme zjistili, že **Rozhodovací strom je o 35 000 USD přesnější než Lineární regrese**.  
+    Při trénování jsme zjistili, že **Rozhodovací strom dosahuje výrazně nižší globální chyby než Lineární regrese** (pokles RMSE o ~26 000 USD vůči OLS a o 35 000 USD vůči nepřořezanému stromu).  
     Tato mapa ukazuje **1 500 skutečných domů v Seattlu a okolí** a barvou znázorňuje relativní chybu $\\frac{y - \\hat{y}}{y} \\times 100\\,\\%$:
 
     - 🔴 **Červená tečka (+50 % a více) = Model dům PODHODNOTIL** (skutečná cena $y$ je vyšší než predikce $\\hat{y}$, např. prestižní čtvrti u jezera).

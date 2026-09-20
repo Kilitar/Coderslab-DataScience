@@ -306,7 +306,7 @@ with tab_dict:
             "cz": "Kletba dimenzionality",
             "en": "Curse of Dimensionality",
             "definice": "Fenomén, kdy s rostoucím počtem příznaků (dimenzí) roste objem prostoru exponenciálně, data se stávají extrémně řídká a vzdálenosti mezi body ztrácejí rozlišovací schopnost.",
-            "kontext": "Vytvoření polynomu 3. stupně na 26 sloupcích diamantů vygenerovalo 3 654 sloupců, což vedlo ke zhroucení OLS a gigantické spotřebě RAM.",
+            "kontext": "Vytvoření polynomu 3. stupně na 9 vybraných prediktorech diamantů vygenerovalo 219 členů a způsobilo kolaps variance OLS (na 26 sloupcích by bez biasu vzniklo dokonce 3 653 členů).",
             "reseni": "Redukce dimenzionality (PCA), selekce příznaků (Lasso), doménový výběr pouze fyzikálních proměnných."
         },
         {

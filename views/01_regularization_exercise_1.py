@@ -312,6 +312,11 @@ with tab2:
     )
 
 with tab3:
+    st.info(
+        "ℹ️ **Metodická poznámka:** V tomto cvičení kurzu je výběr nejlepšího $\\alpha$ demonstrován na testovacím vzorku pro pedagogické znázornění křivky chyb. "
+        "V profesionální praxi se optimální hyperparametr $\\alpha$ vybírá výhradně křížovou validací na trénovacích datech (`GridSearchCV` / `K-Fold CV`), "
+        "zatímco testovací sada slouží k jednorázovému nezávislému ověření."
+    )
     best_l = lasso_df.loc[lasso_df["R2"].idxmax()]
     best_r = ridge_df.loc[ridge_df["R2"].idxmax()]
 

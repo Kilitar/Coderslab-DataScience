@@ -31,8 +31,9 @@ $$y = b + a_1 x_1 + a_2 x_2 + \dots + a_p x_p + \epsilon = \mathbf{X}\mathbf{w} 
 
 Cílem je najít takové parametry ($a, b$, resp. vektor vah $\mathbf{w}$), které minimalizují chybu mezi skutečnými hodnotami $y_i$ a predikovanými hodnotami $\hat{y}_i$.
 
-### Účelová (ztrátová) funkce: Sum of Squared Errors (SSE / RSS)
-$$J(a, b) = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} (y_i - (a x_i + b))^2$$
+### Účelová (ztrátová) funkce: Mean Squared Error (MSE)
+$$J(a, b) = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \frac{1}{n} \sum_{i=1}^{n} (y_i - (a x_i + b))^2$$
+*(Poznámka: V ekonometrické literatuře se OLS často odvozuje přímo ze sumy čtverců $\text{SSE} = \sum (y_i - \hat{y}_i)^2$; pro gradientní sestup se dělí $n$, aby velikost gradientu nezávisela na počtu vzorků).*
 
 Kurz prezentuje dvě metody minimalizace této funkce:
 
