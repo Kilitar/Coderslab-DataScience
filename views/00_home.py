@@ -88,10 +88,10 @@ st.markdown("---")
 st.subheader("🌲 Navigace v postranním panelu:")
 st.info(
     """
-    👈 **V levém menu jsou témata organizována do tematických modulů (Teorie + Cvičení pohromadě):**
-    - **01. Lineární regrese (OLS)**: Teorie OLS & Gradient Descent + Cvičení 1 (Reality) a Cvičení 2 (Diamanty)
-    - **02. Metriky regresních modelů**: Teorie $R^2$, MAE, RMSE + Cvičení 3 (Metriky reality) a Cvičení 4 (Metriky diamantů & $R^2$ paradox)
-    - **03. Regularizace (Lasso, Ridge, Elastic Net)**: Teorie L1/L2 + Teorie Elastic Net + Cvičení 5 (Reality) a Cvičení 6 (Diamanty)
-    - **04. Polynomiální regrese**: Teorie nelineárního mapování, Rungeho fenomén a moderní spliny
+    👈 **V levém menu jsou témata organizována do ucelených tematických modulů s jednotným značením:**
+    - 📖 **Teorie kurzu**: Matematické principy, definice, kritické zhodnocení a moderní ML pohled (09/2026).
+    - 🎯 **Výsledky zadání**: Praktické splnění úkolu z LMS Coderslab, interaktivní model a základní metriky.
+    - 🔬 **Expertní analýza**: Pokročilý datový rozbor, doménové souvislosti, MLOps diagnostika a optimalizace.
+    - 🐍 **Jupyter Notebook**: Kompletní sešit s buňkami, grafy a možností spuštění v Google Colab.
     """
 )
