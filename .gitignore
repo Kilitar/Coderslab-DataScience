@@ -33,3 +33,6 @@ kaggle.json
 # Scratch files
 scratch/
 
+
+# Runtime cache pro extrahované PNG z notebooků
+.notebook_img_cache/
