@@ -36,3 +36,8 @@ scratch/
 
 # Runtime cache pro extrahované PNG z notebooků
 .notebook_img_cache/
+
+# Proprietary course materials & raw PDFs
+Resources/
+*.pdf
+
