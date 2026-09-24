@@ -37,6 +37,11 @@ def load_lumbar_metrics_critique():
 
 df, X_train, X_test, y_train, y_test = load_lumbar_metrics_critique()
 
+# Inicializace referenčního klinického modelu (k=9) pro všechny analýzy
+knn_model = KNeighborsClassifier(n_neighbors=9).fit(X_train, y_train)
+probs_test = knn_model.predict_proba(X_test)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_test, probs_test)
+
 # =============================================================================
 # 1. EXECUTIVNÍ SOUHRN METODICKÝCH ZJIŠTĚNÍ
 # =============================================================================
@@ -80,10 +85,6 @@ with tab1:
         cost_fp = st.number_input("Náklad FP (Zbytečné kontrolní MRI) [€]:", value=150, step=25)
     with col_cost4:
         cost_fn = st.number_input("Náklad FN (Přehlédnutí -> Akutní operace) [€]:", value=3000, step=500)
-
-    # Interaktivní posuvník prahu pro k=9
-    knn_model = KNeighborsClassifier(n_neighbors=9).fit(X_train, y_train)
-    probs_test = knn_model.predict_proba(X_test)[:, 1]
 
     threshold_slider = st.slider("Testovaný klasifikační práh $\\theta$ pro třídu Abnormal:", 0.05, 0.95, 0.50, 0.05)
     preds_th = (probs_test >= threshold_slider).astype(int)
