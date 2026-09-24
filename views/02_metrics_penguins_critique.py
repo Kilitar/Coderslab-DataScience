@@ -78,7 +78,8 @@ with tab1:
     clf_ovr = KNeighborsClassifier(n_neighbors=k_sel, weights=weights_sel)
     clf_ovr.fit(X_train, y_train)
 
-    y_test_bin = label_binarize(y_test, classes=[0, 1, 2])
+    classes_list = list(clf_ovr.classes_)
+    y_test_bin = label_binarize(y_test, classes=classes_list)
     y_score = clf_ovr.predict_proba(X_test)
 
     # Calculate ROC and AUC for each class
@@ -279,8 +280,8 @@ with tab3:
         prob_u = clf_u.predict_proba(X_test)
         prob_d = clf_d.predict_proba(X_test)
 
-        log_losses_uniform.append(log_loss(y_test, prob_u, labels=[0, 1, 2]))
-        log_losses_distance.append(log_loss(y_test, prob_d, labels=[0, 1, 2]))
+        log_losses_uniform.append(log_loss(y_test, prob_u, labels=clf_u.classes_))
+        log_losses_distance.append(log_loss(y_test, prob_d, labels=clf_d.classes_))
 
     fig_loss = go.Figure()
     fig_loss.add_trace(go.Scatter(
@@ -354,7 +355,7 @@ with tab4:
 
     clf_curr = KNeighborsClassifier(n_neighbors=5).fit(X_train, y_train)
     y_pred_curr = clf_curr.predict(X_test)
-    cm_curr = confusion_matrix(y_test, y_pred_curr, labels=[0, 1, 2])
+    cm_curr = confusion_matrix(y_test, y_pred_curr, labels=species_names)
 
     total_cost = np.sum(cm_curr * cost_matrix)
 
@@ -370,7 +371,7 @@ with tab4:
     for k_val in ks_test:
         c_k = KNeighborsClassifier(n_neighbors=k_val).fit(X_train, y_train)
         pred_k = c_k.predict(X_test)
-        cm_k = confusion_matrix(y_test, pred_k, labels=[0, 1, 2])
+        cm_k = confusion_matrix(y_test, pred_k, labels=species_names)
         costs_across_k.append(np.sum(cm_k * cost_matrix))
 
     best_k_idx = int(np.argmin(costs_across_k))
