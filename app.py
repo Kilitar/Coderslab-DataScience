@@ -85,6 +85,8 @@ p_knn_penguins_nb = st.Page("views/02_knn_penguins_nb.py", title="Cvičení 2: T
 p_metrics_class_theory = st.Page("views/02_metrics_theory.py", title="Teorie: Metriky klasifikace", icon="📖")
 p_metrics_lumbar = st.Page("views/02_metrics_lumbar.py", title="Cvičení 1: Bederní páteř – Metriky & Optimalizace k", icon="📊")
 p_metrics_lumbar_nb = st.Page("views/02_metrics_lumbar_nb.py", title="Cvičení 1: Bederní páteř – Notebook", icon="🐍")
+p_metrics_penguins = st.Page("views/02_metrics_penguins.py", title="Cvičení 2: Tučňáci – Multiclass metriky & k-sweep", icon="🎯")
+p_metrics_penguins_nb = st.Page("views/02_metrics_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -164,6 +166,8 @@ nav = st.navigation(
             p_metrics_class_theory,
             p_metrics_lumbar,
             p_metrics_lumbar_nb,
+            p_metrics_penguins,
+            p_metrics_penguins_nb,
         ],
     }
 )

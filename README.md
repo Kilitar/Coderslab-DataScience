@@ -166,24 +166,30 @@ Coderslab-DataScience/
 │   ├── 03_knn_penguins_exercise_2.ipynb  # Vypracovaný a spuštěný Jupyter Notebook tučňáků
 │   ├── 04_classification_metrics_lumbar_exercise_1.py # Cvičení 1: Metriky klasifikace páteře (CM, Precision, Recall, F1, k-sweep)
 │   ├── 04_classification_metrics_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook metrik
+│   ├── 05_classification_metrics_penguins_exercise_2.py # Cvičení 2: Multiclass metriky tučňáků (CM 3x3, Weighted F1, k-sweep)
+│   ├── 05_classification_metrics_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook multiclass metrik
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
 │   │   ├── lumbar_knn_precomputed.json
-│   │   ├── lumbar_metrics_exercise_1_precomputed.json # Předpočtené metriky, sweep k in [1, 25] a ROC křivka
+│   │   ├── lumbar_metrics_exercise_1_precomputed.json # Předpočtené metriky páteře, sweep k in [1, 25] a ROC
 │   │   ├── penguins_size.csv
 │   │   ├── penguins_df_normalized.csv   # Výsledný normalizovaný dataset tučňáků dle kroku 9
 │   │   ├── penguins_knn_precomputed.json
-│   │   └── penguins_exercise_2_precomputed.json
+│   │   ├── penguins_exercise_2_precomputed.json
+│   │   └── penguins_metrics_exercise_2_precomputed.json # Předpočtené multiclass metriky a sweep k in [1, 35]
 │   ├── plots/                           # Diagnostické PNG vizualizace
 │   │   ├── lumbar_knn_k_curve.png
 │   │   ├── lumbar_knn_confusion_matrix.png
-│   │   ├── lumbar_metrics_cm_heatmap.png # Matice záměn (k=5)
+│   │   ├── lumbar_metrics_cm_heatmap.png # Matice záměn páteře (k=5)
 │   │   ├── lumbar_metrics_k_sweep.png    # Křivky metrik Train vs Test, Recall, F1
-│   │   ├── lumbar_metrics_roc_curve.png  # ROC křivka (AUC = 0.821)
+│   │   ├── lumbar_metrics_roc_curve.png  # ROC křivka páteře (AUC = 0.821)
 │   │   ├── penguins_ex2_k_curve.png
 │   │   ├── penguins_ex2_confusion_matrix.png
+│   │   ├── penguins_metrics_cm_k5.png    # Matice záměn tučňáků pro k=5
+│   │   ├── penguins_metrics_cm_k2.png    # Matice záměn tučňáků pro optimum k=2
+│   │   ├── penguins_metrics_k_sweep.png  # Křivky metrik pro k in [1, 35]
 │   │   ├── knn_k_accuracy_curve.png
 │   │   ├── knn_scaling_comparison.png
 │   │   └── knn_confusion_matrix.png
