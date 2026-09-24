@@ -5,20 +5,26 @@
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.5+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![Plotly](https://img.shields.io/badge/Plotly-5.24+-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)](https://plotly.com/)
 [![Coders Lab](https://img.shields.io/badge/Vychází_z-Coders_Lab_CZ-00C48C?style=for-the-badge)](https://coderslab.cz/cz/)
+[![AI Orchestration](https://img.shields.io/badge/AI_Orchestration-Google_Antigravity-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/)
 
 > Komplexní interaktivní výuková platforma a analytické portfolio pro regresní modelování, strojové učení a diagnostiku modelů v Pythonu.
 
 ---
 
-## 🎓 Uznání autorství & Poděkování (Attribution)
+## 🎓 Uznání autorství, AI orchestrace & Poděkování (Attribution)
 
+### 🏫 Vzdělávací základ & Kurikulum
 Základní pedagogická struktura, datové sady a cvičení v tomto projektu vycházejí z materiálů a sylabu akreditovaného kurzu **Data Science / Machine Learning** vzdělávací IT akademie **[Coders Lab Česká republika](https://coderslab.cz/cz/)**.
 
-Tento repozitář rozšiřuje původní osnovy kurzu o:
-- Moderní **Streamlit webovou aplikaci** s interaktivními vizualizacemi v Plotly.
-- **What-If inferenční simulátory** napojené na reálně natrénované Scikit-learn modely.
-- **Expertní diagnostiku:** Gauss-Markovovy teorémy, analýzu multikolinearity (VIF), prostorovou mapu odchylek v cenách nemovitostí v Seattlu a Cost-Complexity Pruning rozhodovacích stromů.
-- **Rigorózní metodické rozbory:** eliminaci Data Leakage, správnou práci s křížovou validací (`GridSearchCV`) a ochranu před přetrénováním.
+### 🤖 Realizace & Autonomní AI Orchestrace (Google Antigravity)
+Tento repozitář byl koncipován, architektonicky navržen a softwarově implementován formou **pokročilého párového programování (Pair Programming) a agentní AI orchestrace v prostředí [Google Antigravity (Antigravity IDE)](https://deepmind.google/)**.
+
+- **Synergie člověk + AI:** Uživatel definuje strategické zadání, věcné mantinely a ověřuje pedagogickou integritu; AI agent Antigravity obstarává end-to-end softwarové inženýrství, matematické formulace v KaTeX, konstrukci Scikit-learn pipeline, diagnostiku chyb, generování interaktivních komponent v Plotly/Streamlit a automatické spouštění Jupyter sešitů.
+- **Přidaná hodnota nad rámec původních osnov:**
+  - Moderní **Streamlit webová aplikace** s interaktivními vizualizacemi v Plotly a hierarchickou navigací.
+  - **What-If inferenční simulátory** napojené na reálně natrénované Scikit-learn modely v reálném čase.
+  - **Expertní diagnostika:** Gauss-Markovovy teorémy, analýza multikolinearity (VIF), prostorová mapa odchylek v cenách nemovitostí v Seattlu, Cost-Complexity Pruning rozhodovacích stromů a geometrický rozbor metrik k-NN.
+  - **Rigorózní metodické rozbory:** eliminace Data Leakage, správná práce s křížovou validací (`GridSearchCV`, `StratifiedKFold`) a ochrana před přetrénováním.
 
 ---
 
@@ -69,9 +75,13 @@ Experimenty jsou prováděny na reálných datových sadách z praxe:
 - **344 tučňáků** tří druhů (*Adelie*, *Chinstrap*, *Gentoo*) ze souostroví Palmer.
 - Cíl: Multitřídní klasifikace druhu na základě morfologie (zobák, ploutev, hmotnost, ostrov, pohlaví).
 - **Školní baseline (bez škálování, $k=5$):** $\text{Accuracy} \approx 80.6\,\%$ *(Hmotnost v gramech tvořila $99.98\,\%$ celkové vzdálenosti!)*
-- **Model se StandardScaler ($k=5$):** $\text{Accuracy} = 99.03\,\%$ *(Okamžitý nárůst o $+18.4$ p.b.)*
 - **Plný Pipeline s OneHot kódováním ostrova a pohlaví:** $\text{Accuracy} = 99.0\,\%$, $\text{CV} = 100.0\,\%$
 
+### 4. Biomechanika bederní páteře (`lumbar_data.csv`)
+- **310 pacientů** (100 zdravých `Normal`, 210 s diagnózou `Abnormal`: výhřez ploténky *Hernia* a posun obratle *Spondylolisthesis*).
+- Cíl: Klinická klasifikace stavu páteře na základě 6 anatomických úhlů pánve.
+- **Školní model ($k=5$, $L_2$ normalizace):** $\text{Accuracy} = 73.08\,\%$, $\text{Recall} = 80.70\,\%$, $\text{ROC-AUC} = 0.8208$.
+- **Optimální model se stratifikací ($k=8$):** $\text{Accuracy} = 88.46\,\%$, $\text{Recall} = 88.68\,\%$.
 
 ---
 
@@ -148,15 +158,21 @@ Coderslab-DataScience/
 │       ├── 06_decision_tree_regression_theory.md
 │       └── 07_day_1_summary.md
 ├── 02_Classification/                    # Podklady, skripty a teorie pro Den 2 (Klasifikace)
-│   ├── 01_knn_penguins_exercise.py       # Kompletní skript: Baseline, Škálování, k in [1, 45], Pipeline
-│   ├── 01_knn_penguins_exercise.ipynb    # Vypracovaný a spuštěný Jupyter Notebook s grafy
+│   ├── 01_knn_penguins_exercise.py       # Cvičení 2: Palmer Penguins (Baseline, Škálování, k in [1, 45], Pipeline)
+│   ├── 01_knn_penguins_exercise.ipynb    # Vypracovaný a spuštěný Jupyter Notebook tučňáků
+│   ├── 02_knn_lumbar_exercise_1.py       # Cvičení 1: Diagnostika bederní páteře (10 kroků zadání, L2 norma)
+│   ├── 02_knn_lumbar_exercise_1.ipynb    # Vypracovaný a spuštěný Jupyter Notebook páteře
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
+│   │   ├── lumbar_data.csv
+│   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset dle kroku 10
+│   │   ├── lumbar_df_normalized.csv
+│   │   ├── lumbar_knn_precomputed.json
 │   │   ├── penguins_size.csv
 │   │   ├── penguins_df_normalized.csv
-│   │   ├── lumbar_data.csv
-│   │   ├── lumbar_df_normalized.csv
 │   │   └── penguins_knn_precomputed.json
 │   ├── plots/                           # Diagnostické PNG vizualizace
+│   │   ├── lumbar_knn_k_curve.png
+│   │   ├── lumbar_knn_confusion_matrix.png
 │   │   ├── knn_k_accuracy_curve.png
 │   │   ├── knn_scaling_comparison.png
 │   │   └── knn_confusion_matrix.png
@@ -175,8 +191,9 @@ Coderslab-DataScience/
 
 ## 🛠️ Použité technologie & Knihovny
 
+- **AI Orchestrace & Vývojové prostředí:** [Google Antigravity IDE](https://deepmind.google/) (Agentic Pair Programming & Workflow Orchestration)
 - **Frontend & Dashboard:** [Streamlit](https://streamlit.io/)
-- **Machine Learning & Preprocessing:** [Scikit-learn](https://scikit-learn.org/) (LinearRegression, Ridge, Lasso, ElasticNet, DecisionTreeRegressor, HistGradientBoostingRegressor, StandardScaler, PolynomialFeatures)
+- **Machine Learning & Preprocessing:** [Scikit-learn](https://scikit-learn.org/) (LinearRegression, Ridge, Lasso, ElasticNet, DecisionTreeRegressor, HistGradientBoostingRegressor, KNeighborsClassifier, StandardScaler, Normalizer, PolynomialFeatures)
 - **Data Wrangling:** [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/)
 - **Interaktivní vizualizace:** [Plotly Express & Graph Objects](https://plotly.com/python/)
 - **Generování PDF:** [ReportLab](https://www.reportlab.com/)

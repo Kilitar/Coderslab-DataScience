@@ -95,3 +95,9 @@ st.info(
     - 🐍 **Jupyter Notebook**: Kompletní sešit s buňkami, grafy a možností spuštění v Google Colab.
     """
 )
+
+st.markdown("---")
+st.caption(
+    "🎓 **Vzdělávací kurikulum:** [Coders Lab Česká republika](https://coderslab.cz/cz/) | "
+    "🤖 **Realizace & AI Orchestrace:** [Google Antigravity IDE](https://deepmind.google/) (Agentic Pair Programming)"
+)
