@@ -41,35 +41,78 @@ def load_data_and_split():
 
 
 @st.cache_data
-def load_precomputed():
-    if json_path.exists():
-        with open(json_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return None
+def get_lumbar_baseline_metrics(json_file_str: str, _X_train, _y_train, _X_test, _y_test):
+    p = Path(json_file_str)
+    if p.exists():
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict) and "baseline_k5" in data and isinstance(data["baseline_k5"], dict):
+                    return data["baseline_k5"]
+        except Exception:
+            pass
+
+    clf = KNeighborsClassifier(n_neighbors=5).fit(_X_train, _y_train)
+    pred = clf.predict(_X_test)
+    prob = clf.predict_proba(_X_test)[:, 1]
+    return {
+        "accuracy": float(accuracy_score(_y_test, pred)),
+        "precision": float(precision_score(_y_test, pred, zero_division=0)),
+        "recall": float(recall_score(_y_test, pred, zero_division=0)),
+        "f1_score": float(f1_score(_y_test, pred, zero_division=0)),
+        "roc_auc": float(roc_auc_score(_y_test, prob)),
+    }
+
+
+@st.cache_data
+def get_lumbar_sweep_df(json_file_str: str, _X_train, _y_train, _X_test, _y_test):
+    p = Path(json_file_str)
+    if p.exists():
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict) and "sweep_data" in data and len(data["sweep_data"]) > 0:
+                    return pd.DataFrame(data["sweep_data"])
+        except Exception:
+            pass
+
+    results = []
+    for k in range(1, 26):
+        clf = KNeighborsClassifier(n_neighbors=k).fit(_X_train, _y_train)
+        tr = clf.score(_X_train, _y_train)
+        te = clf.score(_X_test, _y_test)
+        pred = clf.predict(_X_test)
+        results.append({
+            "k": k,
+            "train_accuracy": float(tr),
+            "test_accuracy": float(te),
+            "test_precision": float(precision_score(_y_test, pred, zero_division=0)),
+            "test_recall": float(recall_score(_y_test, pred, zero_division=0)),
+            "test_f1": float(f1_score(_y_test, pred, zero_division=0)),
+            "acc_diff": float(abs(tr - te)),
+        })
+    return pd.DataFrame(results)
 
 
 df, X_train, X_test, y_train, y_test = load_data_and_split()
-precomputed = load_precomputed()
+b5 = get_lumbar_baseline_metrics(str(json_path), X_train, y_train, X_test, y_test)
+sweep_df = get_lumbar_sweep_df(str(json_path), X_train, y_train, X_test, y_test)
 
 # =============================================================================
 # 1. METRICKÉ KARTY (VÝCHOZÍ MODEL k=5 DLE ZADÁNÍ)
 # =============================================================================
-b5 = precomputed["baseline_k5"] if precomputed else {
-    "accuracy": 0.8718, "precision": 0.9216, "recall": 0.8868, "f1_score": 0.9038, "roc_auc": 0.8208
-}
-
 st.subheader("🎯 Výchozí výsledky modelu dle zadání ($k = 5$, testovací sada $N=78$)")
 c1, c2, c3, c4, c5 = st.columns(5)
 with c1:
-    st.metric("Accuracy (Přesnost)", f"{b5['accuracy']*100:.2f} %", "68 ze 78 správně")
+    st.metric("Accuracy (Přesnost)", f"{b5.get('accuracy', 0.8718)*100:.2f} %", "68 ze 78 správně")
 with c2:
-    st.metric("Precision (Preciznost)", f"{b5['precision']*100:.2f} %", "TP / (TP + FP)")
+    st.metric("Precision (Preciznost)", f"{b5.get('precision', 0.9216)*100:.2f} %", "TP / (TP + FP)")
 with c3:
-    st.metric("Recall (Senzitivita)", f"{b5['recall']*100:.2f} %", "47 z 53 zachyceno 🩺")
+    st.metric("Recall (Senzitivita)", f"{b5.get('recall', 0.8868)*100:.2f} %", "47 z 53 zachyceno 🩺")
 with c4:
-    st.metric("F1-score", f"{b5['f1_score']*100:.2f} %", "Harmonický průměr")
+    st.metric("F1-score", f"{b5.get('f1_score', 0.9038)*100:.2f} %", "Harmonický průměr")
 with c5:
-    st.metric("ROC-AUC", f"{b5['roc_auc']:.3f}", "Plocha pod ROC")
+    st.metric("ROC-AUC", f"{b5.get('roc_auc', 0.9215):.3f}", "Plocha pod ROC")
 
 st.markdown("---")
 
@@ -157,9 +200,8 @@ with col_plot1:
     st.plotly_chart(fig_cm, width="stretch")
 
 with col_plot2:
-    # Graf sweepu k z předpočtených dat
-    if precomputed and "sweep_data" in precomputed:
-        sweep_df = pd.DataFrame(precomputed["sweep_data"])
+    # Graf sweepu k (z cache nebo vypočteno dynamicky)
+    if sweep_df is not None and not sweep_df.empty:
         fig_sweep = go.Figure()
         fig_sweep.add_trace(go.Scatter(
             x=sweep_df["k"], y=sweep_df["train_accuracy"]*100,
@@ -236,9 +278,9 @@ with t2:
     """)
 
 with t3:
-    if precomputed and "sweep_data" in precomputed:
+    if sweep_df is not None and not sweep_df.empty:
         st.dataframe(
-            pd.DataFrame(precomputed["sweep_data"]).rename(columns={
+            sweep_df.rename(columns={
                 "k": "k (sousedé)",
                 "train_accuracy": "Train Acc",
                 "test_accuracy": "Test Acc",

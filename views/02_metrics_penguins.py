@@ -40,36 +40,79 @@ def load_penguins_data_and_split():
 
 
 @st.cache_data
-def load_precomputed():
-    if json_path.exists():
-        with open(json_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return None
+def get_penguins_baseline_metrics(json_file_str: str, _X_train, _y_train, _X_test, _y_test):
+    p = Path(json_file_str)
+    if p.exists():
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict) and "baseline_k5" in data and isinstance(data["baseline_k5"], dict):
+                    return data["baseline_k5"]
+        except Exception:
+            pass
+
+    clf = KNeighborsClassifier(n_neighbors=5).fit(_X_train, _y_train)
+    pred = clf.predict(_X_test)
+    return {
+        "accuracy": float(accuracy_score(_y_test, pred)),
+        "precision_weighted": float(precision_score(_y_test, pred, average="weighted", zero_division=0)),
+        "recall_weighted": float(recall_score(_y_test, pred, average="weighted", zero_division=0)),
+        "f1_weighted": float(f1_score(_y_test, pred, average="weighted", zero_division=0)),
+        "f1_macro": float(f1_score(_y_test, pred, average="macro", zero_division=0)),
+    }
+
+
+@st.cache_data
+def get_penguins_sweep_df(json_file_str: str, _X_train, _y_train, _X_test, _y_test):
+    p = Path(json_file_str)
+    if p.exists():
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict) and "sweep_data" in data and len(data["sweep_data"]) > 0:
+                    return pd.DataFrame(data["sweep_data"])
+        except Exception:
+            pass
+
+    results = []
+    for k in range(1, 36):
+        clf = KNeighborsClassifier(n_neighbors=k).fit(_X_train, _y_train)
+        tr = clf.score(_X_train, _y_train)
+        te = clf.score(_X_test, _y_test)
+        pred = clf.predict(_X_test)
+        results.append({
+            "k": k,
+            "train_accuracy": float(tr),
+            "test_accuracy": float(te),
+            "test_precision_weighted": float(precision_score(_y_test, pred, average="weighted", zero_division=0)),
+            "test_recall_weighted": float(recall_score(_y_test, pred, average="weighted", zero_division=0)),
+            "test_f1_weighted": float(f1_score(_y_test, pred, average="weighted", zero_division=0)),
+            "test_f1_macro": float(f1_score(_y_test, pred, average="macro", zero_division=0)),
+            "acc_gap": float(abs(tr - te)),
+        })
+    return pd.DataFrame(results)
 
 
 df, X_train, X_test, y_train, y_test = load_penguins_data_and_split()
-precomputed = load_precomputed()
+b5 = get_penguins_baseline_metrics(str(json_path), X_train, y_train, X_test, y_test)
+sweep_df = get_penguins_sweep_df(str(json_path), X_train, y_train, X_test, y_test)
 species_labels = ["Adelie", "Chinstrap", "Gentoo"]
 
 # =============================================================================
 # 1. METRICKÉ KARTY (VÝCHOZÍ MODEL k=5 DLE ZADÁNÍ)
 # =============================================================================
-b5 = precomputed["baseline_k5"] if precomputed else {
-    "accuracy": 0.9406, "precision_weighted": 0.9466, "recall_weighted": 0.9406, "f1_weighted": 0.9400, "f1_macro": 0.9401
-}
-
 st.subheader("🎯 Výchozí výsledky modelu ze zadání ($k = 5$, testovací sada $N=101$)")
 c1, c2, c3, c4, c5 = st.columns(5)
 with c1:
-    st.metric("Accuracy (Přesnost)", f"{b5['accuracy']*100:.2f} %", "95 ze 101 správně")
+    st.metric("Accuracy (Přesnost)", f"{b5.get('accuracy', 0.9406)*100:.2f} %", "95 ze 101 správně")
 with c2:
-    st.metric("Weighted Precision", f"{b5['precision_weighted']*100:.2f} %", "Vážená preciznost")
+    st.metric("Weighted Precision", f"{b5.get('precision_weighted', 0.9466)*100:.2f} %", "Vážená preciznost")
 with c3:
-    st.metric("Weighted Recall", f"{b5['recall_weighted']*100:.2f} %", "Vážená senzitivita")
+    st.metric("Weighted Recall", f"{b5.get('recall_weighted', 0.9406)*100:.2f} %", "Vážená senzitivita")
 with c4:
-    st.metric("Weighted F1-score", f"{b5['f1_weighted']*100:.2f} %", "Harmonický průměr")
+    st.metric("Weighted F1-score", f"{b5.get('f1_weighted', 0.9400)*100:.2f} %", "Harmonický průměr")
 with c5:
-    st.metric("Macro F1-score", f"{b5['f1_macro']*100:.2f} %", "Nevážený průměr")
+    st.metric("Macro F1-score", f"{b5.get('f1_macro', 0.9401)*100:.2f} %", "Nevážený průměr")
 
 st.markdown("---")
 
@@ -166,8 +209,7 @@ with col_p1:
     st.plotly_chart(fig_cm, width="stretch")
 
 with col_p2:
-    if precomputed and "sweep_data" in precomputed:
-        sweep_df = pd.DataFrame(precomputed["sweep_data"])
+    if sweep_df is not None and not sweep_df.empty:
         fig_sweep = go.Figure()
         fig_sweep.add_trace(go.Scatter(
             x=sweep_df["k"], y=sweep_df["train_accuracy"]*100,
@@ -241,9 +283,9 @@ with t2:
     """)
 
 with t3:
-    if precomputed and "sweep_data" in precomputed:
+    if sweep_df is not None and not sweep_df.empty:
         st.dataframe(
-            pd.DataFrame(precomputed["sweep_data"]).rename(columns={
+            sweep_df.rename(columns={
                 "k": "k (sousedé)",
                 "train_accuracy": "Train Acc",
                 "test_accuracy": "Test Acc",

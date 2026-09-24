@@ -27,7 +27,7 @@ def load_lumbar_data():
 
 
 @st.cache_data
-def load_precomputed():
+def load_lumbar_knn_precomputed():
     if json_path.exists():
         with open(json_path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -46,7 +46,7 @@ def get_trained_lumbar_models():
 
 
 raw_df, norm_df = load_lumbar_data()
-precomputed = load_precomputed()
+precomputed = load_lumbar_knn_precomputed()
 model_k5, model_opt, feature_cols = get_trained_lumbar_models()
 
 # =============================================================================
