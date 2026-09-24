@@ -38,14 +38,15 @@ Aplikace slouží jako referenční příručka a praktická laboratoř pro **De
 
 ```mermaid
 flowchart TD
-    A[00. Prework: Základy DS & Scikit-learn] --> B[01. Lineární regrese OLS]
-    B --> C[02. Metriky kvality: MAE, RMSE, R²]
-    C --> D[03. Regularizace: Ridge, Lasso, Elastic Net]
-    D --> E[04. Polynomiální regrese & Kletba dimenzionality]
-    E --> F[05. Rozhodovací stromy CART & Úvod do ansámblů]
-    F --> G[06. Velká syntéza & CZ/EN Glosář]
-    G --> H[07. Day 1 Extras: Simulátory, Geografická mapa nemovitostí, CCP Pruning]
-    H --> I[08. Day 2: Klasifikace & K-Nearest Neighbors]
+    A["00. Den 0: Prework (Úvod do DS & ML)"] --> B["01. Den 1: Lineární regrese OLS"]
+    B --> C["02. Den 1: Metriky regresních modelů"]
+    C --> D["03. Den 1: Regularizace (Ridge, Lasso, Elastic Net)"]
+    D --> E["04. Den 1: Polynomiální regrese"]
+    E --> F["05. Den 1: Rozhodovací stromy & Ansámbly"]
+    F --> G["06. Den 1: Závěr Dne 1 (Velká syntéza regrese)"]
+    G --> H["07. Den 1: Extras (Expertní laboratoř)"]
+    H --> I["08. Den 2: K-Nearest Neighbors (k-NN)"]
+    I --> J["09. Den 2: Metriky klasifikačních modelů"]
 ```
 
 ---

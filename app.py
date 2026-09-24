@@ -94,12 +94,12 @@ nav = st.navigation(
         "Úvod & Přehled kurzu": [
             p_home,
         ],
-        "00. Prework: Úvod do Data Science & ML": [
+        "00. Den 0: Prework (Úvod do Data Science & ML)": [
             p_prework_foundations,
             p_prework_stats,
             p_prework_workflow,
         ],
-        "01. Lineární regrese (OLS)": [
+        "01. Den 1: Lineární regrese (OLS)": [
             p_theory,
             p_kc_model,
             p_kc_time,
@@ -108,7 +108,7 @@ nav = st.navigation(
             p_diamonds_gemology,
             p_diamonds_nb,
         ],
-        "02. Metriky regresních modelů": [
+        "02. Den 1: Metriky regresních modelů": [
             p_metrics_theory,
             p_metrics_kc_model,
             p_metrics_kc_critique,
@@ -117,7 +117,7 @@ nav = st.navigation(
             p_metrics_diam_critique,
             p_metrics_diam_nb,
         ],
-        "03. Regularizace (Lasso, Ridge, Elastic Net)": [
+        "03. Den 1: Regularizace (Lasso, Ridge, Elastic Net)": [
             p_reg_theory,
             p_elastic_theory,
             p_reg_kc_model,
@@ -127,13 +127,13 @@ nav = st.navigation(
             p_reg_diam_critique,
             p_reg_diam_nb,
         ],
-        "04. Polynomiální regrese": [
+        "04. Den 1: Polynomiální regrese": [
             p_poly_theory,
             p_poly_diam_model,
             p_poly_diam_critique,
             p_poly_diam_nb,
         ],
-        "05. Rozhodovací stromy & Ansámbly": [
+        "05. Den 1: Rozhodovací stromy & Ansámbly": [
             p_tree_theory,
             p_tree_kc,
             p_tree_kc_critique,
@@ -143,10 +143,10 @@ nav = st.navigation(
             p_tree_diam_nb,
             p_ensemble_theory,
         ],
-        "06. Závěr Dne 1 (Day 1 Summary)": [
+        "06. Den 1: Závěr Dne 1 (Velká syntéza regrese)": [
             p_day1_summary,
         ],
-        "07. Day 1 Extras (Expertní laboratoř)": [
+        "07. Den 1: Extras (Expertní laboratoř)": [
             p_extra_whatif,
             p_extra_geo,
             p_extra_gauss,

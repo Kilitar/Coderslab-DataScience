@@ -41,21 +41,21 @@ st.header("📌 Rozvrh a struktura kurzu")
 
 course_data = [
     {
-        "Blok": "Blok 0: Prework",
-        "Téma": "Python, Pandas, Matplotlib, Plotly, Statistika, Čištění dat",
+        "Blok": "Den 0: Prework",
+        "Téma": "Python, Pandas, Matplotlib, Plotly, Deskriptivní statistika, Čištění dat",
         "Stav": "Dokončeno (13 sešitů)",
         "Umístění": "00_Prework/",
     },
     {
-        "Blok": "Blok 1: Lineární regrese",
-        "Téma": "OLS, Gradient Descent, King County nemovitosti, Klenotník a diamanty, 4C parametry",
-        "Stav": "Aktivní v levém menu",
+        "Blok": "Den 1: Regrese & Stromy",
+        "Téma": "OLS, Metriky regrese, Regularizace (Ridge/Lasso/ElasticNet), Polynomy, CART, Ansámbly",
+        "Stav": "Dokončeno (Sekce 01–07)",
         "Umístění": "01_Regression/",
     },
     {
-        "Blok": "Blok 1: Klasifikace",
-        "Téma": "K-Nearest Neighbors (k-NN), Palmer Penguins, Škálování, Voronoi, Metriky klasifikace",
-        "Stav": "Aktivní v levém menu (k-NN)",
+        "Blok": "Den 2: Klasifikace",
+        "Téma": "K-Nearest Neighbors (k-NN), Palmer Penguins, Diagnostika páteře, Matice záměn, ROC-AUC",
+        "Stav": "Dokončeno (Sekce 08–09)",
         "Umístění": "02_Classification/",
     },
     {
