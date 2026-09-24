@@ -81,6 +81,11 @@ p_knn_lumbar_nb = st.Page("views/02_knn_lumbar_nb.py", title="Cvičení 1: Beder
 p_knn_penguins = st.Page("views/02_knn_penguins.py", title="Cvičení 2: Tučňáci (k-NN) – Výsledky & Simulátor", icon="🎯")
 p_knn_penguins_nb = st.Page("views/02_knn_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍")
 
+# Téma 9: Metriky klasifikačních modelů
+p_metrics_class_theory = st.Page("views/02_metrics_theory.py", title="Teorie: Metriky klasifikace", icon="📖")
+p_metrics_lumbar = st.Page("views/02_metrics_lumbar.py", title="Cvičení 1: Bederní páteř – Metriky & Optimalizace k", icon="📊")
+p_metrics_lumbar_nb = st.Page("views/02_metrics_lumbar_nb.py", title="Cvičení 1: Bederní páteř – Notebook", icon="🐍")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -154,6 +159,11 @@ nav = st.navigation(
             p_knn_lumbar_nb,
             p_knn_penguins,
             p_knn_penguins_nb,
+        ],
+        "09. Den 2: Metriky klasifikačních modelů": [
+            p_metrics_class_theory,
+            p_metrics_lumbar,
+            p_metrics_lumbar_nb,
         ],
     }
 )

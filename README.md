@@ -164,11 +164,14 @@ Coderslab-DataScience/
 │   ├── 02_knn_lumbar_exercise_1.ipynb    # Vypracovaný a spuštěný Jupyter Notebook páteře
 │   ├── 03_knn_penguins_exercise_2.py     # Cvičení 2: Druhy tučňáků (9 kroků zadání, normalizace, k in [1, 35])
 │   ├── 03_knn_penguins_exercise_2.ipynb  # Vypracovaný a spuštěný Jupyter Notebook tučňáků
+│   ├── 04_classification_metrics_lumbar_exercise_1.py # Cvičení 1: Metriky klasifikace páteře (CM, Precision, Recall, F1, k-sweep)
+│   ├── 04_classification_metrics_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook metrik
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
 │   │   ├── lumbar_knn_precomputed.json
+│   │   ├── lumbar_metrics_exercise_1_precomputed.json # Předpočtené metriky, sweep k in [1, 25] a ROC křivka
 │   │   ├── penguins_size.csv
 │   │   ├── penguins_df_normalized.csv   # Výsledný normalizovaný dataset tučňáků dle kroku 9
 │   │   ├── penguins_knn_precomputed.json
@@ -176,6 +179,9 @@ Coderslab-DataScience/
 │   ├── plots/                           # Diagnostické PNG vizualizace
 │   │   ├── lumbar_knn_k_curve.png
 │   │   ├── lumbar_knn_confusion_matrix.png
+│   │   ├── lumbar_metrics_cm_heatmap.png # Matice záměn (k=5)
+│   │   ├── lumbar_metrics_k_sweep.png    # Křivky metrik Train vs Test, Recall, F1
+│   │   ├── lumbar_metrics_roc_curve.png  # ROC křivka (AUC = 0.821)
 │   │   ├── penguins_ex2_k_curve.png
 │   │   ├── penguins_ex2_confusion_matrix.png
 │   │   ├── knn_k_accuracy_curve.png
@@ -183,13 +189,15 @@ Coderslab-DataScience/
 │   │   └── knn_confusion_matrix.png
 │   └── theory/                          # Teoretické markdown příručky
 │       ├── 01_knn_theory.md             # Eukleidovská, Manhattanská, Minkowského metrika, Voronoi, kletba dimenzionality
-│       └── 02_knn_implementation_guide.md # Scikit-learn KNeighborsClassifier, kd-tree/ball-tree, .kneighbors()
+│       ├── 02_knn_implementation_guide.md # Scikit-learn KNeighborsClassifier, kd-tree/ball-tree, .kneighbors()
+│       └── 03_classification_metrics_theory.md # Matice záměn, Precision, Recall, Specificity, F1, ROC-AUC, Log Loss
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
     ├── 01_*.py                          # Stránky úloh, notebooků a analýz Dne 1
     ├── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
-    └── 02_knn_*.py                      # Den 2 moduly (Teorie k-NN, Implementace, Interaktivní dashboard, Notebook)
+    ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Dashboardy, Notebooky)
+    └── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, ROC-AUC, PR křivky)
 ```
 
 ---
