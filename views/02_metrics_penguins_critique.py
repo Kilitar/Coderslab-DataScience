@@ -147,7 +147,7 @@ with tab1:
     st.plotly_chart(fig_roc, width="stretch")
 
     st.info(
-        """
+        r"""
         💡 **Klíčové expertní zjištění z OvR ROC:**
         1. **Gentoo je téměř perfektně oddělitelný ($AUC \approx 1.0$):** V morfologickém prostoru tvoří samostatný izolovaný ostrov. 
            Jeho tělesná hmotnost a délka ploutví jsou natolik signifikantní, že k-NN u něj prakticky nechybuje.
