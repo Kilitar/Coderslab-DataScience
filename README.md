@@ -203,8 +203,8 @@ Coderslab-DataScience/
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
     ├── 01_*.py                          # Stránky úloh, notebooků a analýz Dne 1
     ├── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
-    ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Dashboardy, Notebooky)
-    └── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, ROC-AUC, PR křivky)
+    ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Výsledky, Expertní analýzy, Notebooky)
+    └── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, Multiclass evaluace, Expertní analýzy & Cost matrix, Notebooky)
 ```
 
 ---

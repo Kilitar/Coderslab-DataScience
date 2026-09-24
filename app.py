@@ -78,14 +78,18 @@ p_knn_theory = st.Page("views/02_knn_theory.py", title="Teorie: K-Nearest Neighb
 p_knn_impl = st.Page("views/02_knn_impl_guide.py", title="Teorie: k-NN v Scikit-learn & Škálování", icon="🛠️")
 p_knn_lumbar = st.Page("views/02_knn_lumbar.py", title="Cvičení 1: Bederní páteř (k-NN) – Výsledky & Diagnostika", icon="🎯")
 p_knn_lumbar_nb = st.Page("views/02_knn_lumbar_nb.py", title="Cvičení 1: Bederní páteř – Notebook", icon="🐍")
+p_knn_lumbar_critique = st.Page("views/02_knn_lumbar_critique.py", title="Cvičení 1: Bederní páteř – Expertní analýza", icon="🔬")
 p_knn_penguins = st.Page("views/02_knn_penguins.py", title="Cvičení 2: Tučňáci (k-NN) – Výsledky & Simulátor", icon="🎯")
+p_knn_penguins_critique = st.Page("views/02_knn_penguins_critique.py", title="Cvičení 2: Tučňáci – Expertní analýza", icon="🔬")
 p_knn_penguins_nb = st.Page("views/02_knn_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍")
 
 # Téma 9: Metriky klasifikačních modelů
 p_metrics_class_theory = st.Page("views/02_classification_metrics_theory.py", title="Teorie: Metriky klasifikace", icon="📖", url_path="classification_metrics_theory")
 p_metrics_lumbar = st.Page("views/02_metrics_lumbar.py", title="Cvičení 1: Bederní páteř – Metriky & Optimalizace k", icon="📊")
+p_metrics_lumbar_critique = st.Page("views/02_metrics_lumbar_critique.py", title="Cvičení 1: Bederní páteř – Expertní analýza & Náklady", icon="🔬")
 p_metrics_lumbar_nb = st.Page("views/02_metrics_lumbar_nb.py", title="Cvičení 1: Bederní páteř – Notebook", icon="🐍")
 p_metrics_penguins = st.Page("views/02_metrics_penguins.py", title="Cvičení 2: Tučňáci – Multiclass metriky & k-sweep", icon="🎯")
+p_metrics_penguins_critique = st.Page("views/02_metrics_penguins_critique.py", title="Cvičení 2: Tučňáci – Expertní analýza & OvR ROC", icon="🔬")
 p_metrics_penguins_nb = st.Page("views/02_metrics_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
@@ -158,15 +162,19 @@ nav = st.navigation(
             p_knn_theory,
             p_knn_impl,
             p_knn_lumbar,
+            p_knn_lumbar_critique,
             p_knn_lumbar_nb,
             p_knn_penguins,
+            p_knn_penguins_critique,
             p_knn_penguins_nb,
         ],
         "09. Den 2: Metriky klasifikačních modelů": [
             p_metrics_class_theory,
             p_metrics_lumbar,
+            p_metrics_lumbar_critique,
             p_metrics_lumbar_nb,
             p_metrics_penguins,
+            p_metrics_penguins_critique,
             p_metrics_penguins_nb,
         ],
     }
