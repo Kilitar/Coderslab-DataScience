@@ -158,21 +158,26 @@ Coderslab-DataScience/
 │       ├── 06_decision_tree_regression_theory.md
 │       └── 07_day_1_summary.md
 ├── 02_Classification/                    # Podklady, skripty a teorie pro Den 2 (Klasifikace)
-│   ├── 01_knn_penguins_exercise.py       # Cvičení 2: Palmer Penguins (Baseline, Škálování, k in [1, 45], Pipeline)
-│   ├── 01_knn_penguins_exercise.ipynb    # Vypracovaný a spuštěný Jupyter Notebook tučňáků
+│   ├── 01_knn_penguins_exercise.py       # Úvodní analýza: Palmer Penguins (Analýza selhání neškálování)
+│   ├── 01_knn_penguins_exercise.ipynb    # Vypracovaný sešit úvodní demonstrace
 │   ├── 02_knn_lumbar_exercise_1.py       # Cvičení 1: Diagnostika bederní páteře (10 kroků zadání, L2 norma)
 │   ├── 02_knn_lumbar_exercise_1.ipynb    # Vypracovaný a spuštěný Jupyter Notebook páteře
+│   ├── 03_knn_penguins_exercise_2.py     # Cvičení 2: Druhy tučňáků (9 kroků zadání, normalizace, k in [1, 35])
+│   ├── 03_knn_penguins_exercise_2.ipynb  # Vypracovaný a spuštěný Jupyter Notebook tučňáků
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
 │   │   ├── lumbar_data.csv
-│   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset dle kroku 10
+│   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
 │   │   ├── lumbar_knn_precomputed.json
 │   │   ├── penguins_size.csv
-│   │   ├── penguins_df_normalized.csv
-│   │   └── penguins_knn_precomputed.json
+│   │   ├── penguins_df_normalized.csv   # Výsledný normalizovaný dataset tučňáků dle kroku 9
+│   │   ├── penguins_knn_precomputed.json
+│   │   └── penguins_exercise_2_precomputed.json
 │   ├── plots/                           # Diagnostické PNG vizualizace
 │   │   ├── lumbar_knn_k_curve.png
 │   │   ├── lumbar_knn_confusion_matrix.png
+│   │   ├── penguins_ex2_k_curve.png
+│   │   ├── penguins_ex2_confusion_matrix.png
 │   │   ├── knn_k_accuracy_curve.png
 │   │   ├── knn_scaling_comparison.png
 │   │   └── knn_confusion_matrix.png

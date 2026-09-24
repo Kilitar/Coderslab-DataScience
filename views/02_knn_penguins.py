@@ -11,7 +11,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-st.title("🐧 Cvičení 1: Klasifikace tučňáků (k-NN) na Palmer Penguins")
+st.title("🐧 Cvičení 2: Klasifikace tučňáků (k-NN) na Palmer Penguins")
 st.caption("Interaktivní analýza modelu k nejbližších sousedů, rozhodovacích hranic v 2D prostoru, vlivu škálování a What-If predikce druhu s inspekcí sousedů.")
 
 base_dir = Path(__file__).resolve().parent.parent
