@@ -163,7 +163,7 @@ with col_p1:
         height=380,
         margin=dict(l=40, r=40, t=50, b=40)
     )
-    st.plotly_chart(fig_cm, use_container_width=True)
+    st.plotly_chart(fig_cm, width="stretch")
 
 with col_p2:
     if precomputed and "sweep_data" in precomputed:
@@ -199,7 +199,7 @@ with col_p2:
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
             margin=dict(l=40, r=40, t=50, b=40)
         )
-        st.plotly_chart(fig_sweep, use_container_width=True)
+        st.plotly_chart(fig_sweep, width="stretch")
 
 st.markdown("---")
 
@@ -253,5 +253,5 @@ with t3:
                 "test_f1_macro": "Macro F1",
                 "acc_gap": "Gap (|Train-Test|)"
             }),
-            use_container_width=True
+            width="stretch"
         )

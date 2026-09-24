@@ -25,7 +25,7 @@ p_diamonds_gemology = st.Page("views/01_diamonds_gemology_analysis.py", title="C
 p_diamonds_nb = st.Page("views/01_diamonds_notebook.py", title="Cvičení 2: Diamanty – Notebook", icon="🐍")
 
 # Téma 2: Metriky regresních modelů
-p_metrics_theory = st.Page("views/01_metrics_theory.py", title="Teorie: Metriky regrese", icon="📖")
+p_metrics_theory = st.Page("views/01_metrics_theory.py", title="Teorie: Metriky regrese", icon="📖", url_path="regression_metrics_theory")
 p_metrics_kc_model = st.Page("views/01_metrics_exercise_1.py", title="Cvičení 3: Metriky reality – Výsledky zadání", icon="🎯")
 p_metrics_kc_critique = st.Page("views/01_metrics_critique_analysis.py", title="Cvičení 3: Metriky reality – Expertní analýza", icon="🔬")
 p_metrics_kc_nb = st.Page("views/01_metrics_notebook.py", title="Cvičení 3: Metriky reality – Notebook", icon="🐍")
@@ -82,7 +82,7 @@ p_knn_penguins = st.Page("views/02_knn_penguins.py", title="Cvičení 2: Tučň�
 p_knn_penguins_nb = st.Page("views/02_knn_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍")
 
 # Téma 9: Metriky klasifikačních modelů
-p_metrics_class_theory = st.Page("views/02_metrics_theory.py", title="Teorie: Metriky klasifikace", icon="📖")
+p_metrics_class_theory = st.Page("views/02_classification_metrics_theory.py", title="Teorie: Metriky klasifikace", icon="📖", url_path="classification_metrics_theory")
 p_metrics_lumbar = st.Page("views/02_metrics_lumbar.py", title="Cvičení 1: Bederní páteř – Metriky & Optimalizace k", icon="📊")
 p_metrics_lumbar_nb = st.Page("views/02_metrics_lumbar_nb.py", title="Cvičení 1: Bederní páteř – Notebook", icon="🐍")
 p_metrics_penguins = st.Page("views/02_metrics_penguins.py", title="Cvičení 2: Tučňáci – Multiclass metriky & k-sweep", icon="🎯")

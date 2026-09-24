@@ -213,7 +213,7 @@ with tab1:
             height=540,
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         )
-        st.plotly_chart(fig_boundary, use_container_width=True)
+        st.plotly_chart(fig_boundary, width="stretch")
 
         if not use_scaling and ("body_mass_g" in [feat_x, feat_y]):
             st.error(
@@ -241,7 +241,7 @@ with tab2:
         )
         fig_scaling.update_yaxes(range=[70, 102])
         fig_scaling.update_layout(showlegend=False, template="plotly_white", height=380)
-        st.plotly_chart(fig_scaling, use_container_width=True)
+        st.plotly_chart(fig_scaling, width="stretch")
 
     with dcol2:
         st.markdown("#### Konfúzní matice plného modelu (Pipeline)")
@@ -257,7 +257,7 @@ with tab2:
             title=f"Konfúzní matice na testovacích datech (Accuracy = {precomputed['full_test_acc']*100:.1f} %)",
         )
         fig_cm.update_layout(height=380, template="plotly_white")
-        st.plotly_chart(fig_cm, use_container_width=True)
+        st.plotly_chart(fig_cm, width="stretch")
 
     st.markdown("#### Bias-Variance Tradeoff: Křivka závislosti přesnosti na počtu sousedů $k$")
     k_vals = precomputed["k_range"]
@@ -297,7 +297,7 @@ with tab2:
         height=400,
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
     )
-    st.plotly_chart(fig_k, use_container_width=True)
+    st.plotly_chart(fig_k, width="stretch")
 
 # =============================================================================
 # TAB 3: WHAT-IF SIMULÁTOR INFERENCE S INSPEKCÍ SOUSEDŮ (.kneighbors)
@@ -360,5 +360,5 @@ with tab3:
         st.dataframe(
             neighbors_df[["Vzdálenost (d)", "species", "island", "culmen_length_mm", "culmen_depth_mm", "flipper_length_mm", "body_mass_g", "sex"]],
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )

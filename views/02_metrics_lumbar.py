@@ -154,7 +154,7 @@ with col_plot1:
         height=380,
         margin=dict(l=40, r=40, t=50, b=40)
     )
-    st.plotly_chart(fig_cm, use_container_width=True)
+    st.plotly_chart(fig_cm, width="stretch")
 
 with col_plot2:
     # Graf sweepu k z předpočtených dat
@@ -192,7 +192,7 @@ with col_plot2:
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
             margin=dict(l=40, r=40, t=50, b=40)
         )
-        st.plotly_chart(fig_sweep, use_container_width=True)
+        st.plotly_chart(fig_sweep, width="stretch")
 
 st.markdown("---")
 
@@ -247,5 +247,5 @@ with t3:
                 "test_f1": "F1-score",
                 "acc_diff": "Gap (|Train-Test|)"
             }),
-            use_container_width=True
+            width="stretch"
         )

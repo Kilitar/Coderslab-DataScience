@@ -114,7 +114,7 @@ with tab1:
             title=f"Konfúzní matice testovací sady (k=5, N_test={cm_data.sum()})",
         )
         fig_cm.update_layout(height=380, template="plotly_white")
-        st.plotly_chart(fig_cm, use_container_width=True)
+        st.plotly_chart(fig_cm, width="stretch")
 
     with dcol2:
         tn, fp = cm_data[0]
@@ -156,7 +156,7 @@ with tab1:
         height=380,
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
     )
-    st.plotly_chart(fig_k, use_container_width=True)
+    st.plotly_chart(fig_k, width="stretch")
 
 # =============================================================================
 # TAB 2: BIOMECHANICKÝ PRŮZKUM
@@ -186,7 +186,7 @@ with tab2:
         hover_data=feature_cols,
     )
     fig_scatter.update_layout(template="plotly_white", height=500)
-    st.plotly_chart(fig_scatter, use_container_width=True)
+    st.plotly_chart(fig_scatter, width="stretch")
 
 # =============================================================================
 # TAB 3: WHAT-IF KALKULÁTOR PACIENTA
@@ -214,9 +214,10 @@ with tab3:
     # Příprava vstupních dat a normalizace L2
     input_raw = np.array([[in_pi, in_pt, in_lla, in_ss, in_pr, in_ds]])
     input_norm = Normalizer(norm="l2").transform(input_raw)
+    input_norm_df = pd.DataFrame(input_norm, columns=feature_cols)
 
-    pred_class_code = model_k5.predict(input_norm)[0]
-    pred_prob = model_k5.predict_proba(input_norm)[0]
+    pred_class_code = model_k5.predict(input_norm_df)[0]
+    pred_prob = model_k5.predict_proba(input_norm_df)[0]
 
     st.markdown("### Výsledek predikce modelu:")
     res_col1, res_col2 = st.columns([1, 2])
@@ -243,5 +244,5 @@ with tab3:
         st.dataframe(
             neighbors_raw[["Vzdálenost (d)", "class", "pelvic_incidence", "pelvic_tilt", "lumbar_lordosis_angle", "sacral_slope", "pelvic_radius", "degree_spondylolisthesis"]],
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
