@@ -54,8 +54,8 @@ course_data = [
     },
     {
         "Blok": "Blok 1: Klasifikace",
-        "Téma": "Logistická regrese, k-NN, Rozhodovací stromy, SVM, Metriky",
-        "Stav": "Připraveno",
+        "Téma": "K-Nearest Neighbors (k-NN), Palmer Penguins, Škálování, Voronoi, Metriky klasifikace",
+        "Stav": "Aktivní v levém menu (k-NN)",
         "Umístění": "02_Classification/",
     },
     {

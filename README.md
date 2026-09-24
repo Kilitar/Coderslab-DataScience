@@ -39,13 +39,14 @@ flowchart TD
     E --> F[05. Rozhodovací stromy CART & Úvod do ansámblů]
     F --> G[06. Velká syntéza & CZ/EN Glosář]
     G --> H[07. Day 1 Extras: Simulátory, Geografická mapa nemovitostí, CCP Pruning]
+    H --> I[08. Day 2: Klasifikace & K-Nearest Neighbors]
 ```
 
 ---
 
 ## 📊 Reálné datasety & Benchmarky
 
-Experimenty jsou prováděny na dvou reálných datových sadách z praxe:
+Experimenty jsou prováděny na reálných datových sadách z praxe:
 
 ### 1. Nemovitosti v King County, Seattle (`kc_house_data.csv`)
 - **21 613 prodejů domů** z let 2014–2015.
@@ -63,6 +64,14 @@ Experimenty jsou prováděny na dvou reálných datových sadách z praxe:
 - **Polynom 3. stupně + Ridge ($\alpha=100$):** $R^2 = 0.9744$, $\text{RMSE} = 623.2\text{ USD}$ *(Záchrana modelu regularizací)*
 - **Optimální rozhodovací strom (GridSearchCV):** $R^2 = 0.9785$, $\text{RMSE} = 587.0\text{ USD}$, $\text{MAE} = 307.3\text{ USD}$  
   *(Dokonale zachycuje psychologické cenové skoky u kulatých karátů `carat >= 1.00`).*
+
+### 3. Antarktičtí tučňáci Palmer Penguins (`penguins_size.csv`)
+- **344 tučňáků** tří druhů (*Adelie*, *Chinstrap*, *Gentoo*) ze souostroví Palmer.
+- Cíl: Multitřídní klasifikace druhu na základě morfologie (zobák, ploutev, hmotnost, ostrov, pohlaví).
+- **Školní baseline (bez škálování, $k=5$):** $\text{Accuracy} \approx 80.6\,\%$ *(Hmotnost v gramech tvořila $99.98\,\%$ celkové vzdálenosti!)*
+- **Model se StandardScaler ($k=5$):** $\text{Accuracy} = 99.03\,\%$ *(Okamžitý nárůst o $+18.4$ p.b.)*
+- **Plný Pipeline s OneHot kódováním ostrova a pohlaví:** $\text{Accuracy} = 99.0\,\%$, $\text{CV} = 100.0\,\%$
+
 
 ---
 
@@ -138,11 +147,28 @@ Coderslab-DataScience/
 │       ├── 05_polynomial_regression_theory.md
 │       ├── 06_decision_tree_regression_theory.md
 │       └── 07_day_1_summary.md
+├── 02_Classification/                    # Podklady, skripty a teorie pro Den 2 (Klasifikace)
+│   ├── 01_knn_penguins_exercise.py       # Kompletní skript: Baseline, Škálování, k in [1, 45], Pipeline
+│   ├── 01_knn_penguins_exercise.ipynb    # Vypracovaný a spuštěný Jupyter Notebook s grafy
+│   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
+│   │   ├── penguins_size.csv
+│   │   ├── penguins_df_normalized.csv
+│   │   ├── lumbar_data.csv
+│   │   ├── lumbar_df_normalized.csv
+│   │   └── penguins_knn_precomputed.json
+│   ├── plots/                           # Diagnostické PNG vizualizace
+│   │   ├── knn_k_accuracy_curve.png
+│   │   ├── knn_scaling_comparison.png
+│   │   └── knn_confusion_matrix.png
+│   └── theory/                          # Teoretické markdown příručky
+│       ├── 01_knn_theory.md             # Eukleidovská, Manhattanská, Minkowského metrika, Voronoi, kletba dimenzionality
+│       └── 02_knn_implementation_guide.md # Scikit-learn KNeighborsClassifier, kd-tree/ball-tree, .kneighbors()
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
     ├── 01_*.py                          # Stránky úloh, notebooků a analýz Dne 1
-    └── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
+    ├── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
+    └── 02_knn_*.py                      # Den 2 moduly (Teorie k-NN, Implementace, Interaktivní dashboard, Notebook)
 ```
 
 ---

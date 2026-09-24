@@ -70,6 +70,15 @@ p_extra_ccp = st.Page("views/01_extras_ccp_pruning.py", title="Prořezávání s
 p_extra_chooser = st.Page("views/01_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🔬")
 p_extra_cheat = st.Page("views/01_extras_cheatsheet.py", title="Tahák do kapsy: Scikit-learn Cheatsheet ke stažení", icon="📖")
 
+# =============================================================================
+# DEN 2: KLASIFIKACE (CLASSIFICATION)
+# =============================================================================
+# Téma 8: K-Nearest Neighbors (k-NN)
+p_knn_theory = st.Page("views/02_knn_theory.py", title="Teorie: K-Nearest Neighbors (k-NN)", icon="📖")
+p_knn_impl = st.Page("views/02_knn_impl_guide.py", title="Teorie: k-NN v Scikit-learn & Škálování", icon="🛠️")
+p_knn_penguins = st.Page("views/02_knn_penguins.py", title="Cvičení 1: Tučňáci (k-NN) – Výsledky & Simulátor", icon="🎯")
+p_knn_penguins_nb = st.Page("views/02_knn_penguins_nb.py", title="Cvičení 1: Tučňáci – Notebook", icon="🐍")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -136,8 +145,15 @@ nav = st.navigation(
             p_extra_chooser,
             p_extra_cheat,
         ],
+        "08. Den 2: K-Nearest Neighbors (k-NN)": [
+            p_knn_theory,
+            p_knn_impl,
+            p_knn_penguins,
+            p_knn_penguins_nb,
+        ],
     }
 )
 
 nav.run()
+
 
