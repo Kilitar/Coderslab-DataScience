@@ -122,6 +122,8 @@ p_day2_summary = st.Page("views/02_day_2_summary.py", title="Shrnutí 2. dne & K
 
 # Téma 14: Optimalizace hyperparametrů & Křížová validace (Den 3)
 p_hyperopt_theory = st.Page("views/03_hyperparameter_tuning_theory.py", title="Teorie: Hyperparametry & CV", icon="📖", url_path="hyperparameter_tuning_theory")
+p_hyperopt_diam_ex1 = st.Page("views/03_hyperparameters_diamonds_exercise_1.py", title="Cvičení 1: Diamanty – Výsledky", icon="🎯", url_path="hyperparameters_diamonds_ex1")
+p_hyperopt_diam_nb = st.Page("views/03_hyperparameters_diamonds_nb.py", title="Cvičení 1: Diamanty – Notebook", icon="🐍", url_path="hyperparameters_diamonds_nb")
 p_hyperopt_sample = st.Page("views/03_hyperparameter_optimization_sample.py", title="Ukázka: Implementace tuningu", icon="🔬", url_path="hyperparameter_optimization_sample")
 p_hyperopt_nb = st.Page("views/03_hyperparameter_optimization_nb.py", title="Ukázka: Tuning – Notebook", icon="🐍", url_path="hyperparameter_optimization_nb")
 
@@ -240,6 +242,8 @@ nav = st.navigation(
         ],
         "14. Den 3: Tuning & Validace": [
             p_hyperopt_theory,
+            p_hyperopt_diam_ex1,
+            p_hyperopt_diam_nb,
             p_hyperopt_sample,
             p_hyperopt_nb,
         ],

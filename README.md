@@ -240,12 +240,17 @@ Coderslab-DataScience/
 ├── 03_Advanced_ML_Neural_Networks/       # Podklady pro Den 3 (Session 2): Tuning, Ansámbly & NN
 │   ├── 01_hyperparameter_optimization_sample.py # Ukázková implementace: GridSearchCV, RandomizedSearchCV, Hyperopt
 │   ├── 01_hyperparameter_optimization_sample.ipynb # Spuštěný Jupyter Notebook s výstupy a křivkami
+│   ├── 02_hyperparameters_diamonds_exercise_1.py # Cvičení 1: Diamanty (GridSearchCV pro max_depth a criterion, úprava funkce)
+│   ├── 02_hyperparameters_diamonds_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
 │   ├── data/
-│   │   └── hyperparameter_optimization_sample_precomputed.json # Předpočtené výsledky 3 optimalizačních technik
+│   │   ├── hyperparameter_optimization_sample_precomputed.json # Předpočtené výsledky 3 optimalizačních technik
+│   │   └── diamonds_hyperparameters_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 (diamanty)
 │   ├── plots/
 │   │   ├── hyperopt_grid_search_heatmap.png  # Heatmapa validačního Recall (max_depth vs criterion)
 │   │   ├── hyperopt_random_search_scatter.png # 2D prostor náhodných pokusů C a gamma
-│   │   └── hyperopt_bayesian_convergence.png  # Konvergenční křivka TPE (Hyperopt)
+│   │   ├── hyperopt_bayesian_convergence.png  # Konvergenční křivka TPE (Hyperopt)
+│   │   ├── diamonds_grid_search_depth_curve.png # Křivka chyb RMSE vs max_depth u diamantů
+│   │   └── diamonds_grid_residuals_comparison.png # Srovnání reziduí původního a optimálního modelu
 │   └── theory/
 │       ├── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
 │       └── 02_hyperparameter_optimization_implementation_guide.md # Detailní implementační průvodce (Scikit-learn & Hyperopt)
@@ -261,6 +266,8 @@ Coderslab-DataScience/
     ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
     ├── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
     ├── 03_hyperparameter_tuning_theory.py # Den 3: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
+    ├── 03_hyperparameters_diamonds_exercise_1.py # Den 3: Cvičení 1 (Diamanty - výsledky zadání a ověření metrik)
+    ├── 03_hyperparameters_diamonds_nb.py # Den 3: Cvičení 1 (Diamanty - interaktivní notebook)
     ├── 03_hyperparameter_optimization_sample.py # Den 3: Ukázková laboratoř (GridSearch, RandomizedSearch, Hyperopt)
     └── 03_hyperparameter_optimization_nb.py # Den 3: Interaktivní Jupyter Notebook prohlížeč tuningu
 ```
