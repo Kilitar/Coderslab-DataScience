@@ -120,6 +120,9 @@ p_svm_nb = st.Page("views/02_svm_nb.py", title="Ukázka: SVM – Notebook", icon
 # Téma 13: Shrnutí 2. dne & Znalostní test
 p_day2_summary = st.Page("views/02_day_2_summary.py", title="Shrnutí 2. dne & Kvíz", icon="🎓", url_path="day_2_summary")
 
+# Téma 14: Optimalizace hyperparametrů & Křížová validace (Den 3)
+p_hyperopt_theory = st.Page("views/03_hyperparameter_tuning_theory.py", title="Teorie: Hyperparametry & CV", icon="📖", url_path="hyperparameter_tuning_theory")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -232,6 +235,9 @@ nav = st.navigation(
         ],
         "13. Den 2: Shrnutí klasifikace": [
             p_day2_summary,
+        ],
+        "14. Den 3: Tuning & Validace": [
+            p_hyperopt_theory,
         ],
     }
 )

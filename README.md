@@ -237,6 +237,9 @@ Coderslab-DataScience/
 │       ├── 05_decision_tree_classification_theory.md # CART, Gini Impurity, Shannonova entropie, Information Gain, Pruning
 │       ├── 06_svm_theory.md             # Podpůrné vektory, Nadroviny, Okraj, Jádrový trik (Kernel Trick), OvO/OvR
 │       └── 07_day_2_summary.md          # Ucelené shrnutí 2. dne (k-NN, LogReg, DT, SVM, Metriky, Srovnání, Kvíz)
+├── 03_Advanced_ML_Neural_Networks/       # Podklady pro Den 3 (Session 2): Tuning, Ansámbly & NN
+│   └── theory/
+│       └── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
@@ -247,7 +250,8 @@ Coderslab-DataScience/
     ├── 02_logistic_regression_*.py      # Den 2 moduly logistické regrese (Teorie, Ukázková laboratoř & Simulátory, Notebook)
     ├── 02_decision_tree_*.py            # Den 2 moduly rozhodovacích stromů (Teorie, Cvičení 1 & 2, Ukázka, Notebooky)
     ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
-    └── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
+    ├── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
+    └── 03_hyperparameter_tuning_theory.py # Den 3: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
 ```
 
 ---
