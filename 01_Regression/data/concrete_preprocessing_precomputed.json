@@ -1,0 +1,768 @@
+{
+  "metadata": {
+    "source": "I-Cheng Yeh, Modeling of strength of high performance concrete using artificial neural networks (1998)",
+    "task": "Homework: Preparing data for regression models (Concrete Compressive Strength)",
+    "raw_rows": 1030,
+    "clean_rows": 1005,
+    "num_features": 8,
+    "columns": [
+      "cement",
+      "slag",
+      "flyash",
+      "water",
+      "superplasticizer",
+      "coarseaggregate",
+      "fineaggregate",
+      "age",
+      "csMPa"
+    ],
+    "feature_cols": [
+      "cement",
+      "slag",
+      "flyash",
+      "water",
+      "superplasticizer",
+      "coarseaggregate",
+      "fineaggregate",
+      "age"
+    ],
+    "target_col": "csMPa",
+    "column_descriptions": {
+      "cement": "Obsah cementu (kg/m³)",
+      "slag": "Obsah vysokopecní strusky (kg/m³)",
+      "flyash": "Obsah popílku (kg/m³)",
+      "water": "Obsah záměsové vody (kg/m³)",
+      "superplasticizer": "Obsah superplastifikátoru (kg/m³)",
+      "coarseaggregate": "Obsah hrubého kameniva / štěrku (kg/m³)",
+      "fineaggregate": "Obsah jemného kameniva / písku (kg/m³)",
+      "age": "Stáří betonu (dny zrání, 1 až 365)",
+      "csMPa": "Pevnost v tlaku betonu (MPa, megapascals) [Target]"
+    }
+  },
+  "quality_audit": {
+    "missing_values": {
+      "cement": 0,
+      "slag": 0,
+      "flyash": 0,
+      "water": 0,
+      "superplasticizer": 0,
+      "coarseaggregate": 0,
+      "fineaggregate": 0,
+      "age": 0,
+      "csMPa": 0
+    },
+    "has_missing": false,
+    "duplicates_count": 25,
+    "duplicates_sample": [
+      {
+        "cement": 252.0,
+        "slag": 0.0,
+        "flyash": 0.0,
+        "water": 185.0,
+        "superplasticizer": 0.0,
+        "coarseaggregate": 1111.0,
+        "fineaggregate": 784.0,
+        "age": 28,
+        "csMPa": 19.69143456
+      },
+      {
+        "cement": 252.0,
+        "slag": 0.0,
+        "flyash": 0.0,
+        "water": 185.0,
+        "superplasticizer": 0.0,
+        "coarseaggregate": 1111.0,
+        "fineaggregate": 784.0,
+        "age": 28,
+        "csMPa": 19.69143456
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 3,
+        "csMPa": 35.3011712
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 3,
+        "csMPa": 35.3011712
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 3,
+        "csMPa": 35.3011712
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 3,
+        "csMPa": 35.3011712
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 7,
+        "csMPa": 55.89581932
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 7,
+        "csMPa": 55.89581932
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 7,
+        "csMPa": 55.89581932
+      },
+      {
+        "cement": 362.6,
+        "slag": 189.0,
+        "flyash": 0.0,
+        "water": 164.9,
+        "superplasticizer": 11.6,
+        "coarseaggregate": 944.7,
+        "fineaggregate": 755.8,
+        "age": 28,
+        "csMPa": 71.29871316
+      }
+    ],
+    "dtypes": {
+      "cement": "float64",
+      "slag": "float64",
+      "flyash": "float64",
+      "water": "float64",
+      "superplasticizer": "float64",
+      "coarseaggregate": "float64",
+      "fineaggregate": "float64",
+      "age": "int64",
+      "csMPa": "float64"
+    }
+  },
+  "statistics": {
+    "cement": {
+      "name": "cement",
+      "description": "Obsah cementu (kg/m³)",
+      "count": 1005,
+      "mean": 278.629,
+      "std": 104.345,
+      "min": 102.0,
+      "q25": 190.68,
+      "median": 265.0,
+      "q75": 349.0,
+      "max": 540.0,
+      "skewness": 0.565,
+      "kurtosis": -0.432,
+      "zeros_count": 0,
+      "zeros_pct": 0.0
+    },
+    "slag": {
+      "name": "slag",
+      "description": "Obsah vysokopecní strusky (kg/m³)",
+      "count": 1005,
+      "mean": 72.043,
+      "std": 86.171,
+      "min": 0.0,
+      "q25": 0.0,
+      "median": 20.0,
+      "q75": 142.5,
+      "max": 359.4,
+      "skewness": 0.855,
+      "kurtosis": -0.407,
+      "zeros_count": 465,
+      "zeros_pct": 46.27
+    },
+    "flyash": {
+      "name": "flyash",
+      "description": "Obsah popílku (kg/m³)",
+      "count": 1005,
+      "mean": 55.535,
+      "std": 64.207,
+      "min": 0.0,
+      "q25": 0.0,
+      "median": 0.0,
+      "q75": 118.27,
+      "max": 200.1,
+      "skewness": 0.497,
+      "kurtosis": -1.366,
+      "zeros_count": 541,
+      "zeros_pct": 53.83
+    },
+    "water": {
+      "name": "water",
+      "description": "Obsah záměsové vody (kg/m³)",
+      "count": 1005,
+      "mean": 182.074,
+      "std": 21.341,
+      "min": 121.75,
+      "q25": 166.61,
+      "median": 185.7,
+      "q75": 192.94,
+      "max": 247.0,
+      "skewness": 0.034,
+      "kurtosis": 0.168,
+      "zeros_count": 0,
+      "zeros_pct": 0.0
+    },
+    "superplasticizer": {
+      "name": "superplasticizer",
+      "description": "Obsah superplastifikátoru (kg/m³)",
+      "count": 1005,
+      "mean": 6.032,
+      "std": 5.92,
+      "min": 0.0,
+      "q25": 0.0,
+      "median": 6.1,
+      "q75": 10.0,
+      "max": 32.2,
+      "skewness": 0.982,
+      "kurtosis": 1.698,
+      "zeros_count": 378,
+      "zeros_pct": 37.61
+    },
+    "coarseaggregate": {
+      "name": "coarseaggregate",
+      "description": "Obsah hrubého kameniva / štěrku (kg/m³)",
+      "count": 1005,
+      "mean": 974.376,
+      "std": 77.58,
+      "min": 801.0,
+      "q25": 932.0,
+      "median": 968.0,
+      "q75": 1031.0,
+      "max": 1145.0,
+      "skewness": -0.065,
+      "kurtosis": -0.583,
+      "zeros_count": 0,
+      "zeros_pct": 0.0
+    },
+    "fineaggregate": {
+      "name": "fineaggregate",
+      "description": "Obsah jemného kameniva / písku (kg/m³)",
+      "count": 1005,
+      "mean": 772.687,
+      "std": 80.34,
+      "min": 594.0,
+      "q25": 724.3,
+      "median": 780.0,
+      "q75": 822.2,
+      "max": 992.6,
+      "skewness": -0.252,
+      "kurtosis": -0.106,
+      "zeros_count": 0,
+      "zeros_pct": 0.0
+    },
+    "age": {
+      "name": "age",
+      "description": "Stáří betonu (dny zrání, 1 až 365)",
+      "count": 1005,
+      "mean": 45.857,
+      "std": 63.735,
+      "min": 1.0,
+      "q25": 7.0,
+      "median": 28.0,
+      "q75": 56.0,
+      "max": 365.0,
+      "skewness": 3.254,
+      "kurtosis": 11.962,
+      "zeros_count": 0,
+      "zeros_pct": 0.0
+    },
+    "csMPa": {
+      "name": "csMPa",
+      "description": "Pevnost v tlaku betonu (MPa, megapascals) [Target]",
+      "count": 1005,
+      "mean": 35.25,
+      "std": 16.285,
+      "min": 2.332,
+      "q25": 23.524,
+      "median": 33.798,
+      "q75": 44.868,
+      "max": 82.599,
+      "skewness": 0.396,
+      "kurtosis": -0.305,
+      "zeros_count": 0,
+      "zeros_pct": 0.0
+    }
+  },
+  "correlations": {
+    "full_matrix": {
+      "cement": {
+        "cement": 1.0,
+        "slag": -0.3033,
+        "flyash": -0.3856,
+        "water": -0.0566,
+        "superplasticizer": 0.0613,
+        "coarseaggregate": -0.0862,
+        "fineaggregate": -0.2454,
+        "age": 0.0863,
+        "csMPa": 0.4883
+      },
+      "slag": {
+        "cement": -0.3033,
+        "slag": 1.0,
+        "flyash": -0.3123,
+        "water": 0.1303,
+        "superplasticizer": 0.0199,
+        "coarseaggregate": -0.2776,
+        "fineaggregate": -0.2897,
+        "age": -0.0428,
+        "csMPa": 0.1034
+      },
+      "flyash": {
+        "cement": -0.3856,
+        "slag": -0.3123,
+        "flyash": 1.0,
+        "water": -0.2834,
+        "superplasticizer": 0.4141,
+        "coarseaggregate": -0.0265,
+        "fineaggregate": 0.0902,
+        "age": -0.1589,
+        "csMPa": -0.0806
+      },
+      "water": {
+        "cement": -0.0566,
+        "slag": 0.1303,
+        "flyash": -0.2834,
+        "water": 1.0,
+        "superplasticizer": -0.6469,
+        "coarseaggregate": -0.2125,
+        "fineaggregate": -0.4449,
+        "age": 0.2793,
+        "csMPa": -0.2696
+      },
+      "superplasticizer": {
+        "cement": 0.0613,
+        "slag": 0.0199,
+        "flyash": 0.4141,
+        "water": -0.6469,
+        "superplasticizer": 1.0,
+        "coarseaggregate": -0.242,
+        "fineaggregate": 0.2078,
+        "age": -0.1941,
+        "csMPa": 0.3442
+      },
+      "coarseaggregate": {
+        "cement": -0.0862,
+        "slag": -0.2776,
+        "flyash": -0.0265,
+        "water": -0.2125,
+        "superplasticizer": -0.242,
+        "coarseaggregate": 1.0,
+        "fineaggregate": -0.1622,
+        "age": -0.0053,
+        "csMPa": -0.1447
+      },
+      "fineaggregate": {
+        "cement": -0.2454,
+        "slag": -0.2897,
+        "flyash": 0.0902,
+        "water": -0.4449,
+        "superplasticizer": 0.2078,
+        "coarseaggregate": -0.1622,
+        "fineaggregate": 1.0,
+        "age": -0.1566,
+        "csMPa": -0.1865
+      },
+      "age": {
+        "cement": 0.0863,
+        "slag": -0.0428,
+        "flyash": -0.1589,
+        "water": 0.2793,
+        "superplasticizer": -0.1941,
+        "coarseaggregate": -0.0053,
+        "fineaggregate": -0.1566,
+        "age": 1.0,
+        "csMPa": 0.3374
+      },
+      "csMPa": {
+        "cement": 0.4883,
+        "slag": 0.1034,
+        "flyash": -0.0806,
+        "water": -0.2696,
+        "superplasticizer": 0.3442,
+        "coarseaggregate": -0.1447,
+        "fineaggregate": -0.1865,
+        "age": 0.3374,
+        "csMPa": 1.0
+      }
+    },
+    "with_target": {
+      "cement": 0.4883,
+      "slag": 0.1034,
+      "flyash": -0.0806,
+      "water": -0.2696,
+      "superplasticizer": 0.3442,
+      "coarseaggregate": -0.1447,
+      "fineaggregate": -0.1865,
+      "age": 0.3374,
+      "csMPa": 1.0
+    }
+  },
+  "scaling_comparison": {
+    "standard_scaler": {
+      "cement": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -1.6936,
+        "max": 2.5061
+      },
+      "slag": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -0.8365,
+        "max": 3.3364
+      },
+      "flyash": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -0.8654,
+        "max": 2.2526
+      },
+      "water": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -2.8281,
+        "max": 3.0438
+      },
+      "superplasticizer": {
+        "mean": 0.0,
+        "std": 1.0005,
+        "min": -1.0194,
+        "max": 4.4229
+      },
+      "coarseaggregate": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -2.2359,
+        "max": 2.2004
+      },
+      "fineaggregate": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -2.2252,
+        "max": 2.7387
+      },
+      "age": {
+        "mean": -0.0,
+        "std": 1.0005,
+        "min": -0.7042,
+        "max": 5.0099
+      }
+    },
+    "minmax_scaler": {
+      "cement": {
+        "mean": 0.4033,
+        "std": 0.2382,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "slag": {
+        "mean": 0.2005,
+        "std": 0.2398,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "flyash": {
+        "mean": 0.2775,
+        "std": 0.3209,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "water": {
+        "mean": 0.4816,
+        "std": 0.1704,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "superplasticizer": {
+        "mean": 0.1873,
+        "std": 0.1838,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "coarseaggregate": {
+        "mean": 0.504,
+        "std": 0.2255,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "fineaggregate": {
+        "mean": 0.4483,
+        "std": 0.2016,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "age": {
+        "mean": 0.1232,
+        "std": 0.1751,
+        "min": 0.0,
+        "max": 1.0
+      }
+    },
+    "method_chosen": "StandardScaler",
+    "justification": "StandardScaler zachovává tvar rozdělení a nulové vycentrování (mean=0, std=1), což je ideální pro lineární modely s L1/L2 regularizací (Ridge, Lasso, ElasticNet) i neuronové sítě. Na rozdíl od MinMaxScaler není náchylný na kompresi intervalu odlehlými hodnotami."
+  },
+  "sample_head_raw": [
+    {
+      "cement": 540.0,
+      "slag": 0.0,
+      "flyash": 0.0,
+      "water": 162.0,
+      "superplasticizer": 2.5,
+      "coarseaggregate": 1040.0,
+      "fineaggregate": 676.0,
+      "age": 28,
+      "csMPa": 79.99
+    },
+    {
+      "cement": 540.0,
+      "slag": 0.0,
+      "flyash": 0.0,
+      "water": 162.0,
+      "superplasticizer": 2.5,
+      "coarseaggregate": 1055.0,
+      "fineaggregate": 676.0,
+      "age": 28,
+      "csMPa": 61.89
+    },
+    {
+      "cement": 332.5,
+      "slag": 142.5,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 594.0,
+      "age": 270,
+      "csMPa": 40.27
+    },
+    {
+      "cement": 332.5,
+      "slag": 142.5,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 594.0,
+      "age": 365,
+      "csMPa": 41.05
+    },
+    {
+      "cement": 198.6,
+      "slag": 132.4,
+      "flyash": 0.0,
+      "water": 192.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 978.4,
+      "fineaggregate": 825.5,
+      "age": 360,
+      "csMPa": 44.3
+    },
+    {
+      "cement": 266.0,
+      "slag": 114.0,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 670.0,
+      "age": 90,
+      "csMPa": 47.03
+    },
+    {
+      "cement": 380.0,
+      "slag": 95.0,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 594.0,
+      "age": 365,
+      "csMPa": 43.7
+    },
+    {
+      "cement": 380.0,
+      "slag": 95.0,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 594.0,
+      "age": 28,
+      "csMPa": 36.45
+    },
+    {
+      "cement": 266.0,
+      "slag": 114.0,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 670.0,
+      "age": 28,
+      "csMPa": 45.85
+    },
+    {
+      "cement": 475.0,
+      "slag": 0.0,
+      "flyash": 0.0,
+      "water": 228.0,
+      "superplasticizer": 0.0,
+      "coarseaggregate": 932.0,
+      "fineaggregate": 594.0,
+      "age": 28,
+      "csMPa": 39.29
+    }
+  ],
+  "sample_head_scaled": [
+    {
+      "cement": 2.51,
+      "slag": -0.84,
+      "flyash": -0.87,
+      "water": -0.94,
+      "superplasticizer": -0.6,
+      "coarseaggregate": 0.85,
+      "fineaggregate": -1.2,
+      "age": -0.28,
+      "csMPa": 79.99
+    },
+    {
+      "cement": 2.51,
+      "slag": -0.84,
+      "flyash": -0.87,
+      "water": -0.94,
+      "superplasticizer": -0.6,
+      "coarseaggregate": 1.04,
+      "fineaggregate": -1.2,
+      "age": -0.28,
+      "csMPa": 61.89
+    },
+    {
+      "cement": 0.52,
+      "slag": 0.82,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -2.23,
+      "age": 3.52,
+      "csMPa": 40.27
+    },
+    {
+      "cement": 0.52,
+      "slag": 0.82,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -2.23,
+      "age": 5.01,
+      "csMPa": 41.05
+    },
+    {
+      "cement": -0.77,
+      "slag": 0.7,
+      "flyash": -0.87,
+      "water": 0.47,
+      "superplasticizer": -1.02,
+      "coarseaggregate": 0.05,
+      "fineaggregate": 0.66,
+      "age": 4.93,
+      "csMPa": 44.3
+    },
+    {
+      "cement": -0.12,
+      "slag": 0.49,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -1.28,
+      "age": 0.69,
+      "csMPa": 47.03
+    },
+    {
+      "cement": 0.97,
+      "slag": 0.27,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -2.23,
+      "age": 5.01,
+      "csMPa": 43.7
+    },
+    {
+      "cement": 0.97,
+      "slag": 0.27,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -2.23,
+      "age": -0.28,
+      "csMPa": 36.45
+    },
+    {
+      "cement": -0.12,
+      "slag": 0.49,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -1.28,
+      "age": -0.28,
+      "csMPa": 45.85
+    },
+    {
+      "cement": 1.88,
+      "slag": -0.84,
+      "flyash": -0.87,
+      "water": 2.15,
+      "superplasticizer": -1.02,
+      "coarseaggregate": -0.55,
+      "fineaggregate": -2.23,
+      "age": -0.28,
+      "csMPa": 39.29
+    }
+  ]
+}

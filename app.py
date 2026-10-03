@@ -70,6 +70,10 @@ p_extra_ccp = st.Page("views/01_extras_ccp_pruning.py", title="Prořezávání s
 p_extra_chooser = st.Page("views/01_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🔬")
 p_extra_cheat = st.Page("views/01_extras_cheatsheet.py", title="Tahák do kapsy: Scikit-learn Cheatsheet ke stažení", icon="📖")
 
+# Homework: Regrese (Beton)
+p_hw_concrete_prep = st.Page("views/01_homework_concrete_preprocessing.py", title="Příprava dat (Pevnost betonu)", icon="🧱", url_path="hw_concrete_prep")
+p_hw_concrete_nb = st.Page("views/01_homework_concrete_preprocessing_nb.py", title="Příprava dat – Notebook", icon="🐍", url_path="hw_concrete_nb")
+
 # =============================================================================
 # DEN 2: KLASIFIKACE (CLASSIFICATION)
 # =============================================================================
@@ -194,6 +198,10 @@ nav = st.navigation(
             p_extra_ccp,
             p_extra_chooser,
             p_extra_cheat,
+        ],
+        "Homework: Regrese (Beton)": [
+            p_hw_concrete_prep,
+            p_hw_concrete_nb,
         ],
         "08. Den 2: K-Nearest Neighbors (k-NN)": [
             p_knn_theory,
