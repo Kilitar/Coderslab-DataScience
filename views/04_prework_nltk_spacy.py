@@ -15,7 +15,32 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
-# Import NLTK komponent
+import os
+import warnings
+from pathlib import Path
+
+# Bezpečná a tichá inicializace NLTK zdrojů
+@st.cache_resource
+def init_nltk():
+    try:
+        import nltk
+        # Použijeme explicitně privátní domovský adresář ~/nltk_data pro eliminaci UserWarning na Streamlit Cloud
+        nltk_data_dir = Path.home() / "nltk_data"
+        nltk_data_dir.mkdir(parents=True, exist_ok=True)
+        data_dir_str = str(nltk_data_dir)
+        if data_dir_str not in nltk.data.path:
+            nltk.data.path.insert(0, data_dir_str)
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            for res_name in ["punkt", "punkt_tab", "averaged_perceptron_tagger", "stopwords", "wordnet", "vader_lexicon"]:
+                nltk.download(res_name, download_dir=data_dir_str, quiet=True)
+        return True
+    except Exception:
+        return False
+
+NLTK_AVAILABLE = init_nltk()
+
 try:
     import nltk
     from nltk.tokenize import word_tokenize, sent_tokenize
@@ -23,11 +48,6 @@ try:
     from nltk.corpus import stopwords
     from nltk.stem import PorterStemmer, WordNetLemmatizer
     from nltk.sentiment import SentimentIntensityAnalyzer
-
-    # Tiché zajištění základních balíčků
-    for res in ["punkt", "punkt_tab", "averaged_perceptron_tagger", "stopwords", "wordnet", "vader_lexicon"]:
-        nltk.download(res, quiet=True)
-    NLTK_AVAILABLE = True
 except Exception:
     NLTK_AVAILABLE = False
 
