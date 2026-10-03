@@ -139,6 +139,8 @@ p_hw_concrete_lr = st.Page("views/01_homework_concrete_linear_regression.py", ti
 p_hw_concrete_lr_nb = st.Page("views/01_homework_concrete_linear_regression_nb.py", title="Regrese: Lineární model – Notebook", icon="🐍", url_path="hw_concrete_lr_nb")
 p_hw_concrete_reg = st.Page("views/01_homework_concrete_regularization.py", title="Regrese: Regularizace (Beton)", icon="🎯", url_path="hw_concrete_reg")
 p_hw_concrete_reg_nb = st.Page("views/01_homework_concrete_regularization_nb.py", title="Regrese: Regularizace – Notebook", icon="🐍", url_path="hw_concrete_reg_nb")
+p_hw_concrete_tree = st.Page("views/01_homework_concrete_decision_tree.py", title="Regrese: Rozhodovací strom (Beton)", icon="🌳", url_path="hw_concrete_tree")
+p_hw_concrete_tree_nb = st.Page("views/01_homework_concrete_decision_tree_nb.py", title="Regrese: Strom (Beton) – Notebook", icon="🐍", url_path="hw_concrete_tree_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -267,6 +269,8 @@ nav = st.navigation(
             p_hw_concrete_lr_nb,
             p_hw_concrete_reg,
             p_hw_concrete_reg_nb,
+            p_hw_concrete_tree,
+            p_hw_concrete_tree_nb,
         ],
     }
 )

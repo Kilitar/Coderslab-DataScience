@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "task": "Homework: Decision tree (regression) - exercise 1 (Concrete)",
+    "model": "DecisionTreeRegressor",
+    "train_samples": 703,
+    "test_samples": 302,
+    "features": [
+      "cement",
+      "slag",
+      "flyash",
+      "water",
+      "superplasticizer",
+      "coarseaggregate",
+      "fineaggregate",
+      "age"
+    ],
+    "feature_descriptions": {
+      "cement": "Obsah cementu (kg/m³)",
+      "slag": "Obsah vysokopecní strusky (kg/m³)",
+      "flyash": "Obsah popílku (kg/m³)",
+      "water": "Obsah záměsové vody (kg/m³)",
+      "superplasticizer": "Obsah superplastifikátoru (kg/m³)",
+      "coarseaggregate": "Obsah hrubého kameniva / štěrku (kg/m³)",
+      "fineaggregate": "Obsah jemného kameniva / písku (kg/m³)",
+      "age": "Doba zrání betonu (dny)"
+    },
+    "target": "csMPa"
+  },
+  "best_hyperparams": {
+    "criterion": "squared_error",
+    "max_depth": null,
+    "min_samples_leaf": 1
+  },
+  "best_cv_mae": 4.9884,
+  "metrics": {
+    "train": {
+      "r2": 0.9968
+    },
+    "test": {
+      "r2": 0.8475,
+      "mse": 43.8321,
+      "rmse": 6.6206,
+      "mae": 4.4025,
+      "mape": 15.3
+    },
+    "ols_comparison": {
+      "r2": 0.5608,
+      "rmse": 11.2351,
+      "mae": 8.9847,
+      "r2_improvement": 28.67,
+      "rmse_reduction": 4.6145,
+      "mae_reduction": 4.5822
+    }
+  },
+  "feature_importances": {
+    "cement": 0.3609,
+    "age": 0.3169,
+    "water": 0.1207,
+    "slag": 0.1064,
+    "superplasticizer": 0.0333,
+    "fineaggregate": 0.0265,
+    "coarseaggregate": 0.0255,
+    "flyash": 0.0098
+  },
+  "sample_predictions": [
+    {
+      "cement": -1.207453634166037,
+      "water": -0.1863270417491156,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 19.01,
+      "Predikce Strom csMPa": 19.01,
+      "Predikce OLS csMPa": 23.28,
+      "Chyba Stromu (Abs)": 0.0,
+      "Chyba OLS (Abs)": 4.27
+    },
+    {
+      "cement": -1.496063395172903,
+      "water": 1.0044773382295205,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 24.29,
+      "Predikce Strom csMPa": 28.24,
+      "Predikce OLS csMPa": 16.81,
+      "Chyba Stromu (Abs)": 3.95,
+      "Chyba OLS (Abs)": 7.48
+    },
+    {
+      "cement": -1.2045771249201211,
+      "water": 0.4653336228848624,
+      "age": 0.692954820271138,
+      "Skutečnost csMPa": 26.32,
+      "Predikce Strom csMPa": 17.96,
+      "Predikce OLS csMPa": 22.9,
+      "Chyba Stromu (Abs)": 8.36,
+      "Chyba OLS (Abs)": 3.42
+    },
+    {
+      "cement": 1.9308179531278948,
+      "water": 0.4653336228848624,
+      "age": -0.6099670608242767,
+      "Skutečnost csMPa": 34.57,
+      "Predikce Strom csMPa": 42.42,
+      "Predikce OLS csMPa": 36.82,
+      "Chyba Stromu (Abs)": 7.85,
+      "Chyba OLS (Abs)": 2.25
+    },
+    {
+      "cement": 2.123544072604241,
+      "water": 0.8403901205159289,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 44.13,
+      "Predikce Strom csMPa": 44.09,
+      "Predikce OLS csMPa": 42.36,
+      "Chyba Stromu (Abs)": 0.04,
+      "Chyba OLS (Abs)": 1.77
+    },
+    {
+      "cement": -0.6388636398900509,
+      "water": 1.0044773382295205,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 33.0,
+      "Predikce Strom csMPa": 30.44,
+      "Predikce OLS csMPa": 22.01,
+      "Chyba Stromu (Abs)": 2.56,
+      "Chyba OLS (Abs)": 10.99
+    },
+    {
+      "cement": -1.693583696725775,
+      "water": 0.4653336228848624,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 17.28,
+      "Predikce Strom csMPa": 22.35,
+      "Predikce OLS csMPa": 15.12,
+      "Chyba Stromu (Abs)": 5.07,
+      "Chyba OLS (Abs)": 2.16
+    },
+    {
+      "cement": -0.3742247892658147,
+      "water": 0.1699766310003971,
+      "age": -0.6099670608242767,
+      "Skutečnost csMPa": 25.42,
+      "Predikce Strom csMPa": 20.42,
+      "Predikce OLS csMPa": 45.21,
+      "Chyba Stromu (Abs)": 5.0,
+      "Chyba OLS (Abs)": 19.79
+    },
+    {
+      "cement": -0.6221798862637403,
+      "water": -1.2791479117216351,
+      "age": -0.500082082900567,
+      "Skutečnost csMPa": 33.73,
+      "Predikce Strom csMPa": 33.7,
+      "Predikce OLS csMPa": 33.09,
+      "Chyba Stromu (Abs)": 0.03,
+      "Chyba OLS (Abs)": 0.64
+    },
+    {
+      "cement": 0.9144513529043792,
+      "water": -0.561383539380182,
+      "age": -0.6727584767806822,
+      "Skutečnost csMPa": 34.4,
+      "Predikce Strom csMPa": 23.64,
+      "Predikce OLS csMPa": 50.67,
+      "Chyba Stromu (Abs)": 10.76,
+      "Chyba OLS (Abs)": 16.27
+    }
+  ],
+  "tree_stats": {
+    "depth": 18,
+    "n_leaves": 672
+  }
+}
