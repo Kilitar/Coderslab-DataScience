@@ -156,9 +156,10 @@ p_hw_diabetes_svm_nb = st.Page("views/02_homework_diabetes_svm_nb.py", title="Kl
 p_hw_session1_synthesis = st.Page("views/02_homework_session1_modern_synthesis.py", title="Syntéza Session 1: SOTA 2026", icon="🚀", url_path="hw_session1_synthesis")
 
 # =============================================================================
-# PREWORK SESSION 2: PŘÍPRAVA PŘED DNEM 3 (NEURONOVÉ SÍTĚ)
+# PREWORK SESSION 2: PŘÍPRAVA NA DNY 3 A 4 (SÍTĚ & NLP)
 # =============================================================================
 p_prework_nn_intro = st.Page("views/03_prework_neural_networks_intro.py", title="Prework: Neuronové sítě", icon="🧠", url_path="prework_nn_intro")
+p_prework_nlp_intro = st.Page("views/04_prework_nlp_intro.py", title="Prework: Úvod do NLP", icon="🗣️", url_path="prework_nlp_intro")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -301,8 +302,9 @@ nav = st.navigation(
             p_hw_diabetes_svm_nb,
             p_hw_session1_synthesis,
         ],
-        "15. Prework Session 2: Neuronové sítě": [
+        "15. Prework Session 2: Příprava (Dny 3–4)": [
             p_prework_nn_intro,
+            p_prework_nlp_intro,
         ],
     }
 )
