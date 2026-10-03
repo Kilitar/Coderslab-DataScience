@@ -158,7 +158,7 @@ st.dataframe(comp_df, width="stretch", hide_index=True)
 
 # Interaktivní posuvník hloubky
 st.markdown("#### Interaktivní simulátor: Vliv `max_depth` na jednotlivé metriky")
-sel_d = st.slider("Zvolte maximální hloubku (`max_depth`):", min_value=1, min_value_step=1, max_value=10, value=4)
+sel_d = st.slider("Zvolte maximální hloubku (`max_depth`):", min_value=1, max_value=10, value=4, step=1)
 sel_row = depth_sweep[depth_sweep["depth"] == sel_d].iloc[0]
 
 c1, c2, c3, c4 = st.columns(4)
