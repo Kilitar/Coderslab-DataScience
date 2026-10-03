@@ -162,6 +162,11 @@ p_prework_nn_intro = st.Page("views/03_prework_neural_networks_intro.py", title=
 p_prework_nlp_intro = st.Page("views/04_prework_nlp_intro.py", title="Prework: Úvod do NLP", icon="🗣️", url_path="prework_nlp_intro")
 p_prework_nltk_spacy = st.Page("views/04_prework_nltk_spacy.py", title="Prework: NLTK a spaCy", icon="🛠️", url_path="prework_nltk_spacy")
 
+# =============================================================================
+# DEN 3: POKROČILÉ MODELY ML & ANSÁMBLY
+# =============================================================================
+p_ensemble_bagging_theory = st.Page("views/03_ensemble_bagging_theory.py", title="Teorie: Ansámbly & Bagging", icon="📖", url_path="ensemble_bagging_theory")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -307,6 +312,9 @@ nav = st.navigation(
             p_prework_nn_intro,
             p_prework_nlp_intro,
             p_prework_nltk_spacy,
+        ],
+        "16. Den 3: Ansámbly & Bagging": [
+            p_ensemble_bagging_theory,
         ],
     }
 )

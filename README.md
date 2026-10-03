@@ -294,7 +294,8 @@ Coderslab-DataScience/
 │   └── theory/
 │       ├── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
 │       ├── 02_hyperparameter_optimization_implementation_guide.md # Detailní implementační průvodce (Scikit-learn & Hyperopt)
-│       └── 03_introduction_to_neural_networks.md # Prework Session 2: Teorie neuronových sítí, 6 aktivačních funkcí, mizející gradient, typologie
+│       ├── 03_introduction_to_neural_networks.md # Prework Session 2: Teorie neuronových sítí, 6 aktivačních funkcí, mizející gradient, typologie
+│       └── 04_ensemble_methods_and_bagging_theory.md # Den 3: Teorie ansámblů, Bias-Variance kompromis, Voting, Stacking, Bagging, Boosting
 ├── 04_NLP/                              # Sekce Natural Language Processing (Dny 3 a 4)
 │   └── theory/
 │       ├── 01_introduction_to_nlp.md    # Prework Session 2: Principy NLP, pipeline, Stemming/Lemmatizace, TF-IDF, Word2Vec, 11 aplikací
@@ -338,7 +339,8 @@ Coderslab-DataScience/
     ├── 02_homework_session1_modern_synthesis.py # Syntéza Session 1: SOTA Benchmark 2026 (XGBoost, HistGradientBoosting, Cost Matrix, Paradigmy)
     ├── 03_prework_neural_networks_intro.py # Prework Session 2: Interaktivní playground neuronu, aktivační funkce, kalkulátor ceny auta a kvíz
     ├── 04_prework_nlp_intro.py          # Prework Session 2: Interaktivní pipeline simulátor, Stemming vs Lemma, Word2Vec mapa, 11 aplikací
-    └── 04_prework_nltk_spacy.py         # Prework Session 2: Laboratoř NLTK vs. spaCy (metody, VADER, NER, POS rozdělení, benchmarky)
+    ├── 04_prework_nltk_spacy.py         # Prework Session 2: Laboratoř NLTK vs. spaCy (metody, VADER, NER, POS rozdělení, benchmarky)
+    └── 03_ensemble_bagging_theory.py    # Den 3: Teorie ansámblů & Bagging (Bias-Variance kalkulátor, Bootstrapping simulátor, Heart test)
 ```
 
 ---
