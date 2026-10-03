@@ -201,11 +201,14 @@ Coderslab-DataScience/
 │   ├── 15_homework_diabetes_preprocessing.ipynb # Vypracovaný a spuštěný Jupyter Notebook přípravy diabetu
 │   ├── 16_homework_diabetes_knn.py       # Homework: k-NN klasifikace diabetu (GridSearchCV n_neighbors & metric, F1 vs Recall)
 │   ├── 16_homework_diabetes_knn.ipynb    # Vypracovaný a spuštěný Jupyter Notebook cvičení k-NN
+│   ├── 17_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearchCV C, Odds Ratios)
+│   ├── 17_homework_diabetes_logistic_regression.ipynb # Vypracovaný a spuštěný Jupyter Notebook LogReg
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar, Diabetes) a JSON cache
 │   │   ├── diabetes.csv                 # Původní Pima Indians Diabetes dataset
 │   │   ├── diabetes_scaled.csv          # Výsledný předzpracovaný a standardizovaný dataset
 │   │   ├── diabetes_preprocessing_precomputed.json # Předpočtené statistiky, korelace a škálování
 │   │   ├── diabetes_knn_precomputed.json # Předpočtený k-NN grid search, k-sweep, ROC křivka a matice záměn
+│   │   ├── diabetes_logistic_precomputed.json # Předpočtené výsledky RandomizedSearchCV LogReg, Odds Ratios a srovnání
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
@@ -317,7 +320,9 @@ Coderslab-DataScience/
     ├── 02_homework_diabetes_preprocessing.py # Homework: Příprava dat pro klasifikaci (Diabetes – imputace, nulové hodnoty, škálování)
     ├── 02_homework_diabetes_preprocessing_nb.py # Homework: Příprava dat pro klasifikaci (Diabetes) – interaktivní notebook
     ├── 02_homework_diabetes_knn.py      # Homework: k-NN klasifikace diabetu (GridSearch heatmapa, K-sweep, ROC, práh)
-    └── 02_homework_diabetes_knn_nb.py   # Homework: k-NN klasifikace diabetu – interaktivní notebook
+    ├── 02_homework_diabetes_knn_nb.py   # Homework: k-NN klasifikace diabetu – interaktivní notebook
+    ├── 02_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearch C, Odds Ratios, srovnání)
+    └── 02_homework_diabetes_logistic_regression_nb.py # Homework: Logistická regrese diabetu – interaktivní notebook
 ```
 
 ---
