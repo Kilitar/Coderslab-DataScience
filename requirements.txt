@@ -25,6 +25,7 @@ pypdf>=5.0.0
 # Natural Language Processing (Session 2 / Days 3 & 4)
 nltk>=3.9.0
 spacy>=3.8.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
 
 # Note: Heavy libraries for future blocks (Torch, Gensim, Transformers, Kaggle, Jupyter)
 # can be installed locally via .venv or uncommented when reaching Deep Learning & NLP blocks:
