@@ -75,6 +75,8 @@ p_hw_concrete_prep = st.Page("views/01_homework_concrete_preprocessing.py", titl
 p_hw_concrete_nb = st.Page("views/01_homework_concrete_preprocessing_nb.py", title="Příprava dat – Notebook", icon="🐍", url_path="hw_concrete_nb")
 p_hw_concrete_lr = st.Page("views/01_homework_concrete_linear_regression.py", title="Lineární regrese (Pevnost betonu)", icon="📈", url_path="hw_concrete_lr")
 p_hw_concrete_lr_nb = st.Page("views/01_homework_concrete_linear_regression_nb.py", title="Lineární regrese – Notebook", icon="🐍", url_path="hw_concrete_lr_nb")
+p_hw_concrete_reg = st.Page("views/01_homework_concrete_regularization.py", title="Regularizace (Pevnost betonu)", icon="🎯", url_path="hw_concrete_reg")
+p_hw_concrete_reg_nb = st.Page("views/01_homework_concrete_regularization_nb.py", title="Regularizace – Notebook", icon="🐍", url_path="hw_concrete_reg_nb")
 
 # =============================================================================
 # DEN 2: KLASIFIKACE (CLASSIFICATION)
@@ -206,6 +208,8 @@ nav = st.navigation(
             p_hw_concrete_nb,
             p_hw_concrete_lr,
             p_hw_concrete_lr_nb,
+            p_hw_concrete_reg,
+            p_hw_concrete_reg_nb,
         ],
         "08. Den 2: K-Nearest Neighbors (k-NN)": [
             p_knn_theory,

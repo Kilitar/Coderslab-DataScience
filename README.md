@@ -153,6 +153,8 @@ Coderslab-DataScience/
 │   ├── 10_homework_concrete_preprocessing.ipynb # Vypracovaný a spuštěný Jupyter Notebook přípravy dat
 │   ├── 11_homework_concrete_linear_regression.py # DÚ: Lineární regrese na betonu (70/30, linear_reg, R2=56.1 %, RMSE=11.24 MPa)
 │   ├── 11_homework_concrete_linear_regression.ipynb # Vypracovaný a spuštěný Jupyter Notebook lineární regrese
+│   ├── 12_homework_concrete_regularization.py # DÚ: Regularizace na betonu (ElasticNet R2=56.2 % i LogisticRegression Acc=83.8 %)
+│   ├── 12_homework_concrete_regularization.ipynb # Vypracovaný a spuštěný Jupyter Notebook regularizace
 │   ├── data/                            # Datové sady (CSV) a optimalizované JSON cache
 │   │   ├── kc_house_data.csv
 │   │   ├── diamonds.csv
@@ -160,6 +162,7 @@ Coderslab-DataScience/
 │   │   ├── concrete_data_preprocessed.csv # Očištěný a standardizovaný dataset (1005 unikátních vzorků)
 │   │   ├── concrete_preprocessing_precomputed.json # Předpočtená cache přípravy dat
 │   │   ├── concrete_linear_regression_precomputed.json # Předpočtená cache lineární regrese
+│   │   ├── concrete_regularization_precomputed.json # Předpočtená cache regularizace
 │   │   ├── diamonds_poly_precomputed.json
 │   │   └── kc_time_analysis_precomputed.json
 │   └── theory/                          # Detailní teoretické průvodce a rekapitulace
@@ -276,6 +279,8 @@ Coderslab-DataScience/
     ├── 01_homework_concrete_preprocessing_nb.py # Homework: Příprava dat betonu – interaktivní notebook
     ├── 01_homework_concrete_linear_regression.py # Homework: Lineární regrese betonu (70/30, metriky, koeficienty, rezidua)
     ├── 01_homework_concrete_linear_regression_nb.py # Homework: Lineární regrese betonu – interaktivní notebook
+    ├── 01_homework_concrete_regularization.py # Homework: Regularizace betonu (ElasticNet R2=56.2 %, LogReg Acc=83.8 %)
+    ├── 01_homework_concrete_regularization_nb.py # Homework: Regularizace betonu – interaktivní notebook
     ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Výsledky, Expertní analýzy, Notebooky)
     ├── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, Multiclass evaluace, Expertní analýzy & Cost matrix, Notebooky)
     ├── 02_logistic_regression_*.py      # Den 2 moduly logistické regrese (Teorie, Ukázková laboratoř & Simulátory, Notebook)

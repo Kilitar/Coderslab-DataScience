@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "task": "Homework: Linear regression with regularization (Concrete)",
+    "conflict_explanation": "Zadání obsahuje copy-paste rozpor mezi titulkem (Linear regression with regularization) a tělem textu (LogisticRegression, C, penalty, classifier). Poskytujeme primární regresní řešení (ElasticNet pokrývající L1/L2) i doslovné klasifikační řešení (LogisticRegression na binarizované pevnosti csMPa >= 35 MPa).",
+    "train_samples": 703,
+    "test_samples": 302,
+    "features": [
+      "cement",
+      "slag",
+      "flyash",
+      "water",
+      "superplasticizer",
+      "coarseaggregate",
+      "fineaggregate",
+      "age"
+    ],
+    "feature_descriptions": {
+      "cement": "Obsah cementu (kg/m³)",
+      "slag": "Obsah vysokopecní strusky (kg/m³)",
+      "flyash": "Obsah popílku (kg/m³)",
+      "water": "Obsah záměsové vody (kg/m³)",
+      "superplasticizer": "Obsah superplastifikátoru (kg/m³)",
+      "coarseaggregate": "Obsah hrubého kameniva / štěrku (kg/m³)",
+      "fineaggregate": "Obsah jemného kameniva / písku (kg/m³)",
+      "age": "Doba zrání betonu (dny)"
+    }
+  },
+  "regression_solution": {
+    "metrics": {
+      "ols": {
+        "r2": 0.5608,
+        "rmse": 11.2351,
+        "mae": 8.9847
+      },
+      "elastic_net": {
+        "best_params": {
+          "alpha": 0.002359,
+          "l1_ratio": 0.077
+        },
+        "train": {
+          "r2": 0.622,
+          "rmse": 9.8202,
+          "mae": 7.7886
+        },
+        "test": {
+          "r2": 0.5617,
+          "rmse": 11.2247,
+          "mae": 8.9849
+        }
+      },
+      "ridge": {
+        "test_r2": 0.5614,
+        "test_rmse": 11.2279
+      },
+      "lasso": {
+        "test_r2": 0.5637,
+        "test_rmse": 11.199
+      }
+    },
+    "coefficients": {
+      "cement": {
+        "ols": 12.7909,
+        "elastic_net": 12.3827,
+        "ridge": 12.5212,
+        "lasso": 10.7525
+      },
+      "slag": {
+        "ols": 9.2297,
+        "elastic_net": 8.8201,
+        "ridge": 8.9591,
+        "lasso": 7.138
+      },
+      "flyash": {
+        "ols": 6.0528,
+        "elastic_net": 5.6934,
+        "ridge": 5.8154,
+        "lasso": 4.2307
+      },
+      "water": {
+        "ols": -2.3174,
+        "elastic_net": -2.6058,
+        "ridge": -2.5087,
+        "lasso": -3.7476
+      },
+      "superplasticizer": {
+        "ols": 2.0587,
+        "elastic_net": 2.0471,
+        "ridge": 2.0507,
+        "lasso": 1.9489
+      },
+      "coarseaggregate": {
+        "ols": 1.4404,
+        "elastic_net": 1.155,
+        "ridge": 1.2516,
+        "lasso": -0.0
+      },
+      "fineaggregate": {
+        "ols": 2.3869,
+        "elastic_net": 2.0134,
+        "ridge": 2.1398,
+        "lasso": 0.4377
+      },
+      "age": {
+        "ols": 7.1289,
+        "elastic_net": 7.0906,
+        "ridge": 7.1039,
+        "lasso": 6.8811
+      }
+    }
+  },
+  "classification_solution": {
+    "threshold_mpa": 35.0,
+    "best_params": {
+      "C": 0.169498,
+      "penalty": "l1"
+    },
+    "test": {
+      "accuracy": 0.8377,
+      "precision": 0.8623,
+      "recall": 0.7987,
+      "f1": 0.8293,
+      "confusion_matrix": [
+        [
+          134,
+          19
+        ],
+        [
+          30,
+          119
+        ]
+      ]
+    },
+    "coefficients": {
+      "cement": 1.3402,
+      "slag": 0.6638,
+      "flyash": 0.2773,
+      "water": -0.4641,
+      "superplasticizer": 0.6427,
+      "coarseaggregate": 0.0,
+      "fineaggregate": -0.2654,
+      "age": 1.9451
+    },
+    "intercept": 0.1829
+  }
+}
