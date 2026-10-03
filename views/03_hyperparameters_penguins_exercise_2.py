@@ -263,20 +263,19 @@ optimal_svc.fit(X_train, y_train)
         if not trials_df.empty:
             fig_scatter_trials = px.scatter(
                 trials_df,
-                x="param_C",
-                y="param_gamma",
-                color="mean_precision_macro",
-                symbol="param_kernel",
-                size="mean_accuracy",
+                x="C",
+                y="gamma",
+                color="mean_cv_precision",
+                symbol="kernel",
                 color_continuous_scale="Viridis",
                 log_x=True,
                 log_y=True,
-                hover_data=["param_kernel", "param_degree", "rank_test_score"],
+                hover_data=["iter", "degree", "kernel"],
                 labels={
-                    "param_C": "Regularizační parametr C (log scale)",
-                    "param_gamma": "Šířka jádra Gamma (log scale)",
-                    "mean_precision_macro": "Validační Precision",
-                    "param_kernel": "Jádro (Kernel)"
+                    "C": "Regularizační parametr C (log scale)",
+                    "gamma": "Šířka jádra Gamma (log scale)",
+                    "mean_cv_precision": "Validační Precision",
+                    "kernel": "Jádro (Kernel)"
                 },
                 title="50 náhodných pokusů v RandomizedSearchCV (Barevně: Precision, Tvar: Kernel)"
             )
