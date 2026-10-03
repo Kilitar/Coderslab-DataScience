@@ -293,7 +293,8 @@ Coderslab-DataScience/
 │   │   └── penguins_random_search_distribution.png # Rozložení náhodně vzorkovaných parametrů C a gamma
 │   └── theory/
 │       ├── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
-│       └── 02_hyperparameter_optimization_implementation_guide.md # Detailní implementační průvodce (Scikit-learn & Hyperopt)
+│       ├── 02_hyperparameter_optimization_implementation_guide.md # Detailní implementační průvodce (Scikit-learn & Hyperopt)
+│       └── 03_introduction_to_neural_networks.md # Prework Session 2: Teorie neuronových sítí, 6 aktivačních funkcí, mizející gradient, typologie
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
@@ -330,7 +331,8 @@ Coderslab-DataScience/
     ├── 02_homework_diabetes_logistic_regression_nb.py # Homework: Logistická regrese diabetu – interaktivní notebook
     ├── 02_homework_diabetes_svm.py      # Homework: SVM klasifikace diabetu (Hyperopt konvergence, podpora, velké srovnání 3 modelů)
     ├── 02_homework_diabetes_svm_nb.py   # Homework: SVM klasifikace diabetu – interaktivní notebook
-    └── 02_homework_session1_modern_synthesis.py # Syntéza Session 1: SOTA Benchmark 2026 (XGBoost, HistGradientBoosting, Cost Matrix, Paradigmy)
+    ├── 02_homework_session1_modern_synthesis.py # Syntéza Session 1: SOTA Benchmark 2026 (XGBoost, HistGradientBoosting, Cost Matrix, Paradigmy)
+    └── 03_prework_neural_networks_intro.py # Prework Session 2: Interaktivní playground neuronu, aktivační funkce, kalkulátor ceny auta a kvíz
 ```
 
 ---

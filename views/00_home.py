@@ -59,9 +59,15 @@ course_data = [
         "Umístění": "02_Classification/",
     },
     {
-        "Blok": "Blok 2: Pokročilé ML modely",
-        "Téma": "Random Forest, XGBoost, Boosting & Bagging, Neuronové sítě",
-        "Stav": "Plánováno",
+        "Blok": "Mezi Dny 2 a 3: Homework & Prework",
+        "Téma": "Ladění hyperparametrů (Grid/Random/Bayes), Beton, Diabetes, Prework Neuronové sítě",
+        "Stav": "Dokončeno (Sekce 14–15)",
+        "Umístění": "01_Regression/, 02_Classification/, 03_Advanced_ML_Neural_Networks/",
+    },
+    {
+        "Blok": "Den 3–4: Pokročilé modely & Sítě",
+        "Téma": "Ensemble metody (Random Forest, XGBoost, CatBoost), Hluboké neuronové sítě (PyTorch/Keras)",
+        "Stav": "Aktivní",
         "Umístění": "03_Advanced_ML_Neural_Networks/",
     },
     {
