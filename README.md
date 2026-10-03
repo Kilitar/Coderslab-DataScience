@@ -203,12 +203,15 @@ Coderslab-DataScience/
 │   ├── 16_homework_diabetes_knn.ipynb    # Vypracovaný a spuštěný Jupyter Notebook cvičení k-NN
 │   ├── 17_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearchCV C, Odds Ratios)
 │   ├── 17_homework_diabetes_logistic_regression.ipynb # Vypracovaný a spuštěný Jupyter Notebook LogReg
+│   ├── 18_homework_diabetes_svm.py       # Homework: SVM klasifikace diabetu (Bayesovská optimalizace Hyperopt, srovnání 3 modelů)
+│   ├── 18_homework_diabetes_svm.ipynb    # Vypracovaný a spuštěný Jupyter Notebook SVM
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar, Diabetes) a JSON cache
 │   │   ├── diabetes.csv                 # Původní Pima Indians Diabetes dataset
 │   │   ├── diabetes_scaled.csv          # Výsledný předzpracovaný a standardizovaný dataset
 │   │   ├── diabetes_preprocessing_precomputed.json # Předpočtené statistiky, korelace a škálování
 │   │   ├── diabetes_knn_precomputed.json # Předpočtený k-NN grid search, k-sweep, ROC křivka a matice záměn
 │   │   ├── diabetes_logistic_precomputed.json # Předpočtené výsledky RandomizedSearchCV LogReg, Odds Ratios a srovnání
+│   │   ├── diabetes_svm_precomputed.json # Předpočtené výsledky Bayesovské optimalizace Hyperopt a velké srovnání 3 modelů
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
@@ -322,7 +325,9 @@ Coderslab-DataScience/
     ├── 02_homework_diabetes_knn.py      # Homework: k-NN klasifikace diabetu (GridSearch heatmapa, K-sweep, ROC, práh)
     ├── 02_homework_diabetes_knn_nb.py   # Homework: k-NN klasifikace diabetu – interaktivní notebook
     ├── 02_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearch C, Odds Ratios, srovnání)
-    └── 02_homework_diabetes_logistic_regression_nb.py # Homework: Logistická regrese diabetu – interaktivní notebook
+    ├── 02_homework_diabetes_logistic_regression_nb.py # Homework: Logistická regrese diabetu – interaktivní notebook
+    ├── 02_homework_diabetes_svm.py      # Homework: SVM klasifikace diabetu (Hyperopt konvergence, podpora, velké srovnání 3 modelů)
+    └── 02_homework_diabetes_svm_nb.py   # Homework: SVM klasifikace diabetu – interaktivní notebook
 ```
 
 ---

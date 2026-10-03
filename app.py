@@ -151,6 +151,8 @@ p_hw_diabetes_knn = st.Page("views/02_homework_diabetes_knn.py", title="Klasifik
 p_hw_diabetes_knn_nb = st.Page("views/02_homework_diabetes_knn_nb.py", title="Klasifikace: k-NN – Notebook", icon="🐍", url_path="hw_diabetes_knn_nb")
 p_hw_diabetes_lr = st.Page("views/02_homework_diabetes_logistic_regression.py", title="Klasifikace: LogReg (Diabetes)", icon="🎯", url_path="hw_diabetes_lr")
 p_hw_diabetes_lr_nb = st.Page("views/02_homework_diabetes_logistic_regression_nb.py", title="Klasifikace: LogReg – Notebook", icon="🐍", url_path="hw_diabetes_lr_nb")
+p_hw_diabetes_svm = st.Page("views/02_homework_diabetes_svm.py", title="Klasifikace: SVM (Diabetes)", icon="🎯", url_path="hw_diabetes_svm")
+p_hw_diabetes_svm_nb = st.Page("views/02_homework_diabetes_svm_nb.py", title="Klasifikace: SVM – Notebook", icon="🐍", url_path="hw_diabetes_svm_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -289,6 +291,8 @@ nav = st.navigation(
             p_hw_diabetes_knn_nb,
             p_hw_diabetes_lr,
             p_hw_diabetes_lr_nb,
+            p_hw_diabetes_svm,
+            p_hw_diabetes_svm_nb,
         ],
     }
 )
