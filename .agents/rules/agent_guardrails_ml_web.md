@@ -89,3 +89,13 @@ Pro udržení čisté a profesionální hierarchie navigace musí každá strán
 - 🎓 `icon="🎓"`: **Závěrečné shrnutí & Kvíz** celého dne / modulu.
 - **ZÁKAZ:** Nikdy nenahrazovat standardní ikonu modelu 🎯 specifickými tematickými emotikony (např. 💎, 🌲, 🏠, 🚗), pokud to narušuje jednotnou strukturu trojice / čtveřice: `📖 Teorie` -> `🎯 Výsledky zadání` -> `🔬 Expertní analýza` -> `🐍 Notebook`.
 
+---
+
+## 6. ZÁKAZ statických grafů – VŽDY INTERAKTIVNÍ PLOTLY GRAFY (Kromě vzorových notebooků)
+
+### Pravidlo 6.1: Striktní zákaz statických screenshotů a obrázků ve views
+- **Kritické pravidlo:** Ve všech Streamlit pohledech (`views/`) **MUSÍ** být veškeré grafy, křivky chyb, matice záměn, rezidua, histogramy a prostory hyperparametrů vykresleny jako **plně interaktivní Plotly grafy** (`plotly.express` nebo `plotly.graph_objects`) s hover tooltips, zoomem, legendou a interaktivními filtry/slidery.
+- **PŘÍSNÝ ZÁKAZ:** Je zakázáno nahrazovat grafy statickými screenshoty z Colabu, PNG exporty z Matplotlibu/Seabornu nebo vkládat `st.image("plots/....png")` do běžných analytických pohledů.
+- **Jediná povolená výjimka:** Sekce vzorových notebooků a Colab sešitů (`render_jupyter_notebook` ve `*_nb.py`) a teoretické ilustrační diagramy v Markdownu, kde se zobrazuje přesný výstup školní buňky z Jupyteru.
+
+

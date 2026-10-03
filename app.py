@@ -144,9 +144,11 @@ p_hw_concrete_tree_nb = st.Page("views/01_homework_concrete_decision_tree_nb.py"
 p_hw_concrete_tree_rnd = st.Page("views/01_homework_concrete_decision_tree_random.py", title="Regrese: Strom (Randomized)", icon="🎲", url_path="hw_concrete_tree_rnd")
 p_hw_concrete_tree_rnd_nb = st.Page("views/01_homework_concrete_decision_tree_random_nb.py", title="Regrese: Random Strom – Notebook", icon="🐍", url_path="hw_concrete_tree_rnd_nb")
 
-# Část C: Klasifikace – Diabetes (Příprava dat a preprocessing)
+# Část C: Klasifikace – Diabetes (Příprava dat a klasifikační modely)
 p_hw_diabetes_prep = st.Page("views/02_homework_diabetes_preprocessing.py", title="Klasifikace: Příprava (Diabetes)", icon="🩺", url_path="hw_diabetes_prep")
 p_hw_diabetes_nb = st.Page("views/02_homework_diabetes_preprocessing_nb.py", title="Klasifikace: Příprava – Notebook", icon="🐍", url_path="hw_diabetes_nb")
+p_hw_diabetes_knn = st.Page("views/02_homework_diabetes_knn.py", title="Klasifikace: k-NN (Diabetes)", icon="🎯", url_path="hw_diabetes_knn")
+p_hw_diabetes_knn_nb = st.Page("views/02_homework_diabetes_knn_nb.py", title="Klasifikace: k-NN – Notebook", icon="🐍", url_path="hw_diabetes_knn_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -281,6 +283,8 @@ nav = st.navigation(
             p_hw_concrete_tree_rnd_nb,
             p_hw_diabetes_prep,
             p_hw_diabetes_nb,
+            p_hw_diabetes_knn,
+            p_hw_diabetes_knn_nb,
         ],
     }
 )
