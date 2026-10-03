@@ -242,7 +242,7 @@ nav = st.navigation(
         "13. Den 2: Shrnutí klasifikace": [
             p_day2_summary,
         ],
-        "14. Den 3: Tuning & Validace": [
+        "14. Homework: Mezi Dny 2 a 3": [
             p_hyperopt_theory,
             p_hyperopt_diam_ex1,
             p_hyperopt_diam_nb,

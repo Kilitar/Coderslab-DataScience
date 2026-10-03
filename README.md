@@ -237,7 +237,7 @@ Coderslab-DataScience/
 │       ├── 05_decision_tree_classification_theory.md # CART, Gini Impurity, Shannonova entropie, Information Gain, Pruning
 │       ├── 06_svm_theory.md             # Podpůrné vektory, Nadroviny, Okraj, Jádrový trik (Kernel Trick), OvO/OvR
 │       └── 07_day_2_summary.md          # Ucelené shrnutí 2. dne (k-NN, LogReg, DT, SVM, Metriky, Srovnání, Kvíz)
-├── 03_Advanced_ML_Neural_Networks/       # Podklady pro Den 3 (Session 2): Tuning, Ansámbly & NN
+├── 03_Advanced_ML_Neural_Networks/       # Homework blok (Mezi Dny 2 a 3): Tuning hyperparametrů, Grid/Random/Bayes & CV
 │   ├── 01_hyperparameter_optimization_sample.py # Ukázková implementace: GridSearchCV, RandomizedSearchCV, Hyperopt
 │   ├── 01_hyperparameter_optimization_sample.ipynb # Spuštěný Jupyter Notebook s výstupy a křivkami
 │   ├── 02_hyperparameters_diamonds_exercise_1.py # Cvičení 1: Diamanty (GridSearchCV pro max_depth a criterion, úprava funkce)
@@ -270,13 +270,13 @@ Coderslab-DataScience/
     ├── 02_decision_tree_*.py            # Den 2 moduly rozhodovacích stromů (Teorie, Cvičení 1 & 2, Ukázka, Notebooky)
     ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
     ├── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
-    ├── 03_hyperparameter_tuning_theory.py # Den 3: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
-    ├── 03_hyperparameters_diamonds_exercise_1.py # Den 3: Cvičení 1 (Diamanty - výsledky zadání a ověření metrik)
-    ├── 03_hyperparameters_diamonds_nb.py # Den 3: Cvičení 1 (Diamanty - interaktivní notebook)
-    ├── 03_hyperparameters_penguins_exercise_2.py # Den 3: Cvičení 2 (Tučňáci - výsledky ladění SVM)
-    ├── 03_hyperparameters_penguins_nb.py # Den 3: Cvičení 2 (Tučňáci - interaktivní notebook)
-    ├── 03_hyperparameter_optimization_sample.py # Den 3: Ukázková laboratoř (GridSearch, RandomizedSearch, Hyperopt)
-    └── 03_hyperparameter_optimization_nb.py # Den 3: Interaktivní Jupyter Notebook prohlížeč tuningu
+    ├── 03_hyperparameter_tuning_theory.py # Homework: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
+    ├── 03_hyperparameters_diamonds_exercise_1.py # Homework: Cvičení 1 (Diamanty - výsledky zadání a ověření metrik)
+    ├── 03_hyperparameters_diamonds_nb.py # Homework: Cvičení 1 (Diamanty - interaktivní notebook)
+    ├── 03_hyperparameters_penguins_exercise_2.py # Homework: Cvičení 2 (Tučňáci - výsledky ladění SVM)
+    ├── 03_hyperparameters_penguins_nb.py # Homework: Cvičení 2 (Tučňáci - interaktivní notebook)
+    ├── 03_hyperparameter_optimization_sample.py # Homework: Ukázková laboratoř (GridSearch, RandomizedSearch, Hyperopt)
+    └── 03_hyperparameter_optimization_nb.py # Homework: Interaktivní Jupyter Notebook prohlížeč tuningu
 ```
 
 ---
