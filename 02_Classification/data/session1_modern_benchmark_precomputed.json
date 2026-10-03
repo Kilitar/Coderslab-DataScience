@@ -1,0 +1,621 @@
+{
+  "classification_comparison": [
+    {
+      "name": "k-NN (k=17, Euclidean)",
+      "type": "Školní model (Kurz)",
+      "accuracy": 0.7489177489177489,
+      "recall": 0.5555555555555556,
+      "precision": 0.6716417910447762,
+      "f1": 0.6081081081081081,
+      "roc_auc": 0.8270781893004115,
+      "confusion_matrix": [
+        [
+          128,
+          22
+        ],
+        [
+          36,
+          45
+        ]
+      ],
+      "tn": 128,
+      "fp": 22,
+      "fn": 36,
+      "tp": 45
+    },
+    {
+      "name": "Logistická regrese (C=0.51, L1)",
+      "type": "Školní model (Kurz)",
+      "accuracy": 0.7359307359307359,
+      "recall": 0.5308641975308642,
+      "precision": 0.6515151515151515,
+      "f1": 0.5850340136054422,
+      "roc_auc": 0.834485596707819,
+      "confusion_matrix": [
+        [
+          127,
+          23
+        ],
+        [
+          38,
+          43
+        ]
+      ],
+      "tn": 127,
+      "fp": 23,
+      "fn": 38,
+      "tp": 43
+    },
+    {
+      "name": "SVM (RBF, C=53.38)",
+      "type": "Školní model (Kurz)",
+      "accuracy": 0.7186147186147186,
+      "recall": 0.4691358024691358,
+      "precision": 0.6333333333333333,
+      "f1": 0.5390070921985816,
+      "roc_auc": 0.837119341563786,
+      "confusion_matrix": [
+        [
+          128,
+          22
+        ],
+        [
+          43,
+          38
+        ]
+      ],
+      "tn": 128,
+      "fp": 22,
+      "fn": 43,
+      "tp": 38,
+      "n_support_vectors": 279,
+      "support_per_class": [
+        139,
+        140
+      ]
+    },
+    {
+      "name": "HistGradientBoosting (LightGBM)",
+      "type": "Moderní SOTA (2026)",
+      "accuracy": 0.7445887445887446,
+      "recall": 0.5925925925925926,
+      "precision": 0.6486486486486487,
+      "f1": 0.6193548387096774,
+      "roc_auc": 0.8204115226337447,
+      "confusion_matrix": [
+        [
+          124,
+          26
+        ],
+        [
+          33,
+          48
+        ]
+      ],
+      "tn": 124,
+      "fp": 26,
+      "fn": 33,
+      "tp": 48
+    },
+    {
+      "name": "XGBoost Classifier",
+      "type": "Moderní SOTA (2026)",
+      "accuracy": 0.7619047619047619,
+      "recall": 0.5802469135802469,
+      "precision": 0.6911764705882353,
+      "f1": 0.6308724832214765,
+      "roc_auc": 0.8392592592592591,
+      "confusion_matrix": [
+        [
+          129,
+          21
+        ],
+        [
+          34,
+          47
+        ]
+      ],
+      "tn": 129,
+      "fp": 21,
+      "fn": 34,
+      "tp": 47
+    },
+    {
+      "name": "Random Forest",
+      "type": "Moderní SOTA (2026)",
+      "accuracy": 0.7532467532467533,
+      "recall": 0.5308641975308642,
+      "precision": 0.6935483870967742,
+      "f1": 0.6013986013986014,
+      "roc_auc": 0.8337448559670781,
+      "confusion_matrix": [
+        [
+          131,
+          19
+        ],
+        [
+          38,
+          43
+        ]
+      ],
+      "tn": 131,
+      "fp": 19,
+      "fn": 38,
+      "tp": 43
+    }
+  ],
+  "cost_matrix_comparison": [
+    {
+      "name": "HistGradientBoosting (LightGBM)",
+      "total_cost": 18760,
+      "cost_fn": 16500,
+      "cost_fp": 1300,
+      "fn_count": 33,
+      "fp_count": 26
+    },
+    {
+      "name": "XGBoost Classifier",
+      "total_cost": 18990,
+      "cost_fn": 17000,
+      "cost_fp": 1050,
+      "fn_count": 34,
+      "fp_count": 21
+    },
+    {
+      "name": "k-NN (k=17, Euclidean)",
+      "total_cost": 20000,
+      "cost_fn": 18000,
+      "cost_fp": 1100,
+      "fn_count": 36,
+      "fp_count": 22
+    },
+    {
+      "name": "Random Forest",
+      "total_cost": 20810,
+      "cost_fn": 19000,
+      "cost_fp": 950,
+      "fn_count": 38,
+      "fp_count": 19
+    },
+    {
+      "name": "Logistická regrese (C=0.51, L1)",
+      "total_cost": 21010,
+      "cost_fn": 19000,
+      "cost_fp": 1150,
+      "fn_count": 38,
+      "fp_count": 23
+    },
+    {
+      "name": "SVM (RBF, C=53.38)",
+      "total_cost": 23360,
+      "cost_fn": 21500,
+      "cost_fp": 1100,
+      "fn_count": 43,
+      "fp_count": 22
+    }
+  ],
+  "permutation_importance": [
+    {
+      "feature": "glucose",
+      "importance_mean": 0.10129870129870128,
+      "importance_std": 0.02518275250605886
+    },
+    {
+      "feature": "bmi",
+      "importance_mean": 0.02597402597402595,
+      "importance_std": 0.017024971086583122
+    },
+    {
+      "feature": "age",
+      "importance_mean": 0.015584415584415574,
+      "importance_std": 0.010096886398000517
+    },
+    {
+      "feature": "pregnancies",
+      "importance_mean": 0.011544011544011539,
+      "importance_std": 0.01300303645145029
+    },
+    {
+      "feature": "insulin",
+      "importance_mean": 0.004040404040404052,
+      "importance_std": 0.009280193472331036
+    },
+    {
+      "feature": "skin_thickness",
+      "importance_mean": -0.005483405483405476,
+      "importance_std": 0.006012313609235123
+    },
+    {
+      "feature": "diabetes_pedigree_function",
+      "importance_mean": -0.008658008658008661,
+      "importance_std": 0.010721024889469957
+    },
+    {
+      "feature": "blood_pressure",
+      "importance_mean": -0.011832611832611832,
+      "importance_std": 0.01042162775484432
+    }
+  ],
+  "concrete_regression_summary": {
+    "models": [
+      {
+        "name": "1. OLS Lineární regrese",
+        "r2": 0.5642,
+        "rmse": 10.957,
+        "mae": 8.648,
+        "approach": "Parametrický základ bez ladění"
+      },
+      {
+        "name": "2. ElasticNet (L1+L2 Regularizace)",
+        "r2": 0.5621,
+        "rmse": 10.985,
+        "mae": 8.68,
+        "approach": "Smršťování vah (L1 ratio = 0.5)"
+      },
+      {
+        "name": "3. Rozhodovací strom (GridSearchCV)",
+        "r2": 0.8478,
+        "rmse": 6.541,
+        "mae": 4.402,
+        "approach": "Mřížkové ladění hloubky a listů"
+      },
+      {
+        "name": "4. Rozhodovací strom (RandomizedSearch)",
+        "r2": 0.8471,
+        "rmse": 6.554,
+        "mae": 4.391,
+        "approach": "Náhodné vzorkování 4 parametrů"
+      }
+    ]
+  },
+  "roc_curves": {
+    "hgb": {
+      "fpr": [
+        0.0,
+        0.0,
+        0.006666666666666667,
+        0.006666666666666667,
+        0.013333333333333334,
+        0.013333333333333334,
+        0.02,
+        0.02,
+        0.03333333333333333,
+        0.03333333333333333,
+        0.04,
+        0.04,
+        0.06,
+        0.06,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.07333333333333333,
+        0.07333333333333333,
+        0.09333333333333334,
+        0.09333333333333334,
+        0.10666666666666667,
+        0.10666666666666667,
+        0.12,
+        0.12,
+        0.12666666666666668,
+        0.12666666666666668,
+        0.15333333333333332,
+        0.15333333333333332,
+        0.17333333333333334,
+        0.17333333333333334,
+        0.2,
+        0.2,
+        0.20666666666666667,
+        0.20666666666666667,
+        0.21333333333333335,
+        0.21333333333333335,
+        0.22,
+        0.22,
+        0.22666666666666666,
+        0.22666666666666666,
+        0.24,
+        0.24,
+        0.26,
+        0.26,
+        0.26666666666666666,
+        0.26666666666666666,
+        0.2733333333333333,
+        0.2733333333333333,
+        0.2866666666666667,
+        0.2866666666666667,
+        0.29333333333333333,
+        0.29333333333333333,
+        0.3,
+        0.3,
+        0.38,
+        0.38,
+        0.3933333333333333,
+        0.3933333333333333,
+        0.4266666666666667,
+        0.4266666666666667,
+        0.44666666666666666,
+        0.44666666666666666,
+        0.47333333333333333,
+        0.47333333333333333,
+        0.5266666666666666,
+        0.5266666666666666,
+        0.5466666666666666,
+        0.5466666666666666,
+        0.5533333333333333,
+        0.5533333333333333,
+        0.6133333333333333,
+        0.6133333333333333,
+        0.76,
+        0.76,
+        0.96,
+        0.96,
+        1.0
+      ],
+      "tpr": [
+        0.0,
+        0.012345679012345678,
+        0.012345679012345678,
+        0.06172839506172839,
+        0.06172839506172839,
+        0.20987654320987653,
+        0.20987654320987653,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.2345679012345679,
+        0.2345679012345679,
+        0.32098765432098764,
+        0.32098765432098764,
+        0.38271604938271603,
+        0.38271604938271603,
+        0.41975308641975306,
+        0.41975308641975306,
+        0.4567901234567901,
+        0.4567901234567901,
+        0.4691358024691358,
+        0.4691358024691358,
+        0.48148148148148145,
+        0.48148148148148145,
+        0.5185185185185185,
+        0.5185185185185185,
+        0.5308641975308642,
+        0.5308641975308642,
+        0.5925925925925926,
+        0.5925925925925926,
+        0.6049382716049383,
+        0.6049382716049383,
+        0.6172839506172839,
+        0.6172839506172839,
+        0.6296296296296297,
+        0.6296296296296297,
+        0.6419753086419753,
+        0.6419753086419753,
+        0.654320987654321,
+        0.654320987654321,
+        0.6666666666666666,
+        0.6666666666666666,
+        0.7037037037037037,
+        0.7037037037037037,
+        0.7283950617283951,
+        0.7283950617283951,
+        0.7901234567901234,
+        0.7901234567901234,
+        0.8024691358024691,
+        0.8024691358024691,
+        0.8148148148148148,
+        0.8148148148148148,
+        0.8271604938271605,
+        0.8271604938271605,
+        0.8395061728395061,
+        0.8395061728395061,
+        0.8641975308641975,
+        0.8641975308641975,
+        0.8765432098765432,
+        0.8765432098765432,
+        0.9012345679012346,
+        0.9012345679012346,
+        0.9135802469135802,
+        0.9135802469135802,
+        0.9259259259259259,
+        0.9259259259259259,
+        0.9382716049382716,
+        0.9382716049382716,
+        0.9506172839506173,
+        0.9506172839506173,
+        0.9629629629629629,
+        0.9629629629629629,
+        0.9753086419753086,
+        0.9753086419753086,
+        0.9876543209876543,
+        0.9876543209876543,
+        1.0,
+        1.0
+      ]
+    },
+    "xgb": {
+      "fpr": [
+        0.0,
+        0.0,
+        0.0,
+        0.006666666666666667,
+        0.006666666666666667,
+        0.013333333333333334,
+        0.013333333333333334,
+        0.02,
+        0.02,
+        0.02666666666666667,
+        0.02666666666666667,
+        0.03333333333333333,
+        0.03333333333333333,
+        0.04,
+        0.04,
+        0.04666666666666667,
+        0.04666666666666667,
+        0.05333333333333334,
+        0.05333333333333334,
+        0.06,
+        0.06,
+        0.08,
+        0.08,
+        0.08666666666666667,
+        0.08666666666666667,
+        0.10666666666666667,
+        0.10666666666666667,
+        0.12,
+        0.12,
+        0.12666666666666668,
+        0.12666666666666668,
+        0.15333333333333332,
+        0.15333333333333332,
+        0.16,
+        0.16,
+        0.17333333333333334,
+        0.17333333333333334,
+        0.18,
+        0.18,
+        0.18666666666666668,
+        0.18666666666666668,
+        0.23333333333333334,
+        0.23333333333333334,
+        0.26666666666666666,
+        0.26666666666666666,
+        0.2733333333333333,
+        0.2733333333333333,
+        0.28,
+        0.28,
+        0.2866666666666667,
+        0.2866666666666667,
+        0.29333333333333333,
+        0.29333333333333333,
+        0.30666666666666664,
+        0.30666666666666664,
+        0.36666666666666664,
+        0.36666666666666664,
+        0.4,
+        0.4,
+        0.4066666666666667,
+        0.4066666666666667,
+        0.52,
+        0.52,
+        0.5533333333333333,
+        0.5533333333333333,
+        0.68,
+        0.68,
+        0.7066666666666667,
+        0.7066666666666667,
+        0.74,
+        0.74,
+        1.0
+      ],
+      "tpr": [
+        0.0,
+        0.012345679012345678,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.13580246913580246,
+        0.13580246913580246,
+        0.1728395061728395,
+        0.1728395061728395,
+        0.18518518518518517,
+        0.18518518518518517,
+        0.2716049382716049,
+        0.2716049382716049,
+        0.2839506172839506,
+        0.2839506172839506,
+        0.35802469135802467,
+        0.35802469135802467,
+        0.37037037037037035,
+        0.37037037037037035,
+        0.3950617283950617,
+        0.3950617283950617,
+        0.4074074074074074,
+        0.4074074074074074,
+        0.43209876543209874,
+        0.43209876543209874,
+        0.4444444444444444,
+        0.4444444444444444,
+        0.5061728395061729,
+        0.5061728395061729,
+        0.5185185185185185,
+        0.5185185185185185,
+        0.5802469135802469,
+        0.5802469135802469,
+        0.5925925925925926,
+        0.5925925925925926,
+        0.6049382716049383,
+        0.6049382716049383,
+        0.6172839506172839,
+        0.6172839506172839,
+        0.6419753086419753,
+        0.6419753086419753,
+        0.6790123456790124,
+        0.6790123456790124,
+        0.691358024691358,
+        0.691358024691358,
+        0.7901234567901234,
+        0.7901234567901234,
+        0.8148148148148148,
+        0.8148148148148148,
+        0.8271604938271605,
+        0.8271604938271605,
+        0.8395061728395061,
+        0.8395061728395061,
+        0.8888888888888888,
+        0.8888888888888888,
+        0.9012345679012346,
+        0.9012345679012346,
+        0.9135802469135802,
+        0.9135802469135802,
+        0.9259259259259259,
+        0.9259259259259259,
+        0.9382716049382716,
+        0.9382716049382716,
+        0.9506172839506173,
+        0.9506172839506173,
+        0.9629629629629629,
+        0.9629629629629629,
+        0.9753086419753086,
+        0.9753086419753086,
+        0.9876543209876543,
+        0.9876543209876543,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "modern_paradigms_2026": [
+    {
+      "topic": "1. Ústup k-NN a čistého SVM z tabulární produkce",
+      "legacy": "Školní osnovy stále učí k-NN a SVM jako základní klasifikátory.",
+      "modern_2026": "V reálné praxi dominuje Gradient Boosting (LightGBM, XGBoost, CatBoost) a nově TabPFN (Prior-Data Fitted Networks – transformery pro tabulární data bez nutnosti ladění). k-NN má neúnosnou inferenční složitost O(N*d) a SVM má kvadratickou trénovací složitost O(N^2) až O(N^3).",
+      "recommendation": "Pro produkční tabulární data začínejte vždy s HistGradientBoosting / XGBoost jako silným baseline."
+    },
+    {
+      "topic": "2. Moderní optimalizace hyperparametrů: Optuna vs. Hyperopt",
+      "legacy": "Hyperopt z roku 2013 s pevnou syntaxí hp.choice a těžkopádnou definicí prostoru.",
+      "modern_2026": "Optuna je de facto celosvětový standard. Přináší dynamické Python cykly (trial.suggest_float), asynchronní Median Pruner (včasné odstřelení neúspěšných větví) a integraci s Ray Tune.",
+      "recommendation": "V nových projektech nepoužívejte starý hyperopt, ale přejděte na Optuna s prunery."
+    },
+    {
+      "topic": "3. Pokročilá imputace: Od prostého mediánu k MICE a MissForest",
+      "legacy": "Nahrazení nul mediánem nebo průměrem (ignoruje vazby mezi proměnnými).",
+      "modern_2026": "MICE (Multivariate Imputation by Chained Equations přes IterativeImputer) nebo stromový MissForest. Pokud má pacientka vysokou glykémii a vysoký věk, imputovaný inzulin musí odpovídat této podmíněné korelaci, nikoliv celopopulačnímu mediánu.",
+      "recommendation": "Využívejte sklearn.impute.IterativeImputer pro zachování kovariančních struktur."
+    },
+    {
+      "topic": "4. Konformní predikce (Conformal Prediction) & Odhad nejistoty",
+      "legacy": "Model vrací bodový odhad P=0.52 a lékař musí naslepo rozhodnout.",
+      "modern_2026": "Conformal Prediction (MAPIE) poskytuje matematicky garantované predikční množiny při zadané hladině spolehlivosti 1-α (např. {Zdravá, Diabetička} = nejistý případ, vyžaduje oGTT test).",
+      "recommendation": "V medicíně a automotive neakceptujte holou bodovou predikci bez odhadu spolehlivosti."
+    },
+    {
+      "topic": "5. Vysvětlitelnost: SHAP & TreeSHAP místo váhových koeficientů",
+      "legacy": "Interpretace přes váhy logistické regrese nebo Gini impurity ze stromu.",
+      "modern_2026": "SHAP (Shapley Additive Explanations) vychází z kooperativní teorie her a poskytuje lokální i globální aditivní přínos každého biomarkerů pro konkrétního pacienta bez ohledu na to, zda je model lineární nebo hluboká síť.",
+      "recommendation": "Standardizujte XAI reporty pomocí TreeSHAP / KernelSHAP."
+    },
+    {
+      "topic": "6. MLOps: Data Drift & Concept Drift monitoring",
+      "legacy": "Jednorázové rozdělení 70/30 a trvalé nasazení modelu do produkce.",
+      "modern_2026": "Průběžný monitoring distribuce vstupů (Kolmogorov-Smirnov test, Wassersteinova vzdálenost) přes Evidently AI nebo NannyML pro detekci stárnutí modelu.",
+      "recommendation": "Pipeline musí obsahovat automatické alerty při posunu průměrné glykémie nebo věku populace."
+    }
+  ]
+}

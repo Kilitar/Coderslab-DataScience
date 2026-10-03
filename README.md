@@ -205,6 +205,7 @@ Coderslab-DataScience/
 │   ├── 17_homework_diabetes_logistic_regression.ipynb # Vypracovaný a spuštěný Jupyter Notebook LogReg
 │   ├── 18_homework_diabetes_svm.py       # Homework: SVM klasifikace diabetu (Bayesovská optimalizace Hyperopt, srovnání 3 modelů)
 │   ├── 18_homework_diabetes_svm.ipynb    # Vypracovaný a spuštěný Jupyter Notebook SVM
+│   ├── 19_homework_session1_modern_benchmark_2026.py # SOTA Benchmark 2026: Srovnání s HistGradientBoosting, XGBoost a Random Forest
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar, Diabetes) a JSON cache
 │   │   ├── diabetes.csv                 # Původní Pima Indians Diabetes dataset
 │   │   ├── diabetes_scaled.csv          # Výsledný předzpracovaný a standardizovaný dataset
@@ -212,6 +213,7 @@ Coderslab-DataScience/
 │   │   ├── diabetes_knn_precomputed.json # Předpočtený k-NN grid search, k-sweep, ROC křivka a matice záměn
 │   │   ├── diabetes_logistic_precomputed.json # Předpočtené výsledky RandomizedSearchCV LogReg, Odds Ratios a srovnání
 │   │   ├── diabetes_svm_precomputed.json # Předpočtené výsledky Bayesovské optimalizace Hyperopt a velké srovnání 3 modelů
+│   │   ├── session1_modern_benchmark_precomputed.json # SOTA 2026 srovnání, Permutation Importance a Cost Matrix
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
@@ -327,7 +329,8 @@ Coderslab-DataScience/
     ├── 02_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearch C, Odds Ratios, srovnání)
     ├── 02_homework_diabetes_logistic_regression_nb.py # Homework: Logistická regrese diabetu – interaktivní notebook
     ├── 02_homework_diabetes_svm.py      # Homework: SVM klasifikace diabetu (Hyperopt konvergence, podpora, velké srovnání 3 modelů)
-    └── 02_homework_diabetes_svm_nb.py   # Homework: SVM klasifikace diabetu – interaktivní notebook
+    ├── 02_homework_diabetes_svm_nb.py   # Homework: SVM klasifikace diabetu – interaktivní notebook
+    └── 02_homework_session1_modern_synthesis.py # Syntéza Session 1: SOTA Benchmark 2026 (XGBoost, HistGradientBoosting, Cost Matrix, Paradigmy)
 ```
 
 ---

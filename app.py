@@ -153,6 +153,7 @@ p_hw_diabetes_lr = st.Page("views/02_homework_diabetes_logistic_regression.py", 
 p_hw_diabetes_lr_nb = st.Page("views/02_homework_diabetes_logistic_regression_nb.py", title="Klasifikace: LogReg – Notebook", icon="🐍", url_path="hw_diabetes_lr_nb")
 p_hw_diabetes_svm = st.Page("views/02_homework_diabetes_svm.py", title="Klasifikace: SVM (Diabetes)", icon="🎯", url_path="hw_diabetes_svm")
 p_hw_diabetes_svm_nb = st.Page("views/02_homework_diabetes_svm_nb.py", title="Klasifikace: SVM – Notebook", icon="🐍", url_path="hw_diabetes_svm_nb")
+p_hw_session1_synthesis = st.Page("views/02_homework_session1_modern_synthesis.py", title="Syntéza Session 1: SOTA 2026", icon="🚀", url_path="hw_session1_synthesis")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -293,6 +294,7 @@ nav = st.navigation(
             p_hw_diabetes_lr_nb,
             p_hw_diabetes_svm,
             p_hw_diabetes_svm_nb,
+            p_hw_session1_synthesis,
         ],
     }
 )
