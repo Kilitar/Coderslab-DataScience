@@ -160,6 +160,7 @@ p_hw_session1_synthesis = st.Page("views/02_homework_session1_modern_synthesis.p
 # =============================================================================
 p_prework_nn_intro = st.Page("views/03_prework_neural_networks_intro.py", title="Prework: Neuronové sítě", icon="🧠", url_path="prework_nn_intro")
 p_prework_nlp_intro = st.Page("views/04_prework_nlp_intro.py", title="Prework: Úvod do NLP", icon="🗣️", url_path="prework_nlp_intro")
+p_prework_nltk_spacy = st.Page("views/04_prework_nltk_spacy.py", title="Prework: NLTK a spaCy", icon="🛠️", url_path="prework_nltk_spacy")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -305,6 +306,7 @@ nav = st.navigation(
         "15. Prework Session 2: Příprava (Dny 3–4)": [
             p_prework_nn_intro,
             p_prework_nlp_intro,
+            p_prework_nltk_spacy,
         ],
     }
 )

@@ -297,7 +297,8 @@ Coderslab-DataScience/
 │       └── 03_introduction_to_neural_networks.md # Prework Session 2: Teorie neuronových sítí, 6 aktivačních funkcí, mizející gradient, typologie
 ├── 04_NLP/                              # Sekce Natural Language Processing (Dny 3 a 4)
 │   └── theory/
-│       └── 01_introduction_to_nlp.md    # Prework Session 2: Principy NLP, pipeline, Stemming/Lemmatizace, TF-IDF, Word2Vec, 11 aplikací
+│       ├── 01_introduction_to_nlp.md    # Prework Session 2: Principy NLP, pipeline, Stemming/Lemmatizace, TF-IDF, Word2Vec, 11 aplikací
+│       └── 02_nltk_and_spacy_guide.md   # Prework Session 2: Knihovny NLTK vs. spaCy (metody, architektura, VADER, NER, benchmarky)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
@@ -336,7 +337,8 @@ Coderslab-DataScience/
     ├── 02_homework_diabetes_svm_nb.py   # Homework: SVM klasifikace diabetu – interaktivní notebook
     ├── 02_homework_session1_modern_synthesis.py # Syntéza Session 1: SOTA Benchmark 2026 (XGBoost, HistGradientBoosting, Cost Matrix, Paradigmy)
     ├── 03_prework_neural_networks_intro.py # Prework Session 2: Interaktivní playground neuronu, aktivační funkce, kalkulátor ceny auta a kvíz
-    └── 04_prework_nlp_intro.py          # Prework Session 2: Interaktivní pipeline simulátor, Stemming vs Lemma, Word2Vec mapa, 11 aplikací
+    ├── 04_prework_nlp_intro.py          # Prework Session 2: Interaktivní pipeline simulátor, Stemming vs Lemma, Word2Vec mapa, 11 aplikací
+    └── 04_prework_nltk_spacy.py         # Prework Session 2: Laboratoř NLTK vs. spaCy (metody, VADER, NER, POS rozdělení, benchmarky)
 ```
 
 ---
