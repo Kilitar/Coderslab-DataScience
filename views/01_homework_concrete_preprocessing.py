@@ -72,7 +72,7 @@ def render_concrete_preprocessing_view():
     meta = data["metadata"]
     audit = data["quality_audit"]
     stats = data["statistics"]
-    corrs = data["correlations"]
+    corrs = data["correlations"]["with_target"]
 
     # Rychlé KPI metriky v záhlaví
     col_kpi1, col_kpi2, col_kpi3, col_kpi4 = st.columns(4)
@@ -213,15 +213,13 @@ def render_concrete_preprocessing_view():
                 key="scatter_color_select"
             )
 
-        # Interaktivní Plotly scatter s OLS přímkou
+        # Interaktivní Plotly scatter bez externí závislosti na statsmodels
         fig_scatter = px.scatter(
             df_raw,
             x=x_var,
             y="csMPa",
             color=color_var,
             color_continuous_scale="Plasma",
-            trendline="ols",
-            trendline_color_override="red",
             title=f"Závislost pevnosti betonu na {x_var} (Barevně: {color_var})",
             labels={
                 x_var: f"{x_var} ({meta['column_descriptions'][x_var]})",
@@ -235,6 +233,16 @@ def render_concrete_preprocessing_view():
                 "csMPa": ":.2f"
             }
         )
+        # Manuální přidání lineární trendline přes NumPy
+        slope, intercept_val = np.polyfit(df_raw[x_var], df_raw["csMPa"], 1)
+        x_trend = np.linspace(df_raw[x_var].min(), df_raw[x_var].max(), 100)
+        fig_scatter.add_trace(go.Scatter(
+            x=x_trend,
+            y=slope * x_trend + intercept_val,
+            mode="lines",
+            name=f"Lineární trend (sklon {slope:+.2f})",
+            line=dict(color="red", width=2)
+        ))
         fig_scatter.update_layout(height=500, margin=dict(l=20, r=20, t=40, b=20))
         st.plotly_chart(fig_scatter, width="stretch")
 
@@ -276,11 +284,12 @@ def render_concrete_preprocessing_view():
             corr_target_df = pd.DataFrame([
                 {
                     "Prediktor": k,
-                    "Popis": meta["column_descriptions"][k],
+                    "Popis": meta["column_descriptions"].get(k, k),
                     "Pearson r": f"{v:+.4f}",
                     "Vazba": "Kladná 🟢" if v > 0 else "Záporná 🔴"
                 }
                 for k, v in sorted(corrs.items(), key=lambda x: abs(x[1]), reverse=True)
+                if k != "csMPa"
             ])
             st.dataframe(corr_target_df, width="stretch", hide_index=True)
 
