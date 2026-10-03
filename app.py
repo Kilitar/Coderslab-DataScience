@@ -73,6 +73,8 @@ p_extra_cheat = st.Page("views/01_extras_cheatsheet.py", title="Tahák do kapsy:
 # Homework: Regrese (Beton)
 p_hw_concrete_prep = st.Page("views/01_homework_concrete_preprocessing.py", title="Příprava dat (Pevnost betonu)", icon="🧱", url_path="hw_concrete_prep")
 p_hw_concrete_nb = st.Page("views/01_homework_concrete_preprocessing_nb.py", title="Příprava dat – Notebook", icon="🐍", url_path="hw_concrete_nb")
+p_hw_concrete_lr = st.Page("views/01_homework_concrete_linear_regression.py", title="Lineární regrese (Pevnost betonu)", icon="📈", url_path="hw_concrete_lr")
+p_hw_concrete_lr_nb = st.Page("views/01_homework_concrete_linear_regression_nb.py", title="Lineární regrese – Notebook", icon="🐍", url_path="hw_concrete_lr_nb")
 
 # =============================================================================
 # DEN 2: KLASIFIKACE (CLASSIFICATION)
@@ -202,6 +204,8 @@ nav = st.navigation(
         "Homework: Regrese (Beton)": [
             p_hw_concrete_prep,
             p_hw_concrete_nb,
+            p_hw_concrete_lr,
+            p_hw_concrete_lr_nb,
         ],
         "08. Den 2: K-Nearest Neighbors (k-NN)": [
             p_knn_theory,

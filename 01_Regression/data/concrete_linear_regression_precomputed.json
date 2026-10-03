@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "task": "Homework: Linear regression (Concrete Compressive Strength)",
+    "model": "LinearRegression",
+    "train_samples": 703,
+    "test_samples": 302,
+    "features": [
+      "cement",
+      "slag",
+      "flyash",
+      "water",
+      "superplasticizer",
+      "coarseaggregate",
+      "fineaggregate",
+      "age"
+    ],
+    "feature_descriptions": {
+      "cement": "Obsah cementu (kg/m³)",
+      "slag": "Obsah vysokopecní strusky (kg/m³)",
+      "flyash": "Obsah popílku (kg/m³)",
+      "water": "Obsah záměsové vody (kg/m³)",
+      "superplasticizer": "Obsah superplastifikátoru (kg/m³)",
+      "coarseaggregate": "Obsah hrubého kameniva / štěrku (kg/m³)",
+      "fineaggregate": "Obsah jemného kameniva / písku (kg/m³)",
+      "age": "Doba zrání betonu (dny)"
+    },
+    "target": "csMPa"
+  },
+  "model_parameters": {
+    "intercept": 35.11133642373501,
+    "coefficients": {
+      "cement": 12.790871006482131,
+      "slag": 9.229719578748531,
+      "flyash": 6.052810213612183,
+      "water": -2.317365623858508,
+      "superplasticizer": 2.0586595552849887,
+      "coarseaggregate": 1.4404042550333869,
+      "fineaggregate": 2.3868807368060803,
+      "age": 7.128864720788607
+    }
+  },
+  "metrics": {
+    "train": {
+      "r2": 0.6221,
+      "rmse": 9.8189,
+      "mae": 7.7758,
+      "mse": 96.4104,
+      "mape": 30.47,
+      "max_error": 28.4826,
+      "explained_variance": 0.6221
+    },
+    "test": {
+      "r2": 0.5608,
+      "rmse": 11.2351,
+      "mae": 8.9847,
+      "mse": 126.2285,
+      "mape": 33.86,
+      "max_error": 36.4032,
+      "explained_variance": 0.5616
+    }
+  },
+  "residuals": {
+    "test_mean": 0.4627,
+    "test_std": 11.2442,
+    "test_skewness": -0.0501
+  },
+  "test_sample_predictions": [
+    {
+      "cement": -1.207453634166037,
+      "water": -0.1863270417491156,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 19.01,
+      "Predikce csMPa": 23.28,
+      "Chyba (Abs)": 4.27
+    },
+    {
+      "cement": -1.496063395172903,
+      "water": 1.0044773382295205,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 24.29,
+      "Predikce csMPa": 16.81,
+      "Chyba (Abs)": 7.48
+    },
+    {
+      "cement": -1.2045771249201211,
+      "water": 0.4653336228848624,
+      "age": 0.692954820271138,
+      "Skutečnost csMPa": 26.32,
+      "Predikce csMPa": 22.9,
+      "Chyba (Abs)": 3.42
+    },
+    {
+      "cement": 1.9308179531278948,
+      "water": 0.4653336228848624,
+      "age": -0.6099670608242767,
+      "Skutečnost csMPa": 34.57,
+      "Predikce csMPa": 36.82,
+      "Chyba (Abs)": 2.25
+    },
+    {
+      "cement": 2.123544072604241,
+      "water": 0.8403901205159289,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 44.13,
+      "Predikce csMPa": 42.36,
+      "Chyba (Abs)": 1.77
+    },
+    {
+      "cement": -0.6388636398900509,
+      "water": 1.0044773382295205,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 33.0,
+      "Predikce csMPa": 22.01,
+      "Chyba (Abs)": 10.99
+    },
+    {
+      "cement": -1.693583696725775,
+      "water": 0.4653336228848624,
+      "age": -0.2803121270531477,
+      "Skutečnost csMPa": 17.28,
+      "Predikce csMPa": 15.12,
+      "Chyba (Abs)": 2.16
+    },
+    {
+      "cement": -0.3742247892658147,
+      "water": 0.1699766310003971,
+      "age": -0.6099670608242767,
+      "Skutečnost csMPa": 25.42,
+      "Predikce csMPa": 45.21,
+      "Chyba (Abs)": 19.79
+    },
+    {
+      "cement": -0.6221798862637403,
+      "water": -1.2791479117216351,
+      "age": -0.500082082900567,
+      "Skutečnost csMPa": 33.73,
+      "Predikce csMPa": 33.09,
+      "Chyba (Abs)": 0.64
+    },
+    {
+      "cement": 0.9144513529043792,
+      "water": -0.561383539380182,
+      "age": -0.6727584767806822,
+      "Skutečnost csMPa": 34.4,
+      "Predikce csMPa": 50.67,
+      "Chyba (Abs)": 16.27
+    }
+  ],
+  "interpretation": {
+    "r2_assessment": "Model vysvětluje 56.08 % celkového rozptylu pevnosti betonu na neviděných testovacích datech. Vzhledem k silně nelineární povaze hydratace v čase a synergickým chemickým vazbám představuje OLS solidní baseline, avšak naráží na své limity.",
+    "dominant_features": [
+      "cement (beta = +12.79 MPa/1σ) – absolutně klíčový motor pevnosti kompozitu.",
+      "slag (beta = +9.23 MPa/1σ) – struska působí jako silné sekundární pojivo.",
+      "age (beta = +7.13 MPa/1σ) – zrání betonu v čase.",
+      "flyash (beta = +6.05 MPa/1σ) – popílek zvyšuje dlouhodobou pevnost.",
+      "water (beta = -2.32 MPa/1σ) – negativní koeficient v souladu s Abramsovým zákonem."
+    ]
+  }
+}
