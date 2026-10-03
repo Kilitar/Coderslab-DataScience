@@ -390,7 +390,11 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
         means = {"cement": 281.17, "slag": 73.90, "flyash": 54.19, "water": 181.57, "superplasticizer": 6.20, "coarseaggregate": 972.92, "fineaggregate": 773.58, "age": 45.66}
         stds = {"cement": 104.51, "slag": 86.28, "flyash": 63.99, "water": 21.36, "superplasticizer": 5.97, "coarseaggregate": 77.75, "fineaggregate": 80.18, "age": 63.17}
 
-        input_z = np.array([[
+        feature_cols = [
+            "cement", "slag", "flyash", "water",
+            "superplasticizer", "coarseaggregate", "fineaggregate", "age"
+        ]
+        input_df = pd.DataFrame([[
             (s_cement - means["cement"]) / stds["cement"],
             (s_slag - means["slag"]) / stds["slag"],
             (s_flyash - means["flyash"]) / stds["flyash"],
@@ -399,11 +403,11 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
             (s_coarse - means["coarseaggregate"]) / stds["coarseaggregate"],
             (s_fine - means["fineaggregate"]) / stds["fineaggregate"],
             (s_age - means["age"]) / stds["age"]
-        ]])
+        ]], columns=feature_cols)
 
         if tree_model is not None and lr_model is not None:
-            pred_t = tree_model.predict(input_z)[0]
-            pred_l = lr_model.predict(input_z)[0]
+            pred_t = tree_model.predict(input_df)[0]
+            pred_l = lr_model.predict(input_df)[0]
 
             st.markdown("---")
             res1, res2, res3 = st.columns(3)

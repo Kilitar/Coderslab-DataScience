@@ -382,7 +382,11 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
         means = {"cement": 281.17, "slag": 73.90, "flyash": 54.19, "water": 181.57, "superplasticizer": 6.20, "coarseaggregate": 972.92, "fineaggregate": 773.58, "age": 45.66}
         stds = {"cement": 104.51, "slag": 86.28, "flyash": 63.99, "water": 21.36, "superplasticizer": 5.97, "coarseaggregate": 77.75, "fineaggregate": 80.18, "age": 63.17}
 
-        input_z = np.array([[
+        feature_cols = [
+            "cement", "slag", "flyash", "water",
+            "superplasticizer", "coarseaggregate", "fineaggregate", "age"
+        ]
+        input_df = pd.DataFrame([[
             (rc_cement - means["cement"]) / stds["cement"],
             (rc_slag - means["slag"]) / stds["slag"],
             (rc_flyash - means["flyash"]) / stds["flyash"],
@@ -391,10 +395,10 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
             (rc_coarse - means["coarseaggregate"]) / stds["coarseaggregate"],
             (rc_fine - means["fineaggregate"]) / stds["fineaggregate"],
             (rc_age - means["age"]) / stds["age"]
-        ]])
+        ]], columns=feature_cols)
 
         if tree_model is not None:
-            pred_rnd = tree_model.predict(input_z)[0]
+            pred_rnd = tree_model.predict(input_df)[0]
             st.markdown("---")
             m_col1, m_col2 = st.columns(2)
             m_col1.metric("Odhadnutá pevnost (csMPa)", f"{pred_rnd:.2f} MPa")
