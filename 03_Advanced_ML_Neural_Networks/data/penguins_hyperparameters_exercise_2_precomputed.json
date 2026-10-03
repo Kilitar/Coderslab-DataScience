@@ -1,0 +1,505 @@
+{
+  "dataset_summary": {
+    "n_samples": 334,
+    "n_features": 6,
+    "feature_names": [
+      "culmen_length_mm",
+      "culmen_depth_mm",
+      "flipper_length_mm",
+      "body_mass_g",
+      "island",
+      "sex"
+    ],
+    "classes": [
+      "Adelie",
+      "Chinstrap",
+      "Gentoo"
+    ],
+    "train_size": 233,
+    "test_size": 101
+  },
+  "baseline_model": {
+    "hyperparameters": {
+      "kernel": "rbf",
+      "C": 100.0,
+      "gamma": 100.0,
+      "degree": 3
+    },
+    "train_precision_micro": 0.9485,
+    "test_precision_micro": 0.9307,
+    "train_precision_macro": 0.9496,
+    "test_precision_macro": 0.9235,
+    "test_accuracy": 0.9307,
+    "test_f1_macro": 0.9316,
+    "n_support_vectors": 108,
+    "confusion_matrix": [
+      [
+        38,
+        3,
+        3
+      ],
+      [
+        0,
+        21,
+        0
+      ],
+      [
+        1,
+        0,
+        35
+      ]
+    ]
+  },
+  "random_search_summary": {
+    "time_seconds": 2.2,
+    "n_iter": 50,
+    "best_params": {
+      "kernel": "poly",
+      "C": 16.3665,
+      "gamma": 3.7466,
+      "degree": 5
+    },
+    "best_cv_precision_macro": 0.9842
+  },
+  "optimal_model": {
+    "hyperparameters": {
+      "kernel": "poly",
+      "C": 16.3665,
+      "gamma": 3.7466,
+      "degree": 5
+    },
+    "train_precision_micro": 0.9957,
+    "test_precision_micro": 0.9901,
+    "train_precision_macro": 0.9931,
+    "test_precision_macro": 0.9848,
+    "test_accuracy": 0.9901,
+    "test_f1_macro": 0.9884,
+    "n_support_vectors": 17,
+    "confusion_matrix": [
+      [
+        43,
+        1,
+        0
+      ],
+      [
+        0,
+        21,
+        0
+      ],
+      [
+        0,
+        0,
+        36
+      ]
+    ]
+  },
+  "comparison": {
+    "delta_precision_micro": 0.0594,
+    "delta_precision_macro": 0.0614,
+    "delta_support_vectors": 91,
+    "support_vector_reduction_pct": 84.26
+  },
+  "sampled_trials": [
+    {
+      "iter": 1,
+      "kernel": "linear",
+      "C": 18.827,
+      "gamma": 0.9272,
+      "degree": 2,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 2,
+      "kernel": "poly",
+      "C": 29.9425,
+      "gamma": 0.79,
+      "degree": 3,
+      "mean_cv_precision": 0.7486
+    },
+    {
+      "iter": 3,
+      "kernel": "poly",
+      "C": 23.0624,
+      "gamma": 3.0156,
+      "degree": 2,
+      "mean_cv_precision": 0.7953
+    },
+    {
+      "iter": 4,
+      "kernel": "rbf",
+      "C": 1.1292,
+      "gamma": 3.62,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 5,
+      "kernel": "linear",
+      "C": 10.717,
+      "gamma": 4.9711,
+      "degree": 5,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 6,
+      "kernel": "linear",
+      "C": 15.3121,
+      "gamma": 0.0453,
+      "degree": 3,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 7,
+      "kernel": "poly",
+      "C": 14.6615,
+      "gamma": 2.0093,
+      "degree": 4,
+      "mean_cv_precision": 0.936
+    },
+    {
+      "iter": 8,
+      "kernel": "poly",
+      "C": 22.9035,
+      "gamma": 3.1019,
+      "degree": 4,
+      "mean_cv_precision": 0.9671
+    },
+    {
+      "iter": 9,
+      "kernel": "poly",
+      "C": 49.2615,
+      "gamma": 0.2423,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 10,
+      "kernel": "linear",
+      "C": 34.1154,
+      "gamma": 0.3353,
+      "degree": 2,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 11,
+      "kernel": "rbf",
+      "C": 48.3816,
+      "gamma": 1.9371,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 12,
+      "kernel": "poly",
+      "C": 4.9836,
+      "gamma": 1.2151,
+      "degree": 5,
+      "mean_cv_precision": 0.863
+    },
+    {
+      "iter": 13,
+      "kernel": "rbf",
+      "C": 30.5998,
+      "gamma": 0.1819,
+      "degree": 5,
+      "mean_cv_precision": 0.7774
+    },
+    {
+      "iter": 14,
+      "kernel": "rbf",
+      "C": 19.653,
+      "gamma": 3.3226,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 15,
+      "kernel": "rbf",
+      "C": 21.3578,
+      "gamma": 2.7436,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 16,
+      "kernel": "rbf",
+      "C": 1.6657,
+      "gamma": 3.8857,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 17,
+      "kernel": "poly",
+      "C": 19.8575,
+      "gamma": 2.9995,
+      "degree": 5,
+      "mean_cv_precision": 0.9672
+    },
+    {
+      "iter": 18,
+      "kernel": "rbf",
+      "C": 4.5246,
+      "gamma": 2.6142,
+      "degree": 4,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 19,
+      "kernel": "poly",
+      "C": 16.3665,
+      "gamma": 3.7466,
+      "degree": 5,
+      "mean_cv_precision": 0.9842
+    },
+    {
+      "iter": 20,
+      "kernel": "linear",
+      "C": 41.5369,
+      "gamma": 4.8363,
+      "degree": 3,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 21,
+      "kernel": "linear",
+      "C": 7.1462,
+      "gamma": 0.8363,
+      "degree": 4,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 22,
+      "kernel": "poly",
+      "C": 49.4443,
+      "gamma": 1.9844,
+      "degree": 5,
+      "mean_cv_precision": 0.9732
+    },
+    {
+      "iter": 23,
+      "kernel": "poly",
+      "C": 40.8731,
+      "gamma": 3.5667,
+      "degree": 2,
+      "mean_cv_precision": 0.8597
+    },
+    {
+      "iter": 24,
+      "kernel": "rbf",
+      "C": 38.6635,
+      "gamma": 4.6415,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 25,
+      "kernel": "rbf",
+      "C": 5.8935,
+      "gamma": 4.2602,
+      "degree": 4,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 26,
+      "kernel": "linear",
+      "C": 4.8705,
+      "gamma": 1.5649,
+      "degree": 4,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 27,
+      "kernel": "poly",
+      "C": 36.5803,
+      "gamma": 1.3836,
+      "degree": 5,
+      "mean_cv_precision": 0.9502
+    },
+    {
+      "iter": 28,
+      "kernel": "poly",
+      "C": 23.7107,
+      "gamma": 4.8686,
+      "degree": 2,
+      "mean_cv_precision": 0.8721
+    },
+    {
+      "iter": 29,
+      "kernel": "rbf",
+      "C": 38.1393,
+      "gamma": 1.1899,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 30,
+      "kernel": "rbf",
+      "C": 24.7898,
+      "gamma": 3.5633,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 31,
+      "kernel": "poly",
+      "C": 1.371,
+      "gamma": 1.0186,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 32,
+      "kernel": "rbf",
+      "C": 23.8685,
+      "gamma": 2.5529,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 33,
+      "kernel": "poly",
+      "C": 7.0666,
+      "gamma": 2.0619,
+      "degree": 4,
+      "mean_cv_precision": 0.9484
+    },
+    {
+      "iter": 34,
+      "kernel": "poly",
+      "C": 10.2531,
+      "gamma": 0.3949,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 35,
+      "kernel": "linear",
+      "C": 34.8392,
+      "gamma": 4.6585,
+      "degree": 5,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 36,
+      "kernel": "rbf",
+      "C": 14.8817,
+      "gamma": 4.3673,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 37,
+      "kernel": "linear",
+      "C": 44.264,
+      "gamma": 4.0472,
+      "degree": 5,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 38,
+      "kernel": "poly",
+      "C": 16.0002,
+      "gamma": 1.3707,
+      "degree": 2,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 39,
+      "kernel": "poly",
+      "C": 21.4554,
+      "gamma": 1.7728,
+      "degree": 5,
+      "mean_cv_precision": 0.9527
+    },
+    {
+      "iter": 40,
+      "kernel": "rbf",
+      "C": 0.4476,
+      "gamma": 2.6804,
+      "degree": 5,
+      "mean_cv_precision": 0.7145
+    },
+    {
+      "iter": 41,
+      "kernel": "poly",
+      "C": 11.2054,
+      "gamma": 1.3571,
+      "degree": 4,
+      "mean_cv_precision": 0.8633
+    },
+    {
+      "iter": 42,
+      "kernel": "linear",
+      "C": 8.5146,
+      "gamma": 2.604,
+      "degree": 5,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 43,
+      "kernel": "rbf",
+      "C": 20.2918,
+      "gamma": 4.8689,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 44,
+      "kernel": "linear",
+      "C": 34.9152,
+      "gamma": 1.5144,
+      "degree": 4,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 45,
+      "kernel": "rbf",
+      "C": 49.987,
+      "gamma": 3.0578,
+      "degree": 4,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 46,
+      "kernel": "linear",
+      "C": 20.6519,
+      "gamma": 1.4032,
+      "degree": 4,
+      "mean_cv_precision": 0.4643
+    },
+    {
+      "iter": 47,
+      "kernel": "rbf",
+      "C": 31.8176,
+      "gamma": 0.7345,
+      "degree": 3,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 48,
+      "kernel": "poly",
+      "C": 49.3825,
+      "gamma": 2.9735,
+      "degree": 5,
+      "mean_cv_precision": 0.9842
+    },
+    {
+      "iter": 49,
+      "kernel": "rbf",
+      "C": 38.181,
+      "gamma": 1.2208,
+      "degree": 4,
+      "mean_cv_precision": 0.749
+    },
+    {
+      "iter": 50,
+      "kernel": "rbf",
+      "C": 18.4892,
+      "gamma": 4.9271,
+      "degree": 5,
+      "mean_cv_precision": 0.749
+    }
+  ],
+  "interpretation": "Původní model z cvičení 2 trpěl extrémním přeučením způsobeným hyperlokální hodnotou gamma=100 a nulovou tolerancí marže C=100. Téměř polovina všech trénovacích bodů (108 z 233) musela sloužit jako podpůrné vektory k vytvoření komplikované, rozdrobené hranice. RandomizedSearchCV nalezl optimální hladkou rozhodovací nadrovinu, která zvýšila testovací Precision na 99.01 % (pouze 1 chybná predikce ze 101) a snížila počet podpůrných vektorů ze 108 na pouhých 17 (úbytek o 84.3 %). To dokazuje dramatické obnovení schopnosti generalizace."
+}
