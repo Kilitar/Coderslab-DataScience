@@ -156,6 +156,7 @@ def render_nltk_spacy_view():
 
                 # 2. Stopwords a POS Tagging
                 stop_words = set(stopwords.words("english"))
+                filtered_words = [w for w in words if w.lower() not in stop_words and w.isalnum()]
                 try:
                     tagged = pos_tag(words)
                 except Exception:
