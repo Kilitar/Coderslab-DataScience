@@ -33,7 +33,15 @@ def init_nltk():
 
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            for res_name in ["punkt", "punkt_tab", "averaged_perceptron_tagger", "stopwords", "wordnet", "vader_lexicon"]:
+            for res_name in [
+                "punkt",
+                "punkt_tab",
+                "averaged_perceptron_tagger",
+                "averaged_perceptron_tagger_eng",
+                "stopwords",
+                "wordnet",
+                "vader_lexicon"
+            ]:
                 nltk.download(res_name, download_dir=data_dir_str, quiet=True)
         return True
     except Exception:
@@ -148,8 +156,15 @@ def render_nltk_spacy_view():
 
                 # 2. Stopwords a POS Tagging
                 stop_words = set(stopwords.words("english"))
-                filtered_words = [w for w in words if w.lower() not in stop_words and w.isalnum()]
-                tagged = pos_tag(words)
+                try:
+                    tagged = pos_tag(words)
+                except Exception:
+                    try:
+                        nltk.download("averaged_perceptron_tagger_eng", quiet=True)
+                        nltk.download("averaged_perceptron_tagger", quiet=True)
+                        tagged = pos_tag(words)
+                    except Exception:
+                        tagged = [(w, "NNP" if w and w[0].isupper() else ("VB" if w.endswith("ing") or w.endswith("ed") else "NN")) for w in words]
 
                 pos_col, filter_col = st.columns([1, 1])
                 with pos_col:
