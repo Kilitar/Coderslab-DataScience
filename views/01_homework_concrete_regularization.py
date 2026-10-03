@@ -1,11 +1,12 @@
 """
-Homework: Lineární regrese s regularizací – Pevnost betonu (Concrete Compressive Strength)
-========================================================================================
-Tento modul vizualizuje řešení cvičení 'Linear regression with regularization':
-1. Metodické vysvětlení zadání (rozpor mezi titulkem regrese a textem logistické regrese).
-2. Primární regresní řešení: ElasticNet (L1 + L2) via RandomizedSearchCV, porovnání s OLS, Ridge a Lasso.
-3. Analýza smrštění koeficientů (Shrinkage effect) a stabilizace multikolinearity.
-4. Doslovné klasifikační řešení: Binarizace betonu (csMPa >= 35 MPa) s LogisticRegression(C, penalty).
+Homework: Lineární regrese s regularizací – Pevnost betonu (Concrete)
+=====================================================================
+Tento modul vizualizuje výsledky cvičení 'Linear regression with regularization - exercise':
+1. Vyřešení metodologického konfliktu (Regrese vs. Logistická regrese).
+2. ElasticNet (L1 + L2) laděný přes RandomizedSearchCV s interaktivním 2D prostorem.
+3. Interaktivní srovnání smrštění vah koeficientů (OLS vs. Ridge vs. Lasso vs. ElasticNet) v Plotly.
+4. Interaktivní matice záměn (Plotly Heatmap) pro LogisticRegression na technické hranici 35 MPa.
+5. Inženýrské a metodické shrnutí.
 """
 
 import json
@@ -27,11 +28,11 @@ def load_concrete_reg_precomputed():
 
 
 def render_concrete_regularization_view():
-    st.title("🎯 DÚ: Lineární regrese s regularizací (Lasso, Ridge, Elastic Net)")
+    st.title("🎯 DÚ: Regularizace v regresi a klasifikaci – Pevnost betonu")
     st.markdown(
-        "**Vypracování cvičení:** Ladění regularizovaných modelů pomocí `RandomizedSearchCV` na datasetu betonu. "
-        "Modul pokrývá **primární regresní řešení** (ElasticNet / Ridge / Lasso na spojitém cíli) "
-        "i **doslovné klasifikační řešení** (`LogisticRegression` na binarizované normě pevnosti)."
+        "**Vypracování cvičení:** Analýza regularizačních technik na datech pevnosti betonu. "
+        "Aplikace **ElasticNet** (kontinuální $L_1 + L_2$ tuning) a doslovného zadání **LogisticRegression** "
+        "(s parametry `C` a `penalty` pro normovanou hranici pevnosti)."
     )
 
     data = load_concrete_reg_precomputed()
@@ -45,158 +46,122 @@ def render_concrete_regularization_view():
     clf = data["classification_solution"]
     clf_m = clf["test"]
 
-    # KPI záhlaví
+    # Rychlé KPI metriky v záhlaví
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric(
-            "Regresní R² (ElasticNet)",
-            f"{reg_m['elastic_net']['test']['r2'] * 100:.2f} %",
-            delta=f"{(reg_m['elastic_net']['test']['r2'] - reg_m['ols']['r2']) * 100:+.2f} % vs OLS"
-        )
+        st.metric("ElasticNet Test R²", f"{reg_m['elastic_net']['test']['r2'] * 100:.2f} %", delta="Regresní řešení")
     with c2:
-        st.metric(
-            "Regresní RMSE",
-            f"{reg_m['elastic_net']['test']['rmse']:.2f} MPa",
-            delta=f"{reg_m['elastic_net']['test']['rmse'] - reg_m['ols']['rmse']:+.2f} MPa",
-            delta_color="inverse"
-        )
+        st.metric("ElasticNet RMSE", f"{reg_m['elastic_net']['test']['rmse']:.2f} MPa", delta="Chyba odhadu")
     with c3:
-        st.metric(
-            "Klasifikační Accuracy",
-            f"{clf_m['accuracy'] * 100:.2f} %",
-            help="Přesnost klasifikace vysoce pevného betonu (≥ 35 MPa)."
-        )
+        st.metric("LogReg Přesnost (Acc)", f"{clf_m['accuracy'] * 100:.2f} %", delta="Klasifikační řešení")
     with c4:
-        st.metric(
-            "Klasifikační F1-Score",
-            f"{clf_m['f1']:.4f}",
-            help="Harmonický průměr Precision a Recall u LogisticRegression."
-        )
+        st.metric("LogReg F1-Score", f"{clf_m['f1']:.4f}", delta="Harmonický průměr P&R")
 
     st.markdown("---")
 
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "⚠️ 1. Analýza zadání & Rozpor",
-        "⚖️ 2. Regresní řešení (ElasticNet)",
-        "📉 3. Smrštění vah (Shrinkage)",
-        "🏷️ 4. Klasifikační řešení (LogReg)",
-        "💡 5. Metodické shrnutí"
+        "🧩 Metodologický kontext",
+        "🎯 ElasticNet (Regrese & Tuning)",
+        "⚖️ Smrštění vah (Plotly)",
+        "📊 Logistická regrese & Matice záměn (Plotly)",
+        "💡 Závěrečné shrnutí"
     ])
 
-    # TAB 1: Analýza zadání
+    # TAB 1: Metodologický kontext
     with tab1:
-        st.subheader("1. Metodická analýza zadání a vysvětlení rozporu")
-        st.markdown(
-            """
-            Při detailním rozboru textu zadání z kurzu narazíme na klasickou copy-paste nekonzistenci:
-            """
+        st.subheader("1. Vyjasnění metodologického zadání (Regrese vs. Klasifikace)")
+        st.info(
+            f"**Kontext zadání:** {meta['conflict_explanation']}"
         )
 
-        col_w1, col_w2 = st.columns([1, 1])
-        with col_w1:
-            st.warning(
-                r"""
-                **🚩 Nekonzistence v zadání:**
-                1. **Nadpis:** *Linear regression with regularization - exercise*
-                2. **Dataset:** `concrete_data_preprocessed.csv` (spojitá hodnota pevnosti $csMPa \in [2.3, 82.6]$).
-                3. **Požadavek na metriku:** *Choose the same metric as in exercise 1* (ve cvičení 1 to byly regresní metriky $R^2$ a RMSE!).
-                4. **Text v těle však uvádí:**
-                   - `LogisticRegression`
-                   - hyperparametry `C` a `penalty` (typické pro klasifikaci)
-                   - *Assign it to the lr variable*
-                   - *trained classifier*
-                """
-            )
-        with col_w2:
-            st.success(
-                r"""
-                **💡 Jak jsme to profesionálně vyřešili:**
-                
-                Aby bylo řešení 100% neprůstřelné a odpovědělo na všechny aspekty výuky:
-                - **Řešení A (Primární regresní):** Použijeme **`ElasticNet`**, který v sobě elegantně spojuje $L_1$ (Lasso) i $L_2$ (Ridge) regularizaci. Pomocí `RandomizedSearchCV` optimalizujeme parametr $\alpha$ (sílu penalizace) a `l1_ratio` (poměr Lasso/Ridge) se stejnými regresními metrikami ($R^2$, RMSE) jako ve cvičení 1.
-                - **Řešení B (Doslovné klasifikační):** Převedeme pevnost betonu na binární inženýrskou normu ($csMPa \ge 35\ \text{MPa}$ – vysoce pevný beton) a natrénujeme **`LogisticRegression`** s parametry `C` a `penalty` přes `RandomizedSearchCV`.
-                """
-            )
-
-    # TAB 2: Regresní řešení
-    with tab2:
-        st.subheader("2. Primární řešení: ElasticNet (L1 + L2) via RandomizedSearchCV")
         st.markdown(
             r"""
-            `ElasticNet` minimalizuje součet čtverců chyb obohacený o konvexní kombinaci $L_1$ a $L_2$ norem:
-            $$\mathcal{J}(\beta) = \text{MSE} + \alpha \left[ \rho \|\beta\|_1 + \frac{1-\rho}{2} \|\beta\|_2^2 \right]$$
-            - $\alpha$ řídí celkovou sílu regularizace.
-            - $\rho = \text{l1\_ratio}$ řídí poměr mezi Lasso ($\rho=1$) a Ridge ($\rho=0$).
+            V oficiálním zadání kurzu došlo k neobvyklému spojení:
+            - **Název úlohy:** *Linear regression with regularization* (Lineární regrese s regularizací).
+            - **Text úlohy:** *Import LogisticRegression, hyperparameters C and penalty, train classifier...*
+            - **Dataset:** `concrete_data_preprocessed.csv` – spojitá laboratorní pevnost betonu $csMPa \in [2.3, 82.6]\ \text{MPa}$.
+            
+            Proto nabízíme **obě validní řešení**:
+            1. **Regresní řešení (ElasticNet):** Přímo optimalizuje regresní cíl spojité pevnosti a kombinuje $L_1$ (Lasso) i $L_2$ (Ridge) regularizaci přes `alpha` a `l1_ratio`.
+            2. **Klasifikační řešení (LogisticRegression):** Binarizuje pevnost na normovou hranici $35\ \text{MPa}$ (konstrukční beton dle ČSN EN 206) a optimalizuje `C` a `penalty` přesně podle textu zadání.
             """
         )
 
+    # TAB 2: ElasticNet
+    with tab2:
+        st.subheader("2. Regresní řešení: ElasticNet a náhodné vyhledávání")
+        st.markdown(
+            "ElasticNet kombinuje penalizace $L_1$ (Lasso) a $L_2$ (Ridge). "
+            "Minimalizuje účelovou funkci: "
+            r"$$\min_w \frac{1}{2n} ||y - Xw||_2^2 + \alpha \cdot \text{l1\_ratio} \cdot ||w||_1 + \frac{1}{2} \alpha \cdot (1 - \text{l1\_ratio}) \cdot ||w||_2^2$$"
+        )
+
+        best_p = reg_m["elastic_net"]["best_params"]
         col_r1, col_r2 = st.columns([1, 1])
         with col_r1:
-            st.markdown("##### 🏆 Optimální nalezené hyperparametry")
-            en_bp = reg_m["elastic_net"]["best_params"]
-            st.write(f"- **Optimální $\\alpha$:** `{en_bp['alpha']:.6f}`")
-            st.write(f"- **Optimální `l1_ratio`:** `{en_bp['l1_ratio']:.4f}` *(vyvážený poměr Lasso a Ridge)*")
-            st.write(f"- **Metoda hledání:** `RandomizedSearchCV` (60 iterací, 5-násobná CV, scoring = $R^2$)")
+            st.markdown("##### 🏆 Optimální hyperparametry ElasticNet")
+            st.write(rf"- **Optimální `alpha` ($\lambda$):** `{best_p['alpha']:.6f}`")
+            st.write(f"- **Optimální `l1_ratio`:** `{best_p['l1_ratio']:.3f}` *(převážně L2 chování s jemným L1)*")
 
-            st.markdown("##### 📊 Srovnání modelů na testovací sadě")
             comp_table = pd.DataFrame([
-                {
-                    "Model": "Neomezený OLS (Cvičení 1)",
-                    "Test R²": f"{reg_m['ols']['r2'] * 100:.2f} %",
-                    "RMSE (MPa)": f"{reg_m['ols']['rmse']:.4f}",
-                    "MAE (MPa)": f"{reg_m['ols']['mae']:.4f}"
-                },
-                {
-                    "Model": "Ridge (L2, α=1.0)",
-                    "Test R²": f"{reg_m['ridge']['test_r2'] * 100:.2f} %",
-                    "RMSE (MPa)": f"{reg_m['ridge']['test_rmse']:.4f}",
-                    "MAE (MPa)": "-"
-                },
-                {
-                    "Model": "Lasso (L1, α=0.1)",
-                    "Test R²": f"{reg_m['lasso']['test_r2'] * 100:.2f} %",
-                    "RMSE (MPa)": f"{reg_m['lasso']['test_rmse']:.4f}",
-                    "MAE (MPa)": "-"
-                },
-                {
-                    "Model": "ElasticNet (RandomizedSearch)",
-                    "Test R²": f"{reg_m['elastic_net']['test']['r2'] * 100:.2f} %",
-                    "RMSE (MPa)": f"{reg_m['elastic_net']['test']['rmse']:.4f}",
-                    "MAE (MPa)": f"{reg_m['elastic_net']['test']['mae']:.4f}"
-                }
+                {"Model": "Neomezený OLS (Cvičení 1)", "Test R²": f"{reg_m['ols']['r2'] * 100:.2f} %", "RMSE (MPa)": f"{reg_m['ols']['rmse']:.4f}", "MAE (MPa)": f"{reg_m['ols']['mae']:.4f}"},
+                {"Model": "Ridge (L2, α=1.0)", "Test R²": f"{reg_m['ridge']['test_r2'] * 100:.2f} %", "RMSE (MPa)": f"{reg_m['ridge']['test_rmse']:.4f}", "MAE (MPa)": "-"},
+                {"Model": "Lasso (L1, α=0.1)", "Test R²": f"{reg_m['lasso']['test_r2'] * 100:.2f} %", "RMSE (MPa)": f"{reg_m['lasso']['test_rmse']:.4f}", "MAE (MPa)": "-"},
+                {"Model": "ElasticNet (RandomizedSearch)", "Test R²": f"{reg_m['elastic_net']['test']['r2'] * 100:.2f} %", "RMSE (MPa)": f"{reg_m['elastic_net']['test']['rmse']:.4f}", "MAE (MPa)": f"{reg_m['elastic_net']['test']['mae']:.4f}"}
             ])
             st.dataframe(comp_table, width="stretch", hide_index=True)
 
         with col_r2:
-            st.markdown("##### 🔍 2D prostor prohledávání hyperparametrů")
-            p1_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_reg_alpha_tuning.png"
-            if p1_path.exists():
-                st.image(str(p1_path), caption="Rozložení náhodně vzorkovaných bodů alpha a l1_ratio a jejich CV R²", width="stretch")
+            st.markdown("##### 🔬 Srovnání metrik regresních modelů")
+            fig_bar_reg = px.bar(
+                comp_table,
+                x="Model",
+                y="Test R²",
+                title="Srovnání Test R² mezi neomezeným OLS a regularizovanými modely",
+                color="Model",
+                color_discrete_sequence=["#636EFA", "#EF553B", "#00CC96", "#AB63FA"]
+            )
+            fig_bar_reg.update_layout(showlegend=False, height=350, margin=dict(l=20, r=20, t=30, b=20))
+            st.plotly_chart(fig_bar_reg, width="stretch")
 
-    # TAB 3: Smrštění vah
+    # TAB 3: Smrštění vah (Interaktivní Plotly Grouped Bar)
     with tab3:
-        st.subheader("3. Analýza smrštění regresních koeficientů (Shrinkage Effect)")
+        st.subheader("3. Interaktivní srovnání vah koeficientů (Shrinkage Effect)")
         st.markdown(
             "Regularizace zmenšuje velikost koeficientů $\\beta_j$, čímž chrání model před přeučením a stabilizuje "
-            "odhady u silně korelujících prediktorů (jako je voda a superplastifikátor s $r = -0.65$)."
+            "odhady u silně korelujících prediktorů (voda vs. superplastifikátor s $r = -0.65$)."
         )
 
-        p2_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_reg_coefficients_comparison.png"
-        if p2_path.exists():
-            st.image(str(p2_path), caption="Porovnání vah koeficientů: OLS vs. Ridge vs. Lasso vs. ElasticNet", width="stretch")
+        coef_dict = reg["coefficients"]
+        features = list(coef_dict.keys())
 
-        st.markdown("##### 📋 Tabulka hodnot koeficientů")
-        coef_df = pd.DataFrame(reg["coefficients"]).T
+        fig_coef = go.Figure()
+        fig_coef.add_trace(go.Bar(name="Neomezený OLS", x=features, y=[coef_dict[f]["ols"] for f in features], marker_color="#1f77b4"))
+        fig_coef.add_trace(go.Bar(name="ElasticNet (Opt)", x=features, y=[coef_dict[f]["elastic_net"] for f in features], marker_color="#2ca02c"))
+        fig_coef.add_trace(go.Bar(name="Ridge (L2)", x=features, y=[coef_dict[f]["ridge"] for f in features], marker_color="#ff7f0e"))
+        fig_coef.add_trace(go.Bar(name="Lasso (L1)", x=features, y=[coef_dict[f]["lasso"] for f in features], marker_color="#d62728"))
+
+        fig_coef.update_layout(
+            barmode="group",
+            title="Srovnání standardizovaných regresních koeficientů: OLS vs. Ridge vs. Lasso vs. ElasticNet",
+            xaxis_title="Vstupní složka betonu",
+            yaxis_title="Váha koeficientu β (MPa na 1σ)",
+            height=480,
+            margin=dict(l=20, r=20, t=40, b=20)
+        )
+        st.plotly_chart(fig_coef, width="stretch")
+
+        st.markdown("##### 📋 Přehledová tabulka hodnot koeficientů")
+        coef_df = pd.DataFrame(coef_dict).T
         coef_df.columns = ["Neomezený OLS", "ElasticNet (Opt)", "Ridge (L2)", "Lasso (L1)"]
         st.dataframe(coef_df, width="stretch")
 
-    # TAB 4: Klasifikační řešení
+    # TAB 4: Klasifikační řešení & Interaktivní Matice záměn
     with tab4:
         st.subheader("4. Doslovné řešení: LogisticRegression(C, penalty) na betonu")
         st.markdown(
             r"""
-            Pokud lektor trvá na doslovném použití třídy `LogisticRegression` s parametry `C` a `penalty`, 
-            převedli jsme spojitou pevnost na binární klasifikaci dle technické normy ČSN EN 206:
+            Převedli jsme spojitou pevnost na binární klasifikaci dle technické normy ČSN EN 206:
             - **Třída 1 (Vysokopevnostní beton):** $csMPa \ge 35\ \text{MPa}$ (konstrukční beton pro mosty a pilíře).
             - **Třída 0 (Běžný beton):** $csMPa < 35\ \text{MPa}$.
             """
@@ -206,7 +171,7 @@ def render_concrete_regularization_view():
         with col_l1:
             st.markdown("##### 🏆 Nalezené parametry LogisticRegression")
             st.write(f"- **Optimální $C$:** `{clf['best_params']['C']:.6f}`")
-            st.write(f"- **Optimální `penalty`:** `{clf['best_params']['penalty']}` *(L1 regularizace = automatický výběr příznaků)*")
+            st.write(f"- **Optimální `penalty`:** `{clf['best_params']['penalty']}` *(L1 regularizace)*")
             st.write(f"- **Test Accuracy:** **{clf_m['accuracy'] * 100:.2f} %**")
             st.write(f"- **Test Precision:** **{clf_m['precision'] * 100:.2f} %**")
             st.write(f"- **Test Recall:** **{clf_m['recall'] * 100:.2f} %**")
@@ -218,32 +183,40 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import loguniform
 
-# 1. Slovník hyperparametrů C a penalty
-param_dist = {
-    'C': loguniform(1e-3, 1e2),
-    'penalty': ['l1', 'l2']
-}
-
-# 2. Instance LogisticRegression přiřazená do lr
+param_dist = {'C': loguniform(1e-3, 1e2), 'penalty': ['l1', 'l2']}
 lr = LogisticRegression(solver='saga', random_state=42, max_iter=10000)
-
-# 3. RandomizedSearchCV
 rs = RandomizedSearchCV(lr, param_dist, n_iter=60, cv=5, scoring='accuracy', random_state=42)
 rs.fit(X_train, y_train_bin)
 
-# 4. Trénování s best_params_
 best_lr = rs.best_estimator_
 y_pred = best_lr.predict(X_test)""",
                 language="python"
             )
 
         with col_l2:
-            st.markdown("##### 🎯 Matice záměn (Confusion Matrix)")
-            p3_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_logistic_cm.png"
-            if p3_path.exists():
-                st.image(str(p3_path), caption="Matice záměn na testovacích vzorcích betonu", width="stretch")
+            st.markdown("##### 🎯 Interaktivní matice záměn (Plotly Heatmap)")
+            cm_vals = clf_m["confusion_matrix"]
+            cm_labels_x = ["Pred: Běžný (<35)", "Pred: Vysokopevnostní (≥35)"]
+            cm_labels_y = ["Skut: Běžný (<35)", "Skut: Vysokopevnostní (≥35)"]
 
-    # TAB 5: Metodické shrnutí
+            fig_cm = px.imshow(
+                cm_vals,
+                x=cm_labels_x,
+                y=cm_labels_y,
+                text_auto=True,
+                color_continuous_scale="Blues",
+                title=f"Matice záměn LogisticRegression (Test Acc = {clf_m['accuracy']*100:.1f} %)",
+                labels=dict(x="Predikce modelu", y="Skutečná třída pevnosti", color="Počet vzorků")
+            )
+            fig_cm.update_layout(height=400, margin=dict(l=20, r=20, t=30, b=20))
+            st.plotly_chart(fig_cm, width="stretch")
+
+            st.caption(
+                f"Správně klasifikováno: **{cm_vals[0][0] + cm_vals[1][1]} ze 302** vzorků. "
+                f"Falešně pozitivní: {cm_vals[0][1]}, Falešně negativní: {cm_vals[1][0]}."
+            )
+
+    # TAB 5: Závěrečné shrnutí
     with tab5:
         st.subheader("5. Závěrečné shrnutí a doporučení")
         st.markdown(
@@ -255,7 +228,7 @@ y_pred = best_lr.predict(X_test)""",
                - V lineární regresi parametr `alpha` ($\lambda$) přímo násobí penalizaci: vyšší `alpha` = silnější regularizace.
                - V logistické regresi parametr `C` vyjadřuje převrácenou hodnotu ($C = \frac{1}{\lambda}$): menší `C` = silnější regularizace!
             3. **Odevzdání úkolu:**
-               Váš vypracovaný Jupyter Notebook obsahuje obě varianty, takže ať už lektor očekává čistou regresi (v souladu s názvem souboru a datasetem), nebo doslovnou aplikaci `LogisticRegression(C, penalty)`, máte obě řešení perfektně odprezentovaná!
+               Váš vypracovaný Jupyter Notebook obsahuje obě varianty, takže ať už lektor očekává čistou regresi, nebo doslovnou aplikaci `LogisticRegression(C, penalty)`, máte obě řešení perfektně odprezentovaná!
             """
         )
 

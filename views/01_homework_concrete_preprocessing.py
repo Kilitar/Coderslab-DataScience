@@ -3,10 +3,11 @@ Homework: Příprava dat pro regresní modely – Pevnost betonu (Concrete Compr
 =============================================================================================
 Tento modul vizualizuje kompletní proces přípravy datové sady pro odhad pevnosti betonu v tlaku:
 1. Audit kvality dat (ověření datových typů, chybějících hodnot, detekce a odstranění 25 duplicit).
-2. Rozdělení proměnných (histogramy, šikmost, zero-inflated složky).
-3. Korelace a závislosti vůči cílové proměnné csMPa.
-4. Porovnání metod škálování (StandardScaler vs. MinMaxScaler).
-5. Doménový kontext zrání a složení kompozitu (I-Cheng Yeh, 1998).
+2. Interaktivní rozdělení proměnných (Plotly histogramy, boxploty, šikmost).
+3. Bivariační analýza a závislosti vůči cílové proměnné csMPa s OLS trendlinemi.
+4. Interaktivní korelační matice s tooltipy.
+5. Porovnání metod škálování (StandardScaler vs. MinMaxScaler).
+6. Doménový kontext zrání a složení kompozitu (I-Cheng Yeh, 1998).
 """
 
 import json
@@ -16,6 +17,32 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+
+
+@st.cache_data
+def load_concrete_preprocessed_df():
+    base_dir = Path(__file__).resolve().parent.parent
+    csv_path = base_dir / "01_Regression" / "data" / "concrete_data_preprocessed.csv"
+    if csv_path.exists():
+        return pd.read_csv(csv_path)
+    return None
+
+
+@st.cache_data
+def load_concrete_raw_clean_df():
+    base_dir = Path(__file__).resolve().parent.parent
+    raw_path = base_dir / "01_Regression" / "data" / "concrete_data.csv"
+    if raw_path.exists():
+        try:
+            df = pd.read_csv(raw_path, encoding="latin1")
+        except Exception:
+            df = pd.read_csv(raw_path, encoding="utf-8")
+        df.columns = [
+            "cement", "slag", "flyash", "water",
+            "superplasticizer", "coarseaggregate", "fineaggregate", "age", "csMPa"
+        ]
+        return df.drop_duplicates().reset_index(drop=True)
+    return None
 
 
 def load_concrete_precomputed():
@@ -35,7 +62,10 @@ def render_concrete_preprocessing_view():
     )
 
     data = load_concrete_precomputed()
-    if not data:
+    df_raw = load_concrete_raw_clean_df()
+    df_prep = load_concrete_preprocessed_df()
+
+    if not data or df_raw is None:
         st.error("Předpočtená data nebyla nalezena. Spusťte prosím skript `01_Regression/10_homework_concrete_preprocessing.py`.")
         return
 
@@ -43,7 +73,6 @@ def render_concrete_preprocessing_view():
     audit = data["quality_audit"]
     stats = data["statistics"]
     corrs = data["correlations"]
-    scaling = data["scaling_comparison"]
 
     # Rychlé KPI metriky v záhlaví
     col_kpi1, col_kpi2, col_kpi3, col_kpi4 = st.columns(4)
@@ -59,63 +88,63 @@ def render_concrete_preprocessing_view():
     st.markdown("---")
 
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-        "📋 1. Audit dat & Duplicity",
-        "📊 2. Rozdělení proměnných",
-        "📈 3. Závislosti na csMPa",
-        "🔥 4. Korelační matice",
-        "⚖️ 5. Škálování dat",
-        "🔬 6. Doménový kontext"
+        "🔍 Audit kvality dat",
+        "📊 Rozdělení proměnných (Plotly)",
+        "📈 Závislosti na csMPa (Plotly)",
+        "🔥 Korelační matice (Plotly)",
+        "⚖️ Škálování dat",
+        "🏗️ Doménový kontext"
     ])
 
-    # TAB 1: Audit dat & Duplicity
+    # TAB 1: Audit kvality dat
     with tab1:
-        st.subheader("1. Audit kvality dat a odstranění duplicit")
+        st.subheader("1. Audit kvality a integrity laboratorních dat")
         st.markdown(
-            """
-            V laboratorním testování betonu se často provádějí paralelní testy ze stejné šarže. 
-            Při přípravě dat je nezbytné zkontrolovat přítomnost identických řádků a zajistit nezávislost vzorků.
-            """
+            "Před trénováním jakéhokoliv modelu je nezbytné prověřit konzistenci dat. "
+            "Datová sada obsahuje 8 prediktorů (hmotnosti složek betonové směsi v $\\text{kg/m}^3$ a věk ve dnech) "
+            "a 1 cílovou proměnnou (pevnost v tlaku v MPa)."
         )
 
         col_a1, col_a2 = st.columns([1, 1])
         with col_a1:
-            st.markdown("##### 🔍 Kontrola chybějících hodnot a datových typů")
-            dtype_df = pd.DataFrame([
-                {
-                    "Proměnná": col,
-                    "Popis": meta["column_descriptions"][col],
-                    "Typ": audit["dtypes"][col],
-                    "Chybějící (NaN)": audit["missing_values"][col]
-                }
-                for col in meta["columns"]
-            ])
-            st.dataframe(dtype_df, width="stretch", hide_index=True)
+            st.markdown("##### 📋 Přehled proměnných a datových typů")
+            cols_info = []
+            for col in meta["columns"]:
+                cols_info.append({
+                    "Název": col,
+                    "Popis veličiny": meta["column_descriptions"][col],
+                    "Datový typ": audit["dtypes"].get(col, "float64"),
+                    "Chybějící (NaN)": audit["missing_values"].get(col, 0)
+                })
+            st.dataframe(pd.DataFrame(cols_info), width="stretch", hide_index=True)
 
         with col_a2:
-            st.markdown("##### ⚠️ Odstranění duplicitních měření")
-            st.info(
-                f"V původním souboru bylo identifikováno **{audit['duplicates_count']} duplicitních řádků** "
-                f"({audit['duplicates_count'] / meta['raw_rows'] * 100:.1f} % datasetu). "
-                f"Po jejich odstranění zůstává **{meta['clean_rows']} unikátních laboratorních vzorků**."
+            st.markdown("##### ⚠️ Nález a odstranění duplicitních měření")
+            st.warning(
+                f"Při auditu bylo detekováno **{audit['duplicates_count']} duplicitních záznamů** "
+                f"({audit['duplicates_count'] / meta['raw_rows'] * 100:.2f} % celého datasetu). "
+                "V laboratorní praxi se často provádí více zkoušek téže šarže betonu současně. "
+                "V ML však ponechání duplicit vede k úniku dat mezi trénovací a testovací sadou "
+                "(tzv. data leakage) a nadhodnocení přesnosti."
             )
-            st.markdown("Ukázka detekovaných duplicitních záznamů:")
-            if audit["duplicates_sample"]:
-                dup_df = pd.DataFrame(audit["duplicates_sample"])
-                st.dataframe(dup_df.head(6), width="stretch", hide_index=True)
+            st.markdown("Ukázka detekovaných duplicitních řádků:")
+            st.dataframe(pd.DataFrame(audit["duplicates_sample"]), width="stretch", hide_index=True)
 
-        st.markdown("##### 👁️ Prvních 10 očištěných vzorků (fyzikální jednotky)")
+        st.markdown("##### 🔬 Náhled očištěného datasetu (prvních 5 řádků)")
         st.dataframe(pd.DataFrame(data["sample_head_raw"]), width="stretch", hide_index=True)
 
-    # TAB 2: Rozdělení proměnných
+    # TAB 2: Rozdělení proměnných (Plně interaktivní Plotly)
     with tab2:
-        st.subheader("2. Rozdělení proměnných a deskriptivní statistika")
-        st.markdown("Prozkoumejte tvar distribuce, šikmost a podíl nulových hodnot pro každou složku směsi.")
+        st.subheader("2. Interaktivní rozdělení proměnných a detekce odlehlých hodnot")
+        st.markdown(
+            "Vyberte proměnnou a prozkoumejte její histogram, hustotu pravděpodobnosti a boxplot s přesnými kvartily."
+        )
 
         selected_var = st.selectbox(
-            "Vyberte proměnnou k detailnímu rozboru:",
+            "Vyberte proměnnou pro detailní analýzu:",
             options=meta["columns"],
-            index=0,
-            format_func=lambda x: f"{x} – {meta['column_descriptions'][x]}"
+            format_func=lambda x: f"{x} – {meta['column_descriptions'][x]}",
+            key="eda_var_select"
         )
 
         var_info = stats[selected_var]
@@ -127,20 +156,31 @@ def render_concrete_preprocessing_view():
         c4.metric("Podíl nulových hodnot", f"{var_info['zeros_pct']:.1f} %",
                   help="Řada betonů neobsahuje popílek, strusku nebo superplastifikátor.")
 
-        # Načteme surová data pro interaktivní histogram
-        raw_df_clean = pd.DataFrame(data["sample_head_raw"])  # Fallback pro strukturu
-        # Plný histogram přes Plotly
-        fig_hist = px.histogram(
-            x=[var_info["min"], var_info["q25"], var_info["median"], var_info["q75"], var_info["max"]],
-            title=f"Statistické kvartily: {selected_var} ({meta['column_descriptions'][selected_var]})"
-        )
-        
-        # Zobrazíme vygenerovaný statický přehled všech 9 histogramů
-        hist_img_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_histograms.png"
-        if hist_img_path.exists():
-            st.image(str(hist_img_path), caption="Rozdělení všech 9 proměnných v očištěném datasetu (1005 vzorků)", width="stretch")
+        col_opts1, col_opts2 = st.columns([1, 1])
+        with col_opts1:
+            nbins = st.slider("Počet intervalů histogramu (bins):", min_value=10, max_value=60, value=30, key="bins_slider")
+        with col_opts2:
+            show_box = st.checkbox("Zobrazit Boxplot nad histogramem", value=True)
 
-        st.markdown("##### 📊 Kompletní přehledová tabulka statistik")
+        fig_hist = px.histogram(
+            df_raw,
+            x=selected_var,
+            nbins=nbins,
+            marginal="box" if show_box else None,
+            title=f"Interaktivní rozdělení: {selected_var} ({meta['column_descriptions'][selected_var]})",
+            color_discrete_sequence=["#1f77b4"],
+            opacity=0.85
+        )
+        fig_hist.update_layout(
+            bargap=0.05,
+            xaxis_title=f"{selected_var} ({meta['column_descriptions'][selected_var]})",
+            yaxis_title="Četnost vzorků",
+            height=450,
+            margin=dict(l=20, r=20, t=40, b=20)
+        )
+        st.plotly_chart(fig_hist, width="stretch")
+
+        st.markdown("##### 📊 Kompletní přehledová tabulka statistik všech proměnných")
         full_stats_df = pd.DataFrame(stats).T[
             ["description", "mean", "std", "min", "q25", "median", "q75", "max", "skewness", "zeros_pct"]
         ]
@@ -149,19 +189,59 @@ def render_concrete_preprocessing_view():
         ]
         st.dataframe(full_stats_df, width="stretch")
 
-    # TAB 3: Závislosti na csMPa
+    # TAB 3: Závislosti na csMPa (Plně interaktivní Plotly scatter)
     with tab3:
-        st.subheader("3. Závislost složek směsi na pevnosti betonu (csMPa)")
+        st.subheader("3. Interaktivní bivariační závislosti složek směsi na pevnosti betonu (csMPa)")
         st.markdown(
-            "Pevnost betonu v tlaku závisí na složitých nelineárních a fyzikálně-chemických vazbách. "
-            "Níže vidíte regresní závislosti jednotlivých složek."
+            "Zkoumejte vztah mezi libovolným prediktorem a výslednou pevností $csMPa$. "
+            "Pohybem myši zobrazíte přesné složení každého testovacího vzorku."
         )
 
-        scatter_img_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_scatter_vs_csmpa.png"
-        if scatter_img_path.exists():
-            st.image(str(scatter_img_path), caption="Bivariační závislosti 8 prediktorů na pevnosti csMPa s lineárním trendem", width="stretch")
+        pred_col1, pred_col2 = st.columns([1, 1])
+        with pred_col1:
+            x_var = st.selectbox(
+                "Vyberte prediktor na ose X:",
+                options=meta["columns"][:-1],
+                format_func=lambda x: f"{x} – {meta['column_descriptions'][x]}",
+                key="scatter_x_select"
+            )
+        with pred_col2:
+            color_var = st.selectbox(
+                "Barevné kódování bodů podle:",
+                options=["age", "cement", "water", "superplasticizer", "slag"],
+                format_func=lambda x: f"{x} – {meta['column_descriptions'][x]}",
+                key="scatter_color_select"
+            )
 
-        st.markdown("#### 💡 Klíčové postřehy z regresních závislostí:")
+        # Interaktivní Plotly scatter s OLS přímkou
+        fig_scatter = px.scatter(
+            df_raw,
+            x=x_var,
+            y="csMPa",
+            color=color_var,
+            color_continuous_scale="Plasma",
+            trendline="ols",
+            trendline_color_override="red",
+            title=f"Závislost pevnosti betonu na {x_var} (Barevně: {color_var})",
+            labels={
+                x_var: f"{x_var} ({meta['column_descriptions'][x_var]})",
+                "csMPa": "Pevnost v tlaku (MPa)",
+                color_var: color_var
+            },
+            hover_data={
+                "cement": True,
+                "water": True,
+                "age": True,
+                "csMPa": ":.2f"
+            }
+        )
+        fig_scatter.update_layout(height=500, margin=dict(l=20, r=20, t=40, b=20))
+        st.plotly_chart(fig_scatter, width="stretch")
+
+        r_val = corrs.get(x_var, 0.0)
+        st.info(f"**Pearsonův korelační koeficient pro `{x_var}` vs `csMPa`:** **$r = {r_val:+.4f}$**")
+
+        st.markdown("#### 💡 Klíčové postřehy z materiálové technologie:")
         st.markdown(
             """
             1. **Cement ($r = +0.488$):** Nejsilnější pozitivní faktor. Více cementu poskytuje více vazného hydratačního gelu C-S-H.
@@ -171,14 +251,24 @@ def render_concrete_preprocessing_view():
             """
         )
 
-    # TAB 4: Korelační matice
+    # TAB 4: Korelační matice (Plně interaktivní Plotly Heatmap)
     with tab4:
-        st.subheader("4. Korelační matice a multikolinearita")
+        st.subheader("4. Interaktivní korelační matice a multikolinearita")
         st.markdown("Pearsonův korelační koeficient $r$ měří sílu a směr lineární závislosti.")
 
-        corr_img_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_correlation_heatmap.png"
-        if corr_img_path.exists():
-            st.image(str(corr_img_path), caption="Korelační matice vstupních proměnných a cílové pevnosti", width="stretch")
+        corr_matrix = df_raw.corr()
+
+        fig_corr = px.imshow(
+            corr_matrix,
+            text_auto=".2f",
+            color_continuous_scale="RdBu_r",
+            zmin=-1,
+            zmax=1,
+            title="Korelační matice vstupních proměnných a cílové pevnosti betonu (Pearson r)",
+            aspect="auto"
+        )
+        fig_corr.update_layout(height=520, margin=dict(l=20, r=20, t=40, b=20))
+        st.plotly_chart(fig_corr, width="stretch")
 
         col_c1, col_c2 = st.columns([1, 1])
         with col_c1:
@@ -187,15 +277,15 @@ def render_concrete_preprocessing_view():
                 {
                     "Prediktor": k,
                     "Popis": meta["column_descriptions"][k],
-                    "Pearson r": v,
-                    "Vliv na pevnost": "Zvyšuje pevnost 🟢" if v > 0.2 else ("Snižuje pevnost 🔴" if v < -0.1 else "Slabý vliv ⚪")
+                    "Pearson r": f"{v:+.4f}",
+                    "Vazba": "Kladná 🟢" if v > 0 else "Záporná 🔴"
                 }
-                for k, v in corrs["with_target"].items() if k != "csMPa"
-            ]).sort_values(by="Pearson r", ascending=False)
+                for k, v in sorted(corrs.items(), key=lambda x: abs(x[1]), reverse=True)
+            ])
             st.dataframe(corr_target_df, width="stretch", hide_index=True)
 
         with col_c2:
-            st.markdown("##### ⚡ Klíčová multikolinearita: Voda vs. Superplastifikátor")
+            st.markdown("##### ⚠️ Klíčová multikolinearita v praxi")
             st.warning(
                 "**Pozor na multikolinearitu:** Korelace mezi `water` a `superplasticizer` je **-0.645**! "
                 "Superplastifikátory jsou chemické přísady snižující povrchové napětí a umožňující rozptýlení cementových zrn. "
@@ -203,14 +293,11 @@ def render_concrete_preprocessing_view():
                 "Lineární modely (OLS) mohou trpět inflací rozptylu koeficientů (VIF)."
             )
 
-    # TAB 5: Škálování dat
+    # TAB 5: Škálování dat (Plně interaktivní Plotly)
     with tab5:
         st.subheader("5. Škálování dat: Standardizace (StandardScaler) vs. Normalizace (MinMaxScaler)")
         st.markdown(
-            """
-            Zadání požadovalo volbu jedné ze dvou metod škálování. 
-            Pro regresní modely (zejména s L1/L2 regularizací jako Ridge a Lasso) jsme zvolili **StandardScaler**.
-            """
+            "Prozkoumejte, jak se změní distribuce libovolné proměnné před a po aplikaci standardizace / normalizace."
         )
 
         st.markdown(
@@ -222,9 +309,29 @@ def render_concrete_preprocessing_view():
             """
         )
 
-        scaling_img_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_scaling_comparison.png"
-        if scaling_img_path.exists():
-            st.image(str(scaling_img_path), caption="Srovnání hustot rozdělení: Původní vs. StandardScaler vs. MinMaxScaler", width="stretch")
+        scale_feat = st.selectbox(
+            "Vyberte proměnnou pro srovnání škálování:",
+            options=meta["columns"][:-1],
+            format_func=lambda x: f"{x} – {meta['column_descriptions'][x]}",
+            key="scale_feat_select"
+        )
+
+        raw_vals = df_raw[scale_feat]
+        scaled_z = (raw_vals - raw_vals.mean()) / raw_vals.std()
+        scaled_mm = (raw_vals - raw_vals.min()) / (raw_vals.max() - raw_vals.min())
+
+        fig_scale = go.Figure()
+        fig_scale.add_trace(go.Histogram(x=scaled_z, name="StandardScaler (Z-Score, μ=0, σ=1)", opacity=0.6, marker_color="#2ca02c"))
+        fig_scale.add_trace(go.Histogram(x=scaled_mm, name="MinMaxScaler [0, 1]", opacity=0.6, marker_color="#ff7f0e"))
+        fig_scale.update_layout(
+            barmode="overlay",
+            title=f"Porovnání rozdělení po škálování pro: {scale_feat}",
+            xaxis_title="Škálovaná hodnota",
+            yaxis_title="Četnost",
+            height=400,
+            margin=dict(l=20, r=20, t=40, b=20)
+        )
+        st.plotly_chart(fig_scale, width="stretch")
 
         st.markdown("##### 📁 Výsledný standardizovaný dataset (`concrete_data_preprocessed.csv`)")
         st.dataframe(pd.DataFrame(data["sample_head_scaled"]), width="stretch", hide_index=True)

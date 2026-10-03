@@ -262,16 +262,56 @@ best_params = grid_search.best_params_
             """
         )
 
-        plots_dir = Path(__file__).resolve().parent.parent / "03_Advanced_ML_Neural_Networks" / "plots"
-        d1, d2 = st.columns(2)
-        with d1:
-            img1 = plots_dir / "diamonds_grid_search_depth_curve.png"
-            if img1.exists():
-                st.image(str(img1), caption="Křivka RMSE vs. max_depth (přeučení za hloubkou 10)", width="stretch")
-        with d2:
-            img2 = plots_dir / "diamonds_grid_residuals_comparison.png"
-            if img2.exists():
-                st.image(str(img2), caption="Hustota pravděpodobnosti reziduí: Původní vs. Optimální model", width="stretch")
+        st.markdown("##### 🔬 Interaktivní křivka přeučení (Overfitting U-Curve: Train vs. Test Error)")
+        sweep_data = data.get("depth_sweep", [])
+        if sweep_data:
+            sweep_df = pd.DataFrame(sweep_data)
+            fig_ucurve = go.Figure()
+            fig_ucurve.add_trace(go.Scatter(
+                x=sweep_df["max_depth"],
+                y=sweep_df["squared_error_train_rmse"],
+                mode="lines+markers",
+                name="Train RMSE (Trénovací data)",
+                line=dict(color="#1f77b4", width=2.5)
+            ))
+            fig_ucurve.add_trace(go.Scatter(
+                x=sweep_df["max_depth"],
+                y=sweep_df["squared_error_rmse"],
+                mode="lines+markers",
+                name="Validation RMSE (5-Fold CV)",
+                line=dict(color="#d62728", width=2.5)
+            ))
+            fig_ucurve.add_vline(x=10, line_dash="dash", line_color="green", annotation_text="Optimum (depth=10, min RMSE)")
+            fig_ucurve.add_vline(x=13, line_dash="dot", line_color="orange", annotation_text="Původní baseline (depth=13, přeučený)")
+            fig_ucurve.update_layout(
+                title="Důkaz přeučení: S rostoucí hloubkou trénovací chyba stále klesá, ale validační od hloubky 10 roste!",
+                xaxis_title="Maximální hloubka stromu (max_depth)",
+                yaxis_title="RMSE ($)",
+                height=450,
+                margin=dict(l=20, r=20, t=40, b=20)
+            )
+            st.plotly_chart(fig_ucurve, width="stretch")
+
+        st.markdown("##### 📊 Srovnání složitosti modelu: Počet koncových listů (Leaves)")
+        comp_df = pd.DataFrame([
+            {"Model": "Původní strom (Den 1)", "Hloubka": 13, "Počet listů": data["baseline_model"]["n_leaves"], "Test RMSE ($)": data["baseline_model"]["test_rmse"], "Train R²": data["baseline_model"]["train_r2"]},
+            {"Model": "Optimalizovaný strom (GridSearchCV)", "Hloubka": 10, "Počet listů": data["optimal_model"]["n_leaves"], "Test RMSE ($)": data["optimal_model"]["test_rmse"], "Train R²": data["optimal_model"]["train_r2"]},
+            {"Model": "Alternativní Poisson strom", "Hloubka": 12, "Počet listů": data["alternative_poisson_model"]["n_leaves"], "Test RMSE ($)": data["alternative_poisson_model"]["test_rmse"], "Train R²": data["alternative_poisson_model"]["train_r2"]}
+        ])
+
+        fig_leaves = px.bar(
+            comp_df,
+            x="Model",
+            y="Počet listů",
+            color="Model",
+            text_auto=True,
+            title="Dramatické zjednodušení modelu: Pokles počtu listů z 4 410 na 929 (-79 % složitosti!)",
+            color_discrete_sequence=["#ff7f0e", "#2ca02c", "#9467bd"]
+        )
+        fig_leaves.update_layout(showlegend=False, height=380, margin=dict(l=20, r=20, t=40, b=20))
+        st.plotly_chart(fig_leaves, width="stretch")
+
+        st.dataframe(comp_df, width="stretch", hide_index=True)
 
 
 if __name__ == "__main__":

@@ -5,8 +5,11 @@ Tento modul vizualizuje výsledky cvičení 'Decision tree (regression) - exerci
 1. RandomizedSearchCV s 5-násobnou křížovou validací a metrikou MAE (scoring='neg_mean_absolute_error').
 2. Nalezené optimální hyperparametry (best_hyperparams: max_depth, criterion, min_samples_leaf, max_features).
 3. Efektivita modelu: R2 na Train i Test sadě, MSE a MAE na testovací sadě.
-4. Vizualizace architektury natrénovaného stromu (plot_tree).
-5. Důležitost příznaků (Feature Importances) a srovnání s GridSearchCV (Cvičení 1) a OLS.
+4. Architektura natrénovaného stromu (plot_tree).
+5. Interaktivní Plotly vizualizace důležitosti příznaků.
+6. Interaktivní analýza průběhu RandomizedSearch (Plotly scatter).
+7. Interaktivní srovnání modelů (Grid vs. Random vs. OLS).
+8. Živý interaktivní simulátor pevnosti betonu.
 """
 
 import json
@@ -16,6 +19,35 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
+
+
+@st.cache_data
+def load_fitted_random_tree():
+    base_dir = Path(__file__).resolve().parent.parent
+    csv_path = base_dir / "01_Regression" / "data" / "concrete_data_preprocessed.csv"
+    if csv_path.exists():
+        df = pd.read_csv(csv_path)
+        feature_cols = [
+            "cement", "slag", "flyash", "water",
+            "superplasticizer", "coarseaggregate", "fineaggregate", "age"
+        ]
+        X = df[feature_cols]
+        y = df["csMPa"]
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+        # Best tree from Exercise 2: criterion='poisson', max_depth=25, max_features=6, min_samples_leaf=1
+        tree = DecisionTreeRegressor(
+            criterion="poisson",
+            max_depth=25,
+            max_features=6,
+            min_samples_leaf=1,
+            random_state=42
+        )
+        tree.fit(X_train, y_train)
+        return df, tree
+    return None, None
 
 
 def load_concrete_tree_random_precomputed():
@@ -36,6 +68,8 @@ def render_concrete_decision_tree_random_view():
     )
 
     data = load_concrete_tree_random_precomputed()
+    df_raw, tree_model = load_fitted_random_tree()
+
     if not data:
         st.error("Předpočtená data nebyla nalezena. Spusťte skript `01_Regression/14_homework_concrete_decision_tree_random.py`.")
         return
@@ -87,12 +121,13 @@ def render_concrete_decision_tree_random_view():
 
     st.markdown("---")
 
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
         "🎯 Výsledky & Hyperparametry",
         "🌳 Architektura stromu (plot_tree)",
-        "📊 Důležitost příznaků",
-        "🎲 Průběh RandomizedSearch",
-        "⚔️ Srovnání modelů (Grid vs Random vs OLS)"
+        "📊 Důležitost příznaků (Plotly)",
+        "🎲 Průběh RandomizedSearch (Plotly)",
+        "⚔️ Srovnání modelů (Plotly)",
+        "🎛️ Simulátor pevnosti (Live)"
     ])
 
     # TAB 1: Výsledky & Hyperparametry
@@ -184,13 +219,13 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
         st.markdown("##### 🔬 Analýza architektury:")
         st.markdown(
             """
-            1. **Vliv `max_features=6`:** Při každém větvení strom náhodně vybírá podmnožinu 6 příznaků z celkových 8. Tento princip (převzatý z Random Forest) zabraňuje dominantním příznakům maskovat ostatní proměnné.
+            1. **Vliv `max_features=6`:** Při každém větvení strom náhodně vybírá podmnožinu 6 příznaků z celkových 8. Tento princip zabraňuje dominantním příznakům maskovat ostatní proměnné.
             2. **Rozhodovací kritérium Poisson:** Kritérium `poisson` modeluje rozdělení četností a kladných hodnot, což se pro pevnost betonu ($csMPa > 0$) ukázalo jako vysoce účinné.
             3. **Kořenový split:** Větvení začíná na klíčových komponentách – stáří betonu (`age`) a obsahu cementu (`cement`).
             """
         )
 
-    # TAB 3: Důležitost příznaků
+    # TAB 3: Důležitost příznaků (Plně interaktivní Plotly)
     with tab3:
         st.subheader("3. Relativní důležitost příznaků (Feature Importances)")
         st.markdown("Jak jednotlivé složky betonové směsi přispívají ke snížení chyby predikce:")
@@ -217,21 +252,33 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
         })
         st.dataframe(fi_table, width="stretch", hide_index=True)
 
-    # TAB 4: Analýza RandomizedSearch
+    # TAB 4: Analýza RandomizedSearch (Plně interaktivní Plotly Scatter)
     with tab4:
-        st.subheader("4. Analýza průběhu náhodného vyhledávání (RandomizedSearchCV)")
+        st.subheader("4. Interaktivní analýza průběhu náhodného vyhledávání (RandomizedSearchCV)")
         st.markdown(
-            "Vizualizace validační chyby (5-Fold CV MAE) pro všech 60 náhodně vybraných bodů v hyperparametrickém prostoru:"
+            "Vizualizace validační chyby (5-Fold CV MAE) pro jednotlivé kombinace parametrů. "
+            "Pohybem myši zobrazíte konkrétní parametry každého pokusu:"
         )
 
-        search_img_path = Path(__file__).resolve().parent.parent / "01_Regression" / "plots" / "concrete_tree_random_search_distribution.png"
-        if search_img_path.exists():
-            st.image(str(search_img_path), caption="Rozložení validační chyby MAE v jednotlivých iteracích vzorkování", width="stretch")
-
-        st.markdown("##### 🏆 Top 10 nejlepších kombinací parametrů v RandomizedSearch:")
         top_trials = pd.DataFrame(data.get("top_trials", []))
         if not top_trials.empty:
-            top_trials = top_trials.rename(columns={
+            fig_trials = px.scatter(
+                top_trials,
+                x=top_trials.index + 1,
+                y="mean_mae",
+                color="rank_test_score",
+                color_continuous_scale="Plasma_r",
+                size=[14 - r for r in top_trials["rank_test_score"]],
+                labels={"x": "Index nejlepšího kandidáta", "mean_mae": "Validační MAE (MPa)", "rank_test_score": "Pořadí"},
+                title="Top 10 kandidátů RandomizedSearchCV seřazených dle MAE",
+                hover_data={"param_max_depth": True, "param_criterion": True, "param_min_samples_leaf": True, "param_max_features": True}
+            )
+            fig_trials.add_hline(y=data["cv_score_mae"], line_dash="dash", line_color="red", annotation_text=f"Nejlepší CV MAE = {data['cv_score_mae']:.2f} MPa")
+            fig_trials.update_layout(height=450, margin=dict(l=20, r=20, t=40, b=20))
+            st.plotly_chart(fig_trials, width="stretch")
+
+            st.markdown("##### 🏆 Tabulka Top 10 nejlepších kombinací parametrů v RandomizedSearch:")
+            top_trials_tbl = top_trials.rename(columns={
                 "rank_test_score": "Pořadí",
                 "mean_mae": "Validační MAE (MPa)",
                 "param_max_depth": "max_depth",
@@ -239,15 +286,42 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
                 "param_min_samples_leaf": "min_samples_leaf",
                 "param_max_features": "max_features"
             })
-            top_trials["Validační MAE (MPa)"] = top_trials["Validační MAE (MPa)"].apply(lambda x: f"{x:.4f}")
-            st.dataframe(top_trials, width="stretch", hide_index=True)
+            top_trials_tbl["Validační MAE (MPa)"] = top_trials_tbl["Validační MAE (MPa)"].apply(lambda x: f"{x:.4f}")
+            st.dataframe(top_trials_tbl, width="stretch", hide_index=True)
 
-    # TAB 5: Srovnání modelů
+    # TAB 5: Srovnání modelů (Plně interaktivní Plotly Grouped Bar)
     with tab5:
-        st.subheader("5. Srovnání modelů: Lineární regrese vs. GridSearchCV vs. RandomizedSearchCV")
+        st.subheader("5. Interaktivní srovnání modelů: OLS vs. GridSearchCV vs. RandomizedSearchCV")
         st.markdown("Porovnání dosažených výsledků napříč všemi vytvořenými regresními modely pro pevnost betonu:")
 
         grid_test = comp_models.get("grid_tree", {"r2": 0.8475, "rmse": 6.6206, "mae": 4.4025})
+
+        comp_plot_data = pd.DataFrame([
+            {"Model": "OLS Lineární regrese", "Metrika": "Test R² (%)", "Hodnota": ols_test["r2"] * 100},
+            {"Model": "Strom (GridSearch)", "Metrika": "Test R² (%)", "Hodnota": grid_test["r2"] * 100},
+            {"Model": "Strom (RandomizedSearch)", "Metrika": "Test R² (%)", "Hodnota": test_m["r2"] * 100},
+
+            {"Model": "OLS Lineární regrese", "Metrika": "Test RMSE (MPa)", "Hodnota": ols_test["rmse"]},
+            {"Model": "Strom (GridSearch)", "Metrika": "Test RMSE (MPa)", "Hodnota": grid_test["rmse"]},
+            {"Model": "Strom (RandomizedSearch)", "Metrika": "Test RMSE (MPa)", "Hodnota": test_m["rmse"]},
+
+            {"Model": "OLS Lineární regrese", "Metrika": "Test MAE (MPa)", "Hodnota": ols_test["mae"]},
+            {"Model": "Strom (GridSearch)", "Metrika": "Test MAE (MPa)", "Hodnota": grid_test["mae"]},
+            {"Model": "Strom (RandomizedSearch)", "Metrika": "Test MAE (MPa)", "Hodnota": test_m["mae"]}
+        ])
+
+        fig_comp_bar = px.bar(
+            comp_plot_data,
+            x="Metrika",
+            y="Hodnota",
+            color="Model",
+            barmode="group",
+            text_auto=".2f",
+            title="Porovnání klíčových metrik (R², RMSE, MAE) mezi modely",
+            color_discrete_sequence=["#636EFA", "#00CC96", "#AB63FA"]
+        )
+        fig_comp_bar.update_layout(height=450, margin=dict(l=20, r=20, t=40, b=20))
+        st.plotly_chart(fig_comp_bar, width="stretch")
 
         comp_table = pd.DataFrame([
             {
@@ -280,22 +354,51 @@ test_mae = mean_absolute_error(y_test, y_pred_test)""",
         st.markdown(
             r"""
             #### 💡 Klíčové poznatky ze srovnání:
-            1. **RandomizedSearchCV objevil ještě nižší MAE:** Na testovací sadě dosáhl model z Cvičení 2 průměrné chyby **4.39 MPa** (oproti 4.40 MPa u GridSearch a 8.98 MPa u OLS).
+            1. **RandomizedSearchCV dosáhl nejnižší MAE:** Na testovací sadě dosáhl model ze Cvičení 2 průměrné absolutní chyby **4.39 MPa** (oproti 4.40 MPa u GridSearch a 8.98 MPa u OLS).
             2. **Časová úspora:** Místo testování všech 5 148 kombinací stačilo 60 vzorků (cca 1 % prostoru), které nalezly srovnatelně či více optimální model.
             3. **Výhoda `max_features`:** Omezení počtu příznaků na 6 v každém rozdělení zlepšilo robustnost stromu proti lokálnímu šumu v trénovacích datech.
             """
         )
 
-        st.markdown("##### 🔍 Ukázka konkrétních predikcí na testovací sadě:")
-        preds_df = pd.DataFrame(data.get("sample_predictions", []))
-        if not preds_df.empty:
-            preds_df = preds_df.rename(columns={
-                "idx": "Index vzorku",
-                "actual_mpa": "Skutečná pevnost (MPa)",
-                "pred_random_tree": "Predikce stromu (MPa)",
-                "abs_error": "Absolutní chyba (MPa)"
-            })
-            st.dataframe(preds_df, width="stretch", hide_index=True)
+    # TAB 6: Simulátor pevnosti (Live interactive)
+    with tab6:
+        st.subheader("6. 🎛️ Živý simulátor pevnosti betonu (RandomizedSearch Tree)")
+        st.markdown(
+            "Vyzkoušejte si interaktivní predikci optimálního modelu ze Cvičení 2 nastavením složení směsi:"
+        )
+
+        sim_rc1, sim_rc2 = st.columns(2)
+        with sim_rc1:
+            rc_cement = st.slider("Cement (kg/m³):", 100.0, 550.0, 300.0, 5.0, key="rnd_cement")
+            rc_slag = st.slider("Vysokopecní struska (kg/m³):", 0.0, 360.0, 60.0, 5.0, key="rnd_slag")
+            rc_flyash = st.slider("Popílek (kg/m³):", 0.0, 200.0, 20.0, 5.0, key="rnd_flyash")
+            rc_water = st.slider("Záměsová voda (kg/m³):", 120.0, 250.0, 180.0, 2.0, key="rnd_water")
+        with sim_rc2:
+            rc_sp = st.slider("Superplastifikátor (kg/m³):", 0.0, 35.0, 7.0, 0.5, key="rnd_sp")
+            rc_coarse = st.slider("Hrubé kamenivo (kg/m³):", 800.0, 1150.0, 960.0, 10.0, key="rnd_coarse")
+            rc_fine = st.slider("Jemné kamenivo / písek (kg/m³):", 590.0, 1000.0, 770.0, 10.0, key="rnd_fine")
+            rc_age = st.slider("Doba zrání (dny):", 1, 365, 28, 1, key="rnd_age")
+
+        means = {"cement": 281.17, "slag": 73.90, "flyash": 54.19, "water": 181.57, "superplasticizer": 6.20, "coarseaggregate": 972.92, "fineaggregate": 773.58, "age": 45.66}
+        stds = {"cement": 104.51, "slag": 86.28, "flyash": 63.99, "water": 21.36, "superplasticizer": 5.97, "coarseaggregate": 77.75, "fineaggregate": 80.18, "age": 63.17}
+
+        input_z = np.array([[
+            (rc_cement - means["cement"]) / stds["cement"],
+            (rc_slag - means["slag"]) / stds["slag"],
+            (rc_flyash - means["flyash"]) / stds["flyash"],
+            (rc_water - means["water"]) / stds["water"],
+            (rc_sp - means["superplasticizer"]) / stds["superplasticizer"],
+            (rc_coarse - means["coarseaggregate"]) / stds["coarseaggregate"],
+            (rc_fine - means["fineaggregate"]) / stds["fineaggregate"],
+            (rc_age - means["age"]) / stds["age"]
+        ]])
+
+        if tree_model is not None:
+            pred_rnd = tree_model.predict(input_z)[0]
+            st.markdown("---")
+            m_col1, m_col2 = st.columns(2)
+            m_col1.metric("Odhadnutá pevnost (csMPa)", f"{pred_rnd:.2f} MPa")
+            m_col2.metric("Vodní součinitel w/c poměr", f"{rc_water / rc_cement:.2f}")
 
 
 if __name__ == "__main__":

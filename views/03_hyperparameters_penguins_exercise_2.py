@@ -227,16 +227,61 @@ optimal_svc.fit(X_train, y_train)
     with tab_trials:
         st.subheader("📊 Diagnostika: Matice záměn a 50 pokusů v prostoru hyperparametrů")
 
-        plots_dir = Path(__file__).resolve().parent.parent / "03_Advanced_ML_Neural_Networks" / "plots"
-        d_c1, d_c2 = st.columns(2)
-        with d_c1:
-            img1 = plots_dir / "penguins_svm_cm_comparison.png"
-            if img1.exists():
-                st.image(str(img1), caption="Srovnání matic záměn (Původní vs. Optimalizovaný model)", width="stretch")
-        with d_c2:
-            img2 = plots_dir / "penguins_random_search_distribution.png"
-            if img2.exists():
-                st.image(str(img2), caption="Rozmístění 50 náhodných pokusů v prostoru C a gamma", width="stretch")
+        classes = data["dataset_summary"]["classes"]
+        cm_base = data["baseline_model"]["confusion_matrix"]
+        cm_opt = data["optimal_model"]["confusion_matrix"]
+
+        st.markdown("##### 🎯 Interaktivní srovnání matic záměn (Confusion Matrix Heatmaps)")
+        cm_col1, cm_col2 = st.columns(2)
+        with cm_col1:
+            fig_cm1 = px.imshow(
+                cm_base,
+                x=classes,
+                y=classes,
+                text_auto=True,
+                color_continuous_scale="Reds",
+                title=f"Původní SVM (7 chyb, Acc = {data['baseline_model']['test_accuracy']*100:.1f} %)",
+                labels=dict(x="Predikce", y="Skutečnost", color="Počet")
+            )
+            fig_cm1.update_layout(height=360, margin=dict(l=20, r=20, t=30, b=20))
+            st.plotly_chart(fig_cm1, width="stretch")
+
+        with cm_col2:
+            fig_cm2 = px.imshow(
+                cm_opt,
+                x=classes,
+                y=classes,
+                text_auto=True,
+                color_continuous_scale="Greens",
+                title=f"Optimalizovaný Poly SVM (jen 1 chyba!, Acc = {data['optimal_model']['test_accuracy']*100:.1f} %)",
+                labels=dict(x="Predikce", y="Skutečnost", color="Počet")
+            )
+            fig_cm2.update_layout(height=360, margin=dict(l=20, r=20, t=30, b=20))
+            st.plotly_chart(fig_cm2, width="stretch")
+
+        st.markdown("##### 🔍 Interaktivní prostor 50 náhodných pokusů (C vs. Gamma na logaritmické škále)")
+        if not trials_df.empty:
+            fig_scatter_trials = px.scatter(
+                trials_df,
+                x="param_C",
+                y="param_gamma",
+                color="mean_precision_macro",
+                symbol="param_kernel",
+                size="mean_accuracy",
+                color_continuous_scale="Viridis",
+                log_x=True,
+                log_y=True,
+                hover_data=["param_kernel", "param_degree", "rank_test_score"],
+                labels={
+                    "param_C": "Regularizační parametr C (log scale)",
+                    "param_gamma": "Šířka jádra Gamma (log scale)",
+                    "mean_precision_macro": "Validační Precision",
+                    "param_kernel": "Jádro (Kernel)"
+                },
+                title="50 náhodných pokusů v RandomizedSearchCV (Barevně: Precision, Tvar: Kernel)"
+            )
+            fig_scatter_trials.update_layout(height=450, margin=dict(l=20, r=20, t=40, b=20))
+            st.plotly_chart(fig_scatter_trials, width="stretch")
 
         st.markdown("---")
         st.subheader("Interaktivní tabulka všech 50 náhodných pokusů:")
