@@ -19,9 +19,20 @@ Tento dokument je **závazným pravidlem (rule)** pro všechny AI agenty pracuj�
 - V souboru `.python-version` v kořenu repozitáře **MUSÍ být trvale nastavena hodnota `3.11`**.
 - Nikdy nenastavovat experimentální verze (např. 3.14), pro které neexistují linuxové binární balíčky (wheels) pro `scikit-learn`, `scipy` a `xgboost`.
 
-### Pravidlo 1.3: Zákaz `use_container_width`
-- V moderním Streamlitu (1.40+) je `use_container_width=True` deprecated.
-- **VŽDY** používat `width="stretch"` pro roztažení komponent (`st.dataframe`, `st.plotly_chart`, `st.image`, `st.download_button`).
+### Pravidlo 1.3: PŘÍSNÝ ZÁKAZ `use_container_width` (Deprecation po 2025-12-31)
+- **Kritické varování Streamlit:** Parametr `use_container_width` je v moderním Streamlitu (1.40+) označen jako deprecated a plní cloudové logy chybovými hlášeními.
+- **Pravidlo:**
+  - Pro roztažení na celou šířku kontejneru **VŽDY** použít `width="stretch"` (místo `use_container_width=True`).
+  - Pro přirozenou šířku obsahu použít `width="content"` (místo `use_container_width=False`).
+- **Týká se VŠECH těchto komponent:**
+  - `st.plotly_chart(fig, width="stretch")`  *(NIKDY `use_container_width=True`)*
+  - `st.dataframe(df, width="stretch")`      *(NIKDY `use_container_width=True`)*
+  - `st.button("...", width="stretch")`        *(NIKDY `use_container_width=True`)*
+  - `st.form_submit_button("...", width="stretch")` *(NIKDY `use_container_width=True`)*
+  - `st.image(..., width="stretch")`          *(NIKDY `use_container_width=True`)*
+  - `st.download_button(..., width="stretch")` *(NIKDY `use_container_width=True`)*
+- **Povinný test před commitem:** Před každým commitem spustit grep na `use_container_width` – výsledek musí být **0 nálezů**!
+
 
 ---
 

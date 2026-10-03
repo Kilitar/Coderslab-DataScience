@@ -141,7 +141,7 @@ def render_diabetes_knn_view():
         title=f"Validace mřížky GridSearchCV pro metriku: {active_metric_key.upper()} (weights='uniform')"
     )
     fig_grid_hm.update_layout(height=350, margin=dict(l=10, r=10, t=40, b=10))
-    st.plotly_chart(fig_grid_hm, use_container_width=True)
+    st.plotly_chart(fig_grid_hm, width="stretch")
 
     st.markdown("---")
 
@@ -204,7 +204,7 @@ def render_diabetes_knn_view():
         margin=dict(l=10, r=10, t=50, b=10),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
-    st.plotly_chart(fig_curves, use_container_width=True)
+    st.plotly_chart(fig_curves, width="stretch")
 
     st.markdown("---")
 
@@ -231,7 +231,7 @@ def render_diabetes_knn_view():
         )
         fig_cm.update_traces(text=z_text, texttemplate="%{text}")
         fig_cm.update_layout(height=380, margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(fig_cm, use_container_width=True)
+        st.plotly_chart(fig_cm, width="stretch")
 
     with col_cm2:
         st.markdown("##### 🩺 Lékařský rozbor klasifikačních chyb:")
@@ -273,7 +273,7 @@ def render_diabetes_knn_view():
             margin=dict(l=10, r=10, t=40, b=10),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
-        st.plotly_chart(fig_roc, use_container_width=True)
+        st.plotly_chart(fig_roc, width="stretch")
 
     with c_roc2:
         pr_d = data["pr_curve"]
@@ -291,7 +291,7 @@ def render_diabetes_knn_view():
             margin=dict(l=10, r=10, t=40, b=10),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
-        st.plotly_chart(fig_pr, use_container_width=True)
+        st.plotly_chart(fig_pr, width="stretch")
 
     st.markdown("---")
 
@@ -348,3 +348,4 @@ def render_diabetes_knn_view():
 if __name__ == "__main__":
     st.set_page_config(page_title="k-NN: Diabetes", layout="wide")
     render_diabetes_knn_view()
+

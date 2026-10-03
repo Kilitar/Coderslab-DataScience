@@ -97,7 +97,7 @@ def render_diabetes_preprocessing_view():
         })
 
     df_zero_table = pd.DataFrame(zero_rows)
-    st.dataframe(df_zero_table, use_container_width=True, hide_index=True)
+    st.dataframe(df_zero_table, width="stretch", hide_index=True)
 
     # Interaktivní graf počtu nul vs. platných dat
     col_chart1, col_chart2 = st.columns([1, 1])
@@ -122,7 +122,7 @@ def render_diabetes_preprocessing_view():
         )
         fig_zeros.update_layout(height=350, margin=dict(l=10, r=10, t=40, b=10))
         fig_zeros.update_traces(textposition="outside")
-        st.plotly_chart(fig_zeros, use_container_width=True)
+        st.plotly_chart(fig_zeros, width="stretch")
 
     with col_chart2:
         st.markdown("##### ⚖️ Poměr cílové třídy `outcome`")
@@ -141,7 +141,7 @@ def render_diabetes_preprocessing_view():
             height=350,
             margin=dict(l=10, r=10, t=40, b=10)
         )
-        st.plotly_chart(fig_pie, use_container_width=True)
+        st.plotly_chart(fig_pie, width="stretch")
 
     st.markdown("---")
 
@@ -224,7 +224,7 @@ def render_diabetes_preprocessing_view():
             margin=dict(l=10, r=10, t=50, b=10),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
-        st.plotly_chart(fig_dist, use_container_width=True)
+        st.plotly_chart(fig_dist, width="stretch")
 
     st.markdown("---")
 
@@ -250,7 +250,7 @@ def render_diabetes_preprocessing_view():
             title="Pearsonova korelační matice po imputaci dat"
         )
         fig_heat.update_layout(height=520, margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(fig_heat, use_container_width=True)
+        st.plotly_chart(fig_heat, width="stretch")
 
     with tab_corr2:
         outcome_corr_items = [
@@ -271,7 +271,7 @@ def render_diabetes_preprocessing_view():
         )
         fig_bar_corr.update_traces(texttemplate="%{text:+.3f}", textposition="outside")
         fig_bar_corr.update_layout(height=400, margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(fig_bar_corr, use_container_width=True)
+        st.plotly_chart(fig_bar_corr, width="stretch")
 
     st.markdown("---")
 
@@ -290,11 +290,11 @@ def render_diabetes_preprocessing_view():
 
         with col_s1:
             st.markdown("##### 📋 Původní data (prvních 5 řádků)")
-            st.dataframe(pd.DataFrame(data["sample_head_raw"]), use_container_width=True)
+            st.dataframe(pd.DataFrame(data["sample_head_raw"]), width="stretch")
 
         with col_s2:
             st.markdown("##### 🎯 Škálovaná data v `diabetes_scaled.csv` (prvních 5 řádků)")
-            st.dataframe(pd.DataFrame(data["sample_head_scaled"]), use_container_width=True)
+            st.dataframe(pd.DataFrame(data["sample_head_scaled"]), width="stretch")
 
         # Plotly boxplot škálovaných příznaků
         features_only = [c for c in df_scaled.columns if c != "outcome"]
@@ -304,7 +304,7 @@ def render_diabetes_preprocessing_view():
             labels={"value": "Standardizovaná hodnota (Z-skóre)", "variable": "Příznak"}
         )
         fig_box.update_layout(height=380, margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(fig_box, use_container_width=True)
+        st.plotly_chart(fig_box, width="stretch")
 
     st.markdown("---")
 
@@ -330,7 +330,7 @@ def render_diabetes_preprocessing_view():
             user_dpf = st.slider("Diabetes pedigree", 0.07, 2.50, 0.47, step=0.01)
             user_age = st.slider("Věk (roky)", 21, 81, 33)
 
-        submitted = st.form_submit_button("Vypočítat standardizovaný profil pacientky", use_container_width=True)
+        submitted = st.form_submit_button("Vypočítat standardizovaný profil pacientky", width="stretch")
 
     user_values = {
         "pregnancies": user_preg,
@@ -374,12 +374,13 @@ def render_diabetes_preprocessing_view():
     )
     fig_user_radar.update_traces(texttemplate="%{text:+.2f} σ", textposition="outside")
     fig_user_radar.update_layout(height=350, margin=dict(l=10, r=10, t=40, b=10))
-    st.plotly_chart(fig_user_radar, use_container_width=True)
+    st.plotly_chart(fig_user_radar, width="stretch")
 
     with st.expander("🔍 Zobrazit detailní tabulku přepočtu Z-skóre"):
-        st.dataframe(df_user_z, use_container_width=True, hide_index=True)
+        st.dataframe(df_user_z, width="stretch", hide_index=True)
 
 
 if __name__ == "__main__":
     st.set_page_config(page_title="Příprava dat: Diabetes", layout="wide")
     render_diabetes_preprocessing_view()
+
