@@ -195,7 +195,14 @@ Coderslab-DataScience/
 │   ├── 07_logistic_regression_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
 │   ├── 08_logistic_regression_penguins_exercise_2.py # Cvičení 2: Tučňáci (70/30, class_weight='balanced', ladění C z 59.6 % na 91.7 %)
 │   ├── 08_logistic_regression_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 2
-│   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
+│   ├── 14_svm_lumbar_exercise_1.py       # Cvičení 1: Bederní páteř (SVM s jádry Linear a RBF, ladění C a gamma)
+│   ├── 14_svm_lumbar_exercise_1.ipynb    # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
+│   ├── 15_homework_diabetes_preprocessing.py # Homework: Příprava dat diabetu (imputace nul, rozdělení, škálování)
+│   ├── 15_homework_diabetes_preprocessing.ipynb # Vypracovaný a spuštěný Jupyter Notebook přípravy diabetu
+│   ├── data/                            # Datové sady (Palmer Penguins, Lumbar, Diabetes) a JSON cache
+│   │   ├── diabetes.csv                 # Původní Pima Indians Diabetes dataset
+│   │   ├── diabetes_scaled.csv          # Výsledný předzpracovaný a standardizovaný dataset
+│   │   ├── diabetes_preprocessing_precomputed.json # Předpočtené statistiky, korelace a škálování
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
@@ -303,7 +310,9 @@ Coderslab-DataScience/
     ├── 01_homework_concrete_decision_tree.py # Homework: Rozhodovací strom betonu (GridSearchCV, MAE=4.40 MPa, R2=84.8 %)
     ├── 01_homework_concrete_decision_tree_nb.py # Homework: Rozhodovací strom betonu – interaktivní notebook
     ├── 01_homework_concrete_decision_tree_random.py # Homework: Rozhodovací strom betonu (RandomizedSearchCV, MAE=4.39 MPa)
-    └── 01_homework_concrete_decision_tree_random_nb.py # Homework: Rozhodovací strom betonu (Randomized) – notebook
+    ├── 01_homework_concrete_decision_tree_random_nb.py # Homework: Rozhodovací strom betonu (Randomized) – notebook
+    ├── 02_homework_diabetes_preprocessing.py # Homework: Příprava dat pro klasifikaci (Diabetes – imputace, nulové hodnoty, škálování)
+    └── 02_homework_diabetes_preprocessing_nb.py # Homework: Příprava dat pro klasifikaci (Diabetes) – interaktivní notebook
 ```
 
 ---
