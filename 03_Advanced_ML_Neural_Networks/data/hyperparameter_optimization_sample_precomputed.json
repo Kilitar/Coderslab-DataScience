@@ -1,0 +1,361 @@
+{
+  "dataset_summary": {
+    "n_samples": 310,
+    "n_features": 6,
+    "feature_names": [
+      "pelvic_incidence",
+      "pelvic_tilt",
+      "lumbar_lordosis_angle",
+      "sacral_slope",
+      "pelvic_radius",
+      "degree_spondylolisthesis"
+    ],
+    "train_size": 232,
+    "test_size": 78,
+    "class_distribution_train": {
+      "Abnormal": 157,
+      "Normal": 75
+    },
+    "class_distribution_test": {
+      "Abnormal": 53,
+      "Normal": 25
+    }
+  },
+  "grid_search": {
+    "time_seconds": 2.2596,
+    "total_combinations": 54,
+    "best_cv_recall": 0.8474,
+    "best_params": {
+      "max_depth": 11,
+      "criterion": "gini",
+      "max_features": "log2"
+    },
+    "test_metrics": {
+      "accuracy": 0.8205,
+      "precision": 0.898,
+      "recall": 0.8302,
+      "f1": 0.8627
+    },
+    "confusion_matrix": [
+      [
+        20,
+        5
+      ],
+      [
+        9,
+        44
+      ]
+    ],
+    "top_5_models": [
+      {
+        "params": {
+          "criterion": "gini",
+          "max_depth": 19,
+          "max_features": "sqrt"
+        },
+        "mean_test_recall": 0.8474,
+        "std_test_recall": 0.0356,
+        "mean_train_recall": 1.0
+      },
+      {
+        "params": {
+          "criterion": "gini",
+          "max_depth": 13,
+          "max_features": "log2"
+        },
+        "mean_test_recall": 0.8474,
+        "std_test_recall": 0.0356,
+        "mean_train_recall": 1.0
+      },
+      {
+        "params": {
+          "criterion": "gini",
+          "max_depth": 19,
+          "max_features": "log2"
+        },
+        "mean_test_recall": 0.8474,
+        "std_test_recall": 0.0356,
+        "mean_train_recall": 1.0
+      },
+      {
+        "params": {
+          "criterion": "gini",
+          "max_depth": 17,
+          "max_features": "sqrt"
+        },
+        "mean_test_recall": 0.8474,
+        "std_test_recall": 0.0356,
+        "mean_train_recall": 1.0
+      },
+      {
+        "params": {
+          "criterion": "gini",
+          "max_depth": 17,
+          "max_features": "log2"
+        },
+        "mean_test_recall": 0.8474,
+        "std_test_recall": 0.0356,
+        "mean_train_recall": 1.0
+      }
+    ]
+  },
+  "random_search": {
+    "time_seconds": 0.1424,
+    "n_iter": 20,
+    "best_cv_precision": 0.9244,
+    "best_params": {
+      "C": 3.905,
+      "gamma": 0.0243,
+      "kernel": "linear"
+    },
+    "test_metrics": {
+      "accuracy": 0.8333,
+      "precision": 0.9762,
+      "recall": 0.7736,
+      "f1": 0.8632
+    },
+    "confusion_matrix": [
+      [
+        24,
+        1
+      ],
+      [
+        12,
+        41
+      ]
+    ],
+    "trials_sampled": [
+      {
+        "iter": 1,
+        "C": 1.5082,
+        "gamma": 0.0961,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 2,
+        "C": 3.1288,
+        "gamma": 0.0607,
+        "kernel": "linear",
+        "mean_test_precision": 0.9237
+      },
+      {
+        "iter": 3,
+        "C": 0.634,
+        "gamma": 0.0068,
+        "kernel": "linear",
+        "mean_test_precision": 0.6877
+      },
+      {
+        "iter": 4,
+        "C": 1.3448,
+        "gamma": 0.0153,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 5,
+        "C": 0.0923,
+        "gamma": 0.098,
+        "kernel": "linear",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 6,
+        "C": 3.7642,
+        "gamma": 0.0011,
+        "kernel": "linear",
+        "mean_test_precision": 0.9237
+      },
+      {
+        "iter": 7,
+        "C": 0.7436,
+        "gamma": 0.0314,
+        "kernel": "linear",
+        "mean_test_precision": 0.7152
+      },
+      {
+        "iter": 8,
+        "C": 0.0383,
+        "gamma": 0.0033,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 9,
+        "C": 2.4574,
+        "gamma": 0.0149,
+        "kernel": "linear",
+        "mean_test_precision": 0.9162
+      },
+      {
+        "iter": 10,
+        "C": 3.905,
+        "gamma": 0.0243,
+        "kernel": "linear",
+        "mean_test_precision": 0.9244
+      },
+      {
+        "iter": 11,
+        "C": 3.1507,
+        "gamma": 0.021,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 12,
+        "C": 3.9429,
+        "gamma": 0.0477,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 13,
+        "C": 2.4402,
+        "gamma": 0.0181,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 14,
+        "C": 0.0631,
+        "gamma": 0.0952,
+        "kernel": "linear",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 15,
+        "C": 3.2436,
+        "gamma": 0.0315,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 16,
+        "C": 0.9336,
+        "gamma": 0.0251,
+        "kernel": "linear",
+        "mean_test_precision": 0.8172
+      },
+      {
+        "iter": 17,
+        "C": 0.4982,
+        "gamma": 0.0505,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      },
+      {
+        "iter": 18,
+        "C": 0.7035,
+        "gamma": 0.0401,
+        "kernel": "linear",
+        "mean_test_precision": 0.7026
+      },
+      {
+        "iter": 19,
+        "C": 2.6601,
+        "gamma": 0.0322,
+        "kernel": "linear",
+        "mean_test_precision": 0.9225
+      },
+      {
+        "iter": 20,
+        "C": 0.8418,
+        "gamma": 0.0578,
+        "kernel": "rbf",
+        "mean_test_precision": 0.6767
+      }
+    ]
+  },
+  "bayesian_search": {
+    "time_seconds": 0.5394,
+    "max_evals": 35,
+    "best_cv_recall": 0.8911,
+    "best_params": {
+      "min_samples_split": 22,
+      "min_samples_leaf": 30,
+      "max_depth": "10",
+      "criterion": "gini"
+    },
+    "test_metrics": {
+      "accuracy": 0.7692,
+      "precision": 0.8723,
+      "recall": 0.7736,
+      "f1": 0.82
+    },
+    "convergence_history": [
+      0.8093,
+      0.8538,
+      0.8155,
+      0.8278,
+      0.8093,
+      0.8538,
+      0.803,
+      0.8159,
+      0.8472,
+      0.8538,
+      0.7903,
+      0.8028,
+      0.8472,
+      0.7903,
+      0.7964,
+      0.8472,
+      0.8911,
+      0.8847,
+      0.8155,
+      0.8538,
+      0.8847,
+      0.8847,
+      0.8847,
+      0.8911,
+      0.8911,
+      0.8159,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8159,
+      0.8911,
+      0.8911,
+      0.8155,
+      0.8093,
+      0.8911
+    ],
+    "cumulative_best": [
+      0.8093,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8538,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911,
+      0.8911
+    ]
+  }
+}

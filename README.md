@@ -238,8 +238,17 @@ Coderslab-DataScience/
 │       ├── 06_svm_theory.md             # Podpůrné vektory, Nadroviny, Okraj, Jádrový trik (Kernel Trick), OvO/OvR
 │       └── 07_day_2_summary.md          # Ucelené shrnutí 2. dne (k-NN, LogReg, DT, SVM, Metriky, Srovnání, Kvíz)
 ├── 03_Advanced_ML_Neural_Networks/       # Podklady pro Den 3 (Session 2): Tuning, Ansámbly & NN
+│   ├── 01_hyperparameter_optimization_sample.py # Ukázková implementace: GridSearchCV, RandomizedSearchCV, Hyperopt
+│   ├── 01_hyperparameter_optimization_sample.ipynb # Spuštěný Jupyter Notebook s výstupy a křivkami
+│   ├── data/
+│   │   └── hyperparameter_optimization_sample_precomputed.json # Předpočtené výsledky 3 optimalizačních technik
+│   ├── plots/
+│   │   ├── hyperopt_grid_search_heatmap.png  # Heatmapa validačního Recall (max_depth vs criterion)
+│   │   ├── hyperopt_random_search_scatter.png # 2D prostor náhodných pokusů C a gamma
+│   │   └── hyperopt_bayesian_convergence.png  # Konvergenční křivka TPE (Hyperopt)
 │   └── theory/
-│       └── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
+│       ├── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
+│       └── 02_hyperparameter_optimization_implementation_guide.md # Detailní implementační průvodce (Scikit-learn & Hyperopt)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
@@ -251,7 +260,9 @@ Coderslab-DataScience/
     ├── 02_decision_tree_*.py            # Den 2 moduly rozhodovacích stromů (Teorie, Cvičení 1 & 2, Ukázka, Notebooky)
     ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
     ├── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
-    └── 03_hyperparameter_tuning_theory.py # Den 3: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
+    ├── 03_hyperparameter_tuning_theory.py # Den 3: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
+    ├── 03_hyperparameter_optimization_sample.py # Den 3: Ukázková laboratoř (GridSearch, RandomizedSearch, Hyperopt)
+    └── 03_hyperparameter_optimization_nb.py # Den 3: Interaktivní Jupyter Notebook prohlížeč tuningu
 ```
 
 ---
