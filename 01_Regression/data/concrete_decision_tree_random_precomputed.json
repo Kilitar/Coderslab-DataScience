@@ -1,0 +1,296 @@
+{
+  "dataset_info": {
+    "n_samples": 1005,
+    "n_train": 703,
+    "n_test": 302,
+    "feature_names": [
+      "cement",
+      "slag",
+      "flyash",
+      "water",
+      "superplasticizer",
+      "coarseaggregate",
+      "fineaggregate",
+      "age"
+    ],
+    "target_name": "csMPa"
+  },
+  "search_space": {
+    "max_depth_options": [
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      15,
+      20,
+      25,
+      30,
+      null
+    ],
+    "criterion_options": [
+      "squared_error",
+      "absolute_error",
+      "poisson"
+    ],
+    "min_samples_leaf_options": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      15,
+      20
+    ],
+    "max_features_options": [
+      "None",
+      "sqrt",
+      "log2",
+      "0.5",
+      "0.6",
+      "0.7",
+      "0.8",
+      "1.0",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "total_combinations": 5148,
+    "n_iter": 60
+  },
+  "best_hyperparams": {
+    "min_samples_leaf": 1,
+    "max_features": 6,
+    "max_depth": 25,
+    "criterion": "poisson"
+  },
+  "cv_score_mae": 4.840267173252279,
+  "metrics": {
+    "train": {
+      "r2": 0.9968067622631077,
+      "mse": 0.814660455192034,
+      "rmse": 0.9025854281961536,
+      "mae": 0.0644665718349929,
+      "mape": 0.001816160009662252
+    },
+    "test": {
+      "r2": 0.835133202099589,
+      "mse": 47.3888357615894,
+      "rmse": 6.883954950578149,
+      "mae": 4.3916556291390725,
+      "mape": 0.14537076412485225
+    }
+  },
+  "feature_importances": [
+    {
+      "feature": "age",
+      "importance": 0.34553233488667007,
+      "description": "Doba zrání betonu (dny)"
+    },
+    {
+      "feature": "cement",
+      "importance": 0.3053663186539834,
+      "description": "Obsah cementu (kg/m³)"
+    },
+    {
+      "feature": "water",
+      "importance": 0.1292710131163482,
+      "description": "Obsah záměsové vody (kg/m³)"
+    },
+    {
+      "feature": "slag",
+      "importance": 0.05793949853947308,
+      "description": "Obsah vysokopecní strusky (kg/m³)"
+    },
+    {
+      "feature": "superplasticizer",
+      "importance": 0.051375938907651894,
+      "description": "Obsah superplastifikátoru (kg/m³)"
+    },
+    {
+      "feature": "coarseaggregate",
+      "importance": 0.03947114210184841,
+      "description": "Obsah hrubého kameniva / štěrku (kg/m³)"
+    },
+    {
+      "feature": "flyash",
+      "importance": 0.03880092916497098,
+      "description": "Obsah popílku (kg/m³)"
+    },
+    {
+      "feature": "fineaggregate",
+      "importance": 0.03224282462905403,
+      "description": "Obsah jemného kameniva / písku (kg/m³)"
+    }
+  ],
+  "top_trials": [
+    {
+      "rank_test_score": 1,
+      "mean_mae": 4.840267173252279,
+      "param_max_depth": 25,
+      "param_criterion": "poisson",
+      "param_min_samples_leaf": 1,
+      "param_max_features": 6
+    },
+    {
+      "rank_test_score": 2,
+      "mean_mae": 5.16956172745694,
+      "param_max_depth": 25,
+      "param_criterion": "poisson",
+      "param_min_samples_leaf": 2,
+      "param_max_features": 0.7
+    },
+    {
+      "rank_test_score": 3,
+      "mean_mae": 5.199564420803783,
+      "param_max_depth": 25,
+      "param_criterion": "squared_error",
+      "param_min_samples_leaf": 2,
+      "param_max_features": 8
+    },
+    {
+      "rank_test_score": 4,
+      "mean_mae": 5.212074265450861,
+      "param_max_depth": 30,
+      "param_criterion": "squared_error",
+      "param_min_samples_leaf": 1,
+      "param_max_features": 0.7
+    },
+    {
+      "rank_test_score": 5,
+      "mean_mae": 5.252672982100642,
+      "param_max_depth": 15,
+      "param_criterion": "squared_error",
+      "param_min_samples_leaf": 2,
+      "param_max_features": 4
+    },
+    {
+      "rank_test_score": 6,
+      "mean_mae": 5.28189571342528,
+      "param_max_depth": 10,
+      "param_criterion": "squared_error",
+      "param_min_samples_leaf": 2,
+      "param_max_features": 8
+    },
+    {
+      "rank_test_score": 7,
+      "mean_mae": 5.284814312451966,
+      "param_max_depth": 12,
+      "param_criterion": "squared_error",
+      "param_min_samples_leaf": 2,
+      "param_max_features": 6
+    },
+    {
+      "rank_test_score": 8,
+      "mean_mae": 5.30246443768997,
+      "param_max_depth": 20,
+      "param_criterion": "poisson",
+      "param_min_samples_leaf": 2,
+      "param_max_features": null
+    },
+    {
+      "rank_test_score": 9,
+      "mean_mae": 5.4253343971631205,
+      "param_max_depth": 15,
+      "param_criterion": "absolute_error",
+      "param_min_samples_leaf": 2,
+      "param_max_features": null
+    },
+    {
+      "rank_test_score": 10,
+      "mean_mae": 5.492101728207318,
+      "param_max_depth": 8,
+      "param_criterion": "poisson",
+      "param_min_samples_leaf": 2,
+      "param_max_features": null
+    }
+  ],
+  "comparison_models": {
+    "grid_tree": {
+      "r2": 0.8475,
+      "mse": 43.8321,
+      "rmse": 6.6206,
+      "mae": 4.4025,
+      "mape": 15.3
+    },
+    "ols": {
+      "r2": 0.5608,
+      "rmse": 11.2351,
+      "mae": 8.9847,
+      "mse": 126.2285,
+      "mape": 33.86,
+      "max_error": 36.4032,
+      "explained_variance": 0.5616
+    }
+  },
+  "sample_predictions": [
+    {
+      "idx": 926,
+      "actual_mpa": 19.01,
+      "pred_random_tree": 19.01,
+      "abs_error": 0.0
+    },
+    {
+      "idx": 630,
+      "actual_mpa": 24.29,
+      "pred_random_tree": 22.35,
+      "abs_error": 1.94
+    },
+    {
+      "idx": 682,
+      "actual_mpa": 26.32,
+      "pred_random_tree": 25.46,
+      "abs_error": 0.86
+    },
+    {
+      "idx": 514,
+      "actual_mpa": 34.57,
+      "pred_random_tree": 33.21,
+      "abs_error": 1.36
+    },
+    {
+      "idx": 365,
+      "actual_mpa": 44.13,
+      "pred_random_tree": 44.09,
+      "abs_error": 0.04
+    },
+    {
+      "idx": 655,
+      "actual_mpa": 33.0,
+      "pred_random_tree": 32.88,
+      "abs_error": 0.12
+    },
+    {
+      "idx": 656,
+      "actual_mpa": 17.28,
+      "pred_random_tree": 17.96,
+      "abs_error": 0.68
+    },
+    {
+      "idx": 529,
+      "actual_mpa": 25.42,
+      "pred_random_tree": 24.44,
+      "abs_error": 0.98
+    },
+    {
+      "idx": 321,
+      "actual_mpa": 33.73,
+      "pred_random_tree": 33.7,
+      "abs_error": 0.03
+    },
+    {
+      "idx": 70,
+      "actual_mpa": 34.4,
+      "pred_random_tree": 28.6,
+      "abs_error": 5.8
+    }
+  ]
+}

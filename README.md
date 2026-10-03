@@ -157,6 +157,8 @@ Coderslab-DataScience/
 │   ├── 12_homework_concrete_regularization.ipynb # Vypracovaný a spuštěný Jupyter Notebook regularizace
 │   ├── 13_homework_concrete_decision_tree.py # DÚ: Rozhodovací strom na betonu (GridSearchCV, MAE=4.40 MPa, R2=84.8 %)
 │   ├── 13_homework_concrete_decision_tree.ipynb # Vypracovaný a spuštěný Jupyter Notebook rozhodovacího stromu
+│   ├── 14_homework_concrete_decision_tree_random.py # DÚ: Rozhodovací strom s RandomizedSearchCV (4 parametry, MAE=4.39 MPa)
+│   ├── 14_homework_concrete_decision_tree_random.ipynb # Vypracovaný a spuštěný Jupyter Notebook náhodného ladění stromu
 │   ├── data/                            # Datové sady (CSV) a optimalizované JSON cache
 │   │   ├── kc_house_data.csv
 │   │   ├── diamonds.csv
@@ -165,7 +167,8 @@ Coderslab-DataScience/
 │   │   ├── concrete_preprocessing_precomputed.json # Předpočtená cache přípravy dat
 │   │   ├── concrete_linear_regression_precomputed.json # Předpočtená cache lineární regrese
 │   │   ├── concrete_regularization_precomputed.json # Předpočtená cache regularizace
-│   │   ├── concrete_decision_tree_precomputed.json # Předpočtená cache rozhodovacího stromu
+│   │   ├── concrete_decision_tree_precomputed.json # Předpočtená cache rozhodovacího stromu (GridSearchCV)
+│   │   ├── concrete_decision_tree_random_precomputed.json # Předpočtená cache rozhodovacího stromu (RandomizedSearchCV)
 │   │   ├── diamonds_poly_precomputed.json
 │   │   └── kc_time_analysis_precomputed.json
 │   └── theory/                          # Detailní teoretické průvodce a rekapitulace
@@ -298,7 +301,9 @@ Coderslab-DataScience/
     ├── 01_homework_concrete_regularization.py # Homework: Regularizace betonu (ElasticNet R2=56.2 %, LogReg Acc=83.8 %)
     ├── 01_homework_concrete_regularization_nb.py # Homework: Regularizace betonu – interaktivní notebook
     ├── 01_homework_concrete_decision_tree.py # Homework: Rozhodovací strom betonu (GridSearchCV, MAE=4.40 MPa, R2=84.8 %)
-    └── 01_homework_concrete_decision_tree_nb.py # Homework: Rozhodovací strom betonu – interaktivní notebook
+    ├── 01_homework_concrete_decision_tree_nb.py # Homework: Rozhodovací strom betonu – interaktivní notebook
+    ├── 01_homework_concrete_decision_tree_random.py # Homework: Rozhodovací strom betonu (RandomizedSearchCV, MAE=4.39 MPa)
+    └── 01_homework_concrete_decision_tree_random_nb.py # Homework: Rozhodovací strom betonu (Randomized) – notebook
 ```
 
 ---

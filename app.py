@@ -141,6 +141,8 @@ p_hw_concrete_reg = st.Page("views/01_homework_concrete_regularization.py", titl
 p_hw_concrete_reg_nb = st.Page("views/01_homework_concrete_regularization_nb.py", title="Regrese: Regularizace – Notebook", icon="🐍", url_path="hw_concrete_reg_nb")
 p_hw_concrete_tree = st.Page("views/01_homework_concrete_decision_tree.py", title="Regrese: Rozhodovací strom (Beton)", icon="🌳", url_path="hw_concrete_tree")
 p_hw_concrete_tree_nb = st.Page("views/01_homework_concrete_decision_tree_nb.py", title="Regrese: Strom (Beton) – Notebook", icon="🐍", url_path="hw_concrete_tree_nb")
+p_hw_concrete_tree_rnd = st.Page("views/01_homework_concrete_decision_tree_random.py", title="Regrese: Strom (Randomized)", icon="🎲", url_path="hw_concrete_tree_rnd")
+p_hw_concrete_tree_rnd_nb = st.Page("views/01_homework_concrete_decision_tree_random_nb.py", title="Regrese: Random Strom – Notebook", icon="🐍", url_path="hw_concrete_tree_rnd_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -271,6 +273,8 @@ nav = st.navigation(
             p_hw_concrete_reg_nb,
             p_hw_concrete_tree,
             p_hw_concrete_tree_nb,
+            p_hw_concrete_tree_rnd,
+            p_hw_concrete_tree_rnd_nb,
         ],
     }
 )
