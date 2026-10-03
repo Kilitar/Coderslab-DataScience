@@ -1,0 +1,359 @@
+{
+  "metadata": {
+    "exercise": "Support vector machine - exercise 1",
+    "dataset": "lumbar_normalized_df.csv",
+    "samples_total": 310,
+    "samples_train": 232,
+    "samples_test": 78,
+    "test_ratio": 0.25,
+    "random_state": 42,
+    "feature_names": [
+      "pelvic_incidence",
+      "pelvic_tilt",
+      "lumbar_lordosis_angle",
+      "sacral_slope",
+      "pelvic_radius",
+      "degree_spondylolisthesis"
+    ]
+  },
+  "head_10": [
+    {
+      "pelvic_incidence": 0.4774744140159366,
+      "pelvic_tilt": 0.1708496850707195,
+      "lumbar_lordosis_angle": 0.3000633796979947,
+      "sacral_slope": 0.3066247289452171,
+      "pelvic_radius": 0.7475079254402162,
+      "degree_spondylolisthesis": -0.0019272360849399,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3068354099887695,
+      "pelvic_tilt": 0.079040180176168,
+      "lumbar_lordosis_angle": 0.1965233752140125,
+      "sacral_slope": 0.2277952298126014,
+      "pelvic_radius": 0.8987807477732759,
+      "degree_spondylolisthesis": 0.0358572837226978,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.4731995095389743,
+      "pelvic_tilt": 0.1527454033612555,
+      "lumbar_lordosis_angle": 0.3443688139847403,
+      "sacral_slope": 0.3204541061777187,
+      "pelvic_radius": 0.7286160339763096,
+      "degree_spondylolisthesis": -0.0242698732031585,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.491612667049162,
+      "pelvic_tilt": 0.1748945213843843,
+      "lumbar_lordosis_angle": 0.3143565150076157,
+      "sacral_slope": 0.3167181457357205,
+      "pelvic_radius": 0.7226840517242479,
+      "degree_spondylolisthesis": 0.0795377332085528,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3842935012370115,
+      "pelvic_tilt": 0.0746130819811483,
+      "lumbar_lordosis_angle": 0.2189010095609993,
+      "sacral_slope": 0.3096804192481329,
+      "pelvic_radius": 0.8361727441961319,
+      "degree_spondylolisthesis": 0.061212096151494,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.2837007599631445,
+      "pelvic_tilt": 0.098127599571747,
+      "lumbar_lordosis_angle": 0.1770914766193702,
+      "sacral_slope": 0.1855731604618817,
+      "pelvic_radius": 0.9186070237202084,
+      "degree_spondylolisthesis": 0.0157225950619284,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.373448239968309,
+      "pelvic_tilt": 0.1108774796254483,
+      "lumbar_lordosis_angle": 0.2597565409772525,
+      "sacral_slope": 0.2625707603428606,
+      "pelvic_radius": 0.8426588422652836,
+      "degree_spondylolisthesis": 0.0418545978491893,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.337383449000093,
+      "pelvic_tilt": 0.0799873253165392,
+      "lumbar_lordosis_angle": 0.215952377978265,
+      "sacral_slope": 0.2573961236091858,
+      "pelvic_radius": 0.8721139751155003,
+      "degree_spondylolisthesis": -0.0793943104652081,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3047973828746803,
+      "pelvic_tilt": 0.0942003791456486,
+      "lumbar_lordosis_angle": 0.2971452806355954,
+      "sacral_slope": 0.2105970037290316,
+      "pelvic_radius": 0.870070541381669,
+      "degree_spondylolisthesis": 0.0924969253419743,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3461733448093382,
+      "pelvic_tilt": 0.0472828281197143,
+      "lumbar_lordosis_angle": 0.3958294645707318,
+      "sacral_slope": 0.2988905166990598,
+      "pelvic_radius": 0.7949041043179624,
+      "degree_spondylolisthesis": 0.0062696452843135,
+      "class": 1
+    }
+  ],
+  "baseline_model": {
+    "kernel": "rbf",
+    "C": 1.0,
+    "gamma": "scale",
+    "precision": 0.9057,
+    "accuracy": 0.8205,
+    "recall": 0.8421,
+    "f1_score": 0.8727,
+    "n_support_vectors": 124,
+    "confusion_matrix": [
+      [
+        16,
+        5
+      ],
+      [
+        9,
+        48
+      ]
+    ]
+  },
+  "optimal_model_linear": {
+    "kernel": "linear",
+    "C": 2.0,
+    "precision": 0.9565,
+    "accuracy": 0.8077,
+    "recall": 0.7719,
+    "f1_score": 0.8544,
+    "n_support_vectors": 142,
+    "confusion_matrix": [
+      [
+        19,
+        2
+      ],
+      [
+        13,
+        44
+      ]
+    ]
+  },
+  "optimal_model_rbf_gamma": {
+    "kernel": "rbf",
+    "gamma": 1.0,
+    "precision": 0.9565,
+    "accuracy": 0.8077,
+    "recall": 0.7719,
+    "f1_score": 0.8544,
+    "n_support_vectors": 146,
+    "confusion_matrix": [
+      [
+        19,
+        2
+      ],
+      [
+        13,
+        44
+      ]
+    ]
+  },
+  "kernel_comparison": [
+    {
+      "kernel": "rbf",
+      "test_precision": 0.9057,
+      "test_accuracy": 0.8205,
+      "test_recall": 0.8421,
+      "test_f1": 0.8727,
+      "n_support_vectors": 124
+    },
+    {
+      "kernel": "linear",
+      "test_precision": 0.9362,
+      "test_accuracy": 0.7949,
+      "test_recall": 0.7719,
+      "test_f1": 0.8462,
+      "n_support_vectors": 158
+    },
+    {
+      "kernel": "poly",
+      "test_precision": 0.8621,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.8772,
+      "test_f1": 0.8696,
+      "n_support_vectors": 92
+    },
+    {
+      "kernel": "sigmoid",
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 158
+    }
+  ],
+  "c_linear_sweep": [
+    {
+      "C": 0.05,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 158
+    },
+    {
+      "C": 0.1,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 158
+    },
+    {
+      "C": 0.5,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 159
+    },
+    {
+      "C": 1.0,
+      "test_precision": 0.9362,
+      "test_accuracy": 0.7949,
+      "test_recall": 0.7719,
+      "test_f1": 0.8462,
+      "n_support_vectors": 158
+    },
+    {
+      "C": 1.5,
+      "test_precision": 0.9565,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.7719,
+      "test_f1": 0.8544,
+      "n_support_vectors": 149
+    },
+    {
+      "C": 2.0,
+      "test_precision": 0.9565,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.7719,
+      "test_f1": 0.8544,
+      "n_support_vectors": 142
+    },
+    {
+      "C": 3.0,
+      "test_precision": 0.9375,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.7895,
+      "test_f1": 0.8571,
+      "n_support_vectors": 136
+    },
+    {
+      "C": 5.0,
+      "test_precision": 0.94,
+      "test_accuracy": 0.8333,
+      "test_recall": 0.8246,
+      "test_f1": 0.8785,
+      "n_support_vectors": 129
+    },
+    {
+      "C": 10.0,
+      "test_precision": 0.8772,
+      "test_accuracy": 0.8205,
+      "test_recall": 0.8772,
+      "test_f1": 0.8772,
+      "n_support_vectors": 118
+    }
+  ],
+  "gamma_rbf_sweep": [
+    {
+      "gamma": 0.01,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 158
+    },
+    {
+      "gamma": 0.05,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 158
+    },
+    {
+      "gamma": 0.1,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 159
+    },
+    {
+      "gamma": 0.2,
+      "test_precision": 0.7308,
+      "test_accuracy": 0.7308,
+      "test_recall": 1.0,
+      "test_f1": 0.8444,
+      "n_support_vectors": 159
+    },
+    {
+      "gamma": 0.5,
+      "test_precision": 0.9362,
+      "test_accuracy": 0.7949,
+      "test_recall": 0.7719,
+      "test_f1": 0.8462,
+      "n_support_vectors": 159
+    },
+    {
+      "gamma": 1.0,
+      "test_precision": 0.9565,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.7719,
+      "test_f1": 0.8544,
+      "n_support_vectors": 146
+    },
+    {
+      "gamma": 1.5,
+      "test_precision": 0.9375,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.7895,
+      "test_f1": 0.8571,
+      "n_support_vectors": 138
+    },
+    {
+      "gamma": 2.0,
+      "test_precision": 0.92,
+      "test_accuracy": 0.8077,
+      "test_recall": 0.807,
+      "test_f1": 0.8598,
+      "n_support_vectors": 131
+    },
+    {
+      "gamma": 3.0,
+      "test_precision": 0.9074,
+      "test_accuracy": 0.8333,
+      "test_recall": 0.8596,
+      "test_f1": 0.8829,
+      "n_support_vectors": 124
+    },
+    {
+      "gamma": 5.0,
+      "test_precision": 0.8596,
+      "test_accuracy": 0.7949,
+      "test_recall": 0.8596,
+      "test_f1": 0.8596,
+      "n_support_vectors": 114
+    }
+  ]
+}

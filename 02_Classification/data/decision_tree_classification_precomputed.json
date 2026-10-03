@@ -1,0 +1,192 @@
+{
+  "metadata": {
+    "exercise": "Decision tree in classification - sample",
+    "samples_total": 600,
+    "samples_train": 420,
+    "samples_test": 180,
+    "features_count": 5
+  },
+  "school_model": {
+    "criterion": "gini",
+    "max_depth": 5,
+    "accuracy": 0.9389,
+    "precision": 0.9263,
+    "recall": 0.9565,
+    "f1_score": 0.9412,
+    "confusion_matrix": [
+      [
+        81,
+        7
+      ],
+      [
+        4,
+        88
+      ]
+    ],
+    "feature_importances": {
+      "x[0]": 0.7565,
+      "x[1]": 0.0604,
+      "x[2]": 0.0102,
+      "x[3]": 0.1345,
+      "x[4]": 0.0384
+    },
+    "n_leaves": 18,
+    "actual_depth": 5
+  },
+  "criterion_comparison": {
+    "gini": {
+      "accuracy": 0.9389,
+      "precision": 0.9263
+    },
+    "entropy": {
+      "accuracy": 0.9111,
+      "precision": 0.9318
+    }
+  },
+  "depth_sweep": [
+    {
+      "depth": 1,
+      "train_accuracy": 0.9071,
+      "test_accuracy": 0.9056,
+      "train_precision": 0.8889,
+      "test_precision": 0.8947,
+      "n_leaves": 2
+    },
+    {
+      "depth": 2,
+      "train_accuracy": 0.9071,
+      "test_accuracy": 0.9167,
+      "train_precision": 0.9773,
+      "test_precision": 0.9753,
+      "n_leaves": 4
+    },
+    {
+      "depth": 3,
+      "train_accuracy": 0.9381,
+      "test_accuracy": 0.9333,
+      "train_precision": 0.9249,
+      "test_precision": 0.9255,
+      "n_leaves": 8
+    },
+    {
+      "depth": 4,
+      "train_accuracy": 0.9452,
+      "test_accuracy": 0.9333,
+      "train_precision": 0.9742,
+      "test_precision": 0.9545,
+      "n_leaves": 12
+    },
+    {
+      "depth": 5,
+      "train_accuracy": 0.9643,
+      "test_accuracy": 0.9389,
+      "train_precision": 0.9615,
+      "test_precision": 0.9263,
+      "n_leaves": 18
+    },
+    {
+      "depth": 6,
+      "train_accuracy": 0.9786,
+      "test_accuracy": 0.9222,
+      "train_precision": 0.9853,
+      "test_precision": 0.9432,
+      "n_leaves": 25
+    },
+    {
+      "depth": 7,
+      "train_accuracy": 0.9905,
+      "test_accuracy": 0.9389,
+      "train_precision": 0.9856,
+      "test_precision": 0.9355,
+      "n_leaves": 31
+    },
+    {
+      "depth": 8,
+      "train_accuracy": 0.9952,
+      "test_accuracy": 0.9389,
+      "train_precision": 1.0,
+      "test_precision": 0.9355,
+      "n_leaves": 34
+    },
+    {
+      "depth": 9,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    },
+    {
+      "depth": 10,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    },
+    {
+      "depth": 11,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    },
+    {
+      "depth": 12,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    },
+    {
+      "depth": 13,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    },
+    {
+      "depth": 14,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    },
+    {
+      "depth": 15,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9111,
+      "train_precision": 1.0,
+      "test_precision": 0.9318,
+      "n_leaves": 36
+    }
+  ],
+  "toy_weather_example": {
+    "total_samples": 6,
+    "sunny": 3,
+    "rainy": 3,
+    "root_entropy": 1.0,
+    "root_gini": 0.5,
+    "split_temperature": {
+      "low": {
+        "rainy": 2,
+        "sunny": 1,
+        "entropy": 0.918,
+        "gini": 0.375
+      },
+      "high": {
+        "rainy": 0,
+        "sunny": 3,
+        "entropy": 0.0,
+        "gini": 0.0
+      },
+      "weighted_entropy": 0.459,
+      "information_gain": 0.541,
+      "weighted_gini": 0.25
+    }
+  }
+}

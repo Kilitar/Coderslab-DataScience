@@ -47,6 +47,9 @@ flowchart TD
     G --> H["07. Den 1: Extras (Expertní laboratoř)"]
     H --> I["08. Den 2: K-Nearest Neighbors (k-NN)"]
     I --> J["09. Den 2: Metriky klasifikačních modelů"]
+    J --> K["10. Den 2: Logistická regrese (Sigmoida, MLE, Prahování)"]
+    K --> L["11. Den 2: Rozhodovací stromy (Gini, Entropie, Overfitting)"]
+    L --> M["12. Den 2: Support Vector Machines (SVM, Nadrovina, Jádrový trik)"]
 ```
 
 ---
@@ -169,23 +172,55 @@ Coderslab-DataScience/
 │   ├── 04_classification_metrics_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook metrik
 │   ├── 05_classification_metrics_penguins_exercise_2.py # Cvičení 2: Multiclass metriky tučňáků (CM 3x3, Weighted F1, k-sweep)
 │   ├── 05_classification_metrics_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook multiclass metrik
+│   ├── 06_logistic_regression_exercise.py # Logistická regrese: Školní syntetická úloha, OLS vs. Sigmoida, Threshold Sweep
+│   ├── 06_logistic_regression_exercise.ipynb # Vypracovaný a spuštěný Jupyter Notebook logistické regrese
+│   ├── 07_logistic_regression_lumbar_exercise_1.py # Cvičení 1: Bederní páteř (75/25, baseline C=1.0, optimalizace C=5.0 pro Precision)
+│   ├── 07_logistic_regression_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
+│   ├── 08_logistic_regression_penguins_exercise_2.py # Cvičení 2: Tučňáci (70/30, class_weight='balanced', ladění C z 59.6 % na 91.7 %)
+│   ├── 08_logistic_regression_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 2
 │   ├── data/                            # Datové sady (Palmer Penguins, Lumbar) a JSON cache
 │   │   ├── lumbar_data.csv
 │   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
 │   │   ├── lumbar_df_normalized.csv
 │   │   ├── lumbar_knn_precomputed.json
 │   │   ├── lumbar_metrics_exercise_1_precomputed.json # Předpočtené metriky páteře, sweep k in [1, 25] a ROC
+│   │   ├── lumbar_logistic_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 logistické regrese
+│   │   ├── logistic_regression_precomputed.json # Předpočtená analýza logistické regrese a threshold sweep
 │   │   ├── penguins_size.csv
 │   │   ├── penguins_df_normalized.csv   # Výsledný normalizovaný dataset tučňáků dle kroku 9
 │   │   ├── penguins_knn_precomputed.json
 │   │   ├── penguins_exercise_2_precomputed.json
-│   │   └── penguins_metrics_exercise_2_precomputed.json # Předpočtené multiclass metriky a sweep k in [1, 35]
+│   │   ├── penguins_metrics_exercise_2_precomputed.json # Předpočtené multiclass metriky a sweep k in [1, 35]
+│   │   ├── penguins_logistic_exercise_2_precomputed.json # Předpočtené výsledky cvičení 2 logistické regrese (multiclass)
+│   │   ├── decision_tree_classification_precomputed.json # Předpočtené výsledky klasifikačního stromu a sweep hloubek
+│   │   ├── lumbar_decision_tree_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 rozhodovacího stromu (páteř)
+│   │   ├── penguins_decision_tree_exercise_2_precomputed.json # Předpočtené výsledky cvičení 2 rozhodovacího stromu (tučňáci)
+│   │   ├── svm_theory_precomputed.json       # Předpočtená srovnání jader SVM, citlivost C/gamma a 3D deka
+│   │   ├── svm_classification_sample_precomputed.json # Předpočtené výsledky školního modelu SVC (RBF, Poly, Linear)
+│   │   └── lumbar_svm_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 SVM (páteř)
 │   ├── plots/                           # Diagnostické PNG vizualizace
 │   │   ├── lumbar_knn_k_curve.png
 │   │   ├── lumbar_knn_confusion_matrix.png
 │   │   ├── lumbar_metrics_cm_heatmap.png # Matice záměn páteře (k=5)
 │   │   ├── lumbar_metrics_k_sweep.png    # Křivky metrik Train vs Test, Recall, F1
 │   │   ├── lumbar_metrics_roc_curve.png  # ROC křivka páteře (AUC = 0.821)
+│   │   ├── lumbar_logistic_c_tuning.png  # Křivka Precision vs C a matice záměn páteře
+│   │   ├── lumbar_tree_depth_precision_curve.png # Křivka Precision a Accuracy vs max_depth
+│   │   ├── lumbar_tree_structure_d3.png  # Struktura vyváženého stromu (max_depth=3)
+│   │   ├── lumbar_tree_structure_stump.png # Struktura rozhodovacího pařezu (max_depth=1)
+│   │   ├── lumbar_tree_cm_comparison.png # Srovnání matic záměn stromů
+│   │   ├── lumbar_svm_c_gamma_tuning.png # Křivky ladění parametrů C a gamma u SVM
+│   │   ├── lumbar_svm_cm_comparison.png  # Srovnání matic záměn SVM modelů páteře
+│   │   ├── penguins_tree_depth_curve.png # Křivka Precision tučňáků vs max_depth
+│   │   ├── penguins_tree_structure_opt.png # Struktura optimálního stromu tučňáků (max_depth=4)
+│   │   ├── penguins_tree_cm_comparison.png # Srovnání matic záměn stromu tučňáků
+│   │   ├── svm_kernel_comparison.png     # Srovnání 4 jader SVM (Linear, Poly, RBF, Sigmoid) a podpůrných vektorů
+│   │   ├── svm_c_gamma_grid.png          # Mřížka vlivu hyperparametrů C a gamma na tvar hranice RBF
+│   │   ├── svm_sample_decision_regions.png # 2D projekce rozhodovacích oblastí a podpůrných vektorů SVC
+│   │   ├── svm_sample_kernel_comparison.png # Sloupcový graf Accuracy a Precision jader ze slajdů
+│   │   ├── logistic_regression_comparison.png # Srovnání OLS vs Sigmoida a Threshold curve
+│   │   ├── decision_tree_sample_plot.png # Vizuální architektura stromu (plot_tree)
+│   │   ├── decision_tree_overfitting_curve.png # Křivka přeučení Train vs Test accuracy
 │   │   ├── penguins_ex2_k_curve.png
 │   │   ├── penguins_ex2_confusion_matrix.png
 │   │   ├── penguins_metrics_cm_k5.png    # Matice záměn tučňáků pro k=5
@@ -197,14 +232,22 @@ Coderslab-DataScience/
 │   └── theory/                          # Teoretické markdown příručky
 │       ├── 01_knn_theory.md             # Eukleidovská, Manhattanská, Minkowského metrika, Voronoi, kletba dimenzionality
 │       ├── 02_knn_implementation_guide.md # Scikit-learn KNeighborsClassifier, kd-tree/ball-tree, .kneighbors()
-│       └── 03_classification_metrics_theory.md # Matice záměn, Precision, Recall, Specificity, F1, ROC-AUC, Log Loss
+│       ├── 03_classification_metrics_theory.md # Matice záměn, Precision, Recall, Specificity, F1, ROC-AUC, Log Loss
+│       ├── 04_logistic_regression_theory.md # Sigmoida, Logit, Odvození MLE, Log Loss, Asymetrie prahování
+│       ├── 05_decision_tree_classification_theory.md # CART, Gini Impurity, Shannonova entropie, Information Gain, Pruning
+│       ├── 06_svm_theory.md             # Podpůrné vektory, Nadroviny, Okraj, Jádrový trik (Kernel Trick), OvO/OvR
+│       └── 07_day_2_summary.md          # Ucelené shrnutí 2. dne (k-NN, LogReg, DT, SVM, Metriky, Srovnání, Kvíz)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
     ├── 01_*.py                          # Stránky úloh, notebooků a analýz Dne 1
     ├── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
     ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Výsledky, Expertní analýzy, Notebooky)
-    └── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, Multiclass evaluace, Expertní analýzy & Cost matrix, Notebooky)
+    ├── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, Multiclass evaluace, Expertní analýzy & Cost matrix, Notebooky)
+    ├── 02_logistic_regression_*.py      # Den 2 moduly logistické regrese (Teorie, Ukázková laboratoř & Simulátory, Notebook)
+    ├── 02_decision_tree_*.py            # Den 2 moduly rozhodovacích stromů (Teorie, Cvičení 1 & 2, Ukázka, Notebooky)
+    ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
+    └── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
 ```
 
 ---

@@ -1,0 +1,445 @@
+{
+  "metadata": {
+    "exercise": "Decision tree in classification - exercise 2",
+    "dataset": "penguins_df_normalized.csv",
+    "samples_total": 334,
+    "samples_train": 233,
+    "samples_test": 101,
+    "test_ratio": 0.3,
+    "random_state": 42,
+    "classes": [
+      "Adelie",
+      "Chinstrap",
+      "Gentoo"
+    ],
+    "feature_names": [
+      "culmen_length_mm",
+      "culmen_depth_mm",
+      "flipper_length_mm",
+      "body_mass_g",
+      "island",
+      "sex"
+    ]
+  },
+  "head_10": [
+    {
+      "culmen_length_mm": 0.0104138485817433,
+      "culmen_depth_mm": 0.0049805362782251,
+      "flipper_length_mm": 0.0482073297518044,
+      "body_mass_g": 0.9987706440290977,
+      "island": 2,
+      "sex": 2,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0103816390005715,
+      "culmen_depth_mm": 0.0045731776863277,
+      "flipper_length_mm": 0.0488856925090204,
+      "body_mass_g": 0.9987399544853628,
+      "island": 2,
+      "sex": 1,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0123766028934616,
+      "culmen_depth_mm": 0.0055280112179233,
+      "flipper_length_mm": 0.0598867881941692,
+      "body_mass_g": 0.9981131365694867,
+      "island": 2,
+      "sex": 1,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.010620310098921,
+      "culmen_depth_mm": 0.0055850677086969,
+      "flipper_length_mm": 0.055850677086969,
+      "body_mass_g": 0.9983670256478924,
+      "island": 2,
+      "sex": 1,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.010751772728744,
+      "culmen_depth_mm": 0.0056357892674841,
+      "flipper_length_mm": 0.0519805806224265,
+      "body_mass_g": 0.998574311957141,
+      "island": 2,
+      "sex": 2,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0107169382542474,
+      "culmen_depth_mm": 0.0049038946253368,
+      "flipper_length_mm": 0.0498654453475264,
+      "body_mass_g": 0.9986864054407926,
+      "island": 2,
+      "sex": 1,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0083773745166361,
+      "culmen_depth_mm": 0.004188687258318,
+      "flipper_length_mm": 0.0416731640495932,
+      "body_mass_g": 0.9990873945222988,
+      "island": 2,
+      "sex": 2,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0128217796153087,
+      "culmen_depth_mm": 0.0054905917574071,
+      "flipper_length_mm": 0.0567777102186421,
+      "body_mass_g": 0.9982894104376636,
+      "island": 2,
+      "sex": 1,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0101444081263988,
+      "culmen_depth_mm": 0.0055715402144988,
+      "flipper_length_mm": 0.0501964236306266,
+      "body_mass_g": 0.9986723025988544,
+      "island": 2,
+      "sex": 2,
+      "species": "Adelie"
+    },
+    {
+      "culmen_length_mm": 0.0078553539867759,
+      "culmen_depth_mm": 0.0047904037318199,
+      "flipper_length_mm": 0.0449526037393534,
+      "body_mass_g": 0.9989467497634102,
+      "island": 2,
+      "sex": 2,
+      "species": "Adelie"
+    }
+  ],
+  "baseline_model": {
+    "model_type": "DecisionTreeClassifier(random_state=42)",
+    "max_depth": 5,
+    "n_leaves": 10,
+    "precision_macro": 0.9293,
+    "precision_weighted": 0.9555,
+    "precision_per_class": {
+      "Adelie": 0.9783,
+      "Chinstrap": 0.8095,
+      "Gentoo": 1.0
+    },
+    "accuracy": 0.9505,
+    "recall_macro": 0.9543,
+    "f1_macro": 0.9397,
+    "confusion_matrix": [
+      [
+        45,
+        4,
+        0
+      ],
+      [
+        1,
+        17,
+        0
+      ],
+      [
+        0,
+        0,
+        34
+      ]
+    ],
+    "feature_importances": {
+      "culmen_length_mm": 0.2816,
+      "culmen_depth_mm": 0.6555,
+      "flipper_length_mm": 0.0131,
+      "body_mass_g": 0.0498,
+      "island": 0.0,
+      "sex": 0.0
+    }
+  },
+  "optimal_model_depth4": {
+    "max_depth": 4,
+    "n_leaves": 8,
+    "precision_macro": 0.9429,
+    "precision_weighted": 0.9629,
+    "precision_per_class": {
+      "Adelie": 0.9787,
+      "Chinstrap": 0.85,
+      "Gentoo": 1.0
+    },
+    "accuracy": 0.9604,
+    "recall_macro": 0.9611,
+    "f1_macro": 0.951,
+    "confusion_matrix": [
+      [
+        46,
+        3,
+        0
+      ],
+      [
+        1,
+        17,
+        0
+      ],
+      [
+        0,
+        0,
+        34
+      ]
+    ],
+    "feature_importances": {
+      "culmen_length_mm": 0.2884,
+      "culmen_depth_mm": 0.6714,
+      "flipper_length_mm": 0.0017,
+      "body_mass_g": 0.0385,
+      "island": 0.0,
+      "sex": 0.0
+    }
+  },
+  "depth_sweep": [
+    {
+      "depth": 1,
+      "train_prec_macro": 0.5533,
+      "test_prec_macro": 0.5771,
+      "test_prec_weighted": 0.6914,
+      "train_accuracy": 0.7854,
+      "test_accuracy": 0.8218,
+      "test_recall_macro": 0.6667,
+      "test_f1_macro": 0.6149,
+      "n_leaves": 2
+    },
+    {
+      "depth": 2,
+      "train_prec_macro": 0.9302,
+      "test_prec_macro": 0.9145,
+      "test_prec_weighted": 0.9297,
+      "train_accuracy": 0.9313,
+      "test_accuracy": 0.9307,
+      "test_recall_macro": 0.9055,
+      "test_f1_macro": 0.9098,
+      "n_leaves": 3
+    },
+    {
+      "depth": 3,
+      "train_prec_macro": 0.9606,
+      "test_prec_macro": 0.9235,
+      "test_prec_weighted": 0.9296,
+      "train_accuracy": 0.9442,
+      "test_accuracy": 0.9307,
+      "test_recall_macro": 0.8938,
+      "test_f1_macro": 0.9062,
+      "n_leaves": 5
+    },
+    {
+      "depth": 4,
+      "train_prec_macro": 0.9899,
+      "test_prec_macro": 0.9429,
+      "test_prec_weighted": 0.9629,
+      "train_accuracy": 0.9914,
+      "test_accuracy": 0.9604,
+      "test_recall_macro": 0.9611,
+      "test_f1_macro": 0.951,
+      "n_leaves": 8
+    },
+    {
+      "depth": 5,
+      "train_prec_macro": 1.0,
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9505,
+      "test_recall_macro": 0.9543,
+      "test_f1_macro": 0.9397,
+      "n_leaves": 10
+    },
+    {
+      "depth": 6,
+      "train_prec_macro": 1.0,
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9505,
+      "test_recall_macro": 0.9543,
+      "test_f1_macro": 0.9397,
+      "n_leaves": 10
+    },
+    {
+      "depth": 7,
+      "train_prec_macro": 1.0,
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9505,
+      "test_recall_macro": 0.9543,
+      "test_f1_macro": 0.9397,
+      "n_leaves": 10
+    },
+    {
+      "depth": 8,
+      "train_prec_macro": 1.0,
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9505,
+      "test_recall_macro": 0.9543,
+      "test_f1_macro": 0.9397,
+      "n_leaves": 10
+    },
+    {
+      "depth": 9,
+      "train_prec_macro": 1.0,
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9505,
+      "test_recall_macro": 0.9543,
+      "test_f1_macro": 0.9397,
+      "n_leaves": 10
+    },
+    {
+      "depth": 10,
+      "train_prec_macro": 1.0,
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9505,
+      "test_recall_macro": 0.9543,
+      "test_f1_macro": 0.9397,
+      "n_leaves": 10
+    }
+  ],
+  "criterion_sweep": [
+    {
+      "criterion": "gini",
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "test_accuracy": 0.9505,
+      "depth": 5,
+      "n_leaves": 10
+    },
+    {
+      "criterion": "entropy",
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "test_accuracy": 0.9505,
+      "depth": 6,
+      "n_leaves": 9
+    },
+    {
+      "criterion": "log_loss",
+      "test_prec_macro": 0.9293,
+      "test_prec_weighted": 0.9555,
+      "test_accuracy": 0.9505,
+      "depth": 6,
+      "n_leaves": 9
+    }
+  ],
+  "split_sweep": [
+    {
+      "min_samples_split": 2,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 10
+    },
+    {
+      "min_samples_split": 3,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 10
+    },
+    {
+      "min_samples_split": 4,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 10
+    },
+    {
+      "min_samples_split": 5,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 10
+    },
+    {
+      "min_samples_split": 6,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 9
+    },
+    {
+      "min_samples_split": 7,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 9
+    },
+    {
+      "min_samples_split": 8,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 8
+    },
+    {
+      "min_samples_split": 10,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 8
+    },
+    {
+      "min_samples_split": 15,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 7
+    },
+    {
+      "min_samples_split": 20,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 7
+    }
+  ],
+  "leaf_sweep": [
+    {
+      "min_samples_leaf": 1,
+      "test_prec_macro": 0.9293,
+      "test_accuracy": 0.9505,
+      "n_leaves": 10
+    },
+    {
+      "min_samples_leaf": 2,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 10
+    },
+    {
+      "min_samples_leaf": 3,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 9
+    },
+    {
+      "min_samples_leaf": 4,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 8
+    },
+    {
+      "min_samples_leaf": 5,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 8
+    },
+    {
+      "min_samples_leaf": 6,
+      "test_prec_macro": 0.9429,
+      "test_accuracy": 0.9604,
+      "n_leaves": 8
+    },
+    {
+      "min_samples_leaf": 8,
+      "test_prec_macro": 0.958,
+      "test_accuracy": 0.9703,
+      "n_leaves": 7
+    },
+    {
+      "min_samples_leaf": 10,
+      "test_prec_macro": 0.9394,
+      "test_accuracy": 0.9604,
+      "n_leaves": 7
+    }
+  ]
+}

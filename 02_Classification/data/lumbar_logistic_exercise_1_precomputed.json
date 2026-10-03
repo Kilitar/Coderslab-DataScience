@@ -1,0 +1,620 @@
+{
+  "metadata": {
+    "exercise": "Logistic regression - exercise 1",
+    "dataset": "lumbar_df_normalized.csv",
+    "samples_total": 310,
+    "samples_train": 232,
+    "samples_test": 78,
+    "test_size": 0.25,
+    "random_state": 42
+  },
+  "head_10": [
+    {
+      "pelvic_incidence": 0.4774744140159366,
+      "pelvic_tilt numeric": 0.1708496850707195,
+      "lumbar_lordosis_angle": 0.3000633796979947,
+      "sacral_slope": 0.3066247289452171,
+      "pelvic_radius": 0.7475079254402162,
+      "degree_spondylolisthesis": -0.0019272360849399,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3068354099887695,
+      "pelvic_tilt numeric": 0.079040180176168,
+      "lumbar_lordosis_angle": 0.1965233752140125,
+      "sacral_slope": 0.2277952298126014,
+      "pelvic_radius": 0.8987807477732759,
+      "degree_spondylolisthesis": 0.0358572837226978,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.4731995095389743,
+      "pelvic_tilt numeric": 0.1527454033612555,
+      "lumbar_lordosis_angle": 0.3443688139847403,
+      "sacral_slope": 0.3204541061777187,
+      "pelvic_radius": 0.7286160339763096,
+      "degree_spondylolisthesis": -0.0242698732031585,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.491612667049162,
+      "pelvic_tilt numeric": 0.1748945213843843,
+      "lumbar_lordosis_angle": 0.3143565150076157,
+      "sacral_slope": 0.3167181457357205,
+      "pelvic_radius": 0.7226840517242479,
+      "degree_spondylolisthesis": 0.0795377332085528,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3842935012370115,
+      "pelvic_tilt numeric": 0.0746130819811483,
+      "lumbar_lordosis_angle": 0.2189010095609993,
+      "sacral_slope": 0.3096804192481329,
+      "pelvic_radius": 0.8361727441961319,
+      "degree_spondylolisthesis": 0.061212096151494,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.2837007599631445,
+      "pelvic_tilt numeric": 0.098127599571747,
+      "lumbar_lordosis_angle": 0.1770914766193702,
+      "sacral_slope": 0.1855731604618817,
+      "pelvic_radius": 0.9186070237202084,
+      "degree_spondylolisthesis": 0.0157225950619284,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.373448239968309,
+      "pelvic_tilt numeric": 0.1108774796254483,
+      "lumbar_lordosis_angle": 0.2597565409772525,
+      "sacral_slope": 0.2625707603428606,
+      "pelvic_radius": 0.8426588422652836,
+      "degree_spondylolisthesis": 0.0418545978491893,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.337383449000093,
+      "pelvic_tilt numeric": 0.0799873253165392,
+      "lumbar_lordosis_angle": 0.215952377978265,
+      "sacral_slope": 0.2573961236091858,
+      "pelvic_radius": 0.8721139751155003,
+      "degree_spondylolisthesis": -0.0793943104652081,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3047973828746803,
+      "pelvic_tilt numeric": 0.0942003791456486,
+      "lumbar_lordosis_angle": 0.2971452806355954,
+      "sacral_slope": 0.2105970037290316,
+      "pelvic_radius": 0.870070541381669,
+      "degree_spondylolisthesis": 0.0924969253419743,
+      "class": 1
+    },
+    {
+      "pelvic_incidence": 0.3461733448093382,
+      "pelvic_tilt numeric": 0.0472828281197143,
+      "lumbar_lordosis_angle": 0.3958294645707318,
+      "sacral_slope": 0.2988905166990598,
+      "pelvic_radius": 0.7949041043179624,
+      "degree_spondylolisthesis": 0.0062696452843135,
+      "class": 1
+    }
+  ],
+  "features": [
+    "pelvic_incidence",
+    "pelvic_tilt numeric",
+    "lumbar_lordosis_angle",
+    "sacral_slope",
+    "pelvic_radius",
+    "degree_spondylolisthesis"
+  ],
+  "baseline_model": {
+    "C": 1.0,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "precision": 0.8,
+    "accuracy": 0.7692,
+    "recall": 0.9123,
+    "f1_score": 0.8525,
+    "roc_auc": 0.868,
+    "confusion_matrix": [
+      [
+        8,
+        13
+      ],
+      [
+        5,
+        52
+      ]
+    ],
+    "intercept": 1.0339
+  },
+  "optimal_model_c5": {
+    "C": 5.0,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "precision": 0.8889,
+    "accuracy": 0.8077,
+    "recall": 0.8421,
+    "f1_score": 0.8649,
+    "roc_auc": 0.8855,
+    "confusion_matrix": [
+      [
+        15,
+        6
+      ],
+      [
+        9,
+        48
+      ]
+    ],
+    "intercept": 2.0725
+  },
+  "l1_model": {
+    "C": 1.0,
+    "penalty": "l1",
+    "solver": "saga",
+    "precision": 0.9216,
+    "accuracy": 0.8205,
+    "recall": 0.8246,
+    "f1_score": 0.8704,
+    "roc_auc": 0.8931,
+    "confusion_matrix": [
+      [
+        17,
+        4
+      ],
+      [
+        10,
+        47
+      ]
+    ],
+    "intercept": -0.7839
+  },
+  "c_sweep": [
+    {
+      "C": 0.001,
+      "precision": 0.7308,
+      "accuracy": 0.7308,
+      "recall": 1.0,
+      "f1": 0.8444,
+      "roc_auc": 0.858,
+      "confusion_matrix": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          57
+        ]
+      ],
+      "tn": 0,
+      "fp": 21,
+      "fn": 0,
+      "tp": 57
+    },
+    {
+      "C": 0.01,
+      "precision": 0.7308,
+      "accuracy": 0.7308,
+      "recall": 1.0,
+      "f1": 0.8444,
+      "roc_auc": 0.858,
+      "confusion_matrix": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          57
+        ]
+      ],
+      "tn": 0,
+      "fp": 21,
+      "fn": 0,
+      "tp": 57
+    },
+    {
+      "C": 0.05,
+      "precision": 0.7308,
+      "accuracy": 0.7308,
+      "recall": 1.0,
+      "f1": 0.8444,
+      "roc_auc": 0.858,
+      "confusion_matrix": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          57
+        ]
+      ],
+      "tn": 0,
+      "fp": 21,
+      "fn": 0,
+      "tp": 57
+    },
+    {
+      "C": 0.1,
+      "precision": 0.7308,
+      "accuracy": 0.7308,
+      "recall": 1.0,
+      "f1": 0.8444,
+      "roc_auc": 0.8588,
+      "confusion_matrix": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          57
+        ]
+      ],
+      "tn": 0,
+      "fp": 21,
+      "fn": 0,
+      "tp": 57
+    },
+    {
+      "C": 0.2,
+      "precision": 0.7308,
+      "accuracy": 0.7308,
+      "recall": 1.0,
+      "f1": 0.8444,
+      "roc_auc": 0.8605,
+      "confusion_matrix": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          57
+        ]
+      ],
+      "tn": 0,
+      "fp": 21,
+      "fn": 0,
+      "tp": 57
+    },
+    {
+      "C": 0.5,
+      "precision": 0.7568,
+      "accuracy": 0.7564,
+      "recall": 0.9825,
+      "f1": 0.855,
+      "roc_auc": 0.8622,
+      "confusion_matrix": [
+        [
+          3,
+          18
+        ],
+        [
+          1,
+          56
+        ]
+      ],
+      "tn": 3,
+      "fp": 18,
+      "fn": 1,
+      "tp": 56
+    },
+    {
+      "C": 1.0,
+      "precision": 0.8,
+      "accuracy": 0.7692,
+      "recall": 0.9123,
+      "f1": 0.8525,
+      "roc_auc": 0.868,
+      "confusion_matrix": [
+        [
+          8,
+          13
+        ],
+        [
+          5,
+          52
+        ]
+      ],
+      "tn": 8,
+      "fp": 13,
+      "fn": 5,
+      "tp": 52
+    },
+    {
+      "C": 2.0,
+      "precision": 0.8276,
+      "accuracy": 0.7564,
+      "recall": 0.8421,
+      "f1": 0.8348,
+      "roc_auc": 0.8739,
+      "confusion_matrix": [
+        [
+          11,
+          10
+        ],
+        [
+          9,
+          48
+        ]
+      ],
+      "tn": 11,
+      "fp": 10,
+      "fn": 9,
+      "tp": 48
+    },
+    {
+      "C": 5.0,
+      "precision": 0.8889,
+      "accuracy": 0.8077,
+      "recall": 0.8421,
+      "f1": 0.8649,
+      "roc_auc": 0.8855,
+      "confusion_matrix": [
+        [
+          15,
+          6
+        ],
+        [
+          9,
+          48
+        ]
+      ],
+      "tn": 15,
+      "fp": 6,
+      "fn": 9,
+      "tp": 48
+    },
+    {
+      "C": 10.0,
+      "precision": 0.8596,
+      "accuracy": 0.7949,
+      "recall": 0.8596,
+      "f1": 0.8596,
+      "roc_auc": 0.8931,
+      "confusion_matrix": [
+        [
+          13,
+          8
+        ],
+        [
+          8,
+          49
+        ]
+      ],
+      "tn": 13,
+      "fp": 8,
+      "fn": 8,
+      "tp": 49
+    },
+    {
+      "C": 20.0,
+      "precision": 0.8621,
+      "accuracy": 0.8077,
+      "recall": 0.8772,
+      "f1": 0.8696,
+      "roc_auc": 0.8939,
+      "confusion_matrix": [
+        [
+          13,
+          8
+        ],
+        [
+          7,
+          50
+        ]
+      ],
+      "tn": 13,
+      "fp": 8,
+      "fn": 7,
+      "tp": 50
+    },
+    {
+      "C": 50.0,
+      "precision": 0.8621,
+      "accuracy": 0.8077,
+      "recall": 0.8772,
+      "f1": 0.8696,
+      "roc_auc": 0.8939,
+      "confusion_matrix": [
+        [
+          13,
+          8
+        ],
+        [
+          7,
+          50
+        ]
+      ],
+      "tn": 13,
+      "fp": 8,
+      "fn": 7,
+      "tp": 50
+    },
+    {
+      "C": 100.0,
+      "precision": 0.8621,
+      "accuracy": 0.8077,
+      "recall": 0.8772,
+      "f1": 0.8696,
+      "roc_auc": 0.8939,
+      "confusion_matrix": [
+        [
+          13,
+          8
+        ],
+        [
+          7,
+          50
+        ]
+      ],
+      "tn": 13,
+      "fp": 8,
+      "fn": 7,
+      "tp": 50
+    }
+  ],
+  "coefficients": [
+    {
+      "feature": "pelvic_incidence",
+      "beta_baseline_C1": 0.9676,
+      "odds_ratio_baseline": 2.6315,
+      "beta_opt_C5": 1.4897,
+      "odds_ratio_opt_C5": 4.4358,
+      "beta_L1": 0.0,
+      "odds_ratio_L1": 1.0
+    },
+    {
+      "feature": "pelvic_tilt numeric",
+      "beta_baseline_C1": 1.212,
+      "odds_ratio_baseline": 3.3601,
+      "beta_opt_C5": 3.6594,
+      "odds_ratio_opt_C5": 38.8385,
+      "beta_L1": 3.478,
+      "odds_ratio_L1": 32.3958
+    },
+    {
+      "feature": "lumbar_lordosis_angle",
+      "beta_baseline_C1": 0.2543,
+      "odds_ratio_baseline": 1.2896,
+      "beta_opt_C5": -1.3877,
+      "odds_ratio_opt_C5": 0.2497,
+      "beta_L1": 0.0,
+      "odds_ratio_L1": 1.0
+    },
+    {
+      "feature": "sacral_slope",
+      "beta_baseline_C1": -0.2444,
+      "odds_ratio_baseline": 0.7832,
+      "beta_opt_C5": -2.1697,
+      "odds_ratio_opt_C5": 0.1142,
+      "beta_L1": 0.0,
+      "odds_ratio_L1": 1.0
+    },
+    {
+      "feature": "pelvic_radius",
+      "beta_baseline_C1": -1.7347,
+      "odds_ratio_baseline": 0.1764,
+      "beta_opt_C5": -2.75,
+      "odds_ratio_opt_C5": 0.0639,
+      "beta_L1": 0.0,
+      "odds_ratio_L1": 1.0
+    },
+    {
+      "feature": "degree_spondylolisthesis",
+      "beta_baseline_C1": 4.1693,
+      "odds_ratio_baseline": 64.6716,
+      "beta_opt_C5": 8.928,
+      "odds_ratio_opt_C5": 7540.0553,
+      "beta_L1": 12.1295,
+      "odds_ratio_L1": 185253.8804
+    }
+  ],
+  "roc_curves": {
+    "fpr_base": [
+      0.0,
+      0.0,
+      0.0,
+      0.0476,
+      0.0476,
+      0.0952,
+      0.0952,
+      0.1429,
+      0.1429,
+      0.2381,
+      0.2381,
+      0.2857,
+      0.2857,
+      0.5238,
+      0.5238,
+      0.6667,
+      0.6667,
+      0.7143,
+      0.7143,
+      0.7619,
+      0.7619,
+      0.8571,
+      0.8571,
+      1.0,
+      1.0
+    ],
+    "tpr_base": [
+      0.0,
+      0.0175,
+      0.6842,
+      0.6842,
+      0.7368,
+      0.7368,
+      0.7544,
+      0.7544,
+      0.7719,
+      0.7719,
+      0.807,
+      0.807,
+      0.8421,
+      0.8421,
+      0.9123,
+      0.9123,
+      0.9298,
+      0.9298,
+      0.9474,
+      0.9474,
+      0.9649,
+      0.9649,
+      0.9825,
+      0.9825,
+      1.0
+    ],
+    "fpr_opt": [
+      0.0,
+      0.0,
+      0.0,
+      0.0476,
+      0.0476,
+      0.0952,
+      0.0952,
+      0.1429,
+      0.1429,
+      0.1905,
+      0.1905,
+      0.4762,
+      0.4762,
+      0.5714,
+      0.5714,
+      0.7143,
+      0.7143,
+      0.8571,
+      0.8571,
+      1.0,
+      1.0
+    ],
+    "tpr_opt": [
+      0.0,
+      0.0175,
+      0.7368,
+      0.7368,
+      0.7719,
+      0.7719,
+      0.807,
+      0.807,
+      0.8246,
+      0.8246,
+      0.8421,
+      0.8421,
+      0.9123,
+      0.9123,
+      0.9298,
+      0.9298,
+      0.9474,
+      0.9474,
+      0.9825,
+      0.9825,
+      1.0
+    ]
+  }
+}

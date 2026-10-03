@@ -92,6 +92,34 @@ p_metrics_penguins = st.Page("views/02_metrics_penguins.py", title="Cvičení 2:
 p_metrics_penguins_critique = st.Page("views/02_metrics_penguins_critique.py", title="Cvičení 2: Tučňáci – Expertní analýza & OvR ROC", icon="🔬")
 p_metrics_penguins_nb = st.Page("views/02_metrics_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍")
 
+# Téma 10: Logistická regrese (Logistic Regression)
+p_logreg_theory = st.Page("views/02_logistic_regression_theory.py", title="Teorie: Logistická regrese", icon="📖", url_path="logistic_regression_theory")
+p_logreg_lumbar_ex1 = st.Page("views/02_logistic_regression_lumbar_exercise_1.py", title="Cvičení 1: Páteř – Výsledky zadání", icon="🎯", url_path="logistic_regression_lumbar_ex1")
+p_logreg_lumbar_nb = st.Page("views/02_logistic_regression_lumbar_nb.py", title="Cvičení 1: Páteř – Notebook", icon="🐍", url_path="logistic_regression_lumbar_nb")
+p_logreg_penguins_ex2 = st.Page("views/02_logistic_regression_penguins_exercise_2.py", title="Cvičení 2: Tučňáci – Výsledky", icon="🎯", url_path="logistic_regression_penguins_ex2")
+p_logreg_penguins_nb = st.Page("views/02_logistic_regression_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍", url_path="logistic_regression_penguins_nb")
+p_logreg_sample = st.Page("views/02_logistic_regression_sample.py", title="Ukázka: Simulátor & Laboratoř", icon="🔬", url_path="logistic_regression_sample")
+p_logreg_nb = st.Page("views/02_logistic_regression_nb.py", title="Ukázka: Syntetika – Notebook", icon="🐍", url_path="logistic_regression_notebook")
+
+# Téma 11: Rozhodovací stromy (Decision Trees - Classification)
+p_tree_class_theory = st.Page("views/02_decision_tree_theory.py", title="Teorie: Rozhodovací stromy", icon="📖", url_path="decision_tree_classification_theory")
+p_tree_lumbar_ex1 = st.Page("views/02_decision_tree_lumbar_exercise_1.py", title="Cvičení 1: Páteř – Výsledky zadání", icon="🎯", url_path="decision_tree_lumbar_ex1")
+p_tree_lumbar_nb = st.Page("views/02_decision_tree_lumbar_nb.py", title="Cvičení 1: Páteř – Notebook", icon="🐍", url_path="decision_tree_lumbar_nb")
+p_tree_penguins_ex2 = st.Page("views/02_decision_tree_penguins_exercise_2.py", title="Cvičení 2: Tučňáci – Výsledky", icon="🎯", url_path="decision_tree_penguins_ex2")
+p_tree_penguins_nb = st.Page("views/02_decision_tree_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍", url_path="decision_tree_penguins_nb")
+p_tree_class_sample = st.Page("views/02_decision_tree_sample.py", title="Ukázka: Strom & Laboratoř", icon="🔬", url_path="decision_tree_classification_sample")
+p_tree_class_nb = st.Page("views/02_decision_tree_nb.py", title="Ukázka: Syntetika – Notebook", icon="🐍", url_path="decision_tree_classification_nb")
+
+# Téma 12: Support Vector Machines (SVM)
+p_svm_theory = st.Page("views/02_svm_theory.py", title="Teorie: Support Vector Machines", icon="📖", url_path="svm_theory")
+p_svm_lumbar_ex1 = st.Page("views/02_svm_lumbar_exercise_1.py", title="Cvičení 1: Páteř – Výsledky zadání", icon="🎯", url_path="svm_lumbar_ex1")
+p_svm_lumbar_nb = st.Page("views/02_svm_lumbar_nb.py", title="Cvičení 1: Páteř – Notebook", icon="🐍", url_path="svm_lumbar_nb")
+p_svm_sample = st.Page("views/02_svm_sample.py", title="Ukázka: Klasifikační SVM", icon="🔬", url_path="svm_classification_sample")
+p_svm_nb = st.Page("views/02_svm_nb.py", title="Ukázka: SVM – Notebook", icon="🐍", url_path="svm_classification_nb")
+
+# Téma 13: Shrnutí 2. dne & Znalostní test
+p_day2_summary = st.Page("views/02_day_2_summary.py", title="Shrnutí 2. dne & Kvíz", icon="🎓", url_path="day_2_summary")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -176,6 +204,34 @@ nav = st.navigation(
             p_metrics_penguins,
             p_metrics_penguins_critique,
             p_metrics_penguins_nb,
+        ],
+        "10. Den 2: Logistická regrese": [
+            p_logreg_theory,
+            p_logreg_lumbar_ex1,
+            p_logreg_lumbar_nb,
+            p_logreg_penguins_ex2,
+            p_logreg_penguins_nb,
+            p_logreg_sample,
+            p_logreg_nb,
+        ],
+        "11. Den 2: Rozhodovací stromy (Classification)": [
+            p_tree_class_theory,
+            p_tree_lumbar_ex1,
+            p_tree_lumbar_nb,
+            p_tree_penguins_ex2,
+            p_tree_penguins_nb,
+            p_tree_class_sample,
+            p_tree_class_nb,
+        ],
+        "12. Den 2: Support Vector Machines (SVM)": [
+            p_svm_theory,
+            p_svm_lumbar_ex1,
+            p_svm_lumbar_nb,
+            p_svm_sample,
+            p_svm_nb,
+        ],
+        "13. Den 2: Shrnutí klasifikace": [
+            p_day2_summary,
         ],
     }
 )

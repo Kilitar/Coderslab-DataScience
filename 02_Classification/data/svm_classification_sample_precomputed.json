@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "exercise": "Support vector machine - sample implementation",
+    "dataset": "make_classification(600, 5, 2)",
+    "samples_total": 600,
+    "samples_train": 420,
+    "samples_test": 180,
+    "features_count": 5
+  },
+  "default_model_rbf": {
+    "kernel": "rbf",
+    "C": 1.0,
+    "gamma": "scale",
+    "accuracy": 0.9222,
+    "precision": 0.9239,
+    "recall": 0.9239,
+    "f1_score": 0.9239,
+    "n_support_vectors": 118,
+    "confusion_matrix": [
+      [
+        81,
+        7
+      ],
+      [
+        7,
+        85
+      ]
+    ]
+  },
+  "kernel_comparison": {
+    "rbf": {
+      "kernel": "rbf",
+      "accuracy": 0.9222,
+      "precision": 0.9239,
+      "recall": 0.9239,
+      "f1_score": 0.9239,
+      "n_support_vectors": 118,
+      "support_vectors_per_class": [
+        59,
+        59
+      ],
+      "confusion_matrix": [
+        [
+          81,
+          7
+        ],
+        [
+          7,
+          85
+        ]
+      ]
+    },
+    "linear": {
+      "kernel": "linear",
+      "accuracy": 0.9333,
+      "precision": 0.9444,
+      "recall": 0.9239,
+      "f1_score": 0.9341,
+      "n_support_vectors": 100,
+      "support_vectors_per_class": [
+        49,
+        51
+      ],
+      "confusion_matrix": [
+        [
+          83,
+          5
+        ],
+        [
+          7,
+          85
+        ]
+      ]
+    },
+    "poly": {
+      "kernel": "poly",
+      "accuracy": 0.9444,
+      "precision": 0.9556,
+      "recall": 0.9348,
+      "f1_score": 0.9451,
+      "n_support_vectors": 163,
+      "support_vectors_per_class": [
+        82,
+        81
+      ],
+      "confusion_matrix": [
+        [
+          84,
+          4
+        ],
+        [
+          6,
+          86
+        ]
+      ]
+    },
+    "sigmoid": {
+      "kernel": "sigmoid",
+      "accuracy": 0.8944,
+      "precision": 0.9101,
+      "recall": 0.8804,
+      "f1_score": 0.895,
+      "n_support_vectors": 99,
+      "support_vectors_per_class": [
+        50,
+        49
+      ],
+      "confusion_matrix": [
+        [
+          80,
+          8
+        ],
+        [
+          11,
+          81
+        ]
+      ]
+    }
+  },
+  "grid_search_best": {
+    "best_params": {
+      "C": 0.1,
+      "coef0": 1.0,
+      "degree": 3,
+      "kernel": "poly"
+    },
+    "accuracy": 0.9333,
+    "precision": 0.9444,
+    "recall": 0.9239,
+    "f1_score": 0.9341,
+    "confusion_matrix": [
+      [
+        83,
+        5
+      ],
+      [
+        7,
+        85
+      ]
+    ],
+    "n_support_vectors": 136
+  }
+}
