@@ -70,14 +70,6 @@ p_extra_ccp = st.Page("views/01_extras_ccp_pruning.py", title="Prořezávání s
 p_extra_chooser = st.Page("views/01_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🔬")
 p_extra_cheat = st.Page("views/01_extras_cheatsheet.py", title="Tahák do kapsy: Scikit-learn Cheatsheet ke stažení", icon="📖")
 
-# Homework: Regrese (Beton)
-p_hw_concrete_prep = st.Page("views/01_homework_concrete_preprocessing.py", title="Příprava dat (Pevnost betonu)", icon="🧱", url_path="hw_concrete_prep")
-p_hw_concrete_nb = st.Page("views/01_homework_concrete_preprocessing_nb.py", title="Příprava dat – Notebook", icon="🐍", url_path="hw_concrete_nb")
-p_hw_concrete_lr = st.Page("views/01_homework_concrete_linear_regression.py", title="Lineární regrese (Pevnost betonu)", icon="📈", url_path="hw_concrete_lr")
-p_hw_concrete_lr_nb = st.Page("views/01_homework_concrete_linear_regression_nb.py", title="Lineární regrese – Notebook", icon="🐍", url_path="hw_concrete_lr_nb")
-p_hw_concrete_reg = st.Page("views/01_homework_concrete_regularization.py", title="Regularizace (Pevnost betonu)", icon="🎯", url_path="hw_concrete_reg")
-p_hw_concrete_reg_nb = st.Page("views/01_homework_concrete_regularization_nb.py", title="Regularizace – Notebook", icon="🐍", url_path="hw_concrete_reg_nb")
-
 # =============================================================================
 # DEN 2: KLASIFIKACE (CLASSIFICATION)
 # =============================================================================
@@ -128,14 +120,25 @@ p_svm_nb = st.Page("views/02_svm_nb.py", title="Ukázka: SVM – Notebook", icon
 # Téma 13: Shrnutí 2. dne & Znalostní test
 p_day2_summary = st.Page("views/02_day_2_summary.py", title="Shrnutí 2. dne & Kvíz", icon="🎓", url_path="day_2_summary")
 
-# Téma 14: Optimalizace hyperparametrů & Křížová validace (Den 3)
+# =============================================================================
+# HOMEWORK: MEZI DNY 2 A 3 (TUNING & REGRESE)
+# =============================================================================
+# Část A: Optimalizace hyperparametrů & Křížová validace
 p_hyperopt_theory = st.Page("views/03_hyperparameter_tuning_theory.py", title="Teorie: Hyperparametry & CV", icon="📖", url_path="hyperparameter_tuning_theory")
-p_hyperopt_diam_ex1 = st.Page("views/03_hyperparameters_diamonds_exercise_1.py", title="Cvičení 1: Diamanty – Výsledky", icon="🎯", url_path="hyperparameters_diamonds_ex1")
-p_hyperopt_diam_nb = st.Page("views/03_hyperparameters_diamonds_nb.py", title="Cvičení 1: Diamanty – Notebook", icon="🐍", url_path="hyperparameters_diamonds_nb")
-p_hyperopt_peng_ex2 = st.Page("views/03_hyperparameters_penguins_exercise_2.py", title="Cvičení 2: Tučňáci – Výsledky", icon="🎯", url_path="hyperparameters_penguins_ex2")
-p_hyperopt_peng_nb = st.Page("views/03_hyperparameters_penguins_nb.py", title="Cvičení 2: Tučňáci – Notebook", icon="🐍", url_path="hyperparameters_penguins_nb")
-p_hyperopt_sample = st.Page("views/03_hyperparameter_optimization_sample.py", title="Ukázka: Implementace tuningu", icon="🔬", url_path="hyperparameter_optimization_sample")
-p_hyperopt_nb = st.Page("views/03_hyperparameter_optimization_nb.py", title="Ukázka: Tuning – Notebook", icon="🐍", url_path="hyperparameter_optimization_nb")
+p_hyperopt_diam_ex1 = st.Page("views/03_hyperparameters_diamonds_exercise_1.py", title="Tuning 1: Diamanty – Výsledky", icon="🎯", url_path="hyperparameters_diamonds_ex1")
+p_hyperopt_diam_nb = st.Page("views/03_hyperparameters_diamonds_nb.py", title="Tuning 1: Diamanty – Notebook", icon="🐍", url_path="hyperparameters_diamonds_nb")
+p_hyperopt_peng_ex2 = st.Page("views/03_hyperparameters_penguins_exercise_2.py", title="Tuning 2: Tučňáci – Výsledky", icon="🎯", url_path="hyperparameters_penguins_ex2")
+p_hyperopt_peng_nb = st.Page("views/03_hyperparameters_penguins_nb.py", title="Tuning 2: Tučňáci – Notebook", icon="🐍", url_path="hyperparameters_penguins_nb")
+p_hyperopt_sample = st.Page("views/03_hyperparameter_optimization_sample.py", title="Tuning: Ukázka implementace", icon="🔬", url_path="hyperparameter_optimization_sample")
+p_hyperopt_nb = st.Page("views/03_hyperparameter_optimization_nb.py", title="Tuning: Ukázka – Notebook", icon="🐍", url_path="hyperparameter_optimization_nb")
+
+# Část B: Regrese – Pevnost betonu (Concrete Compressive Strength)
+p_hw_concrete_prep = st.Page("views/01_homework_concrete_preprocessing.py", title="Regrese: Příprava dat (Beton)", icon="🧱", url_path="hw_concrete_prep")
+p_hw_concrete_nb = st.Page("views/01_homework_concrete_preprocessing_nb.py", title="Regrese: Příprava dat – Notebook", icon="🐍", url_path="hw_concrete_nb")
+p_hw_concrete_lr = st.Page("views/01_homework_concrete_linear_regression.py", title="Regrese: Lineární model (Beton)", icon="📈", url_path="hw_concrete_lr")
+p_hw_concrete_lr_nb = st.Page("views/01_homework_concrete_linear_regression_nb.py", title="Regrese: Lineární model – Notebook", icon="🐍", url_path="hw_concrete_lr_nb")
+p_hw_concrete_reg = st.Page("views/01_homework_concrete_regularization.py", title="Regrese: Regularizace (Beton)", icon="🎯", url_path="hw_concrete_reg")
+p_hw_concrete_reg_nb = st.Page("views/01_homework_concrete_regularization_nb.py", title="Regrese: Regularizace – Notebook", icon="🐍", url_path="hw_concrete_reg_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -203,14 +206,6 @@ nav = st.navigation(
             p_extra_chooser,
             p_extra_cheat,
         ],
-        "Homework: Regrese (Beton)": [
-            p_hw_concrete_prep,
-            p_hw_concrete_nb,
-            p_hw_concrete_lr,
-            p_hw_concrete_lr_nb,
-            p_hw_concrete_reg,
-            p_hw_concrete_reg_nb,
-        ],
         "08. Den 2: K-Nearest Neighbors (k-NN)": [
             p_knn_theory,
             p_knn_impl,
@@ -266,6 +261,12 @@ nav = st.navigation(
             p_hyperopt_peng_nb,
             p_hyperopt_sample,
             p_hyperopt_nb,
+            p_hw_concrete_prep,
+            p_hw_concrete_nb,
+            p_hw_concrete_lr,
+            p_hw_concrete_lr_nb,
+            p_hw_concrete_reg,
+            p_hw_concrete_reg_nb,
         ],
     }
 )

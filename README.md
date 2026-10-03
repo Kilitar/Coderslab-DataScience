@@ -275,12 +275,6 @@ Coderslab-DataScience/
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
     ├── 01_*.py                          # Stránky úloh, notebooků a analýz Dne 1
     ├── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
-    ├── 01_homework_concrete_preprocessing.py # Homework: Příprava dat betonu (audit, histogramy, scatter, matice, škálování)
-    ├── 01_homework_concrete_preprocessing_nb.py # Homework: Příprava dat betonu – interaktivní notebook
-    ├── 01_homework_concrete_linear_regression.py # Homework: Lineární regrese betonu (70/30, metriky, koeficienty, rezidua)
-    ├── 01_homework_concrete_linear_regression_nb.py # Homework: Lineární regrese betonu – interaktivní notebook
-    ├── 01_homework_concrete_regularization.py # Homework: Regularizace betonu (ElasticNet R2=56.2 %, LogReg Acc=83.8 %)
-    ├── 01_homework_concrete_regularization_nb.py # Homework: Regularizace betonu – interaktivní notebook
     ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Výsledky, Expertní analýzy, Notebooky)
     ├── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, Multiclass evaluace, Expertní analýzy & Cost matrix, Notebooky)
     ├── 02_logistic_regression_*.py      # Den 2 moduly logistické regrese (Teorie, Ukázková laboratoř & Simulátory, Notebook)
@@ -293,7 +287,13 @@ Coderslab-DataScience/
     ├── 03_hyperparameters_penguins_exercise_2.py # Homework: Cvičení 2 (Tučňáci - výsledky ladění SVM)
     ├── 03_hyperparameters_penguins_nb.py # Homework: Cvičení 2 (Tučňáci - interaktivní notebook)
     ├── 03_hyperparameter_optimization_sample.py # Homework: Ukázková laboratoř (GridSearch, RandomizedSearch, Hyperopt)
-    └── 03_hyperparameter_optimization_nb.py # Homework: Interaktivní Jupyter Notebook prohlížeč tuningu
+    ├── 03_hyperparameter_optimization_nb.py # Homework: Interaktivní Jupyter Notebook prohlížeč tuningu
+    ├── 01_homework_concrete_preprocessing.py # Homework: Příprava dat betonu (audit, histogramy, scatter, matice, škálování)
+    ├── 01_homework_concrete_preprocessing_nb.py # Homework: Příprava dat betonu – interaktivní notebook
+    ├── 01_homework_concrete_linear_regression.py # Homework: Lineární regrese betonu (70/30, metriky, koeficienty, rezidua)
+    ├── 01_homework_concrete_linear_regression_nb.py # Homework: Lineární regrese betonu – interaktivní notebook
+    ├── 01_homework_concrete_regularization.py # Homework: Regularizace betonu (ElasticNet R2=56.2 %, LogReg Acc=83.8 %)
+    └── 01_homework_concrete_regularization_nb.py # Homework: Regularizace betonu – interaktivní notebook
 ```
 
 ---
