@@ -337,6 +337,7 @@ def render_diabetes_logistic_regression_view():
 
     # Odhad pravděpodobnosti
     # Načteme průměry a rozptyly ze souboru pro správnou standardizaci
+    base_dir = Path(__file__).resolve().parent.parent
     prep_cache_path = base_dir / "02_Classification" / "data" / "diabetes_preprocessing_precomputed.json"
     if prep_cache_path.exists():
         with open(prep_cache_path, "r", encoding="utf-8") as f:
