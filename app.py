@@ -219,6 +219,9 @@ p_nlp_tfidf_ex_critique = st.Page("views/04_nlp_exercise_tfidf_critique.py", tit
 p_nlp_tfidf_ex_nb = st.Page("views/04_nlp_exercise_tfidf_nb.py", title="Cvičení 4: TF-IDF – Notebook", icon="🐍", url_path="day4_nlp_exercise_tfidf_nb")
 p_nlp_word2vec_theory = st.Page("views/04_nlp_word2vec_theory.py", title="Teorie: Word2Vec & Slovní vnoření", icon="🧬", url_path="day4_nlp_word2vec_theory")
 p_nlp_word2vec_impl = st.Page("views/04_nlp_word2vec_implementation.py", title="Implementace: Word2Vec v knihovně Gensim", icon="🛠️", url_path="day4_nlp_word2vec_implementation")
+p_nlp_w2v_ex = st.Page("views/04_nlp_exercise_word2vec.py", title="Cvičení 5: Word2Vec – Trénování & Klasifikace", icon="🎯", url_path="day4_nlp_exercise_word2vec")
+p_nlp_w2v_ex_critique = st.Page("views/04_nlp_exercise_word2vec_critique.py", title="Cvičení 5: Word2Vec – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_word2vec_critique")
+p_nlp_w2v_ex_nb = st.Page("views/04_nlp_exercise_word2vec_nb.py", title="Cvičení 5: Word2Vec – Notebook", icon="🐍", url_path="day4_nlp_exercise_word2vec_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -426,6 +429,9 @@ nav = st.navigation(
             p_nlp_tfidf_ex_nb,
             p_nlp_word2vec_theory,
             p_nlp_word2vec_impl,
+            p_nlp_w2v_ex,
+            p_nlp_w2v_ex_critique,
+            p_nlp_w2v_ex_nb,
         ],
     }
 )
