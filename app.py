@@ -202,6 +202,9 @@ p_extra_cost_thresh = st.Page("views/03_extras_cost_threshold_calc.py", title="K
 p_extra_model_chooser = st.Page("views/03_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🧭", url_path="day3_extras_model_chooser")
 p_extra_hyperparam = st.Page("views/03_extras_hyperparam_cheatsheet.py", title="Tahák & Diagnostika: Symptom-to-Fix matice", icon="📚", url_path="day3_extras_hyperparam_cheatsheet")
 
+# Den 4: NLP (Natural Language Processing)
+p_nlp_principles_theory = st.Page("views/04_nlp_text_preprocessing_theory.py", title="Teorie: Klíčové principy práce s textem", icon="📖", url_path="day4_nlp_principles_theory")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -390,6 +393,9 @@ nav = st.navigation(
             p_extra_cost_thresh,
             p_extra_model_chooser,
             p_extra_hyperparam,
+        ],
+        "21. Den 4: NLP – Zpracování textu & Reprezentace": [
+            p_nlp_principles_theory,
         ],
     }
 )
