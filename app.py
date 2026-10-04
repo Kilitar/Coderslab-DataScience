@@ -167,6 +167,9 @@ p_prework_nltk_spacy = st.Page("views/04_prework_nltk_spacy.py", title="Prework:
 # =============================================================================
 p_ensemble_bagging_theory = st.Page("views/03_ensemble_bagging_theory.py", title="Teorie: Ansámbly & Bagging", icon="📖", url_path="ensemble_bagging_theory")
 p_rf_theory = st.Page("views/03_random_forest_theory_and_implementation.py", title="Teorie: Náhodný les (RF)", icon="📖", url_path="random_forest_theory")
+p_rf_heart = st.Page("views/03_random_forest_heart_exercise_1.py", title="Cvičení 1: Nemoc srdce – Výsledky zadání", icon="🎯", url_path="rf_heart_exercise_1")
+p_rf_heart_critique = st.Page("views/03_random_forest_heart_exercise_1_critique.py", title="Cvičení 1: Nemoc srdce – Expertní analýza", icon="🔬", url_path="rf_heart_critique")
+p_rf_heart_nb = st.Page("views/03_random_forest_heart_nb.py", title="Cvičení 1: Nemoc srdce – Notebook", icon="🐍", url_path="rf_heart_notebook")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -317,6 +320,9 @@ nav = st.navigation(
         "16. Den 3: Ansámbly & Bagging": [
             p_ensemble_bagging_theory,
             p_rf_theory,
+            p_rf_heart,
+            p_rf_heart_critique,
+            p_rf_heart_nb,
         ],
     }
 )
