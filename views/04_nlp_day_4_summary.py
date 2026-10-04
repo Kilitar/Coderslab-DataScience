@@ -218,22 +218,22 @@ with tab3:
     st.markdown(
         """
         <div style="background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(49, 46, 129, 0.8)); border: 1px solid rgba(129, 140, 248, 0.6); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
-            <h4 style="color: #a5b4fc; margin-top: 0;">🚀 Nejnovější Frontier Modely (Aktuální k 10/2026): Argon, Astra & Fable</h4>
+            <h4 style="color: #a5b4fc; margin-top: 0;">🚀 Velká trojka Frontier AI (Aktuální stav k 10/2026): Argon, Astra & Fable</h4>
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
                 <div style="background: rgba(15, 23, 42, 0.6); border-left: 4px solid #60a5fa; padding: 12px; border-radius: 6px;">
                     <strong style="color: #60a5fa;">⚡ Gemini 4 Argon (Google)</strong><br>
                     <small><em>Oznámeno: 30. září 2026</em></small><br>
-                    První vlajkový model generace Gemini 4. Průlomový <strong>výstupní limit 1 000 000 tokenů</strong> pro dlouhodobé úlohy, autonomní migrace monstrózních C/C++ kódbází do Rustu (Fuchsia Zircon s 800k+ řádky) a kyberbezpečnostní obranu (program Fairwind).
+                    První vlajkový model generace Gemini 4. Průlomový <strong>výstupní limit 1 000 000 tokenů</strong> pro dlouhodobé autonomní úlohy, kompletní migrace gigantických C/C++ systémů do Rustu (Fuchsia Zircon s 800k+ řádky) a kyberbezpečnost v programu Fairwind.
                 </div>
                 <div style="background: rgba(15, 23, 42, 0.6); border-left: 4px solid #34d399; padding: 12px; border-radius: 6px;">
-                    <strong style="color: #34d399;">👁️ Project Astra (Google DeepMind)</strong><br>
-                    <small><em>Představeno na Google I/O & evoluce v Gemini Live</em></small><br>
-                    Vize univerzálního multimodálního asistenta pro reálný svět. Zpracovává kontinuální video/audio stream z kamery a chytrých brýlí, disponuje prostorovou pamětí („kde mám klíče?“) a nízkolatenčním uvažováním o fyzickém světě.
+                    <strong style="color: #34d399;">🌌 GPT-6 Astra (OpenAI)</strong><br>
+                    <small><em>Vydáno: 4. září 2026</em></small><br>
+                    Vlajková loď nové generace OpenAI navržená jako plnohodnotný <strong>Computer Operator</strong> (autonomní inspekce obrazovky, Blender 3D, QA, web). Rekordy: <strong>99.9 % na ARC-AGI-3</strong> a 97.6 % na FrontierMath. Doplněn o modely <em>Sol</em>, <em>Luna</em> a verzi pro NVIDIA Blackwell.
                 </div>
                 <div style="background: rgba(15, 23, 42, 0.6); border-left: 4px solid #fbbf24; padding: 12px; border-radius: 6px;">
                     <strong style="color: #fbbf24;">🎭 Claude Fable 5 & 5.1 (Anthropic)</strong><br>
                     <small><em>Vydáno: červen & září 2026</em></small><br>
-                    Nejvyšší reasoning tier u Anthropicu (stojící nad Opus/Sonnet) pro komplexní vícedenní agentní běhy a matematiku. Doplněn o privátní výzkumnou třídu <em>Mythos</em> pro kyberbezpečnost a biomedicínu (Project Glasswing).
+                    Nejvyšší reasoning tier u Anthropicu (stojící nad Opus/Sonnet) pro komplexní vícedenní agentní běhy, vědecké modelování a matematiku. Doplněn o privátní výzkumnou třídu <em>Mythos</em> pro kyberbezpečnost a biomedicínu (Project Glasswing).
                 </div>
             </div>
         </div>
@@ -251,7 +251,7 @@ with tab3:
                 <p><strong>Od architektury Transformer k multimodálnímu rozumu:</strong></p>
                 <ul>
                     <li><strong>2013–2018:</strong> Vynález <em>Word2Vec</em> (Mikolov), architektury <em>Transformer</em> (Vaswani et al.) a modelu <em>BERT</em>.</li>
-                    <li><strong>Project Astra:</strong> Univerzální asistent s kontinuálním zrakem a pamětí v reálném čase.</li>
+                    <li><strong>Project Astra:</strong> Univerzální asistent s kontinuálním zrakem a pamětí v reálném čase (integrován v Gemini Live).</li>
                     <li><strong>Gemini 1.5 & 2.0:</strong> Kontextové okno <strong>2 000 000+ tokenů</strong> a nativní multimodalita (text, zvuk, video).</li>
                     <li><strong>10/2026 – Gemini 4 Argon:</strong> Nová generace pro dlouhodobý autonomní softwarový vývoj a masivní refaktoring.</li>
                     <li><strong>Otevřené modely Gemma 2 & 3:</strong> Špičkové otevřené váhy pro vývojáře.</li>
@@ -264,7 +264,7 @@ with tab3:
                     <li><strong>2018–2022:</strong> Série <em>GPT-1</em> až <em>GPT-3</em>, spuštění fenoménu <em>ChatGPT</em> a komerční nasazení RLHF.</li>
                     <li><strong>GPT-4o (Omni):</strong> Sjednocená neuronová síť pro text, zrak a obousměrný realtime hlas s latencí pod 300 ms.</li>
                     <li><strong>OpenAI o1 ("Strawberry"), o3 & o3-mini:</strong> Posun k <strong>internímu řetězci uvažování (Chain-of-Thought)</strong>; řešení úloh na úrovni PhD v matematice (IMO) a autonomní programování.</li>
-                    <li><strong>GPT-6 Astra / Sol ekosystém:</strong> Masivní škálování inference a autonomní agentní asistenti.</li>
+                    <li><strong>09/2026 – GPT-6 Astra, Sol & Luna:</strong> Skok do éry autonomního ovládání počítače (Computer Operator), ARC-AGI-3 (99.9 %) a optimalizace pro architekturu Blackwell.</li>
                 </ul>
             </div>
             """,

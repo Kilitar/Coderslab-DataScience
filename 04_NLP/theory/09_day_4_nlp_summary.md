@@ -83,9 +83,10 @@ Technologie představené ve Dni 4 jsou přímým základem současné revoluce 
    * První vlajkový model nové generace **Gemini 4**.
    * Přináší bezprecedentní **výstupní limit 1 000 000 tokenů** (1M output) navržený pro dlouhodobé (long-horizon) softwarové inženýrství.
    * Využit v ostrém provozu pro migraci masivních C/C++ kódbází do paměťově bezpečného Rustu (jádro Fuchsia Zircon s 800 000+ řádky kódu), optimalizaci SIMD algoritmů a kybernetickou obranu v rámci programu *Fairwind*.
-2. **Project Astra (Google DeepMind)**:
-   * Výzkumný projekt univerzálního multimodálního agenta (představený na Google I/O).
-   * Schopnost vnímat nepřetržitý video a audio stream v reálném čase přes kameru telefonu či chytré brýle, disponující prostorovou a časovou pamětí o fyzickém okolí uživatele.
+2. **GPT-6 Astra (OpenAI – vydáno 4. září 2026)**:
+   * Vlajkový model nové generace GPT-6 od OpenAI, navržený především jako **Computer Operator**.
+   * Schopen samostatně vnímat obrazovku počítače, ovládat komplexní software (Blender 3D, IDE, prohlížeč), provádět QA testování a řídit víceúrovňové pracovní toky.
+   * Dosažené milníky v benchmarcích: **99.9 % na ARC-AGI-3**, **97.6 % na FrontierMath Tier 4** a 100 % na ExploitBench. Doplněn o odlehčené modely *GPT-6 Sol*, *GPT-6 Luna* a verzi *Astra Ultrafast* pro klastry NVIDIA Blackwell.
 3. **Claude Fable (Anthropic – Fable 5 & Fable 5.1, červen–září 2026)**:
    * Nejvyšší reasoning model v hierarchii Anthropicu (pozicovaný nad Opus, Sonnet a Haiku) specializovaný na komplexní, vícedenní autonomní agentní běhy a matematiku.
    * Doplněn o privátní výzkumnou třídu **Mythos** pro zabezpečený výzkum v kyberbezpečnosti a biomedicíně (*Project Glasswing*).
