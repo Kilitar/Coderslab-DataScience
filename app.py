@@ -185,6 +185,9 @@ p_nn_theory = st.Page("views/03_neural_networks_theory.py", title="Teorie: Neuro
 p_nn_mnist = st.Page("views/03_neural_network_mnist_exercise_1.py", title="Cvičení 1: MNIST Číslice – Výsledky zadání", icon="🎯", url_path="nn_mnist_exercise_1")
 p_nn_mnist_critique = st.Page("views/03_neural_network_mnist_exercise_1_critique.py", title="Cvičení 1: MNIST Číslice – Expertní analýza", icon="🔬", url_path="nn_mnist_critique")
 p_nn_mnist_nb = st.Page("views/03_neural_network_mnist_nb.py", title="Cvičení 1: MNIST Číslice – Notebook", icon="🐍", url_path="nn_mnist_notebook")
+p_nn_kc = st.Page("views/03_neural_network_kc_housing_exercise_2.py", title="Cvičení 2: KC Housing – Výsledky zadání", icon="🎯", url_path="nn_kc_exercise_2")
+p_nn_kc_critique = st.Page("views/03_neural_network_kc_housing_exercise_2_critique.py", title="Cvičení 2: KC Housing – Expertní analýza", icon="🔬", url_path="nn_kc_critique")
+p_nn_kc_nb = st.Page("views/03_neural_network_kc_housing_nb.py", title="Cvičení 2: KC Housing – Notebook", icon="🐍", url_path="nn_kc_notebook")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -356,6 +359,9 @@ nav = st.navigation(
             p_nn_mnist,
             p_nn_mnist_critique,
             p_nn_mnist_nb,
+            p_nn_kc,
+            p_nn_kc_critique,
+            p_nn_kc_nb,
         ],
     }
 )

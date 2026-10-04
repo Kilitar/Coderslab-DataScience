@@ -1,0 +1,3300 @@
+{
+  "metadata": {
+    "dataset": "kc_house_data_preprocessed.csv",
+    "n_train": 17290,
+    "n_test": 4323,
+    "n_features": 18,
+    "features": [
+      "bedrooms",
+      "bathrooms",
+      "sqft_living",
+      "sqft_lot",
+      "floors",
+      "waterfront",
+      "view",
+      "condition",
+      "grade",
+      "sqft_above",
+      "sqft_basement",
+      "yr_built",
+      "yr_renovated",
+      "zipcode",
+      "lat",
+      "long",
+      "sqft_living15",
+      "sqft_lot15"
+    ],
+    "epochs": 40,
+    "batch_size": 128,
+    "scaler": "StandardScaler"
+  },
+  "baselines": {
+    "linear_regression": {
+      "mae": 127493.34,
+      "rmse": 212539.52,
+      "r2": 0.7012
+    },
+    "decision_tree": {
+      "mae": 102760.2,
+      "rmse": 202723.51,
+      "r2": 0.7282
+    },
+    "random_forest": {
+      "mae": 75902.91,
+      "rmse": 152674.3,
+      "r2": 0.8458
+    }
+  },
+  "experiments": {
+    "exp1_1layer": {
+      "name": "Experiment 1: 1 skrytá vrstva (18 neuronů)",
+      "layers_desc": "Dense(18, ReLU) -> Dense(1, Linear)",
+      "n_params": 361,
+      "duration_s": 4.31,
+      "test_mae": 83046.43,
+      "test_rmse": 144234.47,
+      "test_r2": 0.8624,
+      "history": {
+        "epoch": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "train_loss": [
+          0.2734,
+          0.2048,
+          0.1915,
+          0.1805,
+          0.1767,
+          0.1661,
+          0.171,
+          0.1631,
+          0.1589,
+          0.1612,
+          0.1491,
+          0.145,
+          0.14,
+          0.1373,
+          0.1352,
+          0.1371,
+          0.1379,
+          0.1308,
+          0.1284,
+          0.139,
+          0.1314,
+          0.1255,
+          0.1296,
+          0.1249,
+          0.1253,
+          0.1219,
+          0.1227,
+          0.1209,
+          0.1191,
+          0.121,
+          0.1221,
+          0.1176,
+          0.1175,
+          0.1199,
+          0.1184,
+          0.1186,
+          0.1159,
+          0.1208,
+          0.1147,
+          0.1138
+        ],
+        "val_loss": [
+          0.2397,
+          0.2442,
+          0.2221,
+          0.2174,
+          0.1983,
+          0.1986,
+          0.2034,
+          0.1733,
+          0.1772,
+          0.1894,
+          0.1794,
+          0.1767,
+          0.1619,
+          0.1875,
+          0.1643,
+          0.1912,
+          0.1531,
+          0.1586,
+          0.1485,
+          0.1656,
+          0.1709,
+          0.1625,
+          0.1492,
+          0.1487,
+          0.1615,
+          0.1483,
+          0.1462,
+          0.1453,
+          0.1492,
+          0.1452,
+          0.1531,
+          0.146,
+          0.1393,
+          0.1481,
+          0.1448,
+          0.1442,
+          0.1669,
+          0.1574,
+          0.1875,
+          0.1441
+        ]
+      }
+    },
+    "exp2_2layers": {
+      "name": "Experiment 2: 2 skryté vrstvy (18 -> 10 neuronů)",
+      "layers_desc": "Dense(18, ReLU) -> Dense(10, ReLU) -> Dense(1, Linear)",
+      "n_params": 543,
+      "duration_s": 5.0,
+      "test_mae": 78564.93,
+      "test_rmse": 153109.23,
+      "test_r2": 0.8449,
+      "history": {
+        "epoch": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "train_loss": [
+          0.3045,
+          0.1774,
+          0.1496,
+          0.1463,
+          0.1342,
+          0.1212,
+          0.1331,
+          0.1205,
+          0.113,
+          0.1154,
+          0.1117,
+          0.1104,
+          0.1064,
+          0.1028,
+          0.1009,
+          0.0994,
+          0.1066,
+          0.0993,
+          0.097,
+          0.1037,
+          0.116,
+          0.0944,
+          0.095,
+          0.0959,
+          0.0946,
+          0.0971,
+          0.0975,
+          0.0973,
+          0.0919,
+          0.0928,
+          0.0988,
+          0.0946,
+          0.0888,
+          0.0913,
+          0.0951,
+          0.0902,
+          0.0893,
+          0.0903,
+          0.0976,
+          0.09
+        ],
+        "val_loss": [
+          0.2145,
+          0.1875,
+          0.2122,
+          0.1763,
+          0.1635,
+          0.1561,
+          0.1578,
+          0.1634,
+          0.1386,
+          0.1443,
+          0.141,
+          0.1449,
+          0.1392,
+          0.1664,
+          0.1388,
+          0.1731,
+          0.1335,
+          0.153,
+          0.1353,
+          0.2195,
+          0.1312,
+          0.1399,
+          0.144,
+          0.1373,
+          0.1318,
+          0.1432,
+          0.1406,
+          0.1495,
+          0.1522,
+          0.1495,
+          0.1589,
+          0.1372,
+          0.1502,
+          0.1398,
+          0.1768,
+          0.1484,
+          0.1518,
+          0.1472,
+          0.1776,
+          0.1658
+        ]
+      }
+    },
+    "exp3_3layers": {
+      "name": "Experiment 3: 3 skryté vrstvy (18 -> 12 -> 6 neuronů) [VÍTĚZ]",
+      "layers_desc": "Dense(18, ReLU) -> Dense(12, ReLU) -> Dense(6, ReLU) -> Dense(1, Linear)",
+      "n_params": 655,
+      "duration_s": 5.42,
+      "test_mae": 78157.39,
+      "test_rmse": 144464.2,
+      "test_r2": 0.862,
+      "history": {
+        "epoch": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "train_loss": [
+          0.3967,
+          0.208,
+          0.1661,
+          0.1436,
+          0.136,
+          0.1245,
+          0.1306,
+          0.119,
+          0.116,
+          0.1148,
+          0.1122,
+          0.1085,
+          0.1059,
+          0.1104,
+          0.101,
+          0.1048,
+          0.1049,
+          0.1024,
+          0.0997,
+          0.1011,
+          0.0988,
+          0.0942,
+          0.0966,
+          0.0934,
+          0.0951,
+          0.0925,
+          0.0907,
+          0.0913,
+          0.0936,
+          0.0932,
+          0.0953,
+          0.0867,
+          0.0874,
+          0.0879,
+          0.0852,
+          0.0873,
+          0.0872,
+          0.0885,
+          0.0883,
+          0.0872
+        ],
+        "val_loss": [
+          0.2722,
+          0.2302,
+          0.1948,
+          0.187,
+          0.1599,
+          0.1736,
+          0.1701,
+          0.1561,
+          0.146,
+          0.1514,
+          0.147,
+          0.1479,
+          0.1442,
+          0.1424,
+          0.1431,
+          0.1586,
+          0.138,
+          0.1463,
+          0.1417,
+          0.1423,
+          0.1379,
+          0.1466,
+          0.1508,
+          0.1402,
+          0.1427,
+          0.1426,
+          0.1422,
+          0.1381,
+          0.138,
+          0.1476,
+          0.1431,
+          0.1307,
+          0.133,
+          0.1454,
+          0.1464,
+          0.1521,
+          0.1519,
+          0.1506,
+          0.1546,
+          0.1569
+        ]
+      }
+    },
+    "exp4_narrow": {
+      "name": "Experiment 4: Příliš úzká síť / Bottleneck (4 neurony)",
+      "layers_desc": "Dense(4, ReLU) -> Dense(1, Linear)",
+      "n_params": 81,
+      "duration_s": 4.2,
+      "test_mae": 96951.44,
+      "test_rmse": 160023.62,
+      "test_r2": 0.8306,
+      "history": {
+        "epoch": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "train_loss": [
+          0.3545,
+          0.2254,
+          0.2136,
+          0.2062,
+          0.2075,
+          0.1979,
+          0.2013,
+          0.1961,
+          0.2004,
+          0.1978,
+          0.1924,
+          0.1929,
+          0.1925,
+          0.1895,
+          0.1852,
+          0.1849,
+          0.1819,
+          0.1737,
+          0.1745,
+          0.1753,
+          0.1692,
+          0.1685,
+          0.1703,
+          0.168,
+          0.1686,
+          0.1674,
+          0.1653,
+          0.1644,
+          0.1649,
+          0.1693,
+          0.166,
+          0.1638,
+          0.1664,
+          0.1644,
+          0.1672,
+          0.1634,
+          0.1647,
+          0.163,
+          0.1622,
+          0.1616
+        ],
+        "val_loss": [
+          0.2819,
+          0.2583,
+          0.2462,
+          0.2433,
+          0.2385,
+          0.2311,
+          0.2387,
+          0.2212,
+          0.2555,
+          0.2463,
+          0.2333,
+          0.2214,
+          0.2275,
+          0.2392,
+          0.2058,
+          0.2214,
+          0.1987,
+          0.2082,
+          0.1888,
+          0.196,
+          0.1898,
+          0.1924,
+          0.1936,
+          0.1821,
+          0.188,
+          0.1968,
+          0.1836,
+          0.197,
+          0.1753,
+          0.1841,
+          0.1964,
+          0.1922,
+          0.1779,
+          0.1936,
+          0.191,
+          0.194,
+          0.202,
+          0.2008,
+          0.2156,
+          0.1849
+        ]
+      }
+    }
+  },
+  "sample_residuals": [
+    {
+      "actual": 245000.0,
+      "pred_mlp": 206548.15625,
+      "res_mlp": 38451.84375,
+      "sqft_living": 1690.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 700000.0,
+      "pred_mlp": 846111.125,
+      "res_mlp": -146111.125,
+      "sqft_living": 2320.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 476500.0,
+      "pred_mlp": 455334.0625,
+      "res_mlp": 21165.9375,
+      "sqft_living": 2250.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 521000.0,
+      "pred_mlp": 492465.125,
+      "res_mlp": 28534.875,
+      "sqft_living": 2020.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 700000.0,
+      "pred_mlp": 746593.875,
+      "res_mlp": -46593.875,
+      "sqft_living": 2580.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 220000.0,
+      "pred_mlp": 263255.8125,
+      "res_mlp": -43255.8125,
+      "sqft_living": 1660.0,
+      "grade": 6.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 795127.0,
+      "pred_mlp": 1132292.0,
+      "res_mlp": -337165.0,
+      "sqft_living": 4360.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.25
+    },
+    {
+      "actual": 229000.0,
+      "pred_mlp": 388162.5625,
+      "res_mlp": -159162.5625,
+      "sqft_living": 1540.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 405000.0,
+      "pred_mlp": 426916.40625,
+      "res_mlp": -21916.40625,
+      "sqft_living": 1260.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 760000.0,
+      "pred_mlp": 763244.125,
+      "res_mlp": -3244.125,
+      "sqft_living": 1780.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 1300000.0,
+      "pred_mlp": 1490697.75,
+      "res_mlp": -190697.75,
+      "sqft_living": 4170.0,
+      "grade": 11.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 680000.0,
+      "pred_mlp": 616159.25,
+      "res_mlp": 63840.75,
+      "sqft_living": 1610.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 375000.0,
+      "pred_mlp": 241775.8125,
+      "res_mlp": 133224.1875,
+      "sqft_living": 1190.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 640000.0,
+      "pred_mlp": 578803.875,
+      "res_mlp": 61196.125,
+      "sqft_living": 1560.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 290000.0,
+      "pred_mlp": 317858.375,
+      "res_mlp": -27858.375,
+      "sqft_living": 1560.0,
+      "grade": 6.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 265000.0,
+      "pred_mlp": 282528.125,
+      "res_mlp": -17528.125,
+      "sqft_living": 2040.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 239950.0,
+      "pred_mlp": 262531.59375,
+      "res_mlp": -22581.59375,
+      "sqft_living": 1600.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 206000.0,
+      "pred_mlp": 140028.375,
+      "res_mlp": 65971.625,
+      "sqft_living": 970.0,
+      "grade": 5.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 440000.0,
+      "pred_mlp": 437791.28125,
+      "res_mlp": 2208.71875,
+      "sqft_living": 2990.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 465000.0,
+      "pred_mlp": 526764.1875,
+      "res_mlp": -61764.1875,
+      "sqft_living": 1450.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 969950.0,
+      "pred_mlp": 1078057.25,
+      "res_mlp": -108107.25,
+      "sqft_living": 2830.0,
+      "grade": 10.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 925000.0,
+      "pred_mlp": 858973.375,
+      "res_mlp": 66026.625,
+      "sqft_living": 3300.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 349500.0,
+      "pred_mlp": 387555.4375,
+      "res_mlp": -38055.4375,
+      "sqft_living": 1130.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 2400000.0,
+      "pred_mlp": 3347211.75,
+      "res_mlp": -947211.75,
+      "sqft_living": 5860.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 1050000.0,
+      "pred_mlp": 1163256.125,
+      "res_mlp": -113256.125,
+      "sqft_living": 3440.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.25
+    },
+    {
+      "actual": 264500.0,
+      "pred_mlp": 248888.0,
+      "res_mlp": 15612.0,
+      "sqft_living": 1630.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 330000.0,
+      "pred_mlp": 380155.4375,
+      "res_mlp": -50155.4375,
+      "sqft_living": 2300.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 400000.0,
+      "pred_mlp": 412251.59375,
+      "res_mlp": -12251.59375,
+      "sqft_living": 1580.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 780000.0,
+      "pred_mlp": 898451.0625,
+      "res_mlp": -118451.0625,
+      "sqft_living": 3300.0,
+      "grade": 8.0,
+      "bedrooms": 6.0,
+      "bathrooms": 4.0
+    },
+    {
+      "actual": 315000.0,
+      "pred_mlp": 250354.28125,
+      "res_mlp": 64645.71875,
+      "sqft_living": 1900.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 265000.0,
+      "pred_mlp": 249552.25,
+      "res_mlp": 15447.75,
+      "sqft_living": 1010.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 1250000.0,
+      "pred_mlp": 1168389.0,
+      "res_mlp": 81611.0,
+      "sqft_living": 3460.0,
+      "grade": 10.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 850000.0,
+      "pred_mlp": 953348.1875,
+      "res_mlp": -103348.1875,
+      "sqft_living": 1540.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 418500.0,
+      "pred_mlp": 353587.0625,
+      "res_mlp": 64912.9375,
+      "sqft_living": 790.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 660000.0,
+      "pred_mlp": 554636.75,
+      "res_mlp": 105363.25,
+      "sqft_living": 1870.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 185000.0,
+      "pred_mlp": 253074.5,
+      "res_mlp": -68074.5,
+      "sqft_living": 1590.0,
+      "grade": 6.0,
+      "bedrooms": 5.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 334850.0,
+      "pred_mlp": 400340.3125,
+      "res_mlp": -65490.3125,
+      "sqft_living": 870.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 495000.0,
+      "pred_mlp": 532969.375,
+      "res_mlp": -37969.375,
+      "sqft_living": 1940.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 1400000.0,
+      "pred_mlp": 1964127.75,
+      "res_mlp": -564127.75,
+      "sqft_living": 3130.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 379500.0,
+      "pred_mlp": 390972.5,
+      "res_mlp": -11472.5,
+      "sqft_living": 960.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 290000.0,
+      "pred_mlp": 299684.75,
+      "res_mlp": -9684.75,
+      "sqft_living": 1480.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 1436000.0,
+      "pred_mlp": 1668014.25,
+      "res_mlp": -232014.25,
+      "sqft_living": 4970.0,
+      "grade": 11.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 655100.0,
+      "pred_mlp": 484622.46875,
+      "res_mlp": 170477.53125,
+      "sqft_living": 1220.0,
+      "grade": 7.0,
+      "bedrooms": 1.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 345000.0,
+      "pred_mlp": 296542.46875,
+      "res_mlp": 48457.53125,
+      "sqft_living": 2200.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 309000.0,
+      "pred_mlp": 218506.625,
+      "res_mlp": 90493.375,
+      "sqft_living": 1280.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 815000.0,
+      "pred_mlp": 861417.875,
+      "res_mlp": -46417.875,
+      "sqft_living": 2620.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 610000.0,
+      "pred_mlp": 533018.9375,
+      "res_mlp": 76981.0625,
+      "sqft_living": 1390.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 645000.0,
+      "pred_mlp": 526527.4375,
+      "res_mlp": 118472.5625,
+      "sqft_living": 3340.0,
+      "grade": 8.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 210000.0,
+      "pred_mlp": 327737.28125,
+      "res_mlp": -117737.28125,
+      "sqft_living": 1050.0,
+      "grade": 6.0,
+      "bedrooms": 1.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 350000.0,
+      "pred_mlp": 336024.125,
+      "res_mlp": 13975.875,
+      "sqft_living": 2380.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 320000.0,
+      "pred_mlp": 277909.875,
+      "res_mlp": 42090.125,
+      "sqft_living": 2000.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 505000.0,
+      "pred_mlp": 504667.0,
+      "res_mlp": 333.0,
+      "sqft_living": 2980.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 540000.0,
+      "pred_mlp": 664248.25,
+      "res_mlp": -124248.25,
+      "sqft_living": 1950.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 209950.0,
+      "pred_mlp": 240223.28125,
+      "res_mlp": -30273.28125,
+      "sqft_living": 1050.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 409900.0,
+      "pred_mlp": 525043.375,
+      "res_mlp": -115143.375,
+      "sqft_living": 1590.0,
+      "grade": 9.0,
+      "bedrooms": 2.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 425000.0,
+      "pred_mlp": 456226.5625,
+      "res_mlp": -31226.5625,
+      "sqft_living": 2060.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 550000.0,
+      "pred_mlp": 241933.71875,
+      "res_mlp": 308066.28125,
+      "sqft_living": 1270.0,
+      "grade": 5.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 350000.0,
+      "pred_mlp": 319605.1875,
+      "res_mlp": 30394.8125,
+      "sqft_living": 1080.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 140000.0,
+      "pred_mlp": 217099.03125,
+      "res_mlp": -77099.03125,
+      "sqft_living": 1080.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 608500.0,
+      "pred_mlp": 565725.75,
+      "res_mlp": 42774.25,
+      "sqft_living": 2850.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 1000000.0,
+      "pred_mlp": 962621.0,
+      "res_mlp": 37379.0,
+      "sqft_living": 2300.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 380000.0,
+      "pred_mlp": 376750.15625,
+      "res_mlp": 3249.84375,
+      "sqft_living": 2390.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 425000.0,
+      "pred_mlp": 509562.96875,
+      "res_mlp": -84562.96875,
+      "sqft_living": 1340.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 880000.0,
+      "pred_mlp": 1008080.625,
+      "res_mlp": -128080.625,
+      "sqft_living": 2530.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 280000.0,
+      "pred_mlp": 424179.8125,
+      "res_mlp": -144179.8125,
+      "sqft_living": 1610.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 335000.0,
+      "pred_mlp": 366066.78125,
+      "res_mlp": -31066.78125,
+      "sqft_living": 1380.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 635000.0,
+      "pred_mlp": 539615.5,
+      "res_mlp": 95384.5,
+      "sqft_living": 1960.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 295000.0,
+      "pred_mlp": 304090.25,
+      "res_mlp": -9090.25,
+      "sqft_living": 1380.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 1925000.0,
+      "pred_mlp": 2587019.75,
+      "res_mlp": -662019.75,
+      "sqft_living": 4830.0,
+      "grade": 11.0,
+      "bedrooms": 5.0,
+      "bathrooms": 4.25
+    },
+    {
+      "actual": 628000.0,
+      "pred_mlp": 519313.03125,
+      "res_mlp": 108686.96875,
+      "sqft_living": 1720.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 408500.0,
+      "pred_mlp": 389763.71875,
+      "res_mlp": 18736.28125,
+      "sqft_living": 2720.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 355000.0,
+      "pred_mlp": 299760.40625,
+      "res_mlp": 55239.59375,
+      "sqft_living": 2050.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 781000.0,
+      "pred_mlp": 755844.0,
+      "res_mlp": 25156.0,
+      "sqft_living": 2070.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 1300000.0,
+      "pred_mlp": 1796765.0,
+      "res_mlp": -496765.0,
+      "sqft_living": 2330.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.25
+    },
+    {
+      "actual": 675900.0,
+      "pred_mlp": 599022.125,
+      "res_mlp": 76877.875,
+      "sqft_living": 2920.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 815000.0,
+      "pred_mlp": 653135.0625,
+      "res_mlp": 161864.9375,
+      "sqft_living": 1370.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 252500.0,
+      "pred_mlp": 297195.21875,
+      "res_mlp": -44695.21875,
+      "sqft_living": 900.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 459995.0,
+      "pred_mlp": 452600.03125,
+      "res_mlp": 7394.96875,
+      "sqft_living": 2350.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 1850000.0,
+      "pred_mlp": 2294706.5,
+      "res_mlp": -444706.5,
+      "sqft_living": 3830.0,
+      "grade": 11.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 555000.0,
+      "pred_mlp": 657451.25,
+      "res_mlp": -102451.25,
+      "sqft_living": 2810.0,
+      "grade": 8.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 575000.0,
+      "pred_mlp": 311164.0625,
+      "res_mlp": 263835.9375,
+      "sqft_living": 1750.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 535000.0,
+      "pred_mlp": 288377.0,
+      "res_mlp": 246623.0,
+      "sqft_living": 2330.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 525888.0,
+      "pred_mlp": 496961.59375,
+      "res_mlp": 28926.40625,
+      "sqft_living": 2550.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 960000.0,
+      "pred_mlp": 2205362.75,
+      "res_mlp": -1245362.75,
+      "sqft_living": 3430.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 380000.0,
+      "pred_mlp": 494960.09375,
+      "res_mlp": -114960.09375,
+      "sqft_living": 2760.0,
+      "grade": 9.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 307700.0,
+      "pred_mlp": 281646.0,
+      "res_mlp": 26054.0,
+      "sqft_living": 1980.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 397990.0,
+      "pred_mlp": 414036.90625,
+      "res_mlp": -16046.90625,
+      "sqft_living": 1180.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 620000.0,
+      "pred_mlp": 683833.6875,
+      "res_mlp": -63833.6875,
+      "sqft_living": 2410.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 535000.0,
+      "pred_mlp": 504589.375,
+      "res_mlp": 30410.625,
+      "sqft_living": 1610.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 616300.0,
+      "pred_mlp": 582463.0,
+      "res_mlp": 33837.0,
+      "sqft_living": 1700.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 747450.0,
+      "pred_mlp": 652765.0625,
+      "res_mlp": 94684.9375,
+      "sqft_living": 2110.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 266000.0,
+      "pred_mlp": 267451.875,
+      "res_mlp": -1451.875,
+      "sqft_living": 1780.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 400000.0,
+      "pred_mlp": 422136.90625,
+      "res_mlp": -22136.90625,
+      "sqft_living": 2470.0,
+      "grade": 8.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 330675.0,
+      "pred_mlp": 398197.125,
+      "res_mlp": -67522.125,
+      "sqft_living": 1930.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 357000.0,
+      "pred_mlp": 376751.0625,
+      "res_mlp": -19751.0625,
+      "sqft_living": 2400.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 2250000.0,
+      "pred_mlp": 2237853.75,
+      "res_mlp": 12146.25,
+      "sqft_living": 4440.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 418000.0,
+      "pred_mlp": 414255.125,
+      "res_mlp": 3744.875,
+      "sqft_living": 3266.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.25
+    },
+    {
+      "actual": 540000.0,
+      "pred_mlp": 560172.75,
+      "res_mlp": -20172.75,
+      "sqft_living": 1630.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 285000.0,
+      "pred_mlp": 310499.9375,
+      "res_mlp": -25499.9375,
+      "sqft_living": 2434.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 403000.0,
+      "pred_mlp": 389621.75,
+      "res_mlp": 13378.25,
+      "sqft_living": 1502.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 157500.0,
+      "pred_mlp": 207685.4375,
+      "res_mlp": -50185.4375,
+      "sqft_living": 1100.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 237000.0,
+      "pred_mlp": 246859.65625,
+      "res_mlp": -9859.65625,
+      "sqft_living": 1210.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 462500.0,
+      "pred_mlp": 457681.75,
+      "res_mlp": 4818.25,
+      "sqft_living": 2350.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 359999.0,
+      "pred_mlp": 406326.65625,
+      "res_mlp": -46327.65625,
+      "sqft_living": 3220.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 182700.0,
+      "pred_mlp": 205210.0,
+      "res_mlp": -22510.0,
+      "sqft_living": 1740.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 500000.0,
+      "pred_mlp": 495910.125,
+      "res_mlp": 4089.875,
+      "sqft_living": 2000.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 481000.0,
+      "pred_mlp": 530340.375,
+      "res_mlp": -49340.375,
+      "sqft_living": 1620.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 315000.0,
+      "pred_mlp": 324675.625,
+      "res_mlp": -9675.625,
+      "sqft_living": 1300.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 472500.0,
+      "pred_mlp": 482625.0,
+      "res_mlp": -10125.0,
+      "sqft_living": 1440.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 260000.0,
+      "pred_mlp": 227807.4375,
+      "res_mlp": 32192.5625,
+      "sqft_living": 1050.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 275000.0,
+      "pred_mlp": 270220.65625,
+      "res_mlp": 4779.34375,
+      "sqft_living": 1390.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 665000.0,
+      "pred_mlp": 626382.875,
+      "res_mlp": 38617.125,
+      "sqft_living": 2420.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 875000.0,
+      "pred_mlp": 909465.25,
+      "res_mlp": -34465.25,
+      "sqft_living": 3030.0,
+      "grade": 11.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 1300000.0,
+      "pred_mlp": 1541246.75,
+      "res_mlp": -241246.75,
+      "sqft_living": 4380.0,
+      "grade": 11.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 628000.0,
+      "pred_mlp": 582835.1875,
+      "res_mlp": 45164.8125,
+      "sqft_living": 2260.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 1229000.0,
+      "pred_mlp": 1075402.0,
+      "res_mlp": 153598.0,
+      "sqft_living": 3770.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 551500.0,
+      "pred_mlp": 566139.5625,
+      "res_mlp": -14639.5625,
+      "sqft_living": 2950.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 700000.0,
+      "pred_mlp": 985860.25,
+      "res_mlp": -285860.25,
+      "sqft_living": 1300.0,
+      "grade": 6.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 1395000.0,
+      "pred_mlp": 1929497.0,
+      "res_mlp": -534497.0,
+      "sqft_living": 4010.0,
+      "grade": 9.0,
+      "bedrooms": 5.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 310000.0,
+      "pred_mlp": 219485.75,
+      "res_mlp": 90514.25,
+      "sqft_living": 670.0,
+      "grade": 5.0,
+      "bedrooms": 1.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 1950000.0,
+      "pred_mlp": 1467187.0,
+      "res_mlp": 482813.0,
+      "sqft_living": 3440.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 262500.0,
+      "pred_mlp": 218820.5625,
+      "res_mlp": 43679.4375,
+      "sqft_living": 1610.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 286651.0,
+      "pred_mlp": 248958.28125,
+      "res_mlp": 37692.71875,
+      "sqft_living": 1830.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 590000.0,
+      "pred_mlp": 525225.5625,
+      "res_mlp": 64774.4375,
+      "sqft_living": 2400.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 245000.0,
+      "pred_mlp": 228059.96875,
+      "res_mlp": 16940.03125,
+      "sqft_living": 1550.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 850000.0,
+      "pred_mlp": 867045.625,
+      "res_mlp": -17045.625,
+      "sqft_living": 2940.0,
+      "grade": 10.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 665000.0,
+      "pred_mlp": 549416.1875,
+      "res_mlp": 115583.8125,
+      "sqft_living": 1260.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 561750.0,
+      "pred_mlp": 508286.875,
+      "res_mlp": 53463.125,
+      "sqft_living": 2040.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 467500.0,
+      "pred_mlp": 484380.15625,
+      "res_mlp": -16880.15625,
+      "sqft_living": 2260.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 445500.0,
+      "pred_mlp": 359813.8125,
+      "res_mlp": 85686.1875,
+      "sqft_living": 2210.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 460000.0,
+      "pred_mlp": 482637.6875,
+      "res_mlp": -22637.6875,
+      "sqft_living": 2080.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 550000.0,
+      "pred_mlp": 434185.625,
+      "res_mlp": 115814.375,
+      "sqft_living": 980.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 979700.0,
+      "pred_mlp": 1230630.75,
+      "res_mlp": -250930.75,
+      "sqft_living": 2480.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 1680000.0,
+      "pred_mlp": 2138374.25,
+      "res_mlp": -458374.25,
+      "sqft_living": 7620.0,
+      "grade": 11.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.75
+    },
+    {
+      "actual": 294500.0,
+      "pred_mlp": 309292.59375,
+      "res_mlp": -14792.59375,
+      "sqft_living": 1760.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 400000.0,
+      "pred_mlp": 424050.59375,
+      "res_mlp": -24050.59375,
+      "sqft_living": 2110.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 269950.0,
+      "pred_mlp": 337609.4375,
+      "res_mlp": -67659.4375,
+      "sqft_living": 1890.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 578000.0,
+      "pred_mlp": 479924.34375,
+      "res_mlp": 98075.65625,
+      "sqft_living": 1790.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 207000.0,
+      "pred_mlp": 189569.21875,
+      "res_mlp": 17430.78125,
+      "sqft_living": 1080.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 509000.0,
+      "pred_mlp": 713778.1875,
+      "res_mlp": -204778.1875,
+      "sqft_living": 1960.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 550000.0,
+      "pred_mlp": 732205.5625,
+      "res_mlp": -182205.5625,
+      "sqft_living": 2410.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 530000.0,
+      "pred_mlp": 494857.25,
+      "res_mlp": 35142.75,
+      "sqft_living": 2030.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 230000.0,
+      "pred_mlp": 268632.53125,
+      "res_mlp": -38632.53125,
+      "sqft_living": 1900.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 480000.0,
+      "pred_mlp": 1059620.25,
+      "res_mlp": -579620.25,
+      "sqft_living": 3370.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 859900.0,
+      "pred_mlp": 868419.0,
+      "res_mlp": -8519.0,
+      "sqft_living": 3390.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 410000.0,
+      "pred_mlp": 506272.0,
+      "res_mlp": -96272.0,
+      "sqft_living": 1510.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 959750.0,
+      "pred_mlp": 994313.3125,
+      "res_mlp": -34563.3125,
+      "sqft_living": 3060.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 261000.0,
+      "pred_mlp": 307818.96875,
+      "res_mlp": -46818.96875,
+      "sqft_living": 1660.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 329950.0,
+      "pred_mlp": 318300.3125,
+      "res_mlp": 11649.6875,
+      "sqft_living": 2120.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 1120000.0,
+      "pred_mlp": 1429963.0,
+      "res_mlp": -309963.0,
+      "sqft_living": 4400.0,
+      "grade": 9.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 551000.0,
+      "pred_mlp": 481789.1875,
+      "res_mlp": 69210.8125,
+      "sqft_living": 2040.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 350000.0,
+      "pred_mlp": 363964.3125,
+      "res_mlp": -13964.3125,
+      "sqft_living": 2470.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 690000.0,
+      "pred_mlp": 694162.4375,
+      "res_mlp": -4162.4375,
+      "sqft_living": 2780.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 770000.0,
+      "pred_mlp": 840976.625,
+      "res_mlp": -70976.625,
+      "sqft_living": 2370.0,
+      "grade": 8.0,
+      "bedrooms": 5.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 276200.0,
+      "pred_mlp": 216846.9375,
+      "res_mlp": 59353.0625,
+      "sqft_living": 1370.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 250000.0,
+      "pred_mlp": 276146.75,
+      "res_mlp": -26146.75,
+      "sqft_living": 1900.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 272450.0,
+      "pred_mlp": 195393.3125,
+      "res_mlp": 77056.6875,
+      "sqft_living": 1350.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 610000.0,
+      "pred_mlp": 596520.875,
+      "res_mlp": 13479.125,
+      "sqft_living": 1960.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 1775000.0,
+      "pred_mlp": 2045357.75,
+      "res_mlp": -270357.75,
+      "sqft_living": 4320.0,
+      "grade": 10.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 500000.0,
+      "pred_mlp": 460116.1875,
+      "res_mlp": 39883.8125,
+      "sqft_living": 2270.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 247500.0,
+      "pred_mlp": 247397.0,
+      "res_mlp": 103.0,
+      "sqft_living": 1710.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 290000.0,
+      "pred_mlp": 349389.6875,
+      "res_mlp": -59389.6875,
+      "sqft_living": 1650.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 840000.0,
+      "pred_mlp": 723900.125,
+      "res_mlp": 116099.875,
+      "sqft_living": 2783.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 592500.0,
+      "pred_mlp": 590249.5625,
+      "res_mlp": 2250.4375,
+      "sqft_living": 2170.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 695000.0,
+      "pred_mlp": 744402.375,
+      "res_mlp": -49402.375,
+      "sqft_living": 2360.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 1225000.0,
+      "pred_mlp": 1246570.0,
+      "res_mlp": -21570.0,
+      "sqft_living": 3490.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 861990.0,
+      "pred_mlp": 863468.0625,
+      "res_mlp": -1478.0625,
+      "sqft_living": 3595.0,
+      "grade": 9.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 395000.0,
+      "pred_mlp": 327165.40625,
+      "res_mlp": 67834.59375,
+      "sqft_living": 1400.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 355000.0,
+      "pred_mlp": 393786.09375,
+      "res_mlp": -38786.09375,
+      "sqft_living": 1360.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 410000.0,
+      "pred_mlp": 362345.71875,
+      "res_mlp": 47654.28125,
+      "sqft_living": 1330.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 449888.0,
+      "pred_mlp": 396604.875,
+      "res_mlp": 53283.125,
+      "sqft_living": 2520.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 1085000.0,
+      "pred_mlp": 905447.4375,
+      "res_mlp": 179552.5625,
+      "sqft_living": 2340.0,
+      "grade": 10.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 242500.0,
+      "pred_mlp": 227372.90625,
+      "res_mlp": 15127.09375,
+      "sqft_living": 1770.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 725000.0,
+      "pred_mlp": 733595.0625,
+      "res_mlp": -8595.0625,
+      "sqft_living": 3360.0,
+      "grade": 8.0,
+      "bedrooms": 5.0,
+      "bathrooms": 3.75
+    },
+    {
+      "actual": 240000.0,
+      "pred_mlp": 255183.125,
+      "res_mlp": -15183.125,
+      "sqft_living": 1280.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 340000.0,
+      "pred_mlp": 343398.65625,
+      "res_mlp": -3398.65625,
+      "sqft_living": 1230.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 410000.0,
+      "pred_mlp": 379581.6875,
+      "res_mlp": 30418.3125,
+      "sqft_living": 2670.0,
+      "grade": 8.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 1750000.0,
+      "pred_mlp": 1885941.0,
+      "res_mlp": -135941.0,
+      "sqft_living": 3560.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 359000.0,
+      "pred_mlp": 404407.0,
+      "res_mlp": -45407.0,
+      "sqft_living": 1370.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 325000.0,
+      "pred_mlp": 464519.0,
+      "res_mlp": -139519.0,
+      "sqft_living": 1870.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 425000.0,
+      "pred_mlp": 381488.8125,
+      "res_mlp": 43511.1875,
+      "sqft_living": 1440.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 304000.0,
+      "pred_mlp": 317713.5,
+      "res_mlp": -13713.5,
+      "sqft_living": 1280.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 554000.0,
+      "pred_mlp": 613550.1875,
+      "res_mlp": -59550.1875,
+      "sqft_living": 3380.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 325000.0,
+      "pred_mlp": 323786.875,
+      "res_mlp": 1213.125,
+      "sqft_living": 1010.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 510250.0,
+      "pred_mlp": 477788.96875,
+      "res_mlp": 32461.03125,
+      "sqft_living": 1400.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 1326000.0,
+      "pred_mlp": 1281974.25,
+      "res_mlp": 44025.75,
+      "sqft_living": 2960.0,
+      "grade": 10.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 433000.0,
+      "pred_mlp": 346313.1875,
+      "res_mlp": 86686.8125,
+      "sqft_living": 1870.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 1272000.0,
+      "pred_mlp": 1241521.25,
+      "res_mlp": 30478.75,
+      "sqft_living": 3020.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.25
+    },
+    {
+      "actual": 3000000.0,
+      "pred_mlp": 3669712.75,
+      "res_mlp": -669712.75,
+      "sqft_living": 4850.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 4.25
+    },
+    {
+      "actual": 555000.0,
+      "pred_mlp": 665651.6875,
+      "res_mlp": -110651.6875,
+      "sqft_living": 2350.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 365000.0,
+      "pred_mlp": 520504.3125,
+      "res_mlp": -155504.3125,
+      "sqft_living": 1820.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 829000.0,
+      "pred_mlp": 898879.375,
+      "res_mlp": -69879.375,
+      "sqft_living": 2970.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 1065000.0,
+      "pred_mlp": 1076978.5,
+      "res_mlp": -11978.5,
+      "sqft_living": 2920.0,
+      "grade": 9.0,
+      "bedrooms": 5.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 335000.0,
+      "pred_mlp": 374627.5625,
+      "res_mlp": -39627.5625,
+      "sqft_living": 1340.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 298000.0,
+      "pred_mlp": 153097.875,
+      "res_mlp": 144902.125,
+      "sqft_living": 850.0,
+      "grade": 5.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 755000.0,
+      "pred_mlp": 692743.125,
+      "res_mlp": 62256.875,
+      "sqft_living": 2170.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 629000.0,
+      "pred_mlp": 549272.3125,
+      "res_mlp": 79727.6875,
+      "sqft_living": 2660.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 488500.0,
+      "pred_mlp": 435173.6875,
+      "res_mlp": 53326.3125,
+      "sqft_living": 1820.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 359950.0,
+      "pred_mlp": 325505.9375,
+      "res_mlp": 34444.0625,
+      "sqft_living": 1980.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 299950.0,
+      "pred_mlp": 293848.6875,
+      "res_mlp": 6101.3125,
+      "sqft_living": 910.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 395000.0,
+      "pred_mlp": 515437.75,
+      "res_mlp": -120437.75,
+      "sqft_living": 1400.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 152500.0,
+      "pred_mlp": 152761.9375,
+      "res_mlp": -261.9375,
+      "sqft_living": 1090.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 688500.0,
+      "pred_mlp": 698549.75,
+      "res_mlp": -10049.75,
+      "sqft_living": 1760.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 380000.0,
+      "pred_mlp": 250191.4375,
+      "res_mlp": 129808.5625,
+      "sqft_living": 1740.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 494000.0,
+      "pred_mlp": 565640.4375,
+      "res_mlp": -71640.4375,
+      "sqft_living": 1570.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 616950.0,
+      "pred_mlp": 768043.375,
+      "res_mlp": -151093.375,
+      "sqft_living": 2490.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 379950.0,
+      "pred_mlp": 372106.40625,
+      "res_mlp": 7843.59375,
+      "sqft_living": 1080.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 613200.0,
+      "pred_mlp": 675452.4375,
+      "res_mlp": -62252.4375,
+      "sqft_living": 2050.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 378000.0,
+      "pred_mlp": 374389.5625,
+      "res_mlp": 3610.4375,
+      "sqft_living": 2790.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 680000.0,
+      "pred_mlp": 714573.125,
+      "res_mlp": -34573.125,
+      "sqft_living": 2330.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 542000.0,
+      "pred_mlp": 611732.5,
+      "res_mlp": -69732.5,
+      "sqft_living": 1990.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 229950.0,
+      "pred_mlp": 297758.03125,
+      "res_mlp": -67808.03125,
+      "sqft_living": 2150.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 350000.0,
+      "pred_mlp": 316463.8125,
+      "res_mlp": 33536.1875,
+      "sqft_living": 940.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 450000.0,
+      "pred_mlp": 374667.75,
+      "res_mlp": 75332.25,
+      "sqft_living": 1140.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 327000.0,
+      "pred_mlp": 347342.9375,
+      "res_mlp": -20342.9375,
+      "sqft_living": 1620.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 577500.0,
+      "pred_mlp": 624747.5,
+      "res_mlp": -47247.5,
+      "sqft_living": 2280.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 115000.0,
+      "pred_mlp": 199071.46875,
+      "res_mlp": -84071.46875,
+      "sqft_living": 790.0,
+      "grade": 5.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 250000.0,
+      "pred_mlp": 171285.21875,
+      "res_mlp": 78714.78125,
+      "sqft_living": 800.0,
+      "grade": 6.0,
+      "bedrooms": 1.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 255000.0,
+      "pred_mlp": 247823.59375,
+      "res_mlp": 7176.40625,
+      "sqft_living": 1490.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 376000.0,
+      "pred_mlp": 307905.5625,
+      "res_mlp": 68094.4375,
+      "sqft_living": 880.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 384500.0,
+      "pred_mlp": 426735.625,
+      "res_mlp": -42235.625,
+      "sqft_living": 1600.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 500000.0,
+      "pred_mlp": 463491.0,
+      "res_mlp": 36509.0,
+      "sqft_living": 930.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 360000.0,
+      "pred_mlp": 302935.09375,
+      "res_mlp": 57064.90625,
+      "sqft_living": 2610.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 274975.0,
+      "pred_mlp": 732798.625,
+      "res_mlp": -457823.625,
+      "sqft_living": 3030.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 374950.0,
+      "pred_mlp": 327728.5625,
+      "res_mlp": 47221.4375,
+      "sqft_living": 1970.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 550000.0,
+      "pred_mlp": 657068.0625,
+      "res_mlp": -107068.0625,
+      "sqft_living": 2360.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 659500.0,
+      "pred_mlp": 789171.6875,
+      "res_mlp": -129671.6875,
+      "sqft_living": 2620.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 295000.0,
+      "pred_mlp": 234053.96875,
+      "res_mlp": 60946.03125,
+      "sqft_living": 1677.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 89950.0,
+      "pred_mlp": 157456.25,
+      "res_mlp": -67506.25,
+      "sqft_living": 570.0,
+      "grade": 5.0,
+      "bedrooms": 1.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 268000.0,
+      "pred_mlp": 234008.125,
+      "res_mlp": 33991.875,
+      "sqft_living": 1600.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 410000.0,
+      "pred_mlp": 409933.78125,
+      "res_mlp": 66.21875,
+      "sqft_living": 1420.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 479000.0,
+      "pred_mlp": 415032.21875,
+      "res_mlp": 63967.78125,
+      "sqft_living": 1340.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 223000.0,
+      "pred_mlp": 219526.28125,
+      "res_mlp": 3473.71875,
+      "sqft_living": 1340.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 462000.0,
+      "pred_mlp": 440949.5625,
+      "res_mlp": 21050.4375,
+      "sqft_living": 1250.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 508000.0,
+      "pred_mlp": 533224.75,
+      "res_mlp": -25224.75,
+      "sqft_living": 3320.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 355000.0,
+      "pred_mlp": 379704.25,
+      "res_mlp": -24704.25,
+      "sqft_living": 1240.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 259950.0,
+      "pred_mlp": 271096.78125,
+      "res_mlp": -11146.78125,
+      "sqft_living": 770.0,
+      "grade": 6.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 885000.0,
+      "pred_mlp": 650863.8125,
+      "res_mlp": 234136.1875,
+      "sqft_living": 1313.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 711600.0,
+      "pred_mlp": 931822.1875,
+      "res_mlp": -220222.1875,
+      "sqft_living": 3580.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 465000.0,
+      "pred_mlp": 410343.125,
+      "res_mlp": 54656.875,
+      "sqft_living": 1440.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 587000.0,
+      "pred_mlp": 535438.4375,
+      "res_mlp": 51561.5625,
+      "sqft_living": 2550.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 440000.0,
+      "pred_mlp": 558884.0625,
+      "res_mlp": -118884.0625,
+      "sqft_living": 2120.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 580000.0,
+      "pred_mlp": 842966.0,
+      "res_mlp": -262966.0,
+      "sqft_living": 3550.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 299000.0,
+      "pred_mlp": 287107.375,
+      "res_mlp": 11892.625,
+      "sqft_living": 1510.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 699950.0,
+      "pred_mlp": 641815.0,
+      "res_mlp": 58135.0,
+      "sqft_living": 2510.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 281000.0,
+      "pred_mlp": 229517.0,
+      "res_mlp": 51483.0,
+      "sqft_living": 1340.0,
+      "grade": 5.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 1008000.0,
+      "pred_mlp": 956169.5,
+      "res_mlp": 51830.5,
+      "sqft_living": 2650.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.5
+    },
+    {
+      "actual": 182500.0,
+      "pred_mlp": 186320.53125,
+      "res_mlp": -3820.53125,
+      "sqft_living": 910.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 740000.0,
+      "pred_mlp": 672221.5,
+      "res_mlp": 67778.5,
+      "sqft_living": 2300.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 219000.0,
+      "pred_mlp": 192838.375,
+      "res_mlp": 26161.625,
+      "sqft_living": 1060.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 169950.0,
+      "pred_mlp": 152121.0,
+      "res_mlp": 17829.0,
+      "sqft_living": 840.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 2537000.0,
+      "pred_mlp": 2062133.25,
+      "res_mlp": 474866.75,
+      "sqft_living": 3710.0,
+      "grade": 10.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 645000.0,
+      "pred_mlp": 669839.9375,
+      "res_mlp": -24839.9375,
+      "sqft_living": 2340.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 367500.0,
+      "pred_mlp": 375859.9375,
+      "res_mlp": -8359.9375,
+      "sqft_living": 3110.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 620000.0,
+      "pred_mlp": 565418.25,
+      "res_mlp": 54581.75,
+      "sqft_living": 990.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 813000.0,
+      "pred_mlp": 946000.5625,
+      "res_mlp": -133000.5625,
+      "sqft_living": 3370.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 470000.0,
+      "pred_mlp": 499339.875,
+      "res_mlp": -29339.875,
+      "sqft_living": 2310.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 3600000.0,
+      "pred_mlp": 2640682.5,
+      "res_mlp": 959317.5,
+      "sqft_living": 5020.0,
+      "grade": 10.0,
+      "bedrooms": 3.0,
+      "bathrooms": 3.25
+    },
+    {
+      "actual": 390000.0,
+      "pred_mlp": 341057.09375,
+      "res_mlp": 48942.90625,
+      "sqft_living": 1140.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 723000.0,
+      "pred_mlp": 761519.875,
+      "res_mlp": -38519.875,
+      "sqft_living": 2430.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 255000.0,
+      "pred_mlp": 265063.4375,
+      "res_mlp": -10063.4375,
+      "sqft_living": 1410.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 260000.0,
+      "pred_mlp": 260997.46875,
+      "res_mlp": -997.46875,
+      "sqft_living": 2320.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 1145000.0,
+      "pred_mlp": 965401.5,
+      "res_mlp": 179598.5,
+      "sqft_living": 2490.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 474950.0,
+      "pred_mlp": 521506.21875,
+      "res_mlp": -46556.21875,
+      "sqft_living": 1850.0,
+      "grade": 9.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 620000.0,
+      "pred_mlp": 671147.1875,
+      "res_mlp": -51147.1875,
+      "sqft_living": 2690.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 245000.0,
+      "pred_mlp": 263318.6875,
+      "res_mlp": -18318.6875,
+      "sqft_living": 2190.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 540000.0,
+      "pred_mlp": 446065.65625,
+      "res_mlp": 93934.34375,
+      "sqft_living": 1300.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 668000.0,
+      "pred_mlp": 673211.25,
+      "res_mlp": -5211.25,
+      "sqft_living": 2670.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 179900.0,
+      "pred_mlp": 182851.46875,
+      "res_mlp": -2951.46875,
+      "sqft_living": 1230.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 345000.0,
+      "pred_mlp": 284646.0625,
+      "res_mlp": 60353.9375,
+      "sqft_living": 2420.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 469000.0,
+      "pred_mlp": 394379.625,
+      "res_mlp": 74620.375,
+      "sqft_living": 1440.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 825000.0,
+      "pred_mlp": 1030641.0625,
+      "res_mlp": -205641.0625,
+      "sqft_living": 3070.0,
+      "grade": 9.0,
+      "bedrooms": 5.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 595000.0,
+      "pred_mlp": 490377.34375,
+      "res_mlp": 104622.65625,
+      "sqft_living": 1910.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 553650.0,
+      "pred_mlp": 581995.5,
+      "res_mlp": -28345.5,
+      "sqft_living": 1360.0,
+      "grade": 8.0,
+      "bedrooms": 2.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 328000.0,
+      "pred_mlp": 357808.40625,
+      "res_mlp": -29808.40625,
+      "sqft_living": 1930.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.75
+    },
+    {
+      "actual": 625000.0,
+      "pred_mlp": 565014.1875,
+      "res_mlp": 59985.8125,
+      "sqft_living": 1920.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 360000.0,
+      "pred_mlp": 361965.25,
+      "res_mlp": -1965.25,
+      "sqft_living": 1050.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 515000.0,
+      "pred_mlp": 478328.5625,
+      "res_mlp": 36671.4375,
+      "sqft_living": 970.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 560000.0,
+      "pred_mlp": 584487.125,
+      "res_mlp": -24487.125,
+      "sqft_living": 2790.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 634800.0,
+      "pred_mlp": 697802.125,
+      "res_mlp": -63002.125,
+      "sqft_living": 3280.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 3.0
+    },
+    {
+      "actual": 534000.0,
+      "pred_mlp": 536397.8125,
+      "res_mlp": -2397.8125,
+      "sqft_living": 2280.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 2.0
+    },
+    {
+      "actual": 439950.0,
+      "pred_mlp": 377096.25,
+      "res_mlp": 62853.75,
+      "sqft_living": 2190.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 697000.0,
+      "pred_mlp": 739508.9375,
+      "res_mlp": -42508.9375,
+      "sqft_living": 3220.0,
+      "grade": 9.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 202000.0,
+      "pred_mlp": 209033.25,
+      "res_mlp": -7033.25,
+      "sqft_living": 1010.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 330000.0,
+      "pred_mlp": 321341.1875,
+      "res_mlp": 8658.8125,
+      "sqft_living": 910.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 360000.0,
+      "pred_mlp": 457753.125,
+      "res_mlp": -97753.125,
+      "sqft_living": 1530.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 557000.0,
+      "pred_mlp": 583356.125,
+      "res_mlp": -26356.125,
+      "sqft_living": 1630.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 339000.0,
+      "pred_mlp": 384590.625,
+      "res_mlp": -45590.625,
+      "sqft_living": 2900.0,
+      "grade": 8.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 330000.0,
+      "pred_mlp": 264796.8125,
+      "res_mlp": 65203.1875,
+      "sqft_living": 2000.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 405000.0,
+      "pred_mlp": 402021.375,
+      "res_mlp": 2978.625,
+      "sqft_living": 1970.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 401000.0,
+      "pred_mlp": 400789.625,
+      "res_mlp": 210.375,
+      "sqft_living": 1260.0,
+      "grade": 7.0,
+      "bedrooms": 2.0,
+      "bathrooms": 1.5
+    },
+    {
+      "actual": 449500.0,
+      "pred_mlp": 377233.6875,
+      "res_mlp": 72266.3125,
+      "sqft_living": 2280.0,
+      "grade": 7.0,
+      "bedrooms": 6.0,
+      "bathrooms": 4.0
+    },
+    {
+      "actual": 260000.0,
+      "pred_mlp": 289478.78125,
+      "res_mlp": -29478.78125,
+      "sqft_living": 1190.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 247500.0,
+      "pred_mlp": 485419.71875,
+      "res_mlp": -237919.71875,
+      "sqft_living": 1300.0,
+      "grade": 6.0,
+      "bedrooms": 3.0,
+      "bathrooms": 0.75
+    },
+    {
+      "actual": 406000.0,
+      "pred_mlp": 312435.125,
+      "res_mlp": 93564.875,
+      "sqft_living": 1580.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 333700.0,
+      "pred_mlp": 311727.75,
+      "res_mlp": 21972.25,
+      "sqft_living": 2230.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    },
+    {
+      "actual": 495000.0,
+      "pred_mlp": 439174.71875,
+      "res_mlp": 55825.28125,
+      "sqft_living": 2070.0,
+      "grade": 7.0,
+      "bedrooms": 4.0,
+      "bathrooms": 2.25
+    },
+    {
+      "actual": 600000.0,
+      "pred_mlp": 498633.46875,
+      "res_mlp": 101366.53125,
+      "sqft_living": 1480.0,
+      "grade": 8.0,
+      "bedrooms": 3.0,
+      "bathrooms": 1.0
+    },
+    {
+      "actual": 240000.0,
+      "pred_mlp": 256041.625,
+      "res_mlp": -16041.625,
+      "sqft_living": 2460.0,
+      "grade": 7.0,
+      "bedrooms": 5.0,
+      "bathrooms": 1.75
+    },
+    {
+      "actual": 437500.0,
+      "pred_mlp": 455149.6875,
+      "res_mlp": -17649.6875,
+      "sqft_living": 2120.0,
+      "grade": 7.0,
+      "bedrooms": 3.0,
+      "bathrooms": 2.5
+    }
+  ]
+}
