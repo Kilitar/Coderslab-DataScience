@@ -190,6 +190,18 @@ p_nn_kc_critique = st.Page("views/03_neural_network_kc_housing_exercise_2_critiq
 p_nn_kc_nb = st.Page("views/03_neural_network_kc_housing_nb.py", title="Cvičení 2: KC Housing – Notebook", icon="🐍", url_path="nn_kc_notebook")
 p_day3_summary = st.Page("views/03_day_3_summary.py", title="Závěr Dne 3: Shrnutí & Kvíz", icon="🎓", url_path="day_3_summary")
 
+# Den 3 Extras: Expertní laboratoř & Interaktivní nástroje
+p_extra_mnist_draw = st.Page("views/03_extras_mnist_draw.py", title="MNIST: Živé kreslení & Rozpoznávání číslic", icon="✍️", url_path="extras_mnist_draw")
+p_extra_nn_playground = st.Page("views/03_extras_nn_playground.py", title="Neuronové sítě: 2D Interaktivní hřiště", icon="🧠", url_path="extras_nn_playground")
+p_extra_backprop = st.Page("views/03_extras_backprop_calc.py", title="Backpropagation: Krok za krokem & Errata slidů", icon="🔢", url_path="extras_backprop_calc")
+p_extra_bagging_var = st.Page("views/03_extras_bagging_variance.py", title="Bagging & RF: Variance & Korelace Lab", icon="🌲", url_path="extras_bagging_variance")
+p_extra_boosting_anim = st.Page("views/03_extras_boosting_animator.py", title="Boosting: Sekvenční simulátor reziduí", icon="📈", url_path="extras_boosting_animator")
+p_extra_condorcet = st.Page("views/03_extras_condorcet_jury.py", title="Ansámbly: Condorcetova porota (Jury Theorem)", icon="🗳️", url_path="extras_condorcet_jury")
+p_extra_nn_arch = st.Page("views/03_extras_nn_architecture_calc.py", title="NN Architekt: Počítadlo tvarů & parametrů", icon="📐", url_path="extras_nn_architecture_calc")
+p_extra_cost_thresh = st.Page("views/03_extras_cost_threshold_calc.py", title="Kalkulátor prahu: Cost-Sensitive analýza (Srdce)", icon="⚖️", url_path="extras_cost_threshold_calc")
+p_extra_model_chooser = st.Page("views/03_extras_model_chooser.py", title="Průvodce výběrem: Jak volit model v praxi", icon="🧭", url_path="extras_model_chooser")
+p_extra_hyperparam = st.Page("views/03_extras_hyperparam_cheatsheet.py", title="Tahák & Diagnostika: Symptom-to-Fix matice", icon="📚", url_path="extras_hyperparam_cheatsheet")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -366,6 +378,18 @@ nav = st.navigation(
         ],
         "19. Den 3: Shrnutí & Závěr Dne 3": [
             p_day3_summary,
+        ],
+        "20. Den 3: Extras (Expertní laboratoř & Interaktivní nástroje)": [
+            p_extra_mnist_draw,
+            p_extra_nn_playground,
+            p_extra_backprop,
+            p_extra_bagging_var,
+            p_extra_boosting_anim,
+            p_extra_condorcet,
+            p_extra_nn_arch,
+            p_extra_cost_thresh,
+            p_extra_model_chooser,
+            p_extra_hyperparam,
         ],
     }
 )
