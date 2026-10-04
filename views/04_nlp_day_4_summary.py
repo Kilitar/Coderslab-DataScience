@@ -201,31 +201,41 @@ with tab2:
 
 
 # ==============================================================================
-# TAB 3: EKOSYSTÉM LLM A PRŮMYSL
+# TAB 3: EKOSYSTÉM LLM A PRŮMYSL (STAV K 10/2026)
 # ==============================================================================
 with tab3:
-    st.subheader("Globální technologičtí lídři v NLP & Velké jazykové modely")
+    st.subheader("Globální technologičtí lídři v NLP & Velké jazykové modely (Stav k 10/2026)")
     st.markdown(
         """
         Závěr Dne 4 (prezentace `Day_4_summary.pdf`, slidy 12–13) zdůrazňuje, 
-        jak inovace představené v tomto kurzu formují globální trh s AI:
+        jak inovace představené v tomto kurzu položily základy současné revoluci v AI. 
+        Od publikace Transformeru (2017) a BERTu (2018) se svět posunul od čistého generování textu 
+        k **multimodálním reasoning modelům** a **autonomním softwarovým agentům**:
         """
     )
 
-    col_l1, col_l2, col_l3 = st.columns(3)
+    col_l1, col_l2 = st.columns(2)
 
     with col_l1:
         st.markdown(
             """
-            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 10px; padding: 18px; height: 100%;">
-                <h4 style="color: #60a5fa; margin-top: 0;">🌐 Google</h4>
-                <p><strong>Základní přínos pro lidstvo:</strong></p>
+            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 10px; padding: 18px; margin-bottom: 15px;">
+                <h4 style="color: #60a5fa; margin-top: 0;">🌐 Google (Google DeepMind)</h4>
+                <p><strong>Od architektury Transformer k multimodálnímu rozumu:</strong></p>
                 <ul>
-                    <li>2013: <strong>Word2Vec</strong> (Mikolov et al.)</li>
-                    <li>2017: <strong>Transformer</strong> ("Attention Is All You Need")</li>
-                    <li>2018: <strong>BERT</strong> (Obousměrný enkodér)</li>
-                    <li>2020: <strong>T5</strong> (Text-to-Text Transfer Transformer)</li>
-                    <li>Současnost: <strong>Gemini</strong> (Multimodální LLM)</li>
+                    <li><strong>2013–2018:</strong> Vynález <em>Word2Vec</em> (Mikolov), architektury <em>Transformer</em> (Vaswani et al.) a modelu <em>BERT</em>.</li>
+                    <li><strong>2024:</strong> <strong>Gemini 1.5 Pro & Flash</strong> – zavedení revolučního multimodálního kontextového okna o velikosti <strong>2 000 000+ tokenů</strong> (zpracování celých knihoven kódu, hodin videa či celých audio nahrávek).</li>
+                    <li><strong>2024–2025:</strong> <strong>Gemma 2 & Gemma 3</strong> – špičkové otevřené modely pro výzkumníky s efektivním během na spotřebitelském hardware.</li>
+                    <li><strong>2025–2026:</strong> <strong>Gemini 2.0 & Gemini Ultra</strong> – nativní multimodální uvažování, hluboká integrace agentů do vyhledávání (AI Overviews) a vědecké průlomy (AlphaFold 3).</li>
+                </ul>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; padding: 18px; margin-bottom: 15px;">
+                <h4 style="color: #34d399; margin-top: 0;">🤖 OpenAI & Microsoft</h4>
+                <p><strong>Průkopník generativní AI a reasoning modelů:</strong></p>
+                <ul>
+                    <li><strong>2018–2022:</strong> Série <em>GPT-1</em> až <em>GPT-3</em>, spuštění fenoménu <em>ChatGPT</em> a komerční nasazení instruovaného učení s lidskou zpětnou vazbou (RLHF).</li>
+                    <li><strong>2023–2024:</strong> <strong>GPT-4 Turbo</strong> a <strong>GPT-4o (Omni)</strong> – sjednocená neuronová síť pro text, zrak a obousměrný realtime hlas s latencí pod 300 ms.</li>
+                    <li><strong>2024–2026:</strong> <strong>OpenAI o1 ("Strawberry"), o3 & o3-mini</strong> – revoluční posun od pouhé predikce slov k <strong>internímu řetězci uvažování (Chain-of-Thought)</strong>; překonání lidských expertů v matematických olympiádách (IMO), kompetitivním programování a komplexní vědecké syntéze.</li>
                 </ul>
             </div>
             """,
@@ -235,37 +245,67 @@ with tab3:
     with col_l2:
         st.markdown(
             """
-            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; padding: 18px; height: 100%;">
-                <h4 style="color: #34d399; margin-top: 0;">🤖 OpenAI & Microsoft</h4>
-                <p><strong>Lídr v generativním AI:</strong></p>
+            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 10px; padding: 18px; margin-bottom: 15px;">
+                <h4 style="color: #c084fc; margin-top: 0;">🦙 Meta & Otevřený ekosystém (Open Weights)</h4>
+                <p><strong>Demokratizace AI a podpora otevřené vědy:</strong></p>
                 <ul>
-                    <li>2018: <strong>GPT-1</strong> (Generative Pre-trained Transformer)</li>
-                    <li>2019: <strong>GPT-2</strong> (Škálování jazykových modelů)</li>
-                    <li>2020: <strong>GPT-3</strong> (175 miliard parametrů)</li>
-                    <li>2022+: <strong>ChatGPT & GPT-4</strong> (RLHF a instruované modely)</li>
-                    <li>Současnost: <strong>GPT-4o & Copilot</strong></li>
+                    <li><strong>2016–2023:</strong> <em>FastText</em>, <em>LLaMA</em> a <em>LLaMA-2</em>, které rozpoutaly globální open-source hnutí.</li>
+                    <li><strong>2024:</strong> <strong>Llama 3.1 (405B, 70B, 8B)</strong> – první gigantický otevřený model na světě vyrovnávající se uzavřeným komerčním špičkám se 128k kontextem, následovaný <strong>Llama 3.2</strong> (multimodální zrak pro edge a mobilní zařízení).</li>
+                    <li><strong>2025–2026:</strong> <strong>Llama 3.3 & Llama 4</strong> s architekturou Mixture-of-Experts (MoE) a otevřené reasoning modely provozovatelné lokálně bez odesílání dat přes <em>Ollama</em>, <em>vLLM</em> a <em>llama.cpp</em>.</li>
+                    <li><strong>Hugging Face:</strong> Globální repozitář s více než 1 000 000 otevřených modelů a knihovnou <code>transformers</code>.</li>
+                </ul>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 18px; margin-bottom: 15px;">
+                <h4 style="color: #fbbf24; margin-top: 0;">🧠 Anthropic & Agentní revoluce</h4>
+                <p><strong>Bezpečnostní výzkum a lídr v programování:</strong></p>
+                <ul>
+                    <li><strong>Constitutional AI:</strong> Výcvik modelů podle explicitních etických ústavních principů místo pouhého černoskříňkového RLHF.</li>
+                    <li><strong>2024–2025:</strong> <strong>Claude 3.5 Sonnet & Haiku</strong> – globálně uznávaný etalon pro softwarové inženýrství, logické uvažování a práci s velkými kódbázemi.</li>
+                    <li><strong>2024–2026:</strong> <strong>Computer Use:</strong> Průlomová schopnost modelu přímo vnímat obrazovku počítače, pohybovat kurzorem myši, klikat a psát kód v reálném desktopovém prostředí.</li>
                 </ul>
             </div>
             """,
             unsafe_allow_html=True
         )
 
-    with col_l3:
-        st.markdown(
-            """
-            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 10px; padding: 18px; height: 100%;">
-                <h4 style="color: #c084fc; margin-top: 0;">🦙 Meta & Open-Source</h4>
-                <p><strong>Šampion otevřeného výzkumu:</strong></p>
-                <ul>
-                    <li>2016: <strong>FastText</strong> (Subword n-gram embeddingy)</li>
-                    <li>2023: <strong>LLaMA & LLaMA-2</strong> (Vznik open-source LLM revoluce)</li>
-                    <li>2024: <strong>Llama-3</strong> (Špičkové 8B a 70B otevřené modely)</li>
-                    <li><strong>Hugging Face:</strong> Globální domov pro sdílení modelů a datasetů.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    st.markdown("---")
+    st.markdown("##### 🚀 Evoluce klíčových parametrů NLP (2018 vs. 2026):")
+
+    evo_df = pd.DataFrame([
+        {
+            "Éra / Model": "BERT-Base (2018)",
+            "Kontextové okno": "512 tokenů (~350 slov)",
+            "Počet parametrů": "110 milionů (0.11 B)",
+            "Modalita": "Pouze čistý text",
+            "Uvažování (Reasoning)": "Statické doplnění tokenu [MASK]",
+            "Hardware pro trénink": "16 TPU jader (4 dny)"
+        },
+        {
+            "Éra / Model": "GPT-3 (2020)",
+            "Kontextové okno": "2 048 tokenů (~1 500 slov)",
+            "Počet parametrů": "175 miliard (175 B)",
+            "Modalita": "Pouze text",
+            "Uvažování (Reasoning)": "Předpovídání dalšího slova (Autoregresivní)",
+            "Hardware pro trénink": "Tisíce V100 GPU (měsíce)"
+        },
+        {
+            "Éra / Model": "GPT-4 / Claude 3.5 (2023–2024)",
+            "Kontextové okno": "128 000 – 200 000 tokenů",
+            "Počet parametrů": "MoE (~1,8 bilionu / 1.8 T)",
+            "Modalita": "Multimodální (Text, Obrázky, Kód)",
+            "Uvažování (Reasoning)": "Pokročilý instruction-following, nástroje (Tools)",
+            "Hardware pro trénink": "Desítky tisíc H100 GPU"
+        },
+        {
+            "Éra / Model": "Současnost (Stav 10/2026)",
+            "Kontextové okno": "2 000 000+ tokenů (Gemini 1.5/2.0)",
+            "Počet parametrů": "Adaptivní MoE + Test-Time Compute (o1/o3)",
+            "Modalita": "Nativní Omnimodalita (Text, Obraz, Zvuk, Video)",
+            "Uvažování (Reasoning)": "Interní Chain-of-Thought, Computer Use & Autonomní agenti",
+            "Hardware pro trénink": "Klastry B200 / H200 / TPU v5p & Inference Scaling"
+        }
+    ])
+    st.dataframe(evo_df, hide_index=True, width="stretch")
 
 
 # ==============================================================================
