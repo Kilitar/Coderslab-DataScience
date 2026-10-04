@@ -403,13 +403,13 @@ nav = st.navigation(
         ],
         "21. Den 4: NLP – Zpracování textu & Reprezentace": [
             p_nlp_principles_theory,
-            p_nlp_bow_tfidf_theory,
             p_nlp_ex1,
             p_nlp_ex1_critique,
             p_nlp_ex1_nb,
             p_nlp_ex2,
             p_nlp_ex2_critique,
             p_nlp_ex2_nb,
+            p_nlp_bow_tfidf_theory,
         ],
     }
 )
