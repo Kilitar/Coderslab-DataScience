@@ -188,6 +188,7 @@ p_nn_mnist_nb = st.Page("views/03_neural_network_mnist_nb.py", title="Cvičení 
 p_nn_kc = st.Page("views/03_neural_network_kc_housing_exercise_2.py", title="Cvičení 2: KC Housing – Výsledky zadání", icon="🎯", url_path="nn_kc_exercise_2")
 p_nn_kc_critique = st.Page("views/03_neural_network_kc_housing_exercise_2_critique.py", title="Cvičení 2: KC Housing – Expertní analýza", icon="🔬", url_path="nn_kc_critique")
 p_nn_kc_nb = st.Page("views/03_neural_network_kc_housing_nb.py", title="Cvičení 2: KC Housing – Notebook", icon="🐍", url_path="nn_kc_notebook")
+p_day3_summary = st.Page("views/03_day_3_summary.py", title="Závěr Dne 3: Shrnutí & Kvíz", icon="🎓", url_path="day_3_summary")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -362,6 +363,9 @@ nav = st.navigation(
             p_nn_kc,
             p_nn_kc_critique,
             p_nn_kc_nb,
+        ],
+        "19. Den 3: Shrnutí & Závěr Dne 3": [
+            p_day3_summary,
         ],
     }
 )
