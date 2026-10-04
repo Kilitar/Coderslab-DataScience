@@ -175,6 +175,9 @@ p_rf_diam = st.Page("views/03_random_forest_diamonds_exercise_2.py", title="Cvi�
 p_rf_diam_critique = st.Page("views/03_random_forest_diamonds_exercise_2_critique.py", title="Cvičení 2: Diamanty – Expertní analýza", icon="🔬", url_path="rf_diamonds_critique")
 p_rf_diam_nb = st.Page("views/03_random_forest_diamonds_nb.py", title="Cvičení 2: Diamanty – Notebook", icon="🐍", url_path="rf_diamonds_notebook")
 p_boosting_theory = st.Page("views/03_boosting_xgboost_theory.py", title="Teorie: Boosting & XGBoost", icon="📖", url_path="boosting_xgboost_theory")
+p_xgb_heart = st.Page("views/03_xgboost_heart_exercise_1.py", title="Cvičení 1: Nemoc srdce – Výsledky zadání", icon="🎯", url_path="xgb_heart_exercise_1")
+p_xgb_heart_critique = st.Page("views/03_xgboost_heart_exercise_1_critique.py", title="Cvičení 1: Nemoc srdce – Expertní analýza", icon="🔬", url_path="xgb_heart_critique")
+p_xgb_heart_nb = st.Page("views/03_xgboost_heart_nb.py", title="Cvičení 1: Nemoc srdce – Notebook", icon="🐍", url_path="xgb_heart_notebook")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -334,6 +337,9 @@ nav = st.navigation(
         ],
         "17. Den 3: Advanced ML – Boosting": [
             p_boosting_theory,
+            p_xgb_heart,
+            p_xgb_heart_critique,
+            p_xgb_heart_nb,
         ],
     }
 )
