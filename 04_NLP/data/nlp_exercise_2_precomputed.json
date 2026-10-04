@@ -1,0 +1,814 @@
+{
+  "metadata": {
+    "exercise": "Processing of textual data - exercise 2",
+    "input_csv": "imdb_reviews_preprocessed_1.csv",
+    "output_csv": "imdb_reviews_preprocessed_2.csv",
+    "total_rows": 10000,
+    "execution_time_seconds": 103.56,
+    "throughput_reviews_per_sec": 96.6
+  },
+  "vocabulary_metrics": {
+    "sample_size_for_vocab": 2000,
+    "sample_cleaned_total_tokens": 256291,
+    "sample_lemmatized_total_tokens": 258868,
+    "unique_vocab_cleaned": 31186,
+    "unique_vocab_lemmatized": 26082,
+    "vocab_reduction_count": 5104,
+    "vocab_reduction_pct": 16.37
+  },
+  "top_frequencies": {
+    "cleaned": [
+      {
+        "word": "br",
+        "count": 5052
+      },
+      {
+        "word": "movie",
+        "count": 3356
+      },
+      {
+        "word": "film",
+        "count": 3082
+      },
+      {
+        "word": "one",
+        "count": 2161
+      },
+      {
+        "word": "like",
+        "count": 1621
+      },
+      {
+        "word": "good",
+        "count": 1162
+      },
+      {
+        "word": "the",
+        "count": 1146
+      },
+      {
+        "word": "even",
+        "count": 1043
+      },
+      {
+        "word": "time",
+        "count": 987
+      },
+      {
+        "word": "story",
+        "count": 956
+      },
+      {
+        "word": "really",
+        "count": 956
+      },
+      {
+        "word": "would",
+        "count": 937
+      },
+      {
+        "word": "see",
+        "count": 923
+      },
+      {
+        "word": "it",
+        "count": 899
+      },
+      {
+        "word": "much",
+        "count": 743
+      },
+      {
+        "word": "great",
+        "count": 741
+      },
+      {
+        "word": "well",
+        "count": 734
+      },
+      {
+        "word": "also",
+        "count": 722
+      },
+      {
+        "word": "first",
+        "count": 717
+      },
+      {
+        "word": "bad",
+        "count": 716
+      }
+    ],
+    "lemmatized": [
+      {
+        "word": "br",
+        "count": 5052
+      },
+      {
+        "word": "movie",
+        "count": 3951
+      },
+      {
+        "word": "film",
+        "count": 3785
+      },
+      {
+        "word": "one",
+        "count": 2242
+      },
+      {
+        "word": "see",
+        "count": 1902
+      },
+      {
+        "word": "like",
+        "count": 1766
+      },
+      {
+        "word": "make",
+        "count": 1751
+      },
+      {
+        "word": "good",
+        "count": 1578
+      },
+      {
+        "word": "get",
+        "count": 1395
+      },
+      {
+        "word": "I",
+        "count": 1309
+      },
+      {
+        "word": "well",
+        "count": 1298
+      },
+      {
+        "word": "s",
+        "count": 1253
+      },
+      {
+        "word": "time",
+        "count": 1229
+      },
+      {
+        "word": "the",
+        "count": 1147
+      },
+      {
+        "word": "character",
+        "count": 1140
+      },
+      {
+        "word": "go",
+        "count": 1110
+      },
+      {
+        "word": "watch",
+        "count": 1066
+      },
+      {
+        "word": "story",
+        "count": 1052
+      },
+      {
+        "word": "even",
+        "count": 1043
+      },
+      {
+        "word": "bad",
+        "count": 1029
+      }
+    ]
+  },
+  "top_lemma_transformations": [
+    {
+      "transformation": "films -> film",
+      "count": 385
+    },
+    {
+      "transformation": "movies -> movie",
+      "count": 382
+    },
+    {
+      "transformation": "made -> make",
+      "count": 373
+    },
+    {
+      "transformation": "characters -> character",
+      "count": 372
+    },
+    {
+      "transformation": "acting -> act",
+      "count": 257
+    },
+    {
+      "transformation": "best -> good",
+      "count": 256
+    },
+    {
+      "transformation": "i -> I",
+      "count": 235
+    },
+    {
+      "transformation": "better -> well",
+      "count": 232
+    },
+    {
+      "transformation": "seen -> see",
+      "count": 232
+    },
+    {
+      "transformation": "scenes -> scene",
+      "count": 228
+    },
+    {
+      "transformation": "actors -> actor",
+      "count": 225
+    },
+    {
+      "transformation": "watching -> watch",
+      "count": 220
+    },
+    {
+      "transformation": "years -> year",
+      "count": 215
+    },
+    {
+      "transformation": "the -> br",
+      "count": 189
+    },
+    {
+      "transformation": "im -> I",
+      "count": 185
+    },
+    {
+      "transformation": "seems -> seem",
+      "count": 182
+    },
+    {
+      "transformation": "makes -> make",
+      "count": 173
+    },
+    {
+      "transformation": "things -> thing",
+      "count": 169
+    },
+    {
+      "transformation": "saw -> see",
+      "count": 165
+    },
+    {
+      "transformation": "going -> go",
+      "count": 159
+    },
+    {
+      "transformation": "gets -> get",
+      "count": 150
+    },
+    {
+      "transformation": "us -> we",
+      "count": 147
+    },
+    {
+      "transformation": "ive -> I",
+      "count": 146
+    },
+    {
+      "transformation": "got -> get",
+      "count": 145
+    },
+    {
+      "transformation": "done -> do",
+      "count": 141
+    }
+  ],
+  "samples": [
+    {
+      "index": 0,
+      "sentiment": "positive",
+      "review_cleaned_preview": "titanic long well made tragic adventure love story takes place illfated voyage unsinkable ship writerdirector james cameron done great job making movie fictional love story two different people combin...",
+      "review_lemmatized_preview": "titanic long well make tragic adventure love story take place illfate voyage unsinkable ship writerdirector james cameron do great job make movie fictional love story two different people combine real...",
+      "cleaned_word_count": 193,
+      "lemmatized_word_count": 194,
+      "transformed_tokens_count": 60,
+      "sample_transformations": [
+        [
+          "made",
+          "make"
+        ],
+        [
+          "takes",
+          "take"
+        ],
+        [
+          "illfated",
+          "illfate"
+        ],
+        [
+          "done",
+          "do"
+        ],
+        [
+          "making",
+          "make"
+        ],
+        [
+          "combining",
+          "combine"
+        ]
+      ]
+    },
+    {
+      "index": 1,
+      "sentiment": "negative",
+      "review_cleaned_preview": "said independent effort beyond fact shot television cameras whether conceit budget constraints make watching variation theme romero easier constantly reminded watching somebodys school project best de...",
+      "review_lemmatized_preview": "say independent effort beyond fact shoot television camera whether conceit budget constraint make watch variation theme romero easier constantly remind watch somebodys school project well derivative b...",
+      "cleaned_word_count": 195,
+      "lemmatized_word_count": 195,
+      "transformed_tokens_count": 57,
+      "sample_transformations": [
+        [
+          "said",
+          "say"
+        ],
+        [
+          "shot",
+          "shoot"
+        ],
+        [
+          "cameras",
+          "camera"
+        ],
+        [
+          "constraints",
+          "constraint"
+        ],
+        [
+          "watching",
+          "watch"
+        ],
+        [
+          "reminded",
+          "remind"
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "sentiment": "negative",
+      "review_cleaned_preview": "maybe fred sandford used say one across lips released film unsuspecting public perhaps person rue morgue called fender hellbender said goodbr br five young girls apparently taking shortcut home high s...",
+      "review_lemmatized_preview": "maybe fred sandford use say one across lip release film unsuspecting public perhaps person rue morgue call fender hellbender say goodbr br five young girl apparently take shortcut home high school foo...",
+      "cleaned_word_count": 242,
+      "lemmatized_word_count": 243,
+      "transformed_tokens_count": 86,
+      "sample_transformations": [
+        [
+          "used",
+          "use"
+        ],
+        [
+          "lips",
+          "lip"
+        ],
+        [
+          "released",
+          "release"
+        ],
+        [
+          "called",
+          "call"
+        ],
+        [
+          "said",
+          "say"
+        ],
+        [
+          "girls",
+          "girl"
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "sentiment": "positive",
+      "review_cleaned_preview": "film comedy expose ive always hated dog shows considering ridiculous getups people put dogs idiotic names give them hence reason uncontrolled cackling watching film get kick something taken seriously ...",
+      "review_lemmatized_preview": "film comedy expose I ve always hat dog show consider ridiculous getup people put dog idiotic name give they hence reason uncontrolle cackle watch film get kick something take seriously even though gai...",
+      "cleaned_word_count": 82,
+      "lemmatized_word_count": 83,
+      "transformed_tokens_count": 79,
+      "sample_transformations": [
+        [
+          "ive",
+          "I"
+        ],
+        [
+          "always",
+          "ve"
+        ],
+        [
+          "hated",
+          "always"
+        ],
+        [
+          "dog",
+          "hat"
+        ],
+        [
+          "shows",
+          "dog"
+        ],
+        [
+          "considering",
+          "show"
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "sentiment": "negative",
+      "review_cleaned_preview": "except acting meryl streep note always id avoid film dated movie week quality it worth watching keep several understories mind couple endures media scrutiny different treatedbr br throughout movie iss...",
+      "review_lemmatized_preview": "except act meryl streep note always I d avoid film date movie week quality it worth watch keep several understorie mind couple endure medium scrutiny different treatedbr br throughout movie issue cred...",
+      "cleaned_word_count": 158,
+      "lemmatized_word_count": 159,
+      "transformed_tokens_count": 152,
+      "sample_transformations": [
+        [
+          "acting",
+          "act"
+        ],
+        [
+          "id",
+          "I"
+        ],
+        [
+          "avoid",
+          "d"
+        ],
+        [
+          "film",
+          "avoid"
+        ],
+        [
+          "dated",
+          "film"
+        ],
+        [
+          "movie",
+          "date"
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "sentiment": "positive",
+      "review_cleaned_preview": "john voight plays title character movie based author pat conroys prince tides autobiography fine teacher film tells story naive pat conroy young english teacher whose first assignment elementary schoo...",
+      "review_lemmatized_preview": "john voight play title character movie base author pat conroy prince tide autobiography fine teacher film tell story naive pat conroy young english teacher whose first assignment elementary school rur...",
+      "cleaned_word_count": 53,
+      "lemmatized_word_count": 53,
+      "transformed_tokens_count": 13,
+      "sample_transformations": [
+        [
+          "plays",
+          "play"
+        ],
+        [
+          "based",
+          "base"
+        ],
+        [
+          "conroys",
+          "conroy"
+        ],
+        [
+          "tides",
+          "tide"
+        ],
+        [
+          "tells",
+          "tell"
+        ],
+        [
+          "pressures",
+          "pressure"
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "sentiment": "positive",
+      "review_cleaned_preview": "one thing really cant seem forget movie beginning classic comedy brilliantly crafted love it see no spoilers here sparring devito crystal also glows movie devito perfect oppressed son one favourites h...",
+      "review_lemmatized_preview": "one thing really can not seem forget movie begin classic comedy brilliantly craft love it see no spoiler here spar devito crystal also glow movie devito perfect oppress son one favourite highly recomm...",
+      "cleaned_word_count": 34,
+      "lemmatized_word_count": 35,
+      "transformed_tokens_count": 31,
+      "sample_transformations": [
+        [
+          "cant",
+          "can"
+        ],
+        [
+          "seem",
+          "not"
+        ],
+        [
+          "forget",
+          "seem"
+        ],
+        [
+          "movie",
+          "forget"
+        ],
+        [
+          "beginning",
+          "movie"
+        ],
+        [
+          "classic",
+          "begin"
+        ]
+      ]
+    },
+    {
+      "index": 7,
+      "sentiment": "negative",
+      "review_cleaned_preview": "christopher lambert attracted movie waste plot holes string vest special effects good take much figure creatures mother creature owed little debt predator anticlimatical movie could done whole lot bet...",
+      "review_lemmatized_preview": "christopher lambert attract movie waste plot hole string vest special effect good take much figure creature mother creature owe little debt predator anticlimatical movie could do whole lot well raise ...",
+      "cleaned_word_count": 43,
+      "lemmatized_word_count": 43,
+      "transformed_tokens_count": 10,
+      "sample_transformations": [
+        [
+          "attracted",
+          "attract"
+        ],
+        [
+          "holes",
+          "hole"
+        ],
+        [
+          "effects",
+          "effect"
+        ],
+        [
+          "creatures",
+          "creature"
+        ],
+        [
+          "owed",
+          "owe"
+        ],
+        [
+          "done",
+          "do"
+        ]
+      ]
+    },
+    {
+      "index": 8,
+      "sentiment": "negative",
+      "review_cleaned_preview": "person thinks entire forensics scenes crime community usa must detest almighty slap faces rookie cop first crime scene back slow respond time send kid found body local store buy disposable camera time...",
+      "review_lemmatized_preview": "person think entire forensic scene crime community usa must detest almighty slap face rookie cop first crime scene back slow respond time send kid find body local store buy disposable camera time retu...",
+      "cleaned_word_count": 159,
+      "lemmatized_word_count": 160,
+      "transformed_tokens_count": 103,
+      "sample_transformations": [
+        [
+          "thinks",
+          "think"
+        ],
+        [
+          "forensics",
+          "forensic"
+        ],
+        [
+          "scenes",
+          "scene"
+        ],
+        [
+          "faces",
+          "face"
+        ],
+        [
+          "found",
+          "find"
+        ],
+        [
+          "returns",
+          "return"
+        ]
+      ]
+    },
+    {
+      "index": 9,
+      "sentiment": "positive",
+      "review_cleaned_preview": "caught minute portion movie turner classic movies months back thought every minute watching gold and somewhere films middle want spoil whole thing watch start decided would rent immediately well video...",
+      "review_lemmatized_preview": "catch minute portion movie turner classic movie month back thought every minute watch gold and somewhere film middle want spoil whole thing watch start decide would rent immediately well video store f...",
+      "cleaned_word_count": 168,
+      "lemmatized_word_count": 170,
+      "transformed_tokens_count": 109,
+      "sample_transformations": [
+        [
+          "caught",
+          "catch"
+        ],
+        [
+          "movies",
+          "movie"
+        ],
+        [
+          "months",
+          "month"
+        ],
+        [
+          "watching",
+          "watch"
+        ],
+        [
+          "films",
+          "film"
+        ],
+        [
+          "decided",
+          "decide"
+        ]
+      ]
+    },
+    {
+      "index": 10,
+      "sentiment": "negative",
+      "review_cleaned_preview": "love documentaries andy goldsworthy doc greati looked forward one disappointed knew kahn intrigued idea lonely death penn station mens room must story here mistakenly believedthe story sadly deluded w...",
+      "review_lemmatized_preview": "love documentary andy goldsworthy doc greati look forward one disappointed know kahn intrigue idea lonely death penn station men room must story here mistakenly believedthe story sadly delude woman af...",
+      "cleaned_word_count": 98,
+      "lemmatized_word_count": 98,
+      "transformed_tokens_count": 24,
+      "sample_transformations": [
+        [
+          "documentaries",
+          "documentary"
+        ],
+        [
+          "looked",
+          "look"
+        ],
+        [
+          "knew",
+          "know"
+        ],
+        [
+          "intrigued",
+          "intrigue"
+        ],
+        [
+          "mens",
+          "men"
+        ],
+        [
+          "deluded",
+          "delude"
+        ]
+      ]
+    },
+    {
+      "index": 11,
+      "sentiment": "negative",
+      "review_cleaned_preview": "got one absolute worst movies ive ever seen life writing acting pathetic ranks right uncle sam time worst movies ever made however see crap like able make video really inspires pursue wild dreams maki...",
+      "review_lemmatized_preview": "get one absolute bad movie I ve ever see life write act pathetic rank right uncle sam time bad movie ever make however see crap like able make video really inspire pursue wild dream make film know cou...",
+      "cleaned_word_count": 42,
+      "lemmatized_word_count": 43,
+      "transformed_tokens_count": 40,
+      "sample_transformations": [
+        [
+          "got",
+          "get"
+        ],
+        [
+          "worst",
+          "bad"
+        ],
+        [
+          "movies",
+          "movie"
+        ],
+        [
+          "ive",
+          "I"
+        ],
+        [
+          "ever",
+          "ve"
+        ],
+        [
+          "seen",
+          "ever"
+        ]
+      ]
+    },
+    {
+      "index": 12,
+      "sentiment": "negative",
+      "review_cleaned_preview": "total disgrace truly awful screenplay dialogue joke combined director clue life saudi arabia surprise quite saudi film ha director palestiniancanadian writer lebanese lead actress jordanian shooting t...",
+      "review_lemmatized_preview": "total disgrace truly awful screenplay dialogue joke combine director clue life saudi arabia surprise quite saudi film ha director palestiniancanadian writer lebanese lead actress jordanian shooting ta...",
+      "cleaned_word_count": 206,
+      "lemmatized_word_count": 207,
+      "transformed_tokens_count": 166,
+      "sample_transformations": [
+        [
+          "combined",
+          "combine"
+        ],
+        [
+          "took",
+          "take"
+        ],
+        [
+          "elements",
+          "element"
+        ],
+        [
+          "representing",
+          "represent"
+        ],
+        [
+          "contains",
+          "contain"
+        ],
+        [
+          "cartoons",
+          "cartoon"
+        ]
+      ]
+    },
+    {
+      "index": 13,
+      "sentiment": "negative",
+      "review_cleaned_preview": "get good portion steven seagal environmental anxieties breathless mountain views along cowboy scenes or alternatively use parts remains horse whisperer add large piece outbreak virus similar attention...",
+      "review_lemmatized_preview": "get good portion steven seagal environmental anxiety breathless mountain view along cowboy scene or alternatively use part remain horse whisperer add large piece outbreak virus similar attention must ...",
+      "cleaned_word_count": 81,
+      "lemmatized_word_count": 81,
+      "transformed_tokens_count": 12,
+      "sample_transformations": [
+        [
+          "anxieties",
+          "anxiety"
+        ],
+        [
+          "views",
+          "view"
+        ],
+        [
+          "scenes",
+          "scene"
+        ],
+        [
+          "parts",
+          "part"
+        ],
+        [
+          "remains",
+          "remain"
+        ],
+        [
+          "wrapped",
+          "wrap"
+        ]
+      ]
+    },
+    {
+      "index": 14,
+      "sentiment": "negative",
+      "review_cleaned_preview": "say think write spoiler alert reveal used fword lot movie like every two sentences like movie much hints sexual perversions sidesteps cheating swearing totally window gave movie two points mira sorvin...",
+      "review_lemmatized_preview": "say think write spoiler alert reveal use fword lot movie like every two sentence like movie much hint sexual perversion sidestep cheating swear totally window give movie two point mira sorvinos sexy m...",
+      "cleaned_word_count": 35,
+      "lemmatized_word_count": 35,
+      "transformed_tokens_count": 9,
+      "sample_transformations": [
+        [
+          "used",
+          "use"
+        ],
+        [
+          "sentences",
+          "sentence"
+        ],
+        [
+          "hints",
+          "hint"
+        ],
+        [
+          "perversions",
+          "perversion"
+        ],
+        [
+          "sidesteps",
+          "sidestep"
+        ],
+        [
+          "swearing",
+          "swear"
+        ]
+      ]
+    }
+  ]
+}

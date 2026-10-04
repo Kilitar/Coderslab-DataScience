@@ -207,6 +207,9 @@ p_nlp_principles_theory = st.Page("views/04_nlp_text_preprocessing_theory.py", t
 p_nlp_ex1 = st.Page("views/04_nlp_exercise_1.py", title="Cvičení 1: Předzpracování textu (IMDb) – Výsledky zadání", icon="🎯", url_path="day4_nlp_exercise_1")
 p_nlp_ex1_critique = st.Page("views/04_nlp_exercise_1_critique.py", title="Cvičení 1: Předzpracování textu – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_1_critique")
 p_nlp_ex1_nb = st.Page("views/04_nlp_exercise_1_nb.py", title="Cvičení 1: Předzpracování textu – Notebook", icon="🐍", url_path="day4_nlp_exercise_1_nb")
+p_nlp_ex2 = st.Page("views/04_nlp_exercise_2.py", title="Cvičení 2: Lemmatizace textu (IMDb) – Výsledky zadání", icon="🎯", url_path="day4_nlp_exercise_2")
+p_nlp_ex2_critique = st.Page("views/04_nlp_exercise_2_critique.py", title="Cvičení 2: Lemmatizace & Subwords – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_2_critique")
+p_nlp_ex2_nb = st.Page("views/04_nlp_exercise_2_nb.py", title="Cvičení 2: Lemmatizace textu – Notebook", icon="🐍", url_path="day4_nlp_exercise_2_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -402,6 +405,9 @@ nav = st.navigation(
             p_nlp_ex1,
             p_nlp_ex1_critique,
             p_nlp_ex1_nb,
+            p_nlp_ex2,
+            p_nlp_ex2_critique,
+            p_nlp_ex2_nb,
         ],
     }
 )
