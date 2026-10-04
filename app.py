@@ -214,6 +214,9 @@ p_nlp_ex2_nb = st.Page("views/04_nlp_exercise_2_nb.py", title="Cvičení 2: Lemm
 p_nlp_bow_ex = st.Page("views/04_nlp_exercise_bow.py", title="Cvičení 3: Bag of Words & Klasifikace (IMDb)", icon="🎯", url_path="day4_nlp_exercise_bow")
 p_nlp_bow_ex_critique = st.Page("views/04_nlp_exercise_bow_critique.py", title="Cvičení 3: Bag of Words – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_bow_critique")
 p_nlp_bow_ex_nb = st.Page("views/04_nlp_exercise_bow_nb.py", title="Cvičení 3: Bag of Words – Notebook", icon="🐍", url_path="day4_nlp_exercise_bow_nb")
+p_nlp_tfidf_ex = st.Page("views/04_nlp_exercise_tfidf.py", title="Cvičení 4: TF-IDF & Srovnání modelů (IMDb)", icon="🎯", url_path="day4_nlp_exercise_tfidf")
+p_nlp_tfidf_ex_critique = st.Page("views/04_nlp_exercise_tfidf_critique.py", title="Cvičení 4: TF-IDF – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_tfidf_critique")
+p_nlp_tfidf_ex_nb = st.Page("views/04_nlp_exercise_tfidf_nb.py", title="Cvičení 4: TF-IDF – Notebook", icon="🐍", url_path="day4_nlp_exercise_tfidf_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -416,6 +419,9 @@ nav = st.navigation(
             p_nlp_bow_ex,
             p_nlp_bow_ex_critique,
             p_nlp_bow_ex_nb,
+            p_nlp_tfidf_ex,
+            p_nlp_tfidf_ex_critique,
+            p_nlp_tfidf_ex_nb,
         ],
     }
 )

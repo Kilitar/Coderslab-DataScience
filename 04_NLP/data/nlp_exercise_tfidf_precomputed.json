@@ -1,0 +1,434 @@
+{
+  "metadata": {
+    "exercise": "TF-IDF - exercise",
+    "input_csv": "imdb_reviews_preprocessed.csv",
+    "text_column": "review_tokens_lemmatized",
+    "total_reviews": 10000,
+    "max_features": 10000,
+    "train_size": 8000,
+    "test_size": 2000,
+    "vectorization_time_s": 0.74,
+    "sparsity_pct": 99.11
+  },
+  "logistic_regression": {
+    "accuracy": 0.873,
+    "precision_weighted": 0.874,
+    "recall_weighted": 0.873,
+    "f1_weighted": 0.8729,
+    "roc_auc": 0.9433,
+    "train_time_s": 0.104,
+    "confusion_matrix": [
+      [
+        847,
+        153
+      ],
+      [
+        101,
+        899
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.8934599156118144,
+        "recall": 0.847,
+        "f1-score": 0.8696098562628337,
+        "support": 1000.0
+      },
+      "1": {
+        "precision": 0.8545627376425855,
+        "recall": 0.899,
+        "f1-score": 0.8762183235867447,
+        "support": 1000.0
+      },
+      "accuracy": 0.873,
+      "macro avg": {
+        "precision": 0.8740113266271999,
+        "recall": 0.873,
+        "f1-score": 0.8729140899247891,
+        "support": 2000.0
+      },
+      "weighted avg": {
+        "precision": 0.8740113266271998,
+        "recall": 0.873,
+        "f1-score": 0.8729140899247891,
+        "support": 2000.0
+      }
+    }
+  },
+  "svm": {
+    "accuracy": 0.866,
+    "precision_weighted": 0.8662,
+    "recall_weighted": 0.866,
+    "f1_weighted": 0.866,
+    "train_time_s": 0.041,
+    "confusion_matrix": [
+      [
+        853,
+        147
+      ],
+      [
+        121,
+        879
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.8757700205338809,
+        "recall": 0.853,
+        "f1-score": 0.8642350557244174,
+        "support": 1000.0
+      },
+      "1": {
+        "precision": 0.8567251461988304,
+        "recall": 0.879,
+        "f1-score": 0.8677196446199408,
+        "support": 1000.0
+      },
+      "accuracy": 0.866,
+      "macro avg": {
+        "precision": 0.8662475833663557,
+        "recall": 0.866,
+        "f1-score": 0.865977350172179,
+        "support": 2000.0
+      },
+      "weighted avg": {
+        "precision": 0.8662475833663557,
+        "recall": 0.866,
+        "f1-score": 0.865977350172179,
+        "support": 2000.0
+      }
+    }
+  },
+  "top_features": {
+    "lr_positive": [
+      {
+        "word": "great",
+        "weight": 5.1062
+      },
+      {
+        "word": "love",
+        "weight": 3.8065
+      },
+      {
+        "word": "excellent",
+        "weight": 3.7663
+      },
+      {
+        "word": "enjoy",
+        "weight": 3.1016
+      },
+      {
+        "word": "favorite",
+        "weight": 2.9369
+      },
+      {
+        "word": "amazing",
+        "weight": 2.8541
+      },
+      {
+        "word": "wonderful",
+        "weight": 2.8485
+      },
+      {
+        "word": "perfect",
+        "weight": 2.8207
+      },
+      {
+        "word": "fun",
+        "weight": 2.6822
+      },
+      {
+        "word": "good",
+        "weight": 2.5417
+      },
+      {
+        "word": "also",
+        "weight": 2.5378
+      },
+      {
+        "word": "superb",
+        "weight": 2.4516
+      },
+      {
+        "word": "especially",
+        "weight": 2.3411
+      },
+      {
+        "word": "brilliant",
+        "weight": 2.2644
+      },
+      {
+        "word": "definitely",
+        "weight": 2.2029
+      }
+    ],
+    "lr_negative": [
+      {
+        "word": "bad",
+        "weight": -8.4428
+      },
+      {
+        "word": "waste",
+        "weight": -5.6262
+      },
+      {
+        "word": "awful",
+        "weight": -3.8949
+      },
+      {
+        "word": "nothing",
+        "weight": -3.8286
+      },
+      {
+        "word": "terrible",
+        "weight": -3.6557
+      },
+      {
+        "word": "poor",
+        "weight": -3.5345
+      },
+      {
+        "word": "boring",
+        "weight": -3.3353
+      },
+      {
+        "word": "minute",
+        "weight": -3.0216
+      },
+      {
+        "word": "stupid",
+        "weight": -2.8926
+      },
+      {
+        "word": "fail",
+        "weight": -2.7643
+      },
+      {
+        "word": "suppose",
+        "weight": -2.7618
+      },
+      {
+        "word": "horrible",
+        "weight": -2.7196
+      },
+      {
+        "word": "script",
+        "weight": -2.6739
+      },
+      {
+        "word": "least",
+        "weight": -2.6711
+      },
+      {
+        "word": "instead",
+        "weight": -2.5574
+      }
+    ],
+    "svm_positive": [
+      {
+        "word": "excellent",
+        "weight": 2.8144
+      },
+      {
+        "word": "great",
+        "weight": 2.5448
+      },
+      {
+        "word": "amazing",
+        "weight": 2.1786
+      },
+      {
+        "word": "enjoy",
+        "weight": 2.0768
+      },
+      {
+        "word": "fun",
+        "weight": 1.9862
+      },
+      {
+        "word": "wonderful",
+        "weight": 1.9247
+      },
+      {
+        "word": "perfect",
+        "weight": 1.9156
+      },
+      {
+        "word": "favorite",
+        "weight": 1.8733
+      },
+      {
+        "word": "brilliant",
+        "weight": 1.8215
+      },
+      {
+        "word": "enjoyable",
+        "weight": 1.8007
+      },
+      {
+        "word": "effective",
+        "weight": 1.7916
+      },
+      {
+        "word": "perfectly",
+        "weight": 1.7818
+      },
+      {
+        "word": "available",
+        "weight": 1.771
+      },
+      {
+        "word": "refreshing",
+        "weight": 1.7616
+      },
+      {
+        "word": "especially",
+        "weight": 1.7207
+      }
+    ],
+    "svm_negative": [
+      {
+        "word": "waste",
+        "weight": -4.3408
+      },
+      {
+        "word": "bad",
+        "weight": -4.0294
+      },
+      {
+        "word": "awful",
+        "weight": -2.6561
+      },
+      {
+        "word": "boring",
+        "weight": -2.645
+      },
+      {
+        "word": "terrible",
+        "weight": -2.6234
+      },
+      {
+        "word": "fail",
+        "weight": -2.5772
+      },
+      {
+        "word": "poor",
+        "weight": -2.4253
+      },
+      {
+        "word": "nothing",
+        "weight": -2.3727
+      },
+      {
+        "word": "annoying",
+        "weight": -2.3017
+      },
+      {
+        "word": "disappointing",
+        "weight": -2.2216
+      },
+      {
+        "word": "suppose",
+        "weight": -2.1151
+      },
+      {
+        "word": "disappoint",
+        "weight": -2.0996
+      },
+      {
+        "word": "poorly",
+        "weight": -2.0652
+      },
+      {
+        "word": "disappointment",
+        "weight": -2.0352
+      },
+      {
+        "word": "horrible",
+        "weight": -2.0321
+      }
+    ]
+  },
+  "samples": [
+    {
+      "text": "tony goldwyn good actor evidently try hand direct a walk moon appear borrow other well make film present story take place late sixty summer resort working class jews far woodstock screen treatment pam...",
+      "actual": "negative",
+      "pred_lr": "positive",
+      "pred_svm": "negative",
+      "prob_lr": 0.5571,
+      "models_agree": false
+    },
+    {
+      "text": "fragment life one first female painter achieve historical renown artemisia tell true story young italian woman impassione pursuit artistic expression vicissitude encounter film feature sumptuous costu...",
+      "actual": "positive",
+      "pred_lr": "positive",
+      "pred_svm": "positive",
+      "prob_lr": 0.649,
+      "models_agree": true
+    },
+    {
+      "text": "rent couple movie little cousin new year pick swan princess mystery enchant kingdom little mermaid watch film sleep figure could get couple comment in cheesy cartoon really bad admit child plot new co...",
+      "actual": "negative",
+      "pred_lr": "negative",
+      "pred_svm": "negative",
+      "prob_lr": 0.4091,
+      "models_agree": true
+    },
+    {
+      "text": "many people find film simply slow simplistic really connect it plot such rather film take form human survival story three people trap tree man eat crocodile lurk somewhere water beneath thembr br pers...",
+      "actual": "positive",
+      "pred_lr": "positive",
+      "pred_svm": "positive",
+      "prob_lr": 0.7763,
+      "models_agree": true
+    },
+    {
+      "text": "friend warn bad movie ever see curious developed bit cult status like lot odd indie cult movie gave shoot agree friend steaming pile dung sorry people love movie recommend much well stuff want watch t...",
+      "actual": "negative",
+      "pred_lr": "positive",
+      "pred_svm": "positive",
+      "prob_lr": 0.5249,
+      "models_agree": true
+    },
+    {
+      "text": "say good polly bergen fine filmthe rest so I m gay honestly many clichs time history sad start watching turn off decide would fun make fun rest film say basic idea film good rewrite less contrived lin...",
+      "actual": "negative",
+      "pred_lr": "negative",
+      "pred_svm": "negative",
+      "prob_lr": 0.2849,
+      "models_agree": true
+    },
+    {
+      "text": "raise watch original batman animate series avid batman graphic novel collector comic book hero iconic batman certain trait can not change creative liberty well good completely change character far pur...",
+      "actual": "negative",
+      "pred_lr": "negative",
+      "pred_svm": "negative",
+      "prob_lr": 0.3873,
+      "models_agree": true
+    },
+    {
+      "text": "murder opera actual murder much symbol past event part bettys fractured personality fact betty person a male suzy bannion suspiria decade later life suzy boy ten befriend another boy ten mild version ...",
+      "actual": "positive",
+      "pred_lr": "positive",
+      "pred_svm": "positive",
+      "prob_lr": 0.6289,
+      "models_agree": true
+    },
+    {
+      "text": "group environmentalist travel island uncover secret lab experiment animal arrive discover late apparently government make scientist test experiment komodo and yes guess it cobra make grow large I m su...",
+      "actual": "negative",
+      "pred_lr": "negative",
+      "pred_svm": "negative",
+      "prob_lr": 0.3887,
+      "models_agree": true
+    },
+    {
+      "text": "must say really idea go sit watch movie guess fact nothing well class but tv movie catch interest importantly helen hunt catch eye really big fan prior film sure like twister good get but something mo...",
+      "actual": "positive",
+      "pred_lr": "negative",
+      "pred_svm": "negative",
+      "prob_lr": 0.3663,
+      "models_agree": true
+    }
+  ]
+}
