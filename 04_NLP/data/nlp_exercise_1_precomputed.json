@@ -1,0 +1,356 @@
+{
+  "total_reviews": 10000,
+  "sentiment_dist": {
+    "negative": 5001,
+    "positive": 4999
+  },
+  "mean_raw_words": 232.3,
+  "mean_clean_words": 126.1,
+  "reduction_pct": 45.7,
+  "negation_reviews_count": 7501,
+  "negation_reviews_pct": 75.0,
+  "hist_bin_labels": [
+    "0-35",
+    "35-70",
+    "70-105",
+    "105-140",
+    "140-175",
+    "175-210",
+    "210-245",
+    "245-280",
+    "280-315",
+    "315-350",
+    "350-385",
+    "385-420",
+    "420-455",
+    "455-490",
+    "490-525",
+    "525-560",
+    "560-595",
+    "595-630",
+    "630-665",
+    "665-700",
+    "700-735",
+    "735-770",
+    "770-805",
+    "805-840"
+  ],
+  "hist_raw_counts": [
+    36,
+    583,
+    693,
+    2065,
+    1665,
+    1087,
+    805,
+    579,
+    451,
+    355,
+    283,
+    217,
+    199,
+    134,
+    122,
+    124,
+    100,
+    70,
+    58,
+    54,
+    50,
+    46,
+    42,
+    25
+  ],
+  "hist_clean_counts": [
+    543,
+    2295,
+    2855,
+    1437,
+    908,
+    553,
+    388,
+    247,
+    197,
+    166,
+    101,
+    84,
+    51,
+    57,
+    48,
+    35,
+    17,
+    8,
+    2,
+    0,
+    2,
+    0,
+    0,
+    0
+  ],
+  "top_raw_words": [
+    {
+      "word": "the",
+      "count": 26587
+    },
+    {
+      "word": "and",
+      "count": 13169
+    },
+    {
+      "word": "a",
+      "count": 12918
+    },
+    {
+      "word": "of",
+      "count": 11493
+    },
+    {
+      "word": "to",
+      "count": 10529
+    },
+    {
+      "word": "is",
+      "count": 8356
+    },
+    {
+      "word": "br",
+      "count": 7996
+    },
+    {
+      "word": "it",
+      "count": 7590
+    },
+    {
+      "word": "in",
+      "count": 7479
+    },
+    {
+      "word": "i",
+      "count": 7037
+    },
+    {
+      "word": "this",
+      "count": 6079
+    },
+    {
+      "word": "that",
+      "count": 5763
+    },
+    {
+      "word": "s",
+      "count": 4975
+    },
+    {
+      "word": "was",
+      "count": 3790
+    },
+    {
+      "word": "as",
+      "count": 3591
+    },
+    {
+      "word": "movie",
+      "count": 3570
+    },
+    {
+      "word": "with",
+      "count": 3472
+    },
+    {
+      "word": "for",
+      "count": 3426
+    },
+    {
+      "word": "but",
+      "count": 3276
+    },
+    {
+      "word": "film",
+      "count": 3179
+    }
+  ],
+  "top_clean_words": [
+    {
+      "word": "br",
+      "count": 4550
+    },
+    {
+      "word": "movie",
+      "count": 3386
+    },
+    {
+      "word": "film",
+      "count": 2954
+    },
+    {
+      "word": "one",
+      "count": 2031
+    },
+    {
+      "word": "like",
+      "count": 1507
+    },
+    {
+      "word": "good",
+      "count": 1115
+    },
+    {
+      "word": "even",
+      "count": 1000
+    },
+    {
+      "word": "the",
+      "count": 979
+    },
+    {
+      "word": "would",
+      "count": 970
+    },
+    {
+      "word": "it",
+      "count": 958
+    },
+    {
+      "word": "time",
+      "count": 946
+    },
+    {
+      "word": "really",
+      "count": 880
+    },
+    {
+      "word": "see",
+      "count": 855
+    },
+    {
+      "word": "story",
+      "count": 786
+    },
+    {
+      "word": "get",
+      "count": 738
+    },
+    {
+      "word": "well",
+      "count": 731
+    },
+    {
+      "word": "much",
+      "count": 712
+    },
+    {
+      "word": "also",
+      "count": 710
+    },
+    {
+      "word": "great",
+      "count": 708
+    },
+    {
+      "word": "bad",
+      "count": 705
+    }
+  ],
+  "samples": [
+    {
+      "index": 0,
+      "sentiment": "positive",
+      "raw_text": "Titanic is a long but well made tragic adventure love story that takes place during the ill-fated voyage on the unsinkable ship. Writer/Director James Cameron has done a great job of making this movie about a fictional love story between two very different people and combining that with the real event of the Titanic that sunk after hitting an iceberg on April 15, 1912 claiming thousands of lives w...",
+      "clean_text": "titanic long well made tragic adventure love story takes place illfated voyage unsinkable ship writerdirector james cameron done great job making movie fictional love story two different people combining real event titanic sunk hitting iceberg april claiming thousands lives perished icy freeing waters north atlantic two leads film great roles including leonardo dicaprio kate winslet make good onsc...",
+      "raw_words": 356,
+      "clean_words": 193,
+      "has_negation": false,
+      "has_html_breaks": false
+    },
+    {
+      "index": 1,
+      "sentiment": "negative",
+      "raw_text": "\"What can be said of this independent effort beyond the fact that it was shot with television cameras, and whether that was by conceit or budget constraints doesn't make the watching of this variation on a theme by Romero any easier. I was constantly reminded that I was watching somebody's school project, at best derivative, at worst cheap.<br /><br />Writer/director Georg Koszulinski (who also ap...",
+      "clean_text": "said independent effort beyond fact shot television cameras whether conceit budget constraints make watching variation theme romero easier constantly reminded watching somebodys school project best derivative worst cheapbr br writerdirector georg koszulinski who also appears film interesting things stock footage says editing style directing style consists inyourface closeups tv cameras made think ...",
+      "raw_words": 365,
+      "clean_words": 195,
+      "has_negation": true,
+      "has_html_breaks": true
+    },
+    {
+      "index": 2,
+      "sentiment": "negative",
+      "raw_text": "\"And maybe, as Fred Sandford used to say, \"\"one across the lips\"\". That to those who released this film on an unsuspecting public. And perhaps to the person in \"\"Rue Morgue\"\" who called this a \"\"Fender Hellbender\"\" and said it was good.<br /><br />Five young girls, apparently taking a short-cut home from a high school football game, become lost and stop to ask directions at some small store in the...",
+      "clean_text": "maybe fred sandford used say one across lips released film unsuspecting public perhaps person rue morgue called fender hellbender said goodbr br five young girls apparently taking shortcut home high school football game become lost stop ask directions small store middle nowhere driver accidentally hits parked suv knocks headlight girls decide leave go find driver driver come find them headlight ve...",
+      "raw_words": 483,
+      "clean_words": 242,
+      "has_negation": true,
+      "has_html_breaks": true
+    },
+    {
+      "index": 3,
+      "sentiment": "positive",
+      "raw_text": "This film isn't a comedy, its an expose. I've always hated dog shows, considering the ridiculous get-ups people put their dogs in and the idiotic names they give them. Hence, the reason for my uncontrolled cackling while watching this film. I get a kick out of something being taken so seriously, even though the gains are small and insignificant. It's like miniature golf, or jump roping championshi...",
+      "clean_text": "film comedy expose ive always hated dog shows considering ridiculous getups people put dogs idiotic names give them hence reason uncontrolled cackling watching film get kick something taken seriously even though gains small insignificant like miniature golf jump roping championships need set obscure world record acting much refined film waiting guffman mainly due fluidity characters seem comfortab...",
+      "raw_words": 153,
+      "clean_words": 82,
+      "has_negation": false,
+      "has_html_breaks": false
+    },
+    {
+      "index": 4,
+      "sentiment": "negative",
+      "raw_text": "\"Except for the acting of Meryl Streep, which is of note as always, I'd avoid this film because it has a dated \"\"Movie of the Week\"\" quality about it. But it is worth watching if you keep the several understories in mind: How a couple endures media scrutiny, and how the different are treated.<br /><br />Throughout the movie the issue is the credibility of the different. Australians are different t...",
+      "clean_text": "except acting meryl streep note always id avoid film dated movie week quality it worth watching keep several understories mind couple endures media scrutiny different treatedbr br throughout movie issue credibility different australians different us most rest world most us automatically come air oddness them couple involved religious different culture adventists different that lifestyle mindset su...",
+      "raw_words": 317,
+      "clean_words": 158,
+      "has_negation": true,
+      "has_html_breaks": true
+    },
+    {
+      "index": 10,
+      "sentiment": "negative",
+      "raw_text": "I love documentaries. The Andy Goldsworthy doc was great.I looked forward to this one - but was very disappointed. I knew of Kahn and was intrigued by the idea of his lonely death in a Penn Station men's room. There must be a story here, I mistakenly believed.The only story here is of sadly deluded women who had affairs with an ugly little famous married man. In the absence of anything like an exp...",
+      "clean_text": "love documentaries andy goldsworthy doc greati looked forward one disappointed knew kahn intrigued idea lonely death penn station mens room must story here mistakenly believedthe story sadly deluded women affairs ugly little famous married man absence anything like explanation guys horrible behavior were given endlessly repeated clips kahn walking around painfully long supposedly contemplative sho...",
+      "raw_words": 174,
+      "clean_words": 98,
+      "has_negation": true,
+      "has_html_breaks": false
+    },
+    {
+      "index": 25,
+      "sentiment": "positive",
+      "raw_text": "\"This almost unknown gem was based on a French farce--which shows, and I mean that as a compliment. <br /><br />Caroline (Lee) is being courted by a wealthy Argentinian (Roland), who asks her father for her hand in marriage. But Caroline is already married to Anthony (Colman), who has just arrived by plane and launches immediately into an audience-directed reminiscence about the last time Caroline...",
+      "clean_text": "almost unknown gem based french farcewhich shows mean compliment br br caroline lee courted wealthy argentinian roland asks father hand marriage caroline already married anthony colman arrived plane launches immediately audiencedirected reminiscence last time caroline decided love someone else dilettanteish sculptor gardiner film plays story anthonys strategy uncoupling caroline sculptor experienc...",
+      "raw_words": 201,
+      "clean_words": 107,
+      "has_negation": false,
+      "has_html_breaks": true
+    },
+    {
+      "index": 42,
+      "sentiment": "positive",
+      "raw_text": "It may (or may not) be considered interesting that the only reason I really checked out this movie in the first place was because I wanted to see the performance of the man who beat out Humphrey Bogart in his CASABLANCA (10/10 role for the Best Actor Oscar. (I still would have given the Oscar to Bogie, but Paul Lukas did do a great job and deserved the nomination, at least.) Well, I'm glad I did c...",
+      "clean_text": "may or may not considered interesting reason really checked movie first place wanted see performance man beat humphrey bogart casablanca role best actor oscar i still would given oscar bogie paul lukas great job deserved nomination least well im glad check movie out enjoyed immensely think movie preach little mind enjoyed speeches never bored thembr br the acting outstanding movie especially enjoy...",
+      "raw_words": 261,
+      "clean_words": 139,
+      "has_negation": true,
+      "has_html_breaks": true
+    },
+    {
+      "index": 99,
+      "sentiment": "positive",
+      "raw_text": "It is finally coming out. The first season will be available March 2007. It is currently airing on ABC Family from 4-5 pm eastern time Monday through Friday. The last episode will air on December 19th at 4:30. I missed it the first 100 times around. I wish I could buy the whole series right now. Who does she pick? I have to write 10 lines in order to reply to the first comment. What am I going to ...",
+      "clean_text": "finally coming out first season available march currently airing abc family pm eastern time monday friday last episode air december th missed first times around wish could buy whole series right now pick write lines order reply first comment going say la da da de de la da da de de nope get almost almost awww need missed counted number punky brewster pretty awesome too almost almost awwwwww",
+      "raw_words": 136,
+      "clean_words": 68,
+      "has_negation": false,
+      "has_html_breaks": false
+    },
+    {
+      "index": 150,
+      "sentiment": "negative",
+      "raw_text": "\"I don't know much about film-making, but good movies have to tell some sort of a story...your characters have to start and complete their journey. In Last Exit to Brooklyn they may, but its not in any satisfying way, and I'm not meaning a happy ending, just ANY ending.<br /><br />Last Exit to Brooklyn, set in 1952 Brooklyn during a very brutal labor strike, sets a number of story threads in motio...",
+      "clean_text": "know much filmmaking good movies tell sort storyyour characters start complete journey last exit brooklyn may satisfying way im meaning happy ending endingbr br last exit brooklyn set brooklyn brutal labor strike sets number story threads motion involve unlikeable characters ever walk across movie screen last exit brooklyn fails bring stories conclusionit leaves dangling ending blasts bizarre stra...",
+      "raw_words": 304,
+      "clean_words": 164,
+      "has_negation": true,
+      "has_html_breaks": true
+    }
+  ]
+}
