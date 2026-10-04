@@ -174,6 +174,7 @@ p_rf_heart_nb = st.Page("views/03_random_forest_heart_nb.py", title="Cvičení 1
 p_rf_diam = st.Page("views/03_random_forest_diamonds_exercise_2.py", title="Cvičení 2: Diamanty – Výsledky zadání", icon="🎯", url_path="rf_diamonds_exercise_2")
 p_rf_diam_critique = st.Page("views/03_random_forest_diamonds_exercise_2_critique.py", title="Cvičení 2: Diamanty – Expertní analýza", icon="🔬", url_path="rf_diamonds_critique")
 p_rf_diam_nb = st.Page("views/03_random_forest_diamonds_nb.py", title="Cvičení 2: Diamanty – Notebook", icon="🐍", url_path="rf_diamonds_notebook")
+p_boosting_theory = st.Page("views/03_boosting_xgboost_theory.py", title="Teorie: Boosting & XGBoost", icon="📖", url_path="boosting_xgboost_theory")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -330,6 +331,9 @@ nav = st.navigation(
             p_rf_diam,
             p_rf_diam_critique,
             p_rf_diam_nb,
+        ],
+        "17. Den 3: Advanced ML – Boosting": [
+            p_boosting_theory,
         ],
     }
 )
