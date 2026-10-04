@@ -214,6 +214,33 @@ with tab3:
         """
     )
 
+    # FRONTIER SPOTLIGHT BOX
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(49, 46, 129, 0.8)); border: 1px solid rgba(129, 140, 248, 0.6); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+            <h4 style="color: #a5b4fc; margin-top: 0;">🚀 Nejnovější Frontier Modely (Aktuální k 10/2026): Argon, Astra & Fable</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                <div style="background: rgba(15, 23, 42, 0.6); border-left: 4px solid #60a5fa; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #60a5fa;">⚡ Gemini 4 Argon (Google)</strong><br>
+                    <small><em>Oznámeno: 30. září 2026</em></small><br>
+                    První vlajkový model generace Gemini 4. Průlomový <strong>výstupní limit 1 000 000 tokenů</strong> pro dlouhodobé úlohy, autonomní migrace monstrózních C/C++ kódbází do Rustu (Fuchsia Zircon s 800k+ řádky) a kyberbezpečnostní obranu (program Fairwind).
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border-left: 4px solid #34d399; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #34d399;">👁️ Project Astra (Google DeepMind)</strong><br>
+                    <small><em>Představeno na Google I/O & evoluce v Gemini Live</em></small><br>
+                    Vize univerzálního multimodálního asistenta pro reálný svět. Zpracovává kontinuální video/audio stream z kamery a chytrých brýlí, disponuje prostorovou pamětí („kde mám klíče?“) a nízkolatenčním uvažováním o fyzickém světě.
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border-left: 4px solid #fbbf24; padding: 12px; border-radius: 6px;">
+                    <strong style="color: #fbbf24;">🎭 Claude Fable 5 & 5.1 (Anthropic)</strong><br>
+                    <small><em>Vydáno: červen & září 2026</em></small><br>
+                    Nejvyšší reasoning tier u Anthropicu (stojící nad Opus/Sonnet) pro komplexní vícedenní agentní běhy a matematiku. Doplněn o privátní výzkumnou třídu <em>Mythos</em> pro kyberbezpečnost a biomedicínu (Project Glasswing).
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     col_l1, col_l2 = st.columns(2)
 
     with col_l1:
@@ -224,18 +251,20 @@ with tab3:
                 <p><strong>Od architektury Transformer k multimodálnímu rozumu:</strong></p>
                 <ul>
                     <li><strong>2013–2018:</strong> Vynález <em>Word2Vec</em> (Mikolov), architektury <em>Transformer</em> (Vaswani et al.) a modelu <em>BERT</em>.</li>
-                    <li><strong>2024:</strong> <strong>Gemini 1.5 Pro & Flash</strong> – zavedení revolučního multimodálního kontextového okna o velikosti <strong>2 000 000+ tokenů</strong> (zpracování celých knihoven kódu, hodin videa či celých audio nahrávek).</li>
-                    <li><strong>2024–2025:</strong> <strong>Gemma 2 & Gemma 3</strong> – špičkové otevřené modely pro výzkumníky s efektivním během na spotřebitelském hardware.</li>
-                    <li><strong>2025–2026:</strong> <strong>Gemini 2.0 & Gemini Ultra</strong> – nativní multimodální uvažování, hluboká integrace agentů do vyhledávání (AI Overviews) a vědecké průlomy (AlphaFold 3).</li>
+                    <li><strong>Project Astra:</strong> Univerzální asistent s kontinuálním zrakem a pamětí v reálném čase.</li>
+                    <li><strong>Gemini 1.5 & 2.0:</strong> Kontextové okno <strong>2 000 000+ tokenů</strong> a nativní multimodalita (text, zvuk, video).</li>
+                    <li><strong>10/2026 – Gemini 4 Argon:</strong> Nová generace pro dlouhodobý autonomní softwarový vývoj a masivní refaktoring.</li>
+                    <li><strong>Otevřené modely Gemma 2 & 3:</strong> Špičkové otevřené váhy pro vývojáře.</li>
                 </ul>
             </div>
             <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; padding: 18px; margin-bottom: 15px;">
                 <h4 style="color: #34d399; margin-top: 0;">🤖 OpenAI & Microsoft</h4>
                 <p><strong>Průkopník generativní AI a reasoning modelů:</strong></p>
                 <ul>
-                    <li><strong>2018–2022:</strong> Série <em>GPT-1</em> až <em>GPT-3</em>, spuštění fenoménu <em>ChatGPT</em> a komerční nasazení instruovaného učení s lidskou zpětnou vazbou (RLHF).</li>
-                    <li><strong>2023–2024:</strong> <strong>GPT-4 Turbo</strong> a <strong>GPT-4o (Omni)</strong> – sjednocená neuronová síť pro text, zrak a obousměrný realtime hlas s latencí pod 300 ms.</li>
-                    <li><strong>2024–2026:</strong> <strong>OpenAI o1 ("Strawberry"), o3 & o3-mini</strong> – revoluční posun od pouhé predikce slov k <strong>internímu řetězci uvažování (Chain-of-Thought)</strong>; překonání lidských expertů v matematických olympiádách (IMO), kompetitivním programování a komplexní vědecké syntéze.</li>
+                    <li><strong>2018–2022:</strong> Série <em>GPT-1</em> až <em>GPT-3</em>, spuštění fenoménu <em>ChatGPT</em> a komerční nasazení RLHF.</li>
+                    <li><strong>GPT-4o (Omni):</strong> Sjednocená neuronová síť pro text, zrak a obousměrný realtime hlas s latencí pod 300 ms.</li>
+                    <li><strong>OpenAI o1 ("Strawberry"), o3 & o3-mini:</strong> Posun k <strong>internímu řetězci uvažování (Chain-of-Thought)</strong>; řešení úloh na úrovni PhD v matematice (IMO) a autonomní programování.</li>
+                    <li><strong>GPT-6 Astra / Sol ekosystém:</strong> Masivní škálování inference a autonomní agentní asistenti.</li>
                 </ul>
             </div>
             """,
@@ -250,18 +279,19 @@ with tab3:
                 <p><strong>Demokratizace AI a podpora otevřené vědy:</strong></p>
                 <ul>
                     <li><strong>2016–2023:</strong> <em>FastText</em>, <em>LLaMA</em> a <em>LLaMA-2</em>, které rozpoutaly globální open-source hnutí.</li>
-                    <li><strong>2024:</strong> <strong>Llama 3.1 (405B, 70B, 8B)</strong> – první gigantický otevřený model na světě vyrovnávající se uzavřeným komerčním špičkám se 128k kontextem, následovaný <strong>Llama 3.2</strong> (multimodální zrak pro edge a mobilní zařízení).</li>
-                    <li><strong>2025–2026:</strong> <strong>Llama 3.3 & Llama 4</strong> s architekturou Mixture-of-Experts (MoE) a otevřené reasoning modely provozovatelné lokálně bez odesílání dat přes <em>Ollama</em>, <em>vLLM</em> a <em>llama.cpp</em>.</li>
-                    <li><strong>Hugging Face:</strong> Globální repozitář s více než 1 000 000 otevřených modelů a knihovnou <code>transformers</code>.</li>
+                    <li><strong>Llama 3.1 (405B) & 3.2:</strong> První gigantický otevřený model vyrovnávající se uzavřeným špičkám se 128k kontextem a vizí.</li>
+                    <li><strong>Llama 3.3 & Llama 4 (MoE):</strong> Otevřené reasoning modely provozovatelné lokálně v soukromí přes <em>Ollama</em> a <em>vLLM</em>.</li>
+                    <li><strong>Hugging Face:</strong> Globální domov pro více než 1 000 000 otevřených modelů a knihovnu <code>transformers</code>.</li>
                 </ul>
             </div>
             <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 18px; margin-bottom: 15px;">
                 <h4 style="color: #fbbf24; margin-top: 0;">🧠 Anthropic & Agentní revoluce</h4>
-                <p><strong>Bezpečnostní výzkum a lídr v programování:</strong></p>
+                <p><strong>Bezpečnostní výzkum, kódování a uvažování:</strong></p>
                 <ul>
-                    <li><strong>Constitutional AI:</strong> Výcvik modelů podle explicitních etických ústavních principů místo pouhého černoskříňkového RLHF.</li>
-                    <li><strong>2024–2025:</strong> <strong>Claude 3.5 Sonnet & Haiku</strong> – globálně uznávaný etalon pro softwarové inženýrství, logické uvažování a práci s velkými kódbázemi.</li>
-                    <li><strong>2024–2026:</strong> <strong>Computer Use:</strong> Průlomová schopnost modelu přímo vnímat obrazovku počítače, pohybovat kurzorem myši, klikat a psát kód v reálném desktopovém prostředí.</li>
+                    <li><strong>Constitutional AI:</strong> Výcvik podle etických ústavních pravidel.</li>
+                    <li><strong>Claude 3.5 Sonnet / Haiku / Opus:</strong> Průmyslový standard pro softwarové inženýrství a logiku.</li>
+                    <li><strong>Claude Fable 5 & 5.1 (2026):</strong> Špičkový reasoning model pro dlouhotrvající agentní úkoly.</li>
+                    <li><strong>Computer Use:</strong> Schopnost modelu přímo ovládat desktopové GUI (myš, klávesnice, kód v reálném OS).</li>
                 </ul>
             </div>
             """,

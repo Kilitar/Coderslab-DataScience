@@ -76,26 +76,41 @@ Počítače a algoritmy strojového učení nedokáží provádět matematické 
 
 ## 4. Moderní ekosystém velkých jazykových modelů (LLM) – Stav k říjnu 2026
 
-Technologie představené ve Dni 4 jsou přímým základem současné revoluce v generativní umělé inteligenci a autonomních agentech. Zde je přehled klíčových technologických lídrů a jejich milníků až do roku 2026:
+Technologie představené ve Dni 4 jsou přímým základem současné revoluce v generativní umělé inteligenci a autonomních agentech. Zde je přehled klíčových technologických lídrů a jejich nejnovějších frontier modelů:
 
+### 🌟 Frontier Modely & Klíčové projekty (10/2026):
+1. **Gemini 4 Argon (Google DeepMind – oznámeno 30. září 2026)**:
+   * První vlajkový model nové generace **Gemini 4**.
+   * Přináší bezprecedentní **výstupní limit 1 000 000 tokenů** (1M output) navržený pro dlouhodobé (long-horizon) softwarové inženýrství.
+   * Využit v ostrém provozu pro migraci masivních C/C++ kódbází do paměťově bezpečného Rustu (jádro Fuchsia Zircon s 800 000+ řádky kódu), optimalizaci SIMD algoritmů a kybernetickou obranu v rámci programu *Fairwind*.
+2. **Project Astra (Google DeepMind)**:
+   * Výzkumný projekt univerzálního multimodálního agenta (představený na Google I/O).
+   * Schopnost vnímat nepřetržitý video a audio stream v reálném čase přes kameru telefonu či chytré brýle, disponující prostorovou a časovou pamětí o fyzickém okolí uživatele.
+3. **Claude Fable (Anthropic – Fable 5 & Fable 5.1, červen–září 2026)**:
+   * Nejvyšší reasoning model v hierarchii Anthropicu (pozicovaný nad Opus, Sonnet a Haiku) specializovaný na komplexní, vícedenní autonomní agentní běhy a matematiku.
+   * Doplněn o privátní výzkumnou třídu **Mythos** pro zabezpečený výzkum v kyberbezpečnosti a biomedicíně (*Project Glasswing*).
+
+---
+
+### Přehled podle technologických lídrů:
 * **Google (Google DeepMind)**:
   * *2013–2020*: Word2Vec, Transformer (*Attention Is All You Need*), BERT, T5.
-  * *2023–2024*: Příchod **Gemini 1.0 & Gemini 1.5 Pro / Flash** s revolučním multimodálním kontextovým oknem o velikosti 2+ miliony tokenů a otevřená rodina **Gemma / Gemma 2**.
-  * *2025–2026*: **Gemini 2.0 & Gemini Ultra** – nativní multimodální reasoning, integrace agentního uvažování do vyhledávání (AI Overviews) a vědecké průlomy (AlphaFold 3).
+  * *2024–2025*: **Project Astra**, **Gemini 1.5 Pro / Flash** (2M+ tokenů kontext), otevřené modely **Gemma 2 & Gemma 3**.
+  * *2025–2026*: **Gemini 2.0 & Gemini 4 Argon** – reasoning nové generace a autonomní softwarový vývoj.
 
 * **OpenAI & Microsoft**:
   * *2018–2022*: GPT-1 až GPT-3, spuštění fenoménu **ChatGPT** a instrukční ladění (RLHF).
-  * *2023–2024*: **GPT-4, GPT-4 Turbo a GPT-4o (Omni)** s nativní hlasovou a vizuální syntézou v reálném čase.
-  * *2024–2026*: **OpenAI o1 ("Strawberry"), o3 & o3-mini** – přechod od čistého generování pravděpodobností k **vnitřnímu řetězci uvažování (Chain-of-Thought Reasoning)**, řešení složitých PhD úloh v matematice, fyzice a autonomním programování.
+  * *2023–2024*: **GPT-4 Turbo** a **GPT-4o (Omni)** s nativní hlasovou a vizuální syntézou v reálném čase pod 300 ms.
+  * *2024–2026*: **OpenAI o1 ("Strawberry"), o3 & o3-mini** – vnitřní řetězec uvažování (**Chain-of-Thought Reasoning**) pro PhD matematiku a programování, následované novými architekturami (GPT-6 Astra / Sol).
 
 * **Meta & Open-Source komunita**:
-  * *2016–2023*: FastText, LLaMA a LLaMA-2, které odstartovaly open-source revoluci.
-  * *2024*: **Llama 3 (8B, 70B)** a gigantický model **Llama 3.1 (405B)** se 128k kontextem a podporou vícejazyčnosti, následovaný **Llama 3.2** (multimodalita pro edge i mobilní zařízení).
-  * *2025–2026*: **Llama 3.3 & Llama 4** využívající architekturu Mixture of Experts (MoE) a otevřené reasoning modely, které lze provozovat lokálně přes nástroje jako Ollama, vLLM a llama.cpp.
+  * *2016–2023*: FastText, LLaMA a LLaMA-2.
+  * *2024*: **Llama 3.1 (405B)** – historicky první otevřený model konkurující nejlepším komerčním modelům, **Llama 3.2** s vizí.
+  * *2025–2026*: **Llama 3.3 & Llama 4** (architektura MoE) provozovatelná lokálně přes *Ollama*, *vLLM* a *llama.cpp*.
 
 * **Anthropic**:
-  * *2024*: **Claude 3 & Claude 3.5 Sonnet / Haiku** – stanovení nového průmyslového standardu pro softwarové inženýrství, logické uvažování a představení průkopnické funkce **Computer Use** (autonomní ovládání PC prostředí).
-  * *2025–2026*: Pokročilé bezpečné modely Claude s ústavní AI (Constitutional AI) a plnohodnotní agentní vývojáři.
+  * *2024–2025*: **Claude 3.5 Sonnet / Haiku / Opus** – nový etalon pro softwarové inženýrství a funkce **Computer Use** (autonomní ovládání myši a klávesnice v OS).
+  * *2026*: **Claude Fable 5 & 5.1** – špičkový reasoning model pro dlouhé agentní běhy.
 
 * **Hugging Face**:
-  * Globální domov pro více než milion otevřených modelů, datasetů a knihoven (`transformers`, `diffusers`, `peft`, `accelerate`). Štandardizace formátu `safetensors` a benchmarking na *Open LLM Leaderboard*.
+  * Globální domov pro více než 1 000 000 otevřených modelů a datasetů (`transformers`, `diffusers`, `peft`).
