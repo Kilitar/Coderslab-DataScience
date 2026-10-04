@@ -163,7 +163,8 @@ p_prework_nlp_intro = st.Page("views/04_prework_nlp_intro.py", title="Prework: �
 p_prework_nltk_spacy = st.Page("views/04_prework_nltk_spacy.py", title="Prework: NLTK a spaCy", icon="🛠️", url_path="prework_nltk_spacy")
 
 # =============================================================================
-# DEN 3: POKROČILÉ MODELY ML & ANSÁMBLY
+# DEN 3: ADVANCED MACHINE LEARNING MODELS
+# Sekce: 1. Bagging, 2. Boosting, 3. Neural Networks
 # =============================================================================
 p_ensemble_bagging_theory = st.Page("views/03_ensemble_bagging_theory.py", title="Teorie: Ansámbly & Bagging", icon="📖", url_path="ensemble_bagging_theory")
 p_rf_theory = st.Page("views/03_random_forest_theory_and_implementation.py", title="Teorie: Náhodný les (RF)", icon="📖", url_path="random_forest_theory")
@@ -317,7 +318,7 @@ nav = st.navigation(
             p_prework_nlp_intro,
             p_prework_nltk_spacy,
         ],
-        "16. Den 3: Ansámbly & Bagging": [
+        "16. Den 3: Advanced ML – Bagging": [
             p_ensemble_bagging_theory,
             p_rf_theory,
             p_rf_heart,

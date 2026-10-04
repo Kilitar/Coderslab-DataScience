@@ -27,11 +27,11 @@ st.markdown(
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    st.metric(label="Aktuální blok", value="01. Regrese", delta="Aktivní")
+    st.metric(label="Aktuální blok", value="03. Advanced ML", delta="Bagging, Boosting, NN")
 with col2:
-    st.metric(label="Dokončená cvičení", value="2 / 2", delta="100 %")
+    st.metric(label="Dokončená cvičení", value="1 / 3", delta="Nemoc srdce (RF)")
 with col3:
-    st.metric(label="Natrénované modely", value="4", delta="Scikit-learn + HGB")
+    st.metric(label="Natrénované modely", value="5", delta="Bagging + RF + GridSearch")
 with col4:
     st.metric(label="Stav platformy", value="Streamlit Cloud", delta="Online")
 
@@ -65,9 +65,9 @@ course_data = [
         "Umístění": "01_Regression/, 02_Classification/, 03_Advanced_ML_Neural_Networks/",
     },
     {
-        "Blok": "Den 3–4: Pokročilé modely & Sítě",
-        "Téma": "Ensemble metody (Random Forest, XGBoost, CatBoost), Hluboké neuronové sítě (PyTorch/Keras)",
-        "Stav": "Aktivní",
+        "Blok": "Den 3: Advanced Machine Learning Models",
+        "Téma": "Bagging (Random Forest), Boosting (AdaBoost, XGBoost) a Neuronové sítě (Perceptron, MLP)",
+        "Stav": "Aktivní (Sekce 16–18)",
         "Umístění": "03_Advanced_ML_Neural_Networks/",
     },
     {
