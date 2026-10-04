@@ -166,6 +166,7 @@ p_prework_nltk_spacy = st.Page("views/04_prework_nltk_spacy.py", title="Prework:
 # DEN 3: POKROČILÉ MODELY ML & ANSÁMBLY
 # =============================================================================
 p_ensemble_bagging_theory = st.Page("views/03_ensemble_bagging_theory.py", title="Teorie: Ansámbly & Bagging", icon="📖", url_path="ensemble_bagging_theory")
+p_rf_theory = st.Page("views/03_random_forest_theory_and_implementation.py", title="Teorie: Náhodný les (RF)", icon="📖", url_path="random_forest_theory")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -315,6 +316,7 @@ nav = st.navigation(
         ],
         "16. Den 3: Ansámbly & Bagging": [
             p_ensemble_bagging_theory,
+            p_rf_theory,
         ],
     }
 )
