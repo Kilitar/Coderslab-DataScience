@@ -182,6 +182,9 @@ p_xgb_diam = st.Page("views/03_xgboost_diamonds_exercise_2.py", title="Cvičení
 p_xgb_diam_critique = st.Page("views/03_xgboost_diamonds_exercise_2_critique.py", title="Cvičení 2: Diamanty – Expertní analýza", icon="🔬", url_path="xgb_diamonds_critique")
 p_xgb_diam_nb = st.Page("views/03_xgboost_diamonds_nb.py", title="Cvičení 2: Diamanty – Notebook", icon="🐍", url_path="xgb_diamonds_notebook")
 p_nn_theory = st.Page("views/03_neural_networks_theory.py", title="Teorie: Neuronové sítě & Keras", icon="📖", url_path="neural_networks_theory")
+p_nn_mnist = st.Page("views/03_neural_network_mnist_exercise_1.py", title="Cvičení 1: MNIST Číslice – Výsledky zadání", icon="🎯", url_path="nn_mnist_exercise_1")
+p_nn_mnist_critique = st.Page("views/03_neural_network_mnist_exercise_1_critique.py", title="Cvičení 1: MNIST Číslice – Expertní analýza", icon="🔬", url_path="nn_mnist_critique")
+p_nn_mnist_nb = st.Page("views/03_neural_network_mnist_nb.py", title="Cvičení 1: MNIST Číslice – Notebook", icon="🐍", url_path="nn_mnist_notebook")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -350,6 +353,9 @@ nav = st.navigation(
         ],
         "18. Den 3: Advanced ML – Neural Networks": [
             p_nn_theory,
+            p_nn_mnist,
+            p_nn_mnist_critique,
+            p_nn_mnist_nb,
         ],
     }
 )
