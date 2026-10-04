@@ -204,6 +204,7 @@ p_extra_hyperparam = st.Page("views/03_extras_hyperparam_cheatsheet.py", title="
 
 # Den 4: NLP (Natural Language Processing)
 p_nlp_principles_theory = st.Page("views/04_nlp_text_preprocessing_theory.py", title="Teorie: Klíčové principy práce s textem", icon="📖", url_path="day4_nlp_principles_theory")
+p_nlp_bow_tfidf_theory = st.Page("views/04_nlp_bow_tfidf_theory.py", title="Teorie: Bag of Words & TF-IDF (Vektorizace)", icon="🎒", url_path="day4_nlp_bow_tfidf_theory")
 p_nlp_ex1 = st.Page("views/04_nlp_exercise_1.py", title="Cvičení 1: Předzpracování textu (IMDb) – Výsledky zadání", icon="🎯", url_path="day4_nlp_exercise_1")
 p_nlp_ex1_critique = st.Page("views/04_nlp_exercise_1_critique.py", title="Cvičení 1: Předzpracování textu – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_1_critique")
 p_nlp_ex1_nb = st.Page("views/04_nlp_exercise_1_nb.py", title="Cvičení 1: Předzpracování textu – Notebook", icon="🐍", url_path="day4_nlp_exercise_1_nb")
@@ -402,6 +403,7 @@ nav = st.navigation(
         ],
         "21. Den 4: NLP – Zpracování textu & Reprezentace": [
             p_nlp_principles_theory,
+            p_nlp_bow_tfidf_theory,
             p_nlp_ex1,
             p_nlp_ex1_critique,
             p_nlp_ex1_nb,
