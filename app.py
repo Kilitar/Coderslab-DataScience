@@ -218,6 +218,7 @@ p_nlp_tfidf_ex = st.Page("views/04_nlp_exercise_tfidf.py", title="Cvičení 4: T
 p_nlp_tfidf_ex_critique = st.Page("views/04_nlp_exercise_tfidf_critique.py", title="Cvičení 4: TF-IDF – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_tfidf_critique")
 p_nlp_tfidf_ex_nb = st.Page("views/04_nlp_exercise_tfidf_nb.py", title="Cvičení 4: TF-IDF – Notebook", icon="🐍", url_path="day4_nlp_exercise_tfidf_nb")
 p_nlp_word2vec_theory = st.Page("views/04_nlp_word2vec_theory.py", title="Teorie: Word2Vec & Slovní vnoření", icon="🧬", url_path="day4_nlp_word2vec_theory")
+p_nlp_word2vec_impl = st.Page("views/04_nlp_word2vec_implementation.py", title="Implementace: Word2Vec v knihovně Gensim", icon="🛠️", url_path="day4_nlp_word2vec_implementation")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -424,6 +425,7 @@ nav = st.navigation(
             p_nlp_tfidf_ex_critique,
             p_nlp_tfidf_ex_nb,
             p_nlp_word2vec_theory,
+            p_nlp_word2vec_impl,
         ],
     }
 )
