@@ -1,0 +1,295 @@
+{
+  "metadata": {
+    "exercise": "Bag of Words - exercise",
+    "input_csv": "imdb_reviews_lemmatized.csv",
+    "total_reviews": 10000,
+    "max_features": 10000,
+    "train_size": 8000,
+    "test_size": 2000,
+    "model": "LogisticRegression(max_iter=1000)",
+    "vectorization_time_s": 0.53,
+    "training_time_s": 0.28,
+    "sparsity_pct": 99.11
+  },
+  "metrics": {
+    "accuracy": 0.8575,
+    "precision_weighted": 0.8578,
+    "recall_weighted": 0.8575,
+    "f1_weighted": 0.8575,
+    "confusion_matrix": [
+      [
+        842,
+        158
+      ],
+      [
+        127,
+        873
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.868937048503612,
+        "recall": 0.842,
+        "f1-score": 0.8552564753682073,
+        "support": 1000.0
+      },
+      "1": {
+        "precision": 0.8467507274490785,
+        "recall": 0.873,
+        "f1-score": 0.8596750369276218,
+        "support": 1000.0
+      },
+      "accuracy": 0.8575,
+      "macro avg": {
+        "precision": 0.8578438879763453,
+        "recall": 0.8574999999999999,
+        "f1-score": 0.8574657561479145,
+        "support": 2000.0
+      },
+      "weighted avg": {
+        "precision": 0.8578438879763453,
+        "recall": 0.8575,
+        "f1-score": 0.8574657561479145,
+        "support": 2000.0
+      }
+    },
+    "classification_report_text": "              precision    recall  f1-score   support\n\n           0       0.87      0.84      0.86      1000\n           1       0.85      0.87      0.86      1000\n\n    accuracy                           0.86      2000\n   macro avg       0.86      0.86      0.86      2000\nweighted avg       0.86      0.86      0.86      2000\n"
+  },
+  "top_words": {
+    "positive": [
+      {
+        "word": "excellent",
+        "coefficient": 1.471
+      },
+      {
+        "word": "available",
+        "coefficient": 1.3405
+      },
+      {
+        "word": "erotic",
+        "coefficient": 1.2949
+      },
+      {
+        "word": "amazing",
+        "coefficient": 1.2645
+      },
+      {
+        "word": "refreshing",
+        "coefficient": 1.2236
+      },
+      {
+        "word": "superb",
+        "coefficient": 1.2136
+      },
+      {
+        "word": "complaint",
+        "coefficient": 1.2017
+      },
+      {
+        "word": "favorite",
+        "coefficient": 1.1368
+      },
+      {
+        "word": "desire",
+        "coefficient": 1.0968
+      },
+      {
+        "word": "enjoyable",
+        "coefficient": 1.0925
+      },
+      {
+        "word": "perfect",
+        "coefficient": 1.0882
+      },
+      {
+        "word": "effective",
+        "coefficient": 1.0835
+      },
+      {
+        "word": "brilliant",
+        "coefficient": 1.0128
+      },
+      {
+        "word": "wonderful",
+        "coefficient": 0.9945
+      },
+      {
+        "word": "innocence",
+        "coefficient": 0.9884
+      },
+      {
+        "word": "especially",
+        "coefficient": 0.9876
+      },
+      {
+        "word": "funniest",
+        "coefficient": 0.9687
+      },
+      {
+        "word": "unique",
+        "coefficient": 0.9617
+      },
+      {
+        "word": "powerful",
+        "coefficient": 0.9555
+      },
+      {
+        "word": "soundtrack",
+        "coefficient": 0.955
+      }
+    ],
+    "negative": [
+      {
+        "word": "waste",
+        "coefficient": -2.4124
+      },
+      {
+        "word": "boring",
+        "coefficient": -1.5863
+      },
+      {
+        "word": "disappointing",
+        "coefficient": -1.5758
+      },
+      {
+        "word": "disappoint",
+        "coefficient": -1.4331
+      },
+      {
+        "word": "fail",
+        "coefficient": -1.3896
+      },
+      {
+        "word": "disappointment",
+        "coefficient": -1.3765
+      },
+      {
+        "word": "annoying",
+        "coefficient": -1.3305
+      },
+      {
+        "word": "awful",
+        "coefficient": -1.3108
+      },
+      {
+        "word": "terrible",
+        "coefficient": -1.2603
+      },
+      {
+        "word": "dull",
+        "coefficient": -1.2436
+      },
+      {
+        "word": "laughable",
+        "coefficient": -1.2368
+      },
+      {
+        "word": "revenge",
+        "coefficient": -1.2198
+      },
+      {
+        "word": "mess",
+        "coefficient": -1.2078
+      },
+      {
+        "word": "poor",
+        "coefficient": -1.194
+      },
+      {
+        "word": "entire",
+        "coefficient": -1.1848
+      },
+      {
+        "word": "flat",
+        "coefficient": -1.174
+      },
+      {
+        "word": "poorly",
+        "coefficient": -1.1688
+      },
+      {
+        "word": "horrible",
+        "coefficient": -1.1587
+      },
+      {
+        "word": "painful",
+        "coefficient": -1.1568
+      },
+      {
+        "word": "clich",
+        "coefficient": -1.1405
+      }
+    ]
+  },
+  "samples": {
+    "correct": [
+      {
+        "text": "tony goldwyn good actor evidently try hand direct a walk moon appear borrow other well make film present story take place late sixty summer resort working class jews far woodstock screen treatment pamela gray much go it puzzle mr goldwyn decide tackl...",
+        "actual": "negative",
+        "predicted": "negative",
+        "prob_positive": 0.1595
+      },
+      {
+        "text": "fragment life one first female painter achieve historical renown artemisia tell true story young italian woman impassione pursuit artistic expression vicissitude encounter film feature sumptuous costuming set good cast act however muddle attempt depi...",
+        "actual": "positive",
+        "predicted": "positive",
+        "prob_positive": 0.5652
+      },
+      {
+        "text": "rent couple movie little cousin new year pick swan princess mystery enchant kingdom little mermaid watch film sleep figure could get couple comment in cheesy cartoon really bad admit child plot new could great introduction story thembr br odette find...",
+        "actual": "negative",
+        "predicted": "negative",
+        "prob_positive": 0.3471
+      },
+      {
+        "text": "many people find film simply slow simplistic really connect it plot such rather film take form human survival story three people trap tree man eat crocodile lurk somewhere water beneath thembr br personally think act mostly good despite role quite de...",
+        "actual": "positive",
+        "predicted": "positive",
+        "prob_positive": 0.9999
+      },
+      {
+        "text": "say good polly bergen fine filmthe rest so I m gay honestly many clichs time history sad start watching turn off decide would fun make fun rest film say basic idea film good rewrite less contrived line well act could actually prety good would recomme...",
+        "actual": "negative",
+        "predicted": "negative",
+        "prob_positive": 0.2067
+      }
+    ],
+    "misclassified": [
+      {
+        "text": "friend warn bad movie ever see curious developed bit cult status like lot odd indie cult movie gave shoot agree friend steaming pile dung sorry people love movie recommend much well stuff want watch twist indie cult film try peter jackson dead alive ...",
+        "actual": "negative",
+        "predicted": "positive",
+        "prob_positive": 0.8945,
+        "error_type": "False Positive (předpovězeno pozitivní, ale je negativní)"
+      },
+      {
+        "text": "raise watch original batman animate series avid batman graphic novel collector comic book hero iconic batman certain trait can not change creative liberty well good completely change character far purchase one season the batman hope extra bonus featu...",
+        "actual": "negative",
+        "predicted": "positive",
+        "prob_positive": 0.7052,
+        "error_type": "False Positive (předpovězeno pozitivní, ale je negativní)"
+      },
+      {
+        "text": "must say really idea go sit watch movie guess fact nothing well class but tv movie catch interest importantly helen hunt catch eye really big fan prior film sure like twister good get but something movie really I would see huge fan movie come high ma...",
+        "actual": "positive",
+        "predicted": "negative",
+        "prob_positive": 0.414,
+        "error_type": "False Negative (předpovězeno negativní, ale je pozitivní)"
+      },
+      {
+        "text": "convince world existbr br this line probably remember lot people usual suspect course relation kaiser goldi mean sosebr br I get another one like that the dumb trick director ever pull try convince audience actually storylinebr br this movie one sadd...",
+        "actual": "negative",
+        "predicted": "positive",
+        "prob_positive": 0.5819,
+        "error_type": "False Positive (předpovězeno pozitivní, ale je negativní)"
+      },
+      {
+        "text": "perhaps would like film attach character henry fool who ve never see henry fool worry hartley jokingly say introduction film tiff film lot exposition explanationsbr br this film heavy plot keep film move many humorous moment film certainly hartley tr...",
+        "actual": "positive",
+        "predicted": "negative",
+        "prob_positive": 0.0785,
+        "error_type": "False Negative (předpovězeno negativní, ale je pozitivní)"
+      }
+    ]
+  }
+}
