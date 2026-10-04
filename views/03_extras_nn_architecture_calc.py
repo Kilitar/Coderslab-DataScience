@@ -70,40 +70,62 @@ TEMPLATES = {
 }
 
 # --- Inicializace stavu ---
+if "nn_tpl_choice" not in st.session_state:
+    st.session_state.nn_tpl_choice = "Cvičení 1: MNIST Jednoduchý MLP (784 -> 128 -> 10)"
 if "nn_layers" not in st.session_state:
-    st.session_state.nn_layers = list(TEMPLATES["Cvičení 1: MNIST Jednoduchý MLP (784 -> 128 -> 10)"]["layers"])
-if "nn_input_mode" not in st.session_state:
-    st.session_state.nn_input_mode = "Obrázek 2D (28, 28, 1)"
+    st.session_state.nn_layers = [dict(l) for l in TEMPLATES[st.session_state.nn_tpl_choice]["layers"]]
+if "nn_input_shape" not in st.session_state:
+    st.session_state.nn_input_shape = TEMPLATES[st.session_state.nn_tpl_choice]["input_shape"]
 
 # Ovládací prvky v hlavní ploše (nezasahuje do navigace v levém docku)
 with st.expander("⚙️ Šablony architektur & Vstupní rozměry (Input Shape)", expanded=True):
     col_t1, col_t2 = st.columns([1, 1])
     with col_t1:
         st.markdown("#### 1. Šablony architektur")
-        selected_tpl = st.selectbox("Vyber přednastavenou šablonu:", list(TEMPLATES.keys()))
-        if st.button("Načíst vybranou šablonu"):
+        tpl_keys = list(TEMPLATES.keys())
+        current_tpl_idx = tpl_keys.index(st.session_state.nn_tpl_choice) if st.session_state.nn_tpl_choice in tpl_keys else 1
+        selected_tpl = st.selectbox(
+            "Vyber přednastavenou šablonu (načte se automaticky):",
+            tpl_keys,
+            index=current_tpl_idx,
+            help="Při změně výběru se nová šablona okamžitě načte do tabulky níže.",
+        )
+        # Automatické načtení při změně v selectboxu
+        if selected_tpl != st.session_state.nn_tpl_choice:
+            st.session_state.nn_tpl_choice = selected_tpl
             st.session_state.nn_layers = [dict(l) for l in TEMPLATES[selected_tpl]["layers"]]
+            st.session_state.nn_input_shape = TEMPLATES[selected_tpl]["input_shape"]
+            st.rerun()
+
+        if st.button("🔄 Resetovat na výchozí stav šablony"):
+            st.session_state.nn_layers = [dict(l) for l in TEMPLATES[selected_tpl]["layers"]]
+            st.session_state.nn_input_shape = TEMPLATES[selected_tpl]["input_shape"]
             st.rerun()
 
     with col_t2:
         st.markdown("#### 2. Rozměr vstupu (Input Shape)")
+        is_1d_curr = len(st.session_state.nn_input_shape) == 1
         input_mode = st.radio(
             "Typ vstupních dat:",
             ["1D Tabulková data (Vektor)", "2D Obrázek (Výška, Šířka, Kanály)"],
-            index=0 if len(TEMPLATES[selected_tpl]["input_shape"]) == 1 else 1,
+            index=0 if is_1d_curr else 1,
             horizontal=True,
         )
         if input_mode == "1D Tabulková data (Vektor)":
-            n_features = st.number_input("Počet vstupních příznaků (Features):", min_value=1, max_value=5000, value=18)
+            default_f = st.session_state.nn_input_shape[0] if is_1d_curr else 18
+            n_features = st.number_input("Počet vstupních příznaků (Features):", min_value=1, max_value=5000, value=int(default_f))
             current_input_shape = (int(n_features),)
         else:
+            default_h = st.session_state.nn_input_shape[0] if not is_1d_curr else 28
+            default_w = st.session_state.nn_input_shape[1] if not is_1d_curr else 28
+            default_c = st.session_state.nn_input_shape[2] if not is_1d_curr else 1
             c_h, c_w, c_c = st.columns(3)
             with c_h:
-                h_in = st.number_input("Výška (H):", min_value=4, max_value=1024, value=28)
+                h_in = st.number_input("Výška (H):", min_value=4, max_value=1024, value=int(default_h))
             with c_w:
-                w_in = st.number_input("Šířka (W):", min_value=4, max_value=1024, value=28)
+                w_in = st.number_input("Šířka (W):", min_value=4, max_value=1024, value=int(default_w))
             with c_c:
-                ch_in = st.number_input("Kanály (C):", min_value=1, max_value=512, value=1)
+                ch_in = st.number_input("Kanály (C):", min_value=1, max_value=512, value=int(default_c))
             current_input_shape = (int(h_in), int(w_in), int(ch_in))
 
 # Správa vrstev v hlavní ploše
@@ -115,6 +137,7 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
     results = []
     has_error = False
     error_msg = ""
+    error_layer_idx = None
     
     for i, l in enumerate(layers, 1):
         l_type = l["type"]
@@ -127,10 +150,18 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
             use_bias = l.get("use_bias", True)
             if len(curr_shape) != 1:
                 has_error = True
-                error_msg = f"Chyba ve vrstvě {i} (Dense): Vstup má tvar {curr_shape}. Dense vrstva vyžaduje 1D vektor! Vlož před ni vrstvu 'Flatten'."
+                error_layer_idx = i
+                error_msg = f"Vstup má tvar {curr_shape} (3D prostorový tensor). Dense vrstva vyžaduje 1D vektor! Vlož před ni vrstvu 'Flatten'."
+                results.append({
+                    "Vrstva #": i,
+                    "Typ vrstvy": l_type,
+                    "Vstupní rozměr": str(curr_shape),
+                    "Výstupní rozměr": "❌ Neplatný tvar",
+                    "Počet parametrů": 0,
+                    "Konfigurace & Poznámka": f"❌ CHYBA: {error_msg}",
+                })
                 break
             in_dim = curr_shape[0]
-            # W: in_dim * units, b: units
             params = in_dim * units + (units if use_bias else 0)
             out_shape = (units,)
             note = f"W: ({in_dim}, {units})" + (f" + b: ({units},)" if use_bias else "")
@@ -142,7 +173,16 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
             use_bias = l.get("use_bias", True)
             if len(curr_shape) != 3:
                 has_error = True
-                error_msg = f"Chyba ve vrstvě {i} (Conv2D): Vstup má tvar {curr_shape}. Conv2D vyžaduje 3D tensor (H, W, C)!"
+                error_layer_idx = i
+                error_msg = f"Vstup má tvar {curr_shape} (1D vektor). Conv2D vyžaduje prostorový 3D tensor (Výška, Šířka, Kanály). Konvoluci nelze použít po Dense nebo Flatten!"
+                results.append({
+                    "Vrstva #": i,
+                    "Typ vrstvy": l_type,
+                    "Vstupní rozměr": str(curr_shape),
+                    "Výstupní rozměr": "❌ Neplatný tvar",
+                    "Počet parametrů": 0,
+                    "Konfigurace & Poznámka": f"❌ CHYBA: {error_msg}",
+                })
                 break
             h_in, w_in, c_in = curr_shape
             if pad == "same":
@@ -151,9 +191,17 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
                 h_out, w_out = h_in - k + 1, w_in - k + 1
             if h_out <= 0 or w_out <= 0:
                 has_error = True
-                error_msg = f"Chyba ve vrstvě {i} (Conv2D): Jádro filtru {k}x{k} je větší než vstupní rozměr {h_in}x{w_in}!"
+                error_layer_idx = i
+                error_msg = f"Jádro filtru {k}x{k} je větší než prostorový rozměr vstupu {h_in}x{w_in}!"
+                results.append({
+                    "Vrstva #": i,
+                    "Typ vrstvy": l_type,
+                    "Vstupní rozměr": str(curr_shape),
+                    "Výstupní rozměr": "❌ Neplatný tvar",
+                    "Počet parametrů": 0,
+                    "Konfigurace & Poznámka": f"❌ CHYBA: {error_msg}",
+                })
                 break
-            # W: k * k * c_in * filters, b: filters
             params = (k * k * c_in * filters) + (filters if use_bias else 0)
             out_shape = (h_out, w_out, filters)
             note = f"Filtry: {filters}x ({k}x{k}x{c_in})" + (f" + b: ({filters},)" if use_bias else "")
@@ -162,13 +210,31 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
             p = l.get("pool_size", 2)
             if len(curr_shape) != 3:
                 has_error = True
-                error_msg = f"Chyba ve vrstvě {i} (MaxPooling2D): Vstup musí být 3D tensor, ale je {curr_shape}."
+                error_layer_idx = i
+                error_msg = f"Vstup má tvar {curr_shape} (1D vektor). MaxPooling2D vyžaduje prostorový 3D tensor (Výška, Šířka, Kanály). Pooling nelze použít po Dense nebo Flatten vrstvě!"
+                results.append({
+                    "Vrstva #": i,
+                    "Typ vrstvy": l_type,
+                    "Vstupní rozměr": str(curr_shape),
+                    "Výstupní rozměr": "❌ Neplatný tvar",
+                    "Počet parametrů": 0,
+                    "Konfigurace & Poznámka": f"❌ CHYBA: {error_msg}",
+                })
                 break
             h_in, w_in, c_in = curr_shape
             h_out, w_out = h_in // p, w_in // p
             if h_out <= 0 or w_out <= 0:
                 has_error = True
-                error_msg = f"Chyba ve vrstvě {i} (MaxPooling2D): Rozměry se zmenšily pod 1x1!"
+                error_layer_idx = i
+                error_msg = "Rozměry se zmenšily pod 1x1!"
+                results.append({
+                    "Vrstva #": i,
+                    "Typ vrstvy": l_type,
+                    "Vstupní rozměr": str(curr_shape),
+                    "Výstupní rozměr": "❌ Neplatný tvar",
+                    "Počet parametrů": 0,
+                    "Konfigurace & Poznámka": f"❌ CHYBA: {error_msg}",
+                })
                 break
             params = 0
             out_shape = (h_out, w_out, c_in)
@@ -177,7 +243,7 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
         elif l_type == "Flatten":
             if len(curr_shape) == 1:
                 out_shape = curr_shape
-                note = "Vstup byl již 1D (no-op)"
+                note = "Vstup byl již 1D vektor (no-op)"
             else:
                 flat_dim = 1
                 for dim in curr_shape:
@@ -195,7 +261,16 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
         elif l_type == "GlobalAveragePooling2D":
             if len(curr_shape) != 3:
                 has_error = True
-                error_msg = f"Chyba ve vrstvě {i} (GlobalAveragePooling2D): Vyžaduje 3D tensor, obdržel {curr_shape}."
+                error_layer_idx = i
+                error_msg = f"Vstup má tvar {curr_shape} (1D vektor). GlobalAveragePooling2D vyžaduje 3D tensor (H, W, C)!"
+                results.append({
+                    "Vrstva #": i,
+                    "Typ vrstvy": l_type,
+                    "Vstupní rozměr": str(curr_shape),
+                    "Výstupní rozměr": "❌ Neplatný tvar",
+                    "Počet parametrů": 0,
+                    "Konfigurace & Poznámka": f"❌ CHYBA: {error_msg}",
+                })
                 break
             c_in = curr_shape[2]
             params = 0
@@ -212,32 +287,53 @@ def compute_architecture(input_shape: Tuple[int, ...], layers: List[Dict[str, An
         })
         curr_shape = out_shape
         
-    return results, has_error, error_msg
+    return results, has_error, error_msg, error_layer_idx, curr_shape
 
 # Výpočet aktuální sítě
-rows, has_err, err_msg = compute_architecture(current_input_shape, st.session_state.nn_layers)
+rows, has_err, err_msg, err_layer_idx, last_shape = compute_architecture(current_input_shape, st.session_state.nn_layers)
+
+if len(rows) > 0:
+    df_res = pd.DataFrame(rows)
+    st.dataframe(df_res, hide_index=True, width="stretch")
 
 if has_err:
-    st.error(f"❌ **Architektonická chyba:** {err_msg}")
+    st.error(f"❌ **Architektonická neshoda rozměrů (Shape Mismatch) ve vrstvě {err_layer_idx}:** {err_msg}")
+    c_fix1, c_fix2 = st.columns([1.5, 3.5])
+    with c_fix1:
+        if st.button(f"🗑️ Odstranit chybnou vrstvu #{err_layer_idx}"):
+            if len(st.session_state.nn_layers) >= err_layer_idx:
+                st.session_state.nn_layers.pop(err_layer_idx - 1)
+                st.rerun()
+    with c_fix2:
+        st.info("💡 **Pravidlo hlubokého učení:** Konvoluce (`Conv2D`) a pooling (`MaxPooling2D`) operují v 2D ploše obrazu se šířkou, výškou a kanály `(H, W, C)`. Jakmile síť projde vrstvou `Dense` nebo `Flatten`, stane se z ní plochý 1D vektor čísel. Po vrstvě `Dense` už nelze provádět prostorové konvoluce ani pooling.")
 else:
-    df_res = pd.DataFrame(rows)
-    total_params = df_res["Počet parametrů"].sum()
-    memory_mb = (total_params * 4) / (1024 * 1024)  # 4 bajty na float32
-    
-    c_p1, c_p2, c_p3 = st.columns(3)
-    c_p1.metric("Celkem trénovatelných parametrů", f"{total_params:,} vah")
-    c_p2.metric("Paměť pro váhy (Float32)", f"{memory_mb:.2f} MB")
-    c_p3.metric("Konečný tvar výstupu", df_res.iloc[-1]["Výstupní rozměr"] if len(df_res) > 0 else "N/A")
-    
-    st.dataframe(df_res, hide_index=True, width="stretch")
+    if len(rows) > 0:
+        total_params = df_res["Počet parametrů"].sum()
+        memory_mb = (total_params * 4) / (1024 * 1024)  # 4 bajty na float32
+        
+        c_p1, c_p2, c_p3 = st.columns(3)
+        c_p1.metric("Celkem trénovatelných parametrů", f"{total_params:,} vah")
+        c_p2.metric("Paměť pro váhy (Float32)", f"{memory_mb:.2f} MB")
+        c_p3.metric("Konečný tvar výstupu", df_res.iloc[-1]["Výstupní rozměr"])
+    else:
+        st.warning("Síť je zatím prázdná. Přidej vrstvy níže nebo vyber přednastavenou šablonu.")
 
 # Ovládání přidávání vrstev
 st.divider()
 st.subheader("➕ Přidat nebo upravit vrstvu")
 
+# Informace o aktuálním výstupu sítě pro uživatele
+is_current_1d = (last_shape is None) or (len(last_shape) == 1)
+shape_label = f"{last_shape} (1D vektor)" if is_current_1d else f"{last_shape} (3D prostorový tensor)"
+st.caption(f"📌 **Aktuální výstupní tvar po poslední platné vrstvě:** `{shape_label}`")
+
 col_a1, col_a2, col_a3, col_a4 = st.columns([1.5, 1.2, 1.2, 1.0])
 with col_a1:
     new_layer_type = st.selectbox("Typ vrstvy k přidání:", ["Dense", "Conv2D", "MaxPooling2D", "Flatten", "Dropout", "GlobalAveragePooling2D"])
+
+# Kontrola kompatibility před přidáním
+if is_current_1d and new_layer_type in ["Conv2D", "MaxPooling2D", "GlobalAveragePooling2D"]:
+    st.warning(f"⚠️ **Pozor na rozměry:** Výstup sítě je 1D vektor {last_shape}. Vrstva **{new_layer_type}** vyžaduje prostorový 3D tensor (H, W, C). Přidáním vznikne rozměrová chyba (Shape Mismatch). Pro 1D data použij **Dense** nebo **Dropout**.")
 
 if new_layer_type == "Dense":
     with col_a2:
