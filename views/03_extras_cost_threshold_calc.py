@@ -46,43 +46,45 @@ y_test = np.array(data["y_test"])
 proba_rf = np.array(data["proba_rf"])
 proba_xgb = np.array(data["proba_xgb"])
 
-# --- Ovládací prvky v postranním panelu ---
-with st.sidebar:
-    st.header("🤖 Výběr modelu")
-    model_choice = st.radio("Porovnávaný model:", ["XGBoost Classifier", "Random Forest Classifier"], index=0)
-    current_probs = proba_xgb if model_choice == "XGBoost Classifier" else proba_rf
+# --- Ovládací prvky v hlavní ploše (nezasahuje do navigace v levém docku) ---
+with st.expander("⚙️ Výběr modelu, nákladová matice & rozhodovací práh", expanded=True):
+    col_p1, col_p2, col_p3 = st.columns(3)
+    with col_p1:
+        st.markdown("#### 1. Model")
+        model_choice = st.radio("Porovnávaný model:", ["XGBoost Classifier", "Random Forest Classifier"], index=0)
+        current_probs = proba_xgb if model_choice == "XGBoost Classifier" else proba_rf
+        st.markdown("#### 3. Ruční práh")
+        interactive_threshold = st.slider("Rozhodovací práh (T):", min_value=0.05, max_value=0.95, value=0.50, step=0.01)
 
-    st.divider()
-    st.header("💰 Nákladová matice (v Kč / jednotkách)")
-    st.caption("Zadej reálné dopady jednotlivých rozhodnutí:")
-    
-    cost_fn = st.number_input(
-        "Náklad za False Negative (FN):",
-        value=60000,
-        step=5000,
-        help="Nemocný pacient poslán domů bez léčby (riziko infarktu, hospitalizace, komplikací).",
-    )
-    cost_fp = st.number_input(
-        "Náklad za False Positive (FP):",
-        value=5000,
-        step=500,
-        help="Zdravý pacient poslán na zbytečné kontrolní vyšetření (např. ultrazvuk, zátěžové EKG).",
-    )
-    cost_tp = st.number_input(
-        "Náklad za True Positive (TP):",
-        value=2000,
-        step=500,
-        help="Včasné odhalení nemoci a nasazení standardní levné medikace.",
-    )
-    cost_tn = st.number_input(
-        "Náklad za True Negative (TN):",
-        value=0,
-        step=100,
-        help="Správné propuštění zdravého pacienta bez dalších nákladů.",
-    )
+    with col_p2:
+        st.markdown("#### 2a. Náklady na chyby")
+        cost_fn = st.number_input(
+            "Náklad False Negative (FN):",
+            value=60000,
+            step=5000,
+            help="Nemocný pacient poslán domů bez léčby (riziko infarktu, hospitalizace, komplikací).",
+        )
+        cost_fp = st.number_input(
+            "Náklad False Positive (FP):",
+            value=5000,
+            step=500,
+            help="Zdravý pacient poslán na zbytečné kontrolní vyšetření (např. ultrazvuk, zátěžové EKG).",
+        )
 
-    st.divider()
-    interactive_threshold = st.slider("Ruční volba prahu (T):", min_value=0.05, max_value=0.95, value=0.50, step=0.01)
+    with col_p3:
+        st.markdown("#### 2b. Náklady na správná určení")
+        cost_tp = st.number_input(
+            "Náklad True Positive (TP):",
+            value=2000,
+            step=500,
+            help="Včasné odhalení nemoci a nasazení standardní levné medikace.",
+        )
+        cost_tn = st.number_input(
+            "Náklad True Negative (TN):",
+            value=0,
+            step=100,
+            help="Správné propuštění zdravého pacienta bez dalších nákladů.",
+        )
 
 # --- Výpočet nákladů pro všechny prahy ---
 thresholds = np.linspace(0.02, 0.98, 193)

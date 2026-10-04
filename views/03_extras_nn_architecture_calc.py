@@ -75,32 +75,36 @@ if "nn_layers" not in st.session_state:
 if "nn_input_mode" not in st.session_state:
     st.session_state.nn_input_mode = "Obrázek 2D (28, 28, 1)"
 
-# Postranní panel
-with st.sidebar:
-    st.header("⚙️ Šablony a vstupní data")
-    selected_tpl = st.selectbox("Vyber přednastavenou šablonu:", list(TEMPLATES.keys()))
-    if st.button("Načíst vybranou šablonu"):
-        st.session_state.nn_layers = [dict(l) for l in TEMPLATES[selected_tpl]["layers"]]
-        st.rerun()
+# Ovládací prvky v hlavní ploše (nezasahuje do navigace v levém docku)
+with st.expander("⚙️ Šablony architektur & Vstupní rozměry (Input Shape)", expanded=True):
+    col_t1, col_t2 = st.columns([1, 1])
+    with col_t1:
+        st.markdown("#### 1. Šablony architektur")
+        selected_tpl = st.selectbox("Vyber přednastavenou šablonu:", list(TEMPLATES.keys()))
+        if st.button("Načíst vybranou šablonu"):
+            st.session_state.nn_layers = [dict(l) for l in TEMPLATES[selected_tpl]["layers"]]
+            st.rerun()
 
-    st.divider()
-    st.header("📥 Rozměr vstupu (Input Shape)")
-    input_mode = st.radio(
-        "Typ vstupních dat:",
-        ["1D Tabulková data (Vektor)", "2D Obrázek (Výška, Šířka, Kanály)"],
-        index=0 if len(TEMPLATES[selected_tpl]["input_shape"]) == 1 else 1,
-    )
-    if input_mode == "1D Tabulková data (Vektor)":
-        n_features = st.number_input("Počet vstupních příznaků (Features):", min_value=1, max_value=5000, value=18)
-        current_input_shape = (int(n_features),)
-    else:
-        c_h, c_w = st.columns(2)
-        with c_h:
-            h_in = st.number_input("Výška (H):", min_value=4, max_value=1024, value=28)
-            ch_in = st.number_input("Kanály (C):", min_value=1, max_value=512, value=1)
-        with c_w:
-            w_in = st.number_input("Šířka (W):", min_value=4, max_value=1024, value=28)
-        current_input_shape = (int(h_in), int(w_in), int(ch_in))
+    with col_t2:
+        st.markdown("#### 2. Rozměr vstupu (Input Shape)")
+        input_mode = st.radio(
+            "Typ vstupních dat:",
+            ["1D Tabulková data (Vektor)", "2D Obrázek (Výška, Šířka, Kanály)"],
+            index=0 if len(TEMPLATES[selected_tpl]["input_shape"]) == 1 else 1,
+            horizontal=True,
+        )
+        if input_mode == "1D Tabulková data (Vektor)":
+            n_features = st.number_input("Počet vstupních příznaků (Features):", min_value=1, max_value=5000, value=18)
+            current_input_shape = (int(n_features),)
+        else:
+            c_h, c_w, c_c = st.columns(3)
+            with c_h:
+                h_in = st.number_input("Výška (H):", min_value=4, max_value=1024, value=28)
+            with c_w:
+                w_in = st.number_input("Šířka (W):", min_value=4, max_value=1024, value=28)
+            with c_c:
+                ch_in = st.number_input("Kanály (C):", min_value=1, max_value=512, value=1)
+            current_input_shape = (int(h_in), int(w_in), int(ch_in))
 
 # Správa vrstev v hlavní ploše
 st.subheader("🛠️ Seznam vrstev v síti")

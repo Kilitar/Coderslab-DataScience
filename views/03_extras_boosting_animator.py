@@ -27,27 +27,32 @@ Zatímco Bagging trénuje všechny stromy nezávisle vedle sebe (paralelně), **
 Každý nový strom se nesnaží předpovídat $y$, ale **chybu (reziduum)**, kterou zanechaly všechny předchozí stromy dohromady!
 """)
 
-# --- Ovládací prvky v postranním panelu ---
-with st.sidebar:
-    st.header("⚙️ Konfigurace Boostingu")
-    
-    dataset_type = st.selectbox(
-        "Tvar 1D funkce:",
-        ["Kombinovaná sinusovka & schod", "Polynom 3. stupně", "Dva skoky (Step function)"],
-        index=0,
-    )
-    
-    n_points = st.slider("Počet datových bodů:", min_value=30, max_value=150, value=70, step=10)
-    noise_lvl = st.slider("Šum (Noise):", min_value=0.0, max_value=0.4, value=0.15, step=0.05)
-    
-    st.divider()
-    st.header("🌲 Hyperparametry stromů")
-    max_stages = st.slider("Celkový počet stromů (M):", min_value=5, max_value=50, value=25, step=5)
-    learning_rate = st.slider("Learning rate / Shrinkage (η):", min_value=0.05, max_value=1.0, value=0.30, step=0.05)
-    tree_depth = st.radio("Hloubka jednotlivých stromů (max_depth):", [1, 2, 3], index=1, horizontal=True,
-                          help="Depth 1 = Decision Stump (nejjednodušší slabý model).")
+# --- Ovládací prvky v hlavní ploše (nezasahuje do navigace v levém docku) ---
+with st.expander("⚙️ Konfigurace Gradient Boostingu & Stromů", expanded=True):
+    col_p1, col_p2, col_p3 = st.columns(3)
+    with col_p1:
+        st.markdown("#### 1. Cílová funkce (Dataset)")
+        dataset_type = st.selectbox(
+            "Tvar 1D funkce:",
+            ["Kombinovaná sinusovka & schod", "Polynom 3. stupně", "Dva skoky (Step function)"],
+            index=0,
+        )
+        c_n, c_s = st.columns(2)
+        with c_n:
+            n_points = st.slider("Počet bodů:", min_value=30, max_value=150, value=70, step=10)
+        with c_s:
+            noise_lvl = st.slider("Šum (Noise):", min_value=0.0, max_value=0.4, value=0.15, step=0.05)
+        seed = st.number_input("Random Seed:", value=42, step=1)
+        
+    with col_p2:
+        st.markdown("#### 2. Architektura slabých stromů")
+        tree_depth = st.radio("Hloubka jednotlivých stromů (max_depth):", [1, 2, 3], index=1, horizontal=True,
+                              help="Depth 1 = Decision Stump (nejjednodušší slabý model).")
+        learning_rate = st.slider("Learning rate / Shrinkage (η):", min_value=0.05, max_value=1.0, value=0.30, step=0.05)
 
-    seed = st.number_input("Random Seed:", value=42, step=1)
+    with col_p3:
+        st.markdown("#### 3. Počet iterací (Stádií)")
+        max_stages = st.slider("Celkový počet stromů (M):", min_value=5, max_value=50, value=25, step=5)
 
 # Generování dat
 rng = np.random.RandomState(int(seed))

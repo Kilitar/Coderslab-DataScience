@@ -66,56 +66,58 @@ def generate_dataset(dataset_type: str, n_samples: int = 300, noise: float = 0.1
         X, y = make_moons(n_samples=n_samples, noise=noise, random_state=random_state)
     return X, y
 
-# --- Postranní panel / Ovládací prvky ---
-with st.sidebar:
-    st.header("⚙️ Konfigurace úlohy")
-    dataset_name = st.selectbox(
-        "Vyber 2D dataset:",
-        ["Dva půlměsíce (Moons)", "Soustředné kružnice (Circles)", "XOR (Čtyři kvadranty)", "Dvojitá spirála (Spiral)"],
-        index=0,
-    )
-    col_s1, col_s2 = st.columns(2)
-    with col_s1:
-        n_samples = st.slider("Počet bodů", min_value=100, max_value=600, value=300, step=50)
-    with col_s2:
-        noise_lvl = st.slider("Úroveň šumu", min_value=0.02, max_value=0.35, value=0.15, step=0.02)
+# --- Ovládací panel / Konfigurace v hlavní ploše (nezasahuje do levého docku navigace) ---
+with st.expander("⚙️ Ovládací panel & Konfigurace neuronové sítě", expanded=True):
+    col_p1, col_p2, col_p3 = st.columns(3)
+    with col_p1:
+        st.markdown("#### 1. Dataset & Data")
+        dataset_name = st.selectbox(
+            "Vyber 2D dataset:",
+            ["Dva půlměsíce (Moons)", "Soustředné kružnice (Circles)", "XOR (Čtyři kvadranty)", "Dvojitá spirála (Spiral)"],
+            index=0,
+        )
+        col_s1, col_s2 = st.columns(2)
+        with col_s1:
+            n_samples = st.slider("Počet bodů", min_value=100, max_value=600, value=300, step=50)
+        with col_s2:
+            noise_lvl = st.slider("Úroveň šumu", min_value=0.02, max_value=0.35, value=0.15, step=0.02)
+        seed = st.number_input("Random Seed:", min_value=0, max_value=9999, value=42, step=1)
 
-    st.divider()
-    st.header("🏗️ Architektura sítě (MLP)")
-    n_layers = st.radio("Počet skrytých vrstev:", [1, 2], horizontal=True)
-    layer1_neurons = st.slider("Neurony ve vrstvě 1", min_value=2, max_value=48, value=12, step=2)
-    if n_layers == 2:
-        layer2_neurons = st.slider("Neurony ve vrstvě 2", min_value=2, max_value=48, value=8, step=2)
-        hidden_sizes = (layer1_neurons, layer2_neurons)
-    else:
-        hidden_sizes = (layer1_neurons,)
+    with col_p2:
+        st.markdown("#### 2. Architektura sítě (MLP)")
+        n_layers = st.radio("Počet skrytých vrstev:", [1, 2], horizontal=True)
+        layer1_neurons = st.slider("Neurony ve vrstvě 1", min_value=2, max_value=48, value=12, step=2)
+        if n_layers == 2:
+            layer2_neurons = st.slider("Neurony ve vrstvě 2", min_value=2, max_value=48, value=8, step=2)
+            hidden_sizes = (layer1_neurons, layer2_neurons)
+        else:
+            hidden_sizes = (layer1_neurons,)
 
-    activation = st.selectbox(
-        "Aktivační funkce:",
-        ["relu", "tanh", "logistic"],
-        index=0,
-        format_func=lambda x: {
-            "relu": "ReLU – max(0, z) (Moderní standard)",
-            "tanh": "Tanh – Hyperbolický tangens (-1..1)",
-            "logistic": "Logistic / Sigmoid – 1/(1+e^-z)",
-        }[x],
-    )
+        activation = st.selectbox(
+            "Aktivační funkce:",
+            ["relu", "tanh", "logistic"],
+            index=0,
+            format_func=lambda x: {
+                "relu": "ReLU – max(0, z) (Moderní standard)",
+                "tanh": "Tanh – Hyperbolický tangens (-1..1)",
+                "logistic": "Logistic / Sigmoid – 1/(1+e^-z)",
+            }[x],
+        )
 
-    st.divider()
-    st.header("⚡ Hyperparametry tréninku")
-    solver = st.selectbox("Optimalizátor (Solver):", ["adam", "sgd"], index=0)
-    lr_init = st.select_slider(
-        "Počáteční Learning Rate (η):",
-        options=[0.001, 0.005, 0.01, 0.03, 0.05, 0.1, 0.2, 0.5],
-        value=0.03,
-    )
-    l2_alpha = st.select_slider(
-        "L2 Regularizace (alpha):",
-        options=[1e-5, 1e-4, 1e-3, 0.01, 0.1, 1.0],
-        value=1e-4,
-    )
-    max_iter = st.slider("Max epoch tréninku:", min_value=30, max_value=500, value=200, step=20)
-    seed = st.number_input("Random Seed:", min_value=0, max_value=9999, value=42, step=1)
+    with col_p3:
+        st.markdown("#### 3. Hyperparametry tréninku")
+        solver = st.selectbox("Optimalizátor (Solver):", ["adam", "sgd"], index=0)
+        lr_init = st.select_slider(
+            "Počáteční Learning Rate (η):",
+            options=[0.001, 0.005, 0.01, 0.03, 0.05, 0.1, 0.2, 0.5],
+            value=0.03,
+        )
+        l2_alpha = st.select_slider(
+            "L2 Regularizace (alpha):",
+            options=[1e-5, 1e-4, 1e-3, 0.01, 0.1, 1.0],
+            value=1e-4,
+        )
+        max_iter = st.slider("Max epoch tréninku:", min_value=30, max_value=500, value=200, step=20)
 
 # Generování dat a split
 X, y = generate_dataset(dataset_name, n_samples=n_samples, noise=noise_lvl, random_state=int(seed))

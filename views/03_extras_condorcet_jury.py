@@ -35,17 +35,21 @@ def p_majority_independent(n: int, p: float) -> float:
     prob = sum(comb(n, k) * (p ** k) * ((1.0 - p) ** (n - k)) for k in range(k_min, n + 1))
     return float(prob)
 
-# --- Postranní panel: Parametry ---
-with st.sidebar:
-    st.header("⚙️ Parametry hlasování")
-    p_single = st.slider("Přesnost 1 modelu / porotce (p):", min_value=0.30, max_value=0.95, value=0.60, step=0.01,
-                         help="Pravděpodobnost, že jeden samostatný klasifikátor odpoví správně.")
-    n_voters = st.slider("Počet modelů v ansámblu (N - liché číslo):", min_value=1, max_value=101, value=25, step=2)
-    rho_corr = st.slider("Korelace mezi modely (ρ):", min_value=0.0, max_value=0.70, value=0.10, step=0.05,
-                         help="V praxi modely nejsou zcela nezávislé – trénují se na podobných datech.")
-
-    st.divider()
-    n_sims = st.select_slider("Počet Monte Carlo simulací:", options=[1000, 5000, 10000, 20000], value=5000)
+# --- Ovládací panel v hlavní ploše (nezasahuje do navigace v levém docku) ---
+with st.expander("⚙️ Parametry hlasování & Monte Carlo simulace", expanded=True):
+    col_p1, col_p2, col_p3 = st.columns(3)
+    with col_p1:
+        st.markdown("#### 1. Schopnost porotce ($p$)")
+        p_single = st.slider("Přesnost 1 modelu (p):", min_value=0.30, max_value=0.95, value=0.60, step=0.01,
+                             help="Pravděpodobnost, že jeden samostatný klasifikátor odpoví správně.")
+    with col_p2:
+        st.markdown("#### 2. Velikost ansámblu ($N$) & Korelace")
+        n_voters = st.slider("Počet modelů v ansámblu (N - liché číslo):", min_value=1, max_value=101, value=25, step=2)
+        rho_corr = st.slider("Korelace mezi modely (ρ):", min_value=0.0, max_value=0.70, value=0.10, step=0.05,
+                             help="V praxi modely nejsou zcela nezávislé – trénují se na podobných datech.")
+    with col_p3:
+        st.markdown("#### 3. Simulace")
+        n_sims = st.select_slider("Počet Monte Carlo simulací:", options=[1000, 5000, 10000, 20000], value=5000)
 
 # Výpočet analytických hodnot
 p_indep = p_majority_independent(n_voters, p_single)

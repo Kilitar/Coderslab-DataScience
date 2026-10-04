@@ -32,43 +32,45 @@ def sigmoid(z):
 def d_sigmoid(out):
     return out * (1.0 - out)
 
-# --- Postranní panel: Parametry sítě ---
-with st.sidebar:
-    st.header("⚙️ Počáteční parametry (dle slidů)")
-    st.caption("Výchozí hodnoty odpovídají přesně zadání na stranách 19-21.")
+# --- Konfigurace parametrů sítě v hlavní ploše (nezasahuje do navigace v levém docku) ---
+with st.expander("⚙️ Počáteční parametry sítě 2-2-2 (přesně dle přednášky)", expanded=True):
+    col_p1, col_p2, col_p3 = st.columns(3)
     
-    st.subheader("Vstupní data & Cíl")
-    col_x1, col_x2 = st.columns(2)
-    with col_x1:
-        x1 = st.number_input("Vstup x₁:", value=3.0, step=0.5)
-        t1 = st.number_input("Cíl t₁ (Class 0):", value=0.1, step=0.05, min_value=0.0, max_value=1.0)
-    with col_x2:
-        x2 = st.number_input("Vstup x₂:", value=5.0, step=0.5)
-        t2 = st.number_input("Cíl t₂ (Class 1):", value=0.9, step=0.05, min_value=0.0, max_value=1.0)
+    with col_p1:
+        st.markdown("#### 1. Vstupy & Cíle")
+        c1, c2 = st.columns(2)
+        with c1:
+            x1 = st.number_input("Vstup x₁:", value=3.0, step=0.5)
+            t1 = st.number_input("Cíl t₁ (Class 0):", value=0.1, step=0.05, min_value=0.0, max_value=1.0)
+        with c2:
+            x2 = st.number_input("Vstup x₂:", value=5.0, step=0.5)
+            t2 = st.number_input("Cíl t₂ (Class 1):", value=0.9, step=0.05, min_value=0.0, max_value=1.0)
+        
+        st.markdown("#### 4. Hyperparametry učení")
+        lr = st.slider("Learning Rate (η):", min_value=0.01, max_value=1.0, value=0.30, step=0.01)
+        update_biases = st.checkbox("Aktualizovat i biasy (slidy to přeskočily)", value=False)
 
-    st.subheader("Váhy: Vstup $\\to$ Skrytá vrstva")
-    c_w1, c_w2 = st.columns(2)
-    with c_w1:
-        w1 = st.number_input("w₁ (x₁→h₁):", value=0.10, step=0.05)
-        w3 = st.number_input("w₃ (x₂→h₁):", value=0.30, step=0.05)
-    with c_w2:
-        w2 = st.number_input("w₂ (x₁→h₂):", value=0.20, step=0.05)
-        w4 = st.number_input("w₄ (x₂→h₂):", value=0.40, step=0.05)
-    b1 = st.number_input("Bias b₁ (pro h₁ i h₂):", value=0.25, step=0.05)
+    with col_p2:
+        st.markdown("#### 2. Váhy: Vstup $\\to$ Skrytá vrstva")
+        c_w1, c_w2 = st.columns(2)
+        with c_w1:
+            w1 = st.number_input("w₁ (x₁→h₁):", value=0.10, step=0.05)
+            w3 = st.number_input("w₃ (x₂→h₁):", value=0.30, step=0.05)
+        with c_w2:
+            w2 = st.number_input("w₂ (x₁→h₂):", value=0.20, step=0.05)
+            w4 = st.number_input("w₄ (x₂→h₂):", value=0.40, step=0.05)
+        b1 = st.number_input("Bias b₁ (pro h₁ i h₂):", value=0.25, step=0.05)
 
-    st.subheader("Váhy: Skrytá $\\to$ Výstupní vrstva")
-    c_w3, c_w4 = st.columns(2)
-    with c_w3:
-        w5 = st.number_input("w₅ (h₁→o₁):", value=0.50, step=0.05)
-        w7 = st.number_input("w₇ (h₂→o₁):", value=0.70, step=0.05)
-    with c_w4:
-        w6 = st.number_input("w₆ (h₁→o₂):", value=0.60, step=0.05)
-        w8 = st.number_input("w₈ (h₂→o₂):", value=0.80, step=0.05)
-    b2 = st.number_input("Bias b₂ (pro o₁ i o₂):", value=0.40, step=0.05)
-
-    st.subheader("Trénink")
-    lr = st.slider("Learning Rate (η):", min_value=0.01, max_value=1.0, value=0.30, step=0.01)
-    update_biases = st.checkbox("Aktualizovat i biasy (slidy to přeskočily)", value=False)
+    with col_p3:
+        st.markdown("#### 3. Váhy: Skrytá $\\to$ Výstupní vrstva")
+        c_w3, c_w4 = st.columns(2)
+        with c_w3:
+            w5 = st.number_input("w₅ (h₁→o₁):", value=0.50, step=0.05)
+            w7 = st.number_input("w₇ (h₂→o₁):", value=0.70, step=0.05)
+        with c_w4:
+            w6 = st.number_input("w₆ (h₁→o₂):", value=0.60, step=0.05)
+            w8 = st.number_input("w₈ (h₂→o₂):", value=0.80, step=0.05)
+        b2 = st.number_input("Bias b₂ (pro o₁ i o₂):", value=0.40, step=0.05)
 
 # --- 1. KROK: FORWARD PASS ---
 sum_h1 = x1 * w1 + x2 * w3 + b1
