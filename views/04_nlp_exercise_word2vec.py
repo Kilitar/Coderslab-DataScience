@@ -13,7 +13,10 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-from gensim.models import Word2Vec
+try:
+    from gensim.models import Word2Vec
+except ImportError:
+    Word2Vec = None
 
 try:
     from czech_nlp import predict_czech_sentiment
@@ -277,8 +280,11 @@ with tab4:
         # Anglický Word2Vec
         @st.cache_resource
         def load_live_w2v_model():
-            if model_path.exists():
-                return Word2Vec.load(str(model_path))
+            if Word2Vec is not None and model_path.exists():
+                try:
+                    return Word2Vec.load(str(model_path))
+                except Exception:
+                    return None
             return None
 
         live_w2v = load_live_w2v_model()
@@ -311,4 +317,9 @@ with tab4:
                 else:
                     st.info("Žádné ze zadaných slov nebylo v natrénovaném slovníku.")
         else:
-            st.info("Model Word2Vec se načítá...")
+            st.info("💡 Model běží v cloudovém odlehčeném režimu s předpočítanými výstupy. Prozkoumejte sémantické vztahy natrénovaného Word2Vec modelu:")
+            if stats and "most_similar" in stats:
+                target_w = st.selectbox("Vyberte slovo pro zobrazení nejpodobnějších slov:", list(stats["most_similar"].keys()), key="fb_target_w")
+                sim_df = pd.DataFrame(stats["most_similar"][target_w], columns=["Podobné slovo", "Kosinová podobnost"])
+                st.dataframe(sim_df, hide_index=True, width="stretch")
+                st.caption(f"Slovo **{target_w}** v korpusu IMDb a jeho nejbližší sémantické sousedy dle kosinové podobnosti.")
