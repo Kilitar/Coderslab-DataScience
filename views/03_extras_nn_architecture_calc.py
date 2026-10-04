@@ -225,7 +225,7 @@ else:
     c_p2.metric("Paměť pro váhy (Float32)", f"{memory_mb:.2f} MB")
     c_p3.metric("Konečný tvar výstupu", df_res.iloc[-1]["Výstupní rozměr"] if len(df_res) > 0 else "N/A")
     
-    st.dataframe(df_res, hide_index=True, use_container_width=True)
+    st.dataframe(df_res, hide_index=True, width="stretch")
 
 # Ovládání přidávání vrstev
 st.divider()

@@ -18,6 +18,9 @@ from sklearn.datasets import make_circles, make_moons
 from sklearn.metrics import accuracy_score, log_loss
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
+from sklearn.exceptions import ConvergenceWarning
+import warnings
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 st.set_page_config(page_title="2D Hřiště neuronových sítí", page_icon="🧠", layout="wide")
 
@@ -250,7 +253,7 @@ with col_left:
         yaxis=dict(title="Příznak $x_2$"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_boundary, use_container_width=True)
+    st.plotly_chart(fig_boundary, width="stretch")
 
 with col_right:
     st.subheader("📉 Průběh trénování (Loss curve)")
@@ -272,7 +275,7 @@ with col_right:
             xaxis=dict(title="Epocha (iterace)"),
             yaxis=dict(title="Ztráta (Cross-Entropy Loss)"),
         )
-        st.plotly_chart(fig_loss, use_container_width=True)
+        st.plotly_chart(fig_loss, width="stretch")
     else:
         st.write("Optimalizátor nezaznamenal křivku ztráty.")
 
@@ -287,7 +290,7 @@ with col_right:
             "Aktivace": activation.upper(),
         })
     layer_info.append({"Vrstva": "Výstupní vrstva", "Typ": "Output", "Dimenze": "1 neuron (Softmax/Sigmoid)", "Aktivace": "Logistic"})
-    st.dataframe(pd.DataFrame(layer_info), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(layer_info), hide_index=True, width="stretch")
 
 st.divider()
 

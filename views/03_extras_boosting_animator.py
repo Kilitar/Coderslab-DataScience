@@ -139,7 +139,7 @@ with col_g1:
         yaxis=dict(title="y"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_top, use_container_width=True)
+    st.plotly_chart(fig_top, width="stretch")
 
     # Dolní graf: Rezidua a nový strom h_m(x)
     if curr_step > 0:
@@ -165,7 +165,7 @@ with col_g1:
             yaxis=dict(title="Reziduum"),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
         )
-        st.plotly_chart(fig_bot, use_container_width=True)
+        st.plotly_chart(fig_bot, width="stretch")
     else:
         st.info("💡 V kroku 0 je predikce $F_0(x)$ rovna pouhému průměru všech hodnot ($\bar{y}$). Posuň slider na krok 1.")
 
@@ -195,7 +195,7 @@ with col_g2:
         yaxis=dict(title="Trénovací MSE"),
         showlegend=False,
     )
-    st.plotly_chart(fig_mse, use_container_width=True)
+    st.plotly_chart(fig_mse, width="stretch")
 
     st.markdown("""
     #### 🎓 Klíčové poznatky:

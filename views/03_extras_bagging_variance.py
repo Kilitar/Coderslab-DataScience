@@ -74,7 +74,7 @@ with tab_math:
         yaxis=dict(title="Rozptyl předpovědi Var", range=[0, sigma2_val * 1.05]),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_var, use_container_width=True)
+    st.plotly_chart(fig_var, width="stretch")
 
     cm1, cm2, cm3 = st.columns(3)
     cm1.metric("Počáteční rozptyl (1 strom)", f"{sigma2_val:.2f}")
@@ -143,7 +143,7 @@ with tab_sim:
         yaxis=dict(title="y"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_sim, use_container_width=True)
+    st.plotly_chart(fig_sim, width="stretch")
 
 # =============================================================================
 # TAB 3: VLIV MAX_FEATURES NA KORELACI
@@ -162,4 +162,4 @@ with tab_feat:
         {"Metoda": "Rozhodovací strom (1x)", "Příznaky na split": "Všechny (p)", "Bootstrap vzorky": "Ne (100% dat)", "Korelace ρ": "N/A", "Rozptyl (Variance)": "Extrémně vysoký"},
         {"Metoda": "Bagging (B stromů)", "Příznaky na split": "Všechny (p)", "Bootstrap vzorky": "Ano (s opakováním)", "Korelace ρ": "Vysoká (0.6 - 0.8)", "Rozptyl (Variance)": "Snížený na ρ·σ²"},
         {"Metoda": "Random Forest (B stromů)", "Příznaky na split": "Náhodná podmnožina m < p", "Bootstrap vzorky": "Ano (s opakováním)", "Korelace ρ": "Nízká (0.2 - 0.4)", "Rozptyl (Variance)": "Minimální možný"},
-    ]), hide_index=True, use_container_width=True)
+    ]), hide_index=True, width="stretch")

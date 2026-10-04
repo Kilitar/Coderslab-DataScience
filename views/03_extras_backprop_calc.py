@@ -189,7 +189,7 @@ with tab_fwd:
                 "Hodnota ve slidech": "0.945",
             },
         ])
-        st.dataframe(df_hidden, hide_index=True, use_container_width=True)
+        st.dataframe(df_hidden, hide_index=True, width="stretch")
 
     with col_f2:
         st.subheader("Výstupní vrstva (Neurony o₁ a o₂)")
@@ -211,7 +211,7 @@ with tab_fwd:
                 "Hodnota ve slidech": "0.844",
             },
         ])
-        st.dataframe(df_out, hide_index=True, use_container_width=True)
+        st.dataframe(df_out, hide_index=True, width="stretch")
 
 with tab_bwd:
     st.subheader("Aktualizace všech vah sítě (1. epocha, $\\eta = 0.3$)")
@@ -282,7 +282,7 @@ with tab_bwd:
             "Slidy (s překlepem)": "Nezmíněno",
         },
     ]
-    st.dataframe(pd.DataFrame(weights_summary), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(weights_summary), hide_index=True, width="stretch")
 
 with tab_sim:
     st.subheader("Simulace konvergence po 500 epochách")
@@ -360,7 +360,7 @@ with tab_sim:
         yaxis=dict(title="Hodnota"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_sim, use_container_width=True)
+    st.plotly_chart(fig_sim, width="stretch")
     
     c_end1, c_end2, c_end3 = st.columns(3)
     c_end1.metric("Počáteční ztráta E", f"{losses[0]:.4f}")

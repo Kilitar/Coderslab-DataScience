@@ -112,7 +112,7 @@ with tab_curve:
         yaxis=dict(title="Pravděpodobnost správného většinového rozhodnutí (%)", range=[0, 105]),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_curve, use_container_width=True)
+    st.plotly_chart(fig_curve, width="stretch")
 
 with tab_mc:
     st.subheader(f"Rozdělení počtu správných hlasů v {n_sims:,} simulovaných případech")
@@ -136,7 +136,7 @@ with tab_mc:
         xaxis=dict(title=f"Počet modelů hlasujících správně (z celkem {n_voters})", dtick=max(1, n_voters // 10)),
         yaxis=dict(title="Četnost v simulaci"),
     )
-    st.plotly_chart(fig_hist, use_container_width=True)
+    st.plotly_chart(fig_hist, width="stretch")
 
 with tab_cond:
     st.markdown(r"""

@@ -34,7 +34,7 @@ with tab_trees:
         {"Parametr": "max_features", "Výchozí hodnota": "None", "Typický rozsah": "'sqrt', 'log2', 0.5 – 0.8", "Vliv na Bias/Variance": "Omezení výběru příznaků zavádí náhodnost"},
         {"Parametr": "ccp_alpha", "Výchozí hodnota": "0.0", "Typický rozsah": "0.0001 – 0.05", "Vliv na Bias/Variance": "Cost-Complexity Pruning (dodatečné ořezání přerostlého stromu)"},
     ])
-    st.dataframe(df_dt, hide_index=True, use_container_width=True)
+    st.dataframe(df_dt, hide_index=True, width="stretch")
 
 # --- TAB 2: RANDOM FOREST ---
 with tab_rf:
@@ -46,7 +46,7 @@ with tab_rf:
         {"Parametr": "oob_score", "Výchozí hodnota": "False", "Typický rozsah": "True", "Vliv na Bias/Variance": "Validace 'zdarma' na netrénovaných out-of-bag vzorcích"},
         {"Parametr": "n_jobs", "Výchozí hodnota": "None", "Typický rozsah": "-1", "Vliv na Bias/Variance": "Paralelizace přes všechna jádra procesoru (nemá vliv na matematiku)"},
     ])
-    st.dataframe(df_rf, hide_index=True, use_container_width=True)
+    st.dataframe(df_rf, hide_index=True, width="stretch")
 
 # --- TAB 3: XGBOOST ---
 with tab_xgb:
@@ -60,7 +60,7 @@ with tab_xgb:
         {"Parametr": "gamma (min_split_loss)", "Výchozí hodnota": "0.0", "Typický rozsah": "0.1 – 5.0", "Vliv na Bias/Variance": "Minimální redukce ztráty nutná pro další rozdělení uzlu"},
         {"Parametr": "reg_alpha / reg_lambda", "Výchozí hodnota": "0 / 1", "Typický rozsah": "L1 (0.1-10) / L2 (1-100)", "Vliv na Bias/Variance": "L1 a L2 regularizace vah na listech stromu"},
     ])
-    st.dataframe(df_xgb, hide_index=True, use_container_width=True)
+    st.dataframe(df_xgb, hide_index=True, width="stretch")
 
 # --- TAB 4: KERAS NN ---
 with tab_nn:
@@ -73,7 +73,7 @@ with tab_nn:
         {"Komponenta": "Batch Size", "Standard": "32 nebo 64", "Alternativy": "16, 128, 256", "Doporučení": "Menší dávky zavádí regularizační šum, větší dávky lépe vytěžují GPU."},
         {"Komponenta": "Škálování vstupů", "Standard": "StandardScaler / MinMaxScaler", "Alternativy": "Normalizace na [0, 1]", "Doporučení": "STRIKTNÍ NUTNOST! Bez škálování neuronové sítě nekonvergují."},
     ])
-    st.dataframe(df_nn, hide_index=True, use_container_width=True)
+    st.dataframe(df_nn, hide_index=True, width="stretch")
 
 # --- TAB 5: DIAGNOSTIKA ---
 with tab_diag:

@@ -163,7 +163,7 @@ with col_g1:
         yaxis=dict(title="Celkové náklady v Kč"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_cost, use_container_width=True)
+    st.plotly_chart(fig_cost, width="stretch")
 
 with col_g2:
     st.subheader("ROC křivka s optimálním bodem")
@@ -189,7 +189,7 @@ with col_g2:
         yaxis=dict(title="True Positive Rate (Recall / Sensitivity)"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )
-    st.plotly_chart(fig_roc, use_container_width=True)
+    st.plotly_chart(fig_roc, width="stretch")
 
 st.divider()
 
@@ -211,7 +211,7 @@ with c_cm1:
         index=["Skutečně Zdravý (0)", "Skutečně Nemocný (1)"],
         columns=["Predikce Zdravý (0)", "Predikce Nemocný (1)"],
     )
-    st.dataframe(df_cm_05, use_container_width=True)
+    st.dataframe(df_cm_05, width="stretch")
     st.caption(f"⚠️ **Neodhalení nemocní (FN):** {cm_05[1, 0]} pacientů × {cost_fn:,} Kč = {cm_05[1, 0] * cost_fn:,} Kč.")
 
 with c_cm2:
@@ -221,5 +221,5 @@ with c_cm2:
         index=["Skutečně Zdravý (0)", "Skutečně Nemocný (1)"],
         columns=["Predikce Zdravý (0)", "Predikce Nemocný (1)"],
     )
-    st.dataframe(df_cm_opt, use_container_width=True)
+    st.dataframe(df_cm_opt, width="stretch")
     st.caption(f"✅ **Neodhalení nemocní (FN) klesli na:** {cm_opt[1, 0]} pacientů! Celková úspora: **{(cost_05 - best_cost):,.0f} Kč**.")
