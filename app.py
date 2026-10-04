@@ -178,6 +178,9 @@ p_boosting_theory = st.Page("views/03_boosting_xgboost_theory.py", title="Teorie
 p_xgb_heart = st.Page("views/03_xgboost_heart_exercise_1.py", title="Cvičení 1: Nemoc srdce – Výsledky zadání", icon="🎯", url_path="xgb_heart_exercise_1")
 p_xgb_heart_critique = st.Page("views/03_xgboost_heart_exercise_1_critique.py", title="Cvičení 1: Nemoc srdce – Expertní analýza", icon="🔬", url_path="xgb_heart_critique")
 p_xgb_heart_nb = st.Page("views/03_xgboost_heart_nb.py", title="Cvičení 1: Nemoc srdce – Notebook", icon="🐍", url_path="xgb_heart_notebook")
+p_xgb_diam = st.Page("views/03_xgboost_diamonds_exercise_2.py", title="Cvičení 2: Diamanty – Výsledky zadání", icon="🎯", url_path="xgb_diamonds_exercise_2")
+p_xgb_diam_critique = st.Page("views/03_xgboost_diamonds_exercise_2_critique.py", title="Cvičení 2: Diamanty – Expertní analýza", icon="🔬", url_path="xgb_diamonds_critique")
+p_xgb_diam_nb = st.Page("views/03_xgboost_diamonds_nb.py", title="Cvičení 2: Diamanty – Notebook", icon="🐍", url_path="xgb_diamonds_notebook")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -340,6 +343,9 @@ nav = st.navigation(
             p_xgb_heart,
             p_xgb_heart_critique,
             p_xgb_heart_nb,
+            p_xgb_diam,
+            p_xgb_diam_critique,
+            p_xgb_diam_nb,
         ],
     }
 )
