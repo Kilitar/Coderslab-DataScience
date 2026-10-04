@@ -222,6 +222,8 @@ p_nlp_word2vec_impl = st.Page("views/04_nlp_word2vec_implementation.py", title="
 p_nlp_w2v_ex = st.Page("views/04_nlp_exercise_word2vec.py", title="Cvičení 5: Word2Vec – Trénování & Klasifikace", icon="🎯", url_path="day4_nlp_exercise_word2vec")
 p_nlp_w2v_ex_critique = st.Page("views/04_nlp_exercise_word2vec_critique.py", title="Cvičení 5: Word2Vec – Expertní analýza", icon="🔬", url_path="day4_nlp_exercise_word2vec_critique")
 p_nlp_w2v_ex_nb = st.Page("views/04_nlp_exercise_word2vec_nb.py", title="Cvičení 5: Word2Vec – Notebook", icon="🐍", url_path="day4_nlp_exercise_word2vec_nb")
+p_nlp_transformer_theory = st.Page("views/04_nlp_transformer_theory.py", title="Teorie: Architektura Transformer & Self-Attention", icon="⚡", url_path="day4_nlp_transformer_theory")
+p_nlp_bert_theory = st.Page("views/04_nlp_bert_theory.py", title="Teorie & Demo: BERT & Hugging Face Pipeline", icon="🤖", url_path="day4_nlp_bert_theory")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -432,6 +434,10 @@ nav = st.navigation(
             p_nlp_w2v_ex,
             p_nlp_w2v_ex_critique,
             p_nlp_w2v_ex_nb,
+        ],
+        "22. Den 4: NLP – Transformery & BERT": [
+            p_nlp_transformer_theory,
+            p_nlp_bert_theory,
         ],
     }
 )
