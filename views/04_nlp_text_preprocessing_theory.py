@@ -13,12 +13,26 @@ Modul pokrývá:
 8. Interaktivní vědomostní kvíz.
 """
 
+import os
+import sys
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import re
+
+# Import českého NLP modulu
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+NLP_DIR = os.path.join(BASE_DIR, "04_NLP")
+if NLP_DIR not in sys.path:
+    sys.path.append(NLP_DIR)
+
+try:
+    from czech_nlp import czech_stem, czech_lemmatize, CZECH_STOPWORDS, CZECH_NEGATIONS, is_czech_negation
+    CZECH_NLP_AVAILABLE = True
+except Exception:
+    CZECH_NLP_AVAILABLE = False
 
 # Bezpečný import NLP knihoven s fallbacky
 try:
@@ -261,106 +275,186 @@ with tab3:
     st.markdown("---")
     st.subheader("Přímé srovnání chování na typických případech")
 
-    comparison_words = [
-        "examining", "examination", "studies", "studying", "better", 
-        "feet", "wolves", "meeting", "universe", "university"
-    ]
-    
-    comp_rows = []
-    for w in comparison_words:
-        stem_val = stemmer.stem(w) if stemmer else w
-        lemma_val = nlp(w)[0].lemma_ if nlp else w
-        note = ""
-        if w in ["better", "feet", "wolves"]:
-            note = "Nepravidelný tvar – Stemmer selhal, Lemmatizátor uspěl!"
-        elif w in ["universe", "university"]:
-            note = "Over-stemming: Porter ořezal obě různá slova na stejný kmen 'univers'!"
-        elif stem_val != lemma_val:
-            note = f"Stemmer vytvořil neplatné slovo '{stem_val}'"
-        else:
-            note = "Obě metody shodné"
-            
-        comp_rows.append({
-            "Původní slovo": w,
-            "Stemming (Porter)": stem_val,
-            "Lemmatizace (spaCy)": lemma_val,
-            "Lingvistický komentář": note
-        })
-        
-    df_comp = pd.DataFrame(comp_rows)
-    st.dataframe(df_comp, hide_index=True, width="stretch")
+    tab3_lang = st.radio("Vyber jazyk pro srovnávací tabulku:", ["🇨🇿 Čeština", "🇬🇧 Angličtina"], horizontal=True)
+
+    if tab3_lang == "🇨🇿 Čeština":
+        st.markdown(r"""
+        **Český jazyk je silně flektivní:** Podstatná a přídavná jména mají 7 pádů v jednotném i množném čísle a slovesa se časují podle osoby, čísla, času a rodu. 
+        Anglický Porter stemmer na češtině zcela selže, protože předpokládá anglické přípony (*-ing, -ed, -s*). 
+        Níže vidíš srovnání **českého kmenovače (Savoy/Dolamic)** a **českého morfologického lemmatizátoru**:
+        """)
+        comparison_words_cs = [
+            "koně", "žluťoučký", "úpěl", "ďábelské", "ódy", "novém", "hradě", 
+            "chladného", "večera", "byli", "dělali", "lepší", "lidem", "kočky"
+        ]
+        comp_rows_cs = []
+        for w in comparison_words_cs:
+            stem_val = czech_stem(w)
+            lemma_val = czech_lemmatize(w)
+            note = ""
+            if w in ["koně", "byli", "lepší", "lidem"]:
+                note = "Nepravidelný / supletivní tvar – Lemmatizátor vrátil základní lemma!"
+            elif stem_val != lemma_val:
+                note = f"Stemmer ořízl pádovou koncovku na '{stem_val}', Lemmatizátor vrátil 1. pád '{lemma_val}'"
+            else:
+                note = "Základní tvar (shoda)"
+            comp_rows_cs.append({
+                "Původní české slovo": w,
+                "Český Stem (Savoy)": stem_val,
+                "České Lemma": lemma_val,
+                "Lingvistické vysvětlení": note
+            })
+        st.dataframe(pd.DataFrame(comp_rows_cs), hide_index=True, width="stretch")
+    else:
+        comparison_words = [
+            "examining", "examination", "studies", "studying", "better", 
+            "feet", "wolves", "meeting", "universe", "university"
+        ]
+        comp_rows = []
+        for w in comparison_words:
+            stem_val = stemmer.stem(w) if stemmer else w
+            lemma_val = nlp(w)[0].lemma_ if nlp else w
+            note = ""
+            if w in ["better", "feet", "wolves"]:
+                note = "Nepravidelný tvar – Stemmer selhal, Lemmatizátor uspěl!"
+            elif w in ["universe", "university"]:
+                note = "Over-stemming: Porter ořezal obě různá slova na stejný kmen 'univers'!"
+            elif stem_val != lemma_val:
+                note = f"Stemmer vytvořil neplatné slovo '{stem_val}'"
+            else:
+                note = "Obě metody shodné"
+                
+            comp_rows.append({
+                "Původní slovo": w,
+                "Stemming (Porter)": stem_val,
+                "Lemmatizace (spaCy)": lemma_val,
+                "Lingvistický komentář": note
+            })
+        st.dataframe(pd.DataFrame(comp_rows), hide_index=True, width="stretch")
 
 
 # =========================================================================
-# TAB 4: INTERAKTIVNÍ TEXTOVÁ LABORATOŘ
+# TAB 4: INTERAKTIVNÍ TEXTOVÁ LABORATOŘ (ČEŠTINA & ANGLIČTINA)
 # =========================================================================
 with tab4:
-    st.subheader("🧪 Interaktivní Textová Laboratoř")
-    st.markdown("Vyzkoušej si celou pipeline předzpracování krok za krokem na libovolném textu.")
+    st.subheader("🧪 Interaktivní Textová Laboratoř (Bilingual NLP Lab)")
+    st.markdown("Vyzkoušej si celou pipeline předzpracování krok za krokem v **češtině i angličtině**.")
 
-    sample_texts = {
+    col_lang, col_opt, col_diac = st.columns([1.3, 1.4, 1.8])
+    with col_lang:
+        lang_mode = st.radio("Jazykový režim (Language Mode):", ["🇨🇿 Čeština", "🇬🇧 Angličtina"], horizontal=True)
+    with col_opt:
+        keep_negations = st.checkbox(
+            "Chránit negace před smazáním", 
+            value=True, 
+            help="V ČJ chrání 'ne-', 'ani', 'nikdy', 'žádný' atd., v AJ chrání 'not', 'no', 'never' atd."
+        )
+    with col_diac:
+        if lang_mode == "🇨🇿 Čeština":
+            diac_mode = st.radio("Diakritika v textu:", ["Zachovat UTF-8 (č, š, ž...)", "Odstranit (unidecode)"], horizontal=True)
+        else:
+            diac_mode = "Odstranit (unidecode)"
+
+    sample_texts_cs = {
+        "Ukázka 1: Klasická testovací věta": "Příliš žluťoučký kůň úpěl ďábelské ódy na novém hradě za chladného večera.",
+        "Ukázka 2: Recenze s českou negací": "Tento film nebyl vůbec dobrý, herci nepředvedli žádný výkon a rozhodně bych ho nikomu nedoporučoval!",
+        "Ukázka 3: Morfologie & Plurály": "Lidé a jejich kočky i věrní psi sledovali v Praze lepší film o starých městech a velkých hradech.",
+        "Ukázka 4: Diakritika vs unidecode": "Včera jsme šli na výbornou kávu a čerstvý koláč do naší oblíbené kavárny.",
+        "Ukázka 5: Vlastní český text": ""
+    }
+
+    sample_texts_en = {
         "Ukázka 1: Přednáška (Akcenty & Café)": "When did you drink latté at our café? This is a sample sentence to split into tokens.",
         "Ukázka 2: Sentiment recenze (Kritická negace)": "This movie was not good at all, the acting was terrible and I would never recommend watching it!",
         "Ukázka 3: Morfologie & Plurály": "The striped wolves were studying the running feet of examined mice better than universities.",
-        "Ukázka 4: Vlastní text": ""
+        "Ukázka 4: Vlastní anglický text": ""
     }
-    
-    col_sel, col_opt = st.columns([2, 1])
-    with col_sel:
-        preset_choice = st.selectbox("Vyber přednastavený text nebo zvol vlastní:", list(sample_texts.keys()))
-    with col_opt:
-        keep_negations = st.checkbox("Chránit negace (not, no, never) před smazáním", value=True)
 
-    default_val = sample_texts[preset_choice] if preset_choice != "Ukázka 4: Vlastní text" else "Enter your own text here..."
+    curr_samples = sample_texts_cs if lang_mode == "🇨🇿 Čeština" else sample_texts_en
+    preset_choice = st.selectbox("Vyber přednastavený text nebo zvol vlastní:", list(curr_samples.keys()))
+    default_val = curr_samples[preset_choice] if "Vlastní" not in preset_choice else ("Zadej vlastní text..." if lang_mode == "🇨🇿 Čeština" else "Enter your own text...")
     user_text = st.text_area("Vstupní text k analýze:", value=default_val, height=100)
 
     if user_text.strip():
-        # Krok 1: Unidecode
-        text_no_accents = clean_accents(user_text)
-        
-        # Krok 2: Tokenizace a čištění interpunkce
-        words_raw = re.findall(r"\b[A-Za-z0-9_]+\b", text_no_accents)
-        words_lower = [w.lower() for w in words_raw]
-        
-        # Krok 3: Stopwords
-        effective_stopwords = set(nltk_stop_set)
-        if keep_negations:
-            effective_stopwords -= {"not", "no", "never", "nor", "neither", "without"}
+        # Rozlišení zpracování dle jazykového režimu
+        if lang_mode == "🇨🇿 Čeština":
+            # 1. Diakritika
+            if diac_mode == "Odstranit (unidecode)":
+                text_clean = clean_accents(user_text)
+                words_raw = re.findall(r"\b[A-Za-z0-9_]+\b", text_clean)
+            else:
+                text_clean = user_text
+                words_raw = re.findall(r"\b[A-Za-zÁ-ž0-9_]+\b", text_clean)
+                
+            words_lower = [w.lower() for w in words_raw]
             
-        words_no_stop = [w for w in words_lower if w not in effective_stopwords]
-        removed_stopwords = [w for w in words_lower if w in effective_stopwords]
-        
-        # Krok 4: Stem vs Lemma
-        pipeline_table = []
-        for w in words_no_stop:
-            s_val = stemmer.stem(w) if stemmer else w
-            l_val = nlp(w)[0].lemma_ if nlp else w
-            pipeline_table.append({
-                "Normalizované slovo": w,
-                "Stem (Porter)": s_val,
-                "Lemma (spaCy)": l_val,
-                "Je shodné?": "✅ Ano" if s_val == l_val else "❌ Ne (Rozdíl)"
-            })
+            # 2. Stop-slova ČJ
+            effective_stopwords = set(CZECH_STOPWORDS)
+            if keep_negations:
+                words_no_stop = [w for w in words_lower if (w not in effective_stopwords) or is_czech_negation(w)]
+                removed_stopwords = [w for w in words_lower if (w in effective_stopwords) and not is_czech_negation(w)]
+            else:
+                words_no_stop = [w for w in words_lower if w not in effective_stopwords]
+                removed_stopwords = [w for w in words_lower if w in effective_stopwords]
+                
+            # 3. Český Stemming vs Lemmatizace
+            pipeline_table = []
+            for w in words_no_stop:
+                s_val = czech_stem(w)
+                l_val = czech_lemmatize(w)
+                pipeline_table.append({
+                    "Normalizované slovo": w,
+                    "Český Stem (Savoy)": s_val,
+                    "České Lemma": l_val,
+                    "Je shodné?": "✅ Ano" if s_val == l_val else "❌ Ne (Rozdíl)"
+                })
+        else:
+            # 1. Unidecode pro AJ
+            text_clean = clean_accents(user_text)
+            words_raw = re.findall(r"\b[A-Za-z0-9_]+\b", text_clean)
+            words_lower = [w.lower() for w in words_raw]
+            
+            # 2. Stop-slova AJ
+            effective_stopwords = set(nltk_stop_set)
+            if keep_negations:
+                effective_stopwords -= {"not", "no", "never", "nor", "neither", "without"}
+                
+            words_no_stop = [w for w in words_lower if w not in effective_stopwords]
+            removed_stopwords = [w for w in words_lower if w in effective_stopwords]
+            
+            # 3. Anglický Stemming vs Lemmatizace
+            pipeline_table = []
+            for w in words_no_stop:
+                s_val = stemmer.stem(w) if stemmer else w
+                l_val = nlp(w)[0].lemma_ if nlp else w
+                pipeline_table.append({
+                    "Normalizované slovo": w,
+                    "Stem (Porter)": s_val,
+                    "Lemma (spaCy)": l_val,
+                    "Je shodné?": "✅ Ano" if s_val == l_val else "❌ Ne (Rozdíl)"
+                })
             
         # Zobrazení metrik pipeline
         m1, m2, m3, m4 = st.columns(4)
         m1.metric("Počet surových slov", len(words_raw))
         m2.metric("Odstraněno stop-slov", len(removed_stopwords))
         m3.metric("Zbylých sémantických tokenů", len(words_no_stop))
-        m4.metric("Unikátních lemat", len(set([row["Lemma (spaCy)"] for row in pipeline_table])))
+        lemma_key = "České Lemma" if lang_mode == "🇨🇿 Čeština" else "Lemma (spaCy)"
+        m4.metric("Unikátních lemat", len(set([row[lemma_key] for row in pipeline_table])))
 
-        st.markdown("#### Detailní rozpad tokenů v pipeline:")
+        st.markdown(f"#### Detailní rozpad tokenů v pipeline ({lang_mode}):")
         df_pipe = pd.DataFrame(pipeline_table)
         st.dataframe(df_pipe, hide_index=True, width="stretch")
 
         # Interaktivní graf redukce velikosti korpusu
+        stem_key = "Český Stem (Savoy)" if lang_mode == "🇨🇿 Čeština" else "Stem (Porter)"
         step_names = ["1. Surový text", "2. Unikátní slova", "3. Po vyjmutí Stop-slov", "4. Unikátní Stemy", "5. Unikátní Lemmata"]
         step_counts = [
             len(words_raw),
             len(set(words_lower)),
             len(set(words_no_stop)),
-            len(set([r["Stem (Porter)"] for r in pipeline_table])),
-            len(set([r["Lemma (spaCy)"] for r in pipeline_table]))
+            len(set([r[stem_key] for r in pipeline_table])),
+            len(set([r[lemma_key] for r in pipeline_table]))
         ]
         
         fig = go.Figure(go.Bar(
@@ -371,7 +465,7 @@ with tab4:
             marker_color=["#4A90E2", "#50E3C2", "#F5A623", "#D0021B", "#9013FE"]
         ))
         fig.update_layout(
-            title="📉 Redukce počtu unikátních termínů v jednotlivých krocích čištění",
+            title=f"📉 Redukce počtu unikátních termínů v jednotlivých krocích čištění ({lang_mode})",
             xaxis_title="Krok zpracování",
             yaxis_title="Počet unikátních prvků",
             template="plotly_dark",
