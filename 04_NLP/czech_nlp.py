@@ -205,6 +205,164 @@ def is_czech_negation(word: str) -> bool:
     if w in CZECH_NEGATIONS:
         return True
     # České slovesné a adjektivní negace s předponou ne-
-    if w.startswith("ne") and len(w) >= 5 and w not in {"nebe", "nebo", "něco", "někdo", "někdy", "někde", "nehet", "nehet", "nerv", "nervy"}:
+    if w.startswith("ne") and len(w) >= 5 and w not in {"nebe", "nebo", "něco", "někdo", "někdy", "někde", "nehet", "nerv", "nervy"}:
         return True
     return False
+
+
+# 4. ČESKÝ MODEL SENTIMENTU (Trénovaný BoW + Bigramy + Logistická regrese)
+CZECH_SENTIMENT_CORPUS = [
+    # Pozitivní recenze (třída 1)
+    ("Tento film byl naprosto skvělý a herci hráli výborně.", 1),
+    ("Úžasný zážitek, skvělá režie a vynikající hudba.", 1),
+    ("Perfektní filmové dílo, moc se mi to líbilo a vřele doporučuji všem.", 1),
+    ("Geniální scénář a úchvatné herecké výkony, bavil jsem se celou dobu.", 1),
+    ("Skvělý film, nádherná atmosféra, silné emoce a dojemný příběh.", 1),
+    ("Jedno z nejlepších děl, které jsem viděl, bezchybné a bravurní.", 1),
+    ("Vynikající kamera, skvělé dialogy a velmi poutavý děj.", 1),
+    ("Tento snímek je naprostá pecka, vtipné, chytré a energické.", 1),
+    ("Velmi kvalitní zpracování, režisér odvedl špičkovou práci a herci zazářili.", 1),
+    ("Krásný a hluboký film, který rozhodně stojí za zhlédnutí, doporučuji.", 1),
+    ("Excelentní podívaná s výborným inteligentním humorem a skvělým obsazením.", 1),
+    ("Srdcovka, moc se mi to líbilo a skvěle jsem si odpočinul.", 1),
+    ("Opravdu dojemný a krásný příběh s fantastickou atmosférou.", 1),
+    ("Naprostá paráda, originální nápad a perfektní provedení od začátku do konce.", 1),
+    ("Byl to vynikající film, herci byli skvělí a tempo bylo strhující.", 1),
+    ("Líbilo se mi to moc, doporučuji do kina, stojí za to.", 1),
+    ("Nádherná podívaná, film mě nadchnul a bavil.", 1),
+    ("Vtipná komedie, smál jsem se nahlas, super herci.", 1),
+    ("Povedený film, vizuálně nádherné a hudba byla kouzelná.", 1),
+    ("Skvěle zahrané postavy a promyšlený konec, který mě potěšil.", 1),
+    ("Nebyla to žádná nuda, naopak skvělá jízda plná akce a vtipu.", 1),
+    ("Rozhodně nelituji peněz za lístek, byl to parádní zážitek.", 1),
+    ("Nebylo to vůbec špatné, příjemně mě to překvapilo a herci byli fajn.", 1),
+    ("Velmi dobrý film, který mohu s klidným svědomím doporučit.", 1),
+    ("Kvalitní dílo plné skvělých myšlenek a skvělých scén.", 1),
+
+    # Negativní recenze (třída 0)
+    ("Tento film byl naprostý odpad a hrozná nuda.", 0),
+    ("Příšerný scénář, trapné dialogy a nekoukatelné herecké výkony.", 0),
+    ("Ztráta času, vůbec se mi to nelíbilo a nedoporučuji to nikomu.", 0),
+    ("Katastrofální režie, nudný děj a celkově obrovské zklamání.", 0),
+    ("Bídné zpracování, amatérské výkony a neuvěřitelně špatný konec.", 0),
+    ("Naprostý propadák, klišé na každém kroku a otřesná hudba.", 0),
+    ("Tento film je neskutečná hloupost a nuda, málem jsem v kině usnul.", 0),
+    ("Hrozné zklamání, čekal jsem kvalitu a dostal jsem nefunkční chaos.", 0),
+    ("Trapný humor, nesympatičtí herci a hloupý příběh bez kapky smyslu.", 0),
+    ("Vůbec to nefunguje, slabý scénář, příšerný střih a zmatek.", 0),
+    ("Tohle se opravdu nepovedlo, bída a nesnesitelné utrpení sledovat.", 0),
+    ("Rozhodně nedoporučuji, zbytečný film a vyhozené peníze za vstupné.", 0),
+    ("Nudné, zdlouhavé a nezajímavé od začátku až do úplného konce.", 0),
+    ("Příšerná slátanina bez špetky originality, škoda času.", 0),
+    ("Špatný film, herci nepředvedli vůbec nic a režie zklamala na celé čáře.", 0),
+    ("Tento film nebyl vůbec dobrý a herci nepředvedli žádný výkon.", 0),
+    ("Film neměl žádný děj a vůbec mě nebavil, je to hrozné.", 0),
+    ("Bohužel velké zklamání, trapné a nudné scény bez jakéhokoliv nápadu.", 0),
+    ("Ubohé dílo, nesmyslný scénář a příšerná kamera.", 0),
+    ("Vůbec se mi to nelíbilo, film mě nudil a znechutil.", 0),
+    ("Totální propadák, herci hráli hrozně a hudba rvala uši.", 0),
+    ("Otřesný film, vyhozené peníze a ztracený večer, nedoporučuji.", 0),
+    ("Nekoukatelné, trapné a nesmírně nudné od první minuty.", 0),
+    ("Žádná zábava, jenom prázdný a zbytečný film bez duše.", 0),
+    ("Zklamalo mě to na plné čáře, horší film jsem dlouho neviděl.", 0)
+]
+
+
+_CZECH_SENTIMENT_MODEL = None
+_CZECH_VECTORIZER = None
+
+
+def get_czech_sentiment_model():
+    """Vrátí natrénovaný CountVectorizer a LogisticRegression model pro český sentiment."""
+    global _CZECH_SENTIMENT_MODEL, _CZECH_VECTORIZER
+    if _CZECH_SENTIMENT_MODEL is None:
+        from sklearn.feature_extraction.text import CountVectorizer
+        from sklearn.linear_model import LogisticRegression
+
+        texts = [item[0] for item in CZECH_SENTIMENT_CORPUS]
+        labels = [item[1] for item in CZECH_SENTIMENT_CORPUS]
+
+        # Využijeme unigramy i bigramy a Unicode pattern pro češtinu
+        _CZECH_VECTORIZER = CountVectorizer(
+            ngram_range=(1, 2),
+            token_pattern=r"(?u)\b[A-Za-zÁ-ž0-9_]+\b",
+            lowercase=True
+        )
+        X = _CZECH_VECTORIZER.fit_transform(texts)
+        _CZECH_SENTIMENT_MODEL = LogisticRegression(C=2.0, max_iter=1000, random_state=42)
+        _CZECH_SENTIMENT_MODEL.fit(X, labels)
+
+    return _CZECH_VECTORIZER, _CZECH_SENTIMENT_MODEL
+
+
+def predict_czech_sentiment(text: str) -> Dict:
+    """
+    Predikuje sentiment českého textu a vrátí detailní rozbor slov a vah:
+    - class: 1 (Pozitivní) nebo 0 (Negativní)
+    - prob_positive: float
+    - prob_negative: float
+    - contributions: list slov/bigramů a jejich koeficientů
+    """
+    if not isinstance(text, str) or not text.strip():
+        return {
+            "predicted_class": 0,
+            "sentiment_label": "Neurčeno",
+            "prob_positive": 0.5,
+            "prob_negative": 0.5,
+            "contributions": []
+        }
+
+    vec, model = get_czech_sentiment_model()
+    x_vec = vec.transform([text])
+    pred = int(model.predict(x_vec)[0])
+    probs = model.predict_proba(x_vec)[0]
+
+    feature_names = vec.get_feature_names_out()
+    coefs = model.coef_[0]
+    vocab_map = {term: idx for idx, term in enumerate(feature_names)}
+
+    # Analýza unigramů i bigramů obsažených v textu
+    words_raw = re.findall(r"\b[A-Za-zÁ-ž0-9_]+\b", text.lower())
+    contributions = []
+
+    # Bigramy
+    for i in range(len(words_raw) - 1):
+        bg = f"{words_raw[i]} {words_raw[i+1]}"
+        if bg in vocab_map:
+            c = coefs[vocab_map[bg]]
+            contributions.append({
+                "Termín": bg,
+                "Typ": "Bigram (Spojení)",
+                "Váha (Koeficient)": round(float(c), 4),
+                "Směr": "🟢 Pozitivní" if c > 0 else "🔴 Negativní"
+            })
+
+    # Unigramy
+    for w in words_raw:
+        if w in vocab_map:
+            c = coefs[vocab_map[w]]
+            contributions.append({
+                "Termín": w,
+                "Typ": "Unigram (Slovo)",
+                "Váha (Koeficient)": round(float(c), 4),
+                "Směr": "🟢 Pozitivní" if c > 0 else "🔴 Negativní"
+            })
+
+    # Deduplikace
+    seen = set()
+    dedup_contrib = []
+    for item in contributions:
+        if item["Termín"] not in seen:
+            seen.add(item["Termín"])
+            dedup_contrib.append(item)
+
+    dedup_contrib.sort(key=lambda x: abs(x["Váha (Koeficient)"]), reverse=True)
+
+    return {
+        "predicted_class": pred,
+        "sentiment_label": "Pozitivní" if pred == 1 else "Negativní",
+        "prob_positive": float(probs[1]),
+        "prob_negative": float(probs[0]),
+        "contributions": dedup_contrib
+    }
+

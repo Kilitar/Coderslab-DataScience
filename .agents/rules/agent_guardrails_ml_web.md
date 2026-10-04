@@ -109,4 +109,19 @@ Pro udržení čisté a profesionální hierarchie navigace musí každá strán
 - **PŘÍSNÝ ZÁKAZ:** Je zakázáno nahrazovat grafy statickými screenshoty z Colabu, PNG exporty z Matplotlibu/Seabornu nebo vkládat `st.image("plots/....png")` do běžných analytických pohledů.
 - **Jediná povolená výjimka:** Sekce vzorových notebooků a Colab sešitů (`render_jupyter_notebook` ve `*_nb.py`) a teoretické ilustrační diagramy v Markdownu, kde se zobrazuje přesný výstup školní buňky z Jupyteru.
 
+---
+
+## 7. Standard pro zpracování textových modelů (NLP & Bilingualita CZ / EN)
+
+### Pravidlo 7.1: Povinná dvojjazyčná podpora (🇨🇿 Čeština / 🇬🇧 Angličtina)
+- **Kritický standard pro všechny NLP stránky:** Veškerá interaktivní hřiště, textové prediktory sentimentu, tokenizační laboratoře a vektorizační nástroje **MUSÍ obsahovat přepínač mezi 🇨🇿 Češtinou a 🇬🇧 Angličtinou**.
+- **Anglický režim:** Využívá standardní data z kurzu (IMDb recenze, spaCy `en_core_web_sm`, NLTK stop-slova).
+- **Český režim:** Využívá dedikovaný modul `04_NLP/czech_nlp.py`:
+  1. **Podpora české diakritiky:** Regulární výrazy **nesmí** ořezávat české znaky (používat `(?u)\b[A-Za-zÁ-ž0-9_]+\b`).
+  2. **Česká stop-slova & morfologie:** Používat lingvistický seznam `CZECH_STOPWORDS`, Savoy stemmer a český lemmatizér.
+  3. **Ochrana české negace:** Zohlednit předponu `ne-` u sloves/adjektiv (*nebyl, neměl, nedoporučuji*) a záporná zájmena/příslovce (*ani, nikdy, žádný, vůbec*).
+  4. **N-gramy v modelech:** Pro češtinu vždy využívat minimálně bigramy (`ngram_range=(1, 2)`), aby model neztratil vazbu negace se slovem.
+  5. **Interpretace:** Vždy uživateli zobrazit rozpad rozpoznaných slov/termínů a jejich vliv na predikci (koeficienty $\beta$).
+
+
 

@@ -16,6 +16,13 @@ import streamlit as st
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 
+try:
+    from czech_nlp import predict_czech_sentiment
+except ImportError:
+    import sys
+    sys.path.append(str(Path(__file__).resolve().parent.parent / "04_NLP"))
+    from czech_nlp import predict_czech_sentiment
+
 st.title("🎯 Cvičení: Bag of Words & Klasifikace sentimentu (IMDb)")
 st.caption(
     "Klasifikace sentimentu filmových recenzí: Vektorizace lemmatizovaného textu pomocí `CountVectorizer(max_features=10000)`, "
@@ -211,60 +218,119 @@ with tab3:
 
 with tab4:
     st.subheader("🧪 Interaktivní prediktor sentimentu v reálném čase")
-    st.markdown("Napište vlastní recenzi v angličtině a model odhadne sentiment s rozpisem vlivu klíčových slov.")
+    st.markdown(
+        "Otestujte klasifikaci sentimentu na libovolném textu. Podporujeme jak **anglický model** (trénovaný na 10 000 recenzích IMDb), "
+        "tak nativní **český model** (s podporou unigramů, bigramů a české negace)."
+    )
 
-    # Natrénování lehkého modelu pro interaktivní záložku
-    @st.cache_resource
-    def get_live_model():
-        if csv_path.exists():
-            df_live = pd.read_csv(csv_path)
-            v = CountVectorizer(max_features=10000)
-            X_l = v.fit_transform(df_live["review_lemmatized"].fillna(""))
-            y_l = df_live["sentiment"].apply(lambda s: 1 if str(s).lower() == "positive" else 0)
-            m = LogisticRegression(max_iter=1000, random_state=42)
-            m.fit(X_l, y_l)
-            return v, m
-        return None, None
+    lang_choice = st.radio(
+        "Zvolte jazykový režim pro analýzu sentimentu:",
+        ["🇨🇿 Čeština (Český sentiment model – Negace & Bigramy)", "🇬🇧 Angličtina (IMDb model – 10 000 recenzí)"],
+        horizontal=True
+    )
 
-    vec_live, model_live = get_live_model()
+    sample_texts_cs = {
+        "Ukázka 1: Pozitivní chvála": "Tento film byl naprosto skvělý, herci předvedli úžasný výkon a hudba byla fantastická!",
+        "Ukázka 2: Negativní kritika": "Naprostá katastrofa a hrozná nuda, scénář je trapný a rozhodně to nedoporučuji.",
+        "Ukázka 3: Vliv české negace": "Tento film nebyl vůbec dobrý a herci nepředvedli žádný výkon.",
+        "Ukázka 4: Obrácený zápor": "Nebylo to vůbec špatné, příjemně mě to potěšilo a skvěle jsem se bavil.",
+        "Ukázka 5: Vlastní český text": ""
+    }
 
-    if vec_live is not None and model_live is not None:
-        user_rev = st.text_area(
-            "Vložte text recenze v angličtině:",
-            value="This movie was an amazing masterpiece with superb acting and brilliant cinematography, definitely my favorite film!",
-            height=100
-        )
+    sample_texts_en = {
+        "Ukázka 1: Pozitivní mistrovské dílo": "This movie was an amazing masterpiece with superb acting and brilliant cinematography, definitely my favorite film!",
+        "Ukázka 2: Negativní zklamání": "Total waste of time, boring plot, terrible acting and disappointing ending.",
+        "Ukázka 3: Vliv unigramů vs negace": "The plot twists were predictable and did not offer any surprises.",
+        "Ukázka 4: Vlastní anglický text": ""
+    }
 
-        if user_rev.strip():
-            # Vektorizace vstupu
-            x_input = vec_live.transform([user_rev.lower()])
-            pred_class = model_live.predict(x_input)[0]
-            pred_proba = model_live.predict_proba(x_input)[0]
+    if "Čeština" in lang_choice:
+        preset_cz = st.selectbox("Vyberte ukázkovou českou recenzi:", list(sample_texts_cs.keys()))
+        default_cz = sample_texts_cs[preset_cz] if preset_cz != "Ukázka 5: Vlastní český text" else "Napište sem vlastní českou recenzi..."
+        user_text = st.text_area("Vstupní recenze v češtině:", value=default_cz, height=100)
+
+        if user_text.strip():
+            res_cz = predict_czech_sentiment(user_text)
+            pred_class = res_cz["predicted_class"]
+            p_pos = res_cz["prob_positive"]
+            p_neg = res_cz["prob_negative"]
 
             col_res1, col_res2 = st.columns([1, 2])
             with col_res1:
                 if pred_class == 1:
-                    st.success(f"### 🟢 Pozitivní recenze\n**Pravděpodobnost:** {pred_proba[1] * 100:.1f} %")
+                    st.success(f"### 🟢 Pozitivní recenze\n**Pravděpodobnost:** {p_pos * 100:.1f} %")
                 else:
-                    st.error(f"### 🔴 Negativní recenze\n**Pravděpodobnost:** {pred_proba[0] * 100:.1f} %")
+                    st.error(f"### 🔴 Negativní recenze\n**Pravděpodobnost:** {p_neg * 100:.1f} %")
+
+                st.progress(float(p_pos), text=f"P(Pozitivní): {p_pos*100:.1f}% | P(Negativní): {p_neg*100:.1f}%")
 
             with col_res2:
-                # Zobrazení slov ze vstupu, která jsou ve slovníku a jejich vliv
-                words_in_input = user_rev.lower().split()
-                feature_names = vec_live.get_feature_names_out()
-                vocab_dict = {w: i for i, w in enumerate(feature_names)}
+                contribs = res_cz["contributions"]
+                if contribs:
+                    df_cz_contrib = pd.DataFrame(contribs)
+                    st.markdown("##### Rozpad rozpoznaných českých slov & bigramů a jejich vliv:")
+                    st.dataframe(df_cz_contrib, hide_index=True, width="stretch")
+                else:
+                    st.info("Ve vstupu nebyla nalezena žádná polaritní slova ze slovníku.")
 
-                contributions = []
-                for w in words_in_input:
-                    clean_w = w.strip(".,!?:;\"'()[]{}")
-                    if clean_w in vocab_dict:
-                        feat_idx = vocab_dict[clean_w]
-                        coef_val = model_live.coef_[0][feat_idx]
-                        contributions.append({"Slovo": clean_w, "Váha (Koeficient)": round(float(coef_val), 4), "Směr": "🟢 Pozitivní" if coef_val > 0 else "🔴 Negativní"})
-
-                if contributions:
-                    df_contrib = pd.DataFrame(contributions).drop_duplicates(subset=["Slovo"]).sort_values("Váha (Koeficient)", ascending=False)
-                    st.markdown("##### Rozpad rozpoznaných slov a jejich vliv na výsledek:")
-                    st.dataframe(df_contrib, hide_index=True, width="stretch")
     else:
-        st.info("Model se načítá...")
+        # Anglický model IMDb
+        @st.cache_resource
+        def get_live_en_model():
+            if csv_path.exists():
+                df_live = pd.read_csv(csv_path)
+                v = CountVectorizer(max_features=10000)
+                X_l = v.fit_transform(df_live["review_lemmatized"].fillna(""))
+                y_l = df_live["sentiment"].apply(lambda s: 1 if str(s).lower() == "positive" else 0)
+                m = LogisticRegression(max_iter=1000, random_state=42)
+                m.fit(X_l, y_l)
+                return v, m
+            return None, None
+
+        vec_en, model_en = get_live_en_model()
+
+        if vec_en is not None and model_en is not None:
+            preset_en = st.selectbox("Vyberte ukázkovou anglickou recenzi:", list(sample_texts_en.keys()))
+            default_en = sample_texts_en[preset_en] if preset_en != "Ukázka 4: Vlastní anglický text" else "Type your own English review here..."
+            user_text_en = st.text_area("Vstupní recenze v angličtině:", value=default_en, height=100)
+
+            if user_text_en.strip():
+                x_input = vec_en.transform([user_text_en.lower()])
+                pred_class = model_en.predict(x_input)[0]
+                pred_proba = model_en.predict_proba(x_input)[0]
+
+                col_res1, col_res2 = st.columns([1, 2])
+                with col_res1:
+                    if pred_class == 1:
+                        st.success(f"### 🟢 Pozitivní recenze\n**Pravděpodobnost:** {pred_proba[1] * 100:.1f} %")
+                    else:
+                        st.error(f"### 🔴 Negativní recenze\n**Pravděpodobnost:** {pred_proba[0] * 100:.1f} %")
+
+                    st.progress(float(pred_proba[1]), text=f"P(Pozitivní): {pred_proba[1]*100:.1f}% | P(Negativní): {pred_proba[0]*100:.1f}%")
+
+                with col_res2:
+                    words_in_input = user_text_en.lower().split()
+                    feature_names = vec_en.get_feature_names_out()
+                    vocab_dict = {w: i for i, w in enumerate(feature_names)}
+
+                    contributions = []
+                    for w in words_in_input:
+                        clean_w = w.strip(".,!?:;\"'()[]{}")
+                        if clean_w in vocab_dict:
+                            feat_idx = vocab_dict[clean_w]
+                            coef_val = model_en.coef_[0][feat_idx]
+                            contributions.append({
+                                "Slovo": clean_w,
+                                "Typ": "Unigram (Slovo)",
+                                "Váha (Koeficient)": round(float(coef_val), 4),
+                                "Směr": "🟢 Pozitivní" if coef_val > 0 else "🔴 Negativní"
+                            })
+
+                    if contributions:
+                        df_contrib = pd.DataFrame(contributions).drop_duplicates(subset=["Slovo"]).sort_values("Váha (Koeficient)", ascending=False)
+                        st.markdown("##### Rozpad rozpoznaných anglických slov a jejich vliv:")
+                        st.dataframe(df_contrib, hide_index=True, width="stretch")
+                    else:
+                        st.info("Ve vstupu nebyla nalezena žádná slova z 10 000 nejčastějších výrazů IMDb slovníku.")
+        else:
+            st.info("Anglický model se načítá...")
