@@ -175,7 +175,7 @@ def render_random_forest_theory_view():
             ("random_state", "None", "Seed pro pseudonáhodný generátor zajišťující přesnou reprodukovatelnost."),
         ]
         df_params = pd.DataFrame(params_data, columns=["Parametr", "Default v Scikit-learn", "Význam & Doporučení"])
-        st.dataframe(df_params, width="stretch", hide_index=True)
+        st.dataframe(df_params, width="stretch", hide_index=True, height=450)
 
         st.markdown("---")
         st.markdown("#### 📌 Přehled klíčových atributů a metod po natrénování")

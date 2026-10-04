@@ -137,7 +137,7 @@ def render_boosting_xgboost_theory_view():
             "F3": [92.417, 92.417, 92.417, 92.417, 156.167, 156.167, 181.375, 181.375, 147.625, 147.625]
         }
         df_math = pd.DataFrame(data_math)
-        st.dataframe(df_math, width="stretch", hide_index=True)
+        st.dataframe(df_math, width="stretch", hide_index=True, height=420)
 
         st.markdown("---")
         st.markdown("#### 📈 Vizuální průběh: Jak stromy H1, H2 a H3 postupně aproximují data")
@@ -218,7 +218,7 @@ def render_boosting_xgboost_theory_view():
             ("tree_method", "'auto' / 'hist'", "Způsob konstrukce stromů. 'hist' je moderní rychlá histogramová metoda."),
         ]
         df_p_xgb = pd.DataFrame(params_xgb, columns=["Hyperparametr", "Default / Doporučení", "Význam & Popis"])
-        st.dataframe(df_p_xgb, width="stretch", hide_index=True)
+        st.dataframe(df_p_xgb, width="stretch", hide_index=True, height=450)
 
         st.markdown("---")
         st.markdown("#### 🛠️ Kódové syntaxe: Scikit-learn vs. Native XGBoost")
