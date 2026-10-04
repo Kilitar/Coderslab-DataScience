@@ -22,9 +22,11 @@ from scipy import ndimage
 BASE_DIR = Path(__file__).resolve().parent.parent
 WEIGHTS_PATH = BASE_DIR / "03_Advanced_ML_Neural_Networks" / "data" / "mnist_mlp_weights.npz"
 SAMPLES_PATH = BASE_DIR / "03_Advanced_ML_Neural_Networks" / "data" / "mnist_mlp_exercise_1_precomputed.json"
-CANVAS_DIR = BASE_DIR / "components" / "digit_canvas"
 
-_digit_canvas = components.declare_component("digit_canvas", path=str(CANVAS_DIR))
+try:
+    from components.digit_canvas_component import digit_canvas as _digit_canvas
+except Exception:
+    _digit_canvas = None
 
 
 @st.cache_resource
@@ -135,8 +137,12 @@ with tab_draw:
     c_canvas, c_result = st.columns([1, 1.25])
     with c_canvas:
         st.markdown("##### 1️⃣ Nakreslete číslici")
-        value = _digit_canvas(key="mnist_canvas", default=None)
-        st.caption("Tip: kreslete velkou číslici přes většinu plátna. Po puštění myši se predikce aktualizuje.")
+        if _digit_canvas is not None:
+            value = _digit_canvas(key="mnist_canvas", default=None)
+            st.caption("Tip: kreslete velkou číslici přes většinu plátna. Po puštění myši se predikce aktualizuje.")
+        else:
+            st.warning("Kreslicí komponenta se nenačetla.")
+            value = None
 
     with c_result:
         st.markdown("##### 2️⃣ Predikce sítě")
