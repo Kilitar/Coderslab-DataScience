@@ -51,12 +51,7 @@ ENGLISH_STOPWORDS_FALLBACK = {
 def get_stopwords_set():
     try:
         from nltk.corpus import stopwords
-        try:
-            return set(stopwords.words("english"))
-        except LookupError:
-            import nltk
-            nltk.download("stopwords", quiet=True)
-            return set(stopwords.words("english"))
+        return set(stopwords.words("english"))
     except Exception:
         return ENGLISH_STOPWORDS_FALLBACK
 
@@ -64,15 +59,9 @@ def get_stopwords_set():
 def get_lemmatizer():
     try:
         from nltk.stem import WordNetLemmatizer
-        try:
-            lem = WordNetLemmatizer()
-            lem.lemmatize("burgers")
-            return lem
-        except LookupError:
-            import nltk
-            nltk.download("wordnet", quiet=True)
-            nltk.download("omw-1.4", quiet=True)
-            return WordNetLemmatizer()
+        lem = WordNetLemmatizer()
+        lem.lemmatize("burgers")
+        return lem
     except Exception:
         return None
 

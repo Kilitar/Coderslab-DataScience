@@ -19,30 +19,10 @@ import os
 import warnings
 from pathlib import Path
 
-# Bezpečná a tichá inicializace NLTK zdrojů
 @st.cache_resource
 def init_nltk():
     try:
         import nltk
-        # Použijeme explicitně privátní domovský adresář ~/nltk_data pro eliminaci UserWarning na Streamlit Cloud
-        nltk_data_dir = Path.home() / "nltk_data"
-        nltk_data_dir.mkdir(parents=True, exist_ok=True)
-        data_dir_str = str(nltk_data_dir)
-        if data_dir_str not in nltk.data.path:
-            nltk.data.path.insert(0, data_dir_str)
-
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            for res_name in [
-                "punkt",
-                "punkt_tab",
-                "averaged_perceptron_tagger",
-                "averaged_perceptron_tagger_eng",
-                "stopwords",
-                "wordnet",
-                "vader_lexicon"
-            ]:
-                nltk.download(res_name, download_dir=data_dir_str, quiet=True)
         return True
     except Exception:
         return False
@@ -219,21 +199,12 @@ def render_nltk_spacy_view():
                 try:
                     stop_words = set(stopwords.words("english"))
                 except Exception:
-                    try:
-                        nltk.download("stopwords", quiet=True)
-                        stop_words = set(stopwords.words("english"))
-                    except Exception:
-                        stop_words = {"in", "over", "the", "a", "an", "was", "is", "at", "by", "and", "during", "for", "to", "of", "on", "it", "this", "that", "these", "those"}
+                    stop_words = {"in", "over", "the", "a", "an", "was", "is", "at", "by", "and", "during", "for", "to", "of", "on", "it", "this", "that", "these", "those"}
                 filtered_words = [w for w in words if w.lower() not in stop_words and w.isalnum()]
                 try:
                     tagged = pos_tag(words)
                 except Exception:
-                    try:
-                        nltk.download("averaged_perceptron_tagger_eng", quiet=True)
-                        nltk.download("averaged_perceptron_tagger", quiet=True)
-                        tagged = pos_tag(words)
-                    except Exception:
-                        tagged = [(w, "NNP" if w and w[0].isupper() else ("VB" if w.endswith("ing") or w.endswith("ed") else "NN")) for w in words]
+                    tagged = [(w, "NNP" if w and w[0].isupper() else ("VB" if w.endswith("ing") or w.endswith("ed") else "NN")) for w in words]
 
                 pos_col, filter_col = st.columns([1, 1])
                 with pos_col:

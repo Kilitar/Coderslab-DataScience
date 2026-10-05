@@ -208,9 +208,8 @@ with t4:
         from nltk.corpus import stopwords
         try:
             st_stops = set(stopwords.words("english"))
-        except LookupError:
-            nltk.download("stopwords", quiet=True)
-            st_stops = set(stopwords.words("english"))
+        except Exception:
+            st_stops = {"the", "a", "an", "and", "or", "in", "on", "at", "to", "for", "of", "with", "is", "was", "this", "that", "not", "but"}
             
         t_low = test_input.lower()
         t_letters = re.sub(r"[^a-zA-Z\s]", " ", t_low)

@@ -7,6 +7,9 @@ try:
 except ImportError:
     pass
 
+warnings.filterwarnings("ignore", category=UserWarning, module="nltk")
+warnings.filterwarnings("ignore", message=".*NLTK will not authorize.*")
+
 st.set_page_config(
     page_title="Data Science & ML Portfolio | Coderslab",
     page_icon="🔬",

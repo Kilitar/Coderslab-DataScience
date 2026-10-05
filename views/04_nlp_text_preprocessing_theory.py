@@ -49,12 +49,10 @@ try:
     from nltk.tokenize import word_tokenize
     from nltk.corpus import stopwords as nltk_stopwords
     from nltk.stem import PorterStemmer
-    # Zajistíme stažení dat
     try:
         nltk_stop_set = set(nltk_stopwords.words("english"))
-    except LookupError:
-        nltk.download("stopwords", quiet=True)
-        nltk_stop_set = set(nltk_stopwords.words("english"))
+    except Exception:
+        nltk_stop_set = {"the", "a", "an", "and", "or", "in", "on", "at", "to", "for", "of", "with", "is", "was", "this", "that"}
     stemmer = PorterStemmer()
     NLTK_AVAILABLE = True
 except Exception:
