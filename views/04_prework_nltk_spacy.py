@@ -216,7 +216,14 @@ def render_nltk_spacy_view():
                 st.markdown("---")
 
                 # 2. Stopwords a POS Tagging
-                stop_words = set(stopwords.words("english"))
+                try:
+                    stop_words = set(stopwords.words("english"))
+                except Exception:
+                    try:
+                        nltk.download("stopwords", quiet=True)
+                        stop_words = set(stopwords.words("english"))
+                    except Exception:
+                        stop_words = {"in", "over", "the", "a", "an", "was", "is", "at", "by", "and", "during", "for", "to", "of", "on", "it", "this", "that", "these", "those"}
                 filtered_words = [w for w in words if w.lower() not in stop_words and w.isalnum()]
                 try:
                     tagged = pos_tag(words)
