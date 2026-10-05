@@ -257,6 +257,9 @@ p_hw_mcdonalds_w2v_nb = st.Page("views/04_homework_mcdonalds_w2v_nb.py", title="
 
 p_hw_kaggle_guide = st.Page("views/04_homework_kaggle_guide.py", title="Průvodce: Jak nahrát notebook na Kaggle", icon="🌐", url_path="hw_kaggle_guide")
 
+# Prework Session 3: Neřízené učení (Unsupervised Learning)
+p_prework_unsupervised_intro = st.Page("views/05_prework_unsupervised_learning_intro.py", title="Úvod do neřízeného učení (Unsupervised Learning)", icon="🌐", url_path="prework_unsupervised_intro")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -497,6 +500,9 @@ nav = st.navigation(
             p_hw_mcdonalds_w2v_critique,
             p_hw_mcdonalds_w2v_nb,
             p_hw_kaggle_guide,
+        ],
+        "25. Prework Session 3: Neřízené učení (Unsupervised Learning)": [
+            p_prework_unsupervised_intro,
         ],
     }
 )
