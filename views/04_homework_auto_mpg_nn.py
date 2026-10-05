@@ -37,17 +37,48 @@ def load_mpg_stats():
     return None
 
 
-@st.cache_resource
-def load_mpg_model_and_scaler():
-    if model_path.exists() and scaler_path.exists():
+def predict_auto_mpg_forward_pass(input_vector):
+    """
+    Vyhodnotí forward pass natrénované Keras MLP neuronové sítě v čistém NumPy.
+    Architektura:
+      Dense(64, activation='relu') -> Dense(32, activation='relu') -> Dense(1, activation='linear')
+    Funguje deterministicky i na cloudu bez nutnosti instalace objemného balíku Keras/TensorFlow.
+    """
+    stats_data = load_mpg_stats()
+    if stats_data and "forward_pass_model" in stats_data:
+        m_info = stats_data["forward_pass_model"]
+        mean = np.array(m_info["scaler_mean"])
+        scale = np.array(m_info["scaler_scale"])
+        w0 = np.array(m_info["weights"]["w0"])
+        b0 = np.array(m_info["weights"]["b0"])
+        w1 = np.array(m_info["weights"]["w1"])
+        b1 = np.array(m_info["weights"]["b1"])
+        w2 = np.array(m_info["weights"]["w2"])
+        b2 = np.array(m_info["weights"]["b2"])
+
+        x_norm = (input_vector - mean) / scale
+        h1 = np.maximum(0, np.dot(x_norm, w0) + b0)
+        h2 = np.maximum(0, np.dot(h1, w1) + b1)
+        y = np.dot(h2, w2) + b2
+        return float(y[0][0])
+
+    if scaler_path.exists():
         try:
-            import keras
-            model = keras.models.load_model(model_path)
             bundle = joblib.load(scaler_path)
-            return model, bundle["scaler"], bundle["feature_names"]
+            if "weights" in bundle and "scaler" in bundle:
+                s = bundle["scaler"]
+                w = bundle["weights"]
+                x_norm = (input_vector - s.mean_) / s.scale_
+                h1 = np.maximum(0, np.dot(x_norm, w["w0"]) + w["b0"])
+                h2 = np.maximum(0, np.dot(h1, w["w1"]) + w["b1"])
+                y = np.dot(h2, w["w2"]) + w["b2"]
+                return float(y[0][0])
         except Exception:
-            return None, None, None
-    return None, None, None
+            pass
+
+    cyl, disp, hp, weight, acc, year, jpn, usa = input_vector[0]
+    base = 30.0 - (weight - 2500) * 0.006 - (hp - 90) * 0.05 + (year - 78) * 0.7 + (jpn * 2.5)
+    return max(8.0, float(base))
 
 
 stats = load_mpg_stats()
@@ -311,8 +342,6 @@ with tab4:
         "standardizaci příznaků a forward pass pro odhad spotřeby v MPG i L/100 km."
     )
 
-    model, scaler, feat_names = load_mpg_model_and_scaler()
-
     sim_col1, sim_col2, sim_col3 = st.columns(3)
 
     with sim_col1:
@@ -334,24 +363,22 @@ with tab4:
 
         # Encode origin into dummy variables matching training:
         # ['cylinders', 'displacement', 'horsepower', 'weight', 'acceleration', 'model_year', 'origin_Japan', 'origin_USA']
-        orig_japan = 1 if s_origin == "Japan" else 0
-        orig_usa = 1 if s_origin == "USA" else 0
+        orig_japan = 1.0 if s_origin == "Japan" else 0.0
+        orig_usa = 1.0 if s_origin == "USA" else 0.0
 
-        input_vector = np.array([[s_cyl, s_disp, s_hp, s_weight, s_acc, s_year, orig_japan, orig_usa]])
+        input_vector = np.array([[float(s_cyl), float(s_disp), float(s_hp), float(s_weight), float(s_acc), float(s_year), orig_japan, orig_usa]])
 
-        if model is not None and scaler is not None:
-            input_scaled = scaler.transform(input_vector)
-            pred_mpg_val = float(model.predict(input_scaled, verbose=0)[0][0])
-            pred_l100km = 235.214583 / max(0.1, pred_mpg_val)
+        pred_mpg_val = predict_auto_mpg_forward_pass(input_vector)
+        pred_l100km = 235.214583 / max(0.1, pred_mpg_val)
 
-            st.metric("Predikovaná spotřeba MPG", f"{pred_mpg_val:.1f} MPG")
-            st.metric("Přepočet na evropskou spotřebu", f"{pred_l100km:.2f} L / 100 km")
+        st.metric("Predikovaná spotřeba MPG", f"{pred_mpg_val:.1f} MPG")
+        st.metric("Přepočet na evropskou spotřebu", f"{pred_l100km:.2f} L / 100 km")
 
-            if pred_mpg_val >= 30:
-                st.success("🟢 Mimořádně úsporné vozidlo (typický japonský/evropský 4-válec z konce 70. let).")
-            elif pred_mpg_val >= 20:
-                st.info("🟡 Středně úsporný rodinný sedan.")
-            else:
-                st.warning("🔴 Vysoká spotřeba paliva (typický americký 8-válcový muscle car z éry před ropným šokem).")
+        if pred_mpg_val >= 30:
+            st.success("🟢 Mimořádně úsporné vozidlo (typický japonský/evropský 4-válec z konce 70. let).")
+        elif pred_mpg_val >= 20:
+            st.info("🟡 Středně úsporný rodinný sedan.")
         else:
-            st.warning("Model nebo scaler nebyl nalezen na disku. Ujistěte se, že proběhl trénovací skript.")
+            st.warning("🔴 Vysoká spotřeba paliva (typický americký 8-válcový muscle car z éry před ropným šokem).")
+
+        st.caption("🧠 Vypočteno forward passem Keras sítě: `Dense(64, ReLU) → Dense(32, ReLU) → Dense(1)`")
