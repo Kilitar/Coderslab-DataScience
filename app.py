@@ -260,6 +260,10 @@ p_hw_kaggle_guide = st.Page("views/04_homework_kaggle_guide.py", title="Průvodc
 # Prework Session 3: Neřízené učení (Unsupervised Learning)
 p_prework_unsupervised_intro = st.Page("views/05_prework_unsupervised_learning_intro.py", title="Úvod do neřízeného učení (Unsupervised Learning)", icon="🌐", url_path="prework_unsupervised_intro")
 
+# Den 5: Neřízené učení – Redukce dimenzionality (PCA)
+p_pca_theory = st.Page("views/05_pca_dimensionality_reduction_theory.py", title="Teorie: Redukce dimenzionality & Matematika PCA", icon="📖", url_path="day5_pca_theory")
+p_pca_impl = st.Page("views/05_pca_breast_cancer_implementation.py", title="Implementace: PCA v Scikit-learn (Breast Cancer)", icon="🛠️", url_path="day5_pca_breast_cancer_implementation")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -503,6 +507,10 @@ nav = st.navigation(
         ],
         "25. Prework Session 3: Neřízené učení (Unsupervised Learning)": [
             p_prework_unsupervised_intro,
+        ],
+        "26. Den 5: Neřízené učení – Redukce dimenzionality (PCA)": [
+            p_pca_theory,
+            p_pca_impl,
         ],
     }
 )
