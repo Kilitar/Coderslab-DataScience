@@ -189,8 +189,8 @@ with tab2:
             {"Hyperparametr": "max_depth", "Testované hodnoty": str(p_dict.get("max_depth", [3, 6, 9])), "Vliv na XGBoost regresi": "Hloubka jednotlivých stromů; hloubka 6 zachycuje nelineární interakce mezi tepem a teplotou."},
             {"Hyperparametr": "min_samples_leaf", "Testované hodnoty": str(p_dict.get("min_samples_leaf", [1, 2, 4])), "Vliv na XGBoost regresi": "Parametr ze zadání (přijat přes **kwargs, v XGBoost odpovídá min_child_weight)."},
             {"Hyperparametr": "n_estimators", "Testované hodnoty": str(p_dict.get("n_estimators", [50, 100, 150])), "Vliv na XGBoost regresi": "Počet boostingových stromů; 150 stromů vyhladilo predikce na minimální MAE."},
-            {"Metrika optimalizace", "scoring", "neg_mean_absolute_error", "Přímá optimalizace na průměrnou absolutní odchylku dle zadání."},
-            {"Typ vyhledávání", "RandomizedSearchCV", "n_iter=10, cv=3", "Efektivní náhodný průzkum kombinací v 3-násobné křížové validaci."}
+            {"Hyperparametr": "scoring (metrika)", "Testované hodnoty": "neg_mean_absolute_error", "Vliv na XGBoost regresi": "Přímá optimalizace na průměrnou absolutní odchylku dle zadání."},
+            {"Hyperparametr": "Hledání & validace", "Testované hodnoty": "RandomizedSearchCV (n_iter=10, cv=3)", "Vliv na XGBoost regresi": "Efektivní náhodný průzkum kombinací v 3-násobné křížové validaci."}
         ])
         st.dataframe(param_table, hide_index=True, width="stretch")
 

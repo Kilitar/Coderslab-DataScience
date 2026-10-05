@@ -1,4 +1,11 @@
+import warnings
 import streamlit as st
+
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+    warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+except ImportError:
+    pass
 
 st.set_page_config(
     page_title="Data Science & ML Portfolio | Coderslab",

@@ -221,8 +221,8 @@ with tab2:
             {"Hyperparametr": "gamma (min_split_loss)", "Testované hodnoty": str(p_dict.get("gamma", [0.0, 0.1, 0.5])), "Účel a role v XGBoost": "Minimální snížení ztrátové funkce nutné pro provedení dalšího rozštěpení uzlu."},
             {"Hyperparametr": "learning_rate (eta)", "Testované hodnoty": str(p_dict.get("learning_rate", [0.05, 0.1, 0.2])), "Účel a role v XGBoost": "Zmenšovací faktor (shrinkage) váhy každého nově přidaného stromu."},
             {"Hyperparametr": "objective", "Testované hodnoty": str(p_dict.get("objective", ["binary:logistic"])), "Účel a role v XGBoost": "Logistická ztrátová funkce pro binární klasifikaci."},
-            {"Optimalizační metrika", "scoring='precision'", "precision", "Maximalizace podílu skutečných diabetiček mezi označenými."},
-            {"Křížová validace", "cv=5", "5 záhybů", "Odhad zobecnitelnosti na trénovacích datech."}
+            {"Hyperparametr": "scoring (metrika)", "Testované hodnoty": "precision", "Účel a role v XGBoost": "Maximalizace podílu skutečných diabetiček mezi označenými."},
+            {"Hyperparametr": "cv (křížová validace)", "Testované hodnoty": "5-fold CV", "Účel a role v XGBoost": "Odhad zobecnitelnosti na trénovacích datech."}
         ])
         st.dataframe(param_table, hide_index=True, width="stretch")
 

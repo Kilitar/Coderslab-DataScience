@@ -198,8 +198,8 @@ with tab2:
             {"Hyperparametr": "max_depth", "Testované hodnoty": str(p_dict.get("max_depth", [10, 15, 20])), "Vliv na model": "Řídí maximální hloubku stromů; zabraňuje přeučení (overfittingu)."},
             {"Hyperparametr": "min_samples_leaf", "Testované hodnoty": str(p_dict.get("min_samples_leaf", [1, 2, 4])), "Vliv na model": "Minimální počet vzorků v koncovém listu; vyhlazuje cenové odhady."},
             {"Hyperparametr": "n_estimators", "Testované hodnoty": str(p_dict.get("n_estimators", [50, 100, 150])), "Vliv na model": "Počet stromů v ansámblu; vyšší počet stabilizuje rozptyl, ale prodlužuje trénování."},
-            {"Metrika optimalizace", "scoring", "neg_mean_squared_error", "Odpovídá minimalizaci průměrné čtvercové chyby dle zadání."},
-            {"Křížová validace", "cv", "3-fold cross validation", "3 trénovací záhyby pro robustní odhad generalizační chyby."}
+            {"Hyperparametr": "scoring (metrika)", "Testované hodnoty": "neg_mean_squared_error", "Vliv na model": "Odpovídá minimalizaci průměrné čtvercové chyby dle zadání."},
+            {"Hyperparametr": "cv (křížová validace)", "Testované hodnoty": "3-fold cross validation", "Vliv na model": "3 trénovací záhyby pro robustní odhad generalizační chyby."}
         ])
         st.dataframe(param_table, hide_index=True, width="stretch")
 
