@@ -5,6 +5,7 @@ Návod na exportování vypracovaných úkolů z Colabu / lokálního prostřed�
 propojení s datasety, úpravu cest a vytvoření reprezentativního Data Science portfolia.
 """
 
+import pandas as pd
 import streamlit as st
 
 st.title("🌐 Průvodce: Jak publikovat notebook z Colabu na Kaggle")

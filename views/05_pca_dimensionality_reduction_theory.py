@@ -225,7 +225,7 @@ with tab3:
             {cov_matrix[0,0]:.2f} & {cov_matrix[0,1]:.2f} & {cov_matrix[0,2]:.2f} \\
             {cov_matrix[1,0]:.2f} & {cov_matrix[1,1]:.2f} & {cov_matrix[1,2]:.2f} \\
             {cov_matrix[2,0]:.2f} & {cov_matrix[2,1]:.2f} & {cov_matrix[2,2]:.2f}
-            \end{bmatrix}$$
+            \end{{bmatrix}}$$
             *(Na diagonále jsou rozptyly zkoušek: 66.67, 291.67, 166.67).*
             """
         )
