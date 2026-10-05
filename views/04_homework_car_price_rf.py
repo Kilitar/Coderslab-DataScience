@@ -45,7 +45,6 @@ def load_car_model():
 
 
 stats = load_car_stats()
-model = load_car_model()
 
 metrics = stats["test_metrics"] if stats else {}
 meta = stats["metadata"] if stats else {}
@@ -340,6 +339,7 @@ with tab4:
         s_color = st.selectbox("Barva karoserie:", colors, index=0)
 
     if st.button("🔮 Odhadnout tržní cenu automobilu", type="primary"):
+        model = load_car_model()
         feature_names = meta.get("feature_names", [])
 
         if model is not None and feature_names:

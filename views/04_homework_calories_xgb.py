@@ -45,7 +45,6 @@ def load_calories_bundle():
 
 
 stats = load_calories_stats()
-bundle = load_calories_bundle()
 
 metrics = stats["test_metrics"] if stats else {}
 meta = stats["metadata"] if stats else {}
@@ -284,6 +283,7 @@ with tab4:
         st.metric("Vypočtené BMI", f"{bmi_calc:.1f} kg/m²")
 
     if st.button("🔥 Vypočítat spálené kalorie", type="primary"):
+        bundle = load_calories_bundle()
         features = meta.get("features", ["age", "height", "weight", "duration", "heart_rate", "body_temp", "gender_male"])
 
         raw_input = {

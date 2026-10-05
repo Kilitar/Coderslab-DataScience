@@ -45,7 +45,6 @@ def load_diabetes_model():
 
 
 stats = load_diabetes_stats()
-model = load_diabetes_model()
 
 metrics = stats["test_metrics"] if stats else {}
 meta = stats["metadata"] if stats else {}
@@ -319,6 +318,7 @@ with tab4:
         i_thresh = st.slider("Rozhodovací práh diagnózy (Threshold):", min_value=0.10, max_value=0.90, value=0.50, step=0.05)
 
     if st.button("🔮 Diagnostikovat riziko diabetu", type="primary"):
+        model = load_diabetes_model()
         features = meta.get("features", ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"])
 
         input_data = pd.DataFrame([{
