@@ -1,0 +1,792 @@
+{
+  "metadata": {
+    "dataset": "titanic_data.csv",
+    "total_rows": 1309,
+    "train_rows": 916,
+    "test_rows": 393,
+    "dropped_columns": [
+      "passengerid",
+      "name",
+      "ticket",
+      "cabin"
+    ],
+    "feature_count": 14,
+    "feature_names": [
+      "age",
+      "fare",
+      "parch",
+      "pclass",
+      "sibsp",
+      "family_size",
+      "sex_male",
+      "embarked_Q",
+      "embarked_S",
+      "title_Master",
+      "title_Miss",
+      "title_Mr",
+      "title_Mrs",
+      "title_Rev"
+    ],
+    "target_distribution": {
+      "died": 815,
+      "survived": 494,
+      "survival_rate": 0.3774
+    }
+  },
+  "grid_search": {
+    "param_grid": {
+      "max_depth": [
+        4,
+        6,
+        8,
+        12
+      ],
+      "min_samples_leaf": [
+        1,
+        2,
+        4
+      ],
+      "n_estimators": [
+        50,
+        100,
+        150
+      ]
+    },
+    "scoring_metric": "precision",
+    "cv_folds": 5,
+    "best_params": {
+      "max_depth": 6,
+      "min_samples_leaf": 1,
+      "n_estimators": 100
+    },
+    "best_cv_precision": 0.8454,
+    "top_10_configs": [
+      {
+        "params": {
+          "max_depth": 6,
+          "min_samples_leaf": 1,
+          "n_estimators": 150
+        },
+        "mean_test_precision": 0.8454,
+        "std_test_score": 0.0122,
+        "rank": 1
+      },
+      {
+        "params": {
+          "max_depth": 6,
+          "min_samples_leaf": 1,
+          "n_estimators": 100
+        },
+        "mean_test_precision": 0.8454,
+        "std_test_score": 0.0122,
+        "rank": 1
+      },
+      {
+        "params": {
+          "max_depth": 4,
+          "min_samples_leaf": 2,
+          "n_estimators": 50
+        },
+        "mean_test_precision": 0.8451,
+        "std_test_score": 0.0138,
+        "rank": 3
+      },
+      {
+        "params": {
+          "max_depth": 4,
+          "min_samples_leaf": 1,
+          "n_estimators": 50
+        },
+        "mean_test_precision": 0.8449,
+        "std_test_score": 0.0119,
+        "rank": 4
+      },
+      {
+        "params": {
+          "max_depth": 6,
+          "min_samples_leaf": 2,
+          "n_estimators": 50
+        },
+        "mean_test_precision": 0.8429,
+        "std_test_score": 0.0144,
+        "rank": 5
+      },
+      {
+        "params": {
+          "max_depth": 6,
+          "min_samples_leaf": 1,
+          "n_estimators": 50
+        },
+        "mean_test_precision": 0.8429,
+        "std_test_score": 0.0144,
+        "rank": 5
+      },
+      {
+        "params": {
+          "max_depth": 8,
+          "min_samples_leaf": 2,
+          "n_estimators": 100
+        },
+        "mean_test_precision": 0.841,
+        "std_test_score": 0.0158,
+        "rank": 7
+      },
+      {
+        "params": {
+          "max_depth": 4,
+          "min_samples_leaf": 2,
+          "n_estimators": 100
+        },
+        "mean_test_precision": 0.841,
+        "std_test_score": 0.0209,
+        "rank": 8
+      },
+      {
+        "params": {
+          "max_depth": 4,
+          "min_samples_leaf": 2,
+          "n_estimators": 150
+        },
+        "mean_test_precision": 0.841,
+        "std_test_score": 0.0209,
+        "rank": 8
+      },
+      {
+        "params": {
+          "max_depth": 6,
+          "min_samples_leaf": 4,
+          "n_estimators": 100
+        },
+        "mean_test_precision": 0.8409,
+        "std_test_score": 0.0196,
+        "rank": 10
+      }
+    ]
+  },
+  "test_metrics": {
+    "accuracy": 0.8651,
+    "precision": 0.88,
+    "recall": 0.7432,
+    "f1_score": 0.8059,
+    "roc_auc": 0.8947,
+    "confusion_matrix": [
+      [
+        230,
+        15
+      ],
+      [
+        38,
+        110
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.8582089552238806,
+        "recall": 0.9387755102040817,
+        "f1-score": 0.8966861598440545,
+        "support": 245.0
+      },
+      "1": {
+        "precision": 0.88,
+        "recall": 0.7432432432432432,
+        "f1-score": 0.8058608058608059,
+        "support": 148.0
+      },
+      "accuracy": 0.8651399491094147,
+      "macro avg": {
+        "precision": 0.8691044776119403,
+        "recall": 0.8410093767236624,
+        "f1-score": 0.8512734828524302,
+        "support": 393.0
+      },
+      "weighted avg": {
+        "precision": 0.8664152519843531,
+        "recall": 0.8651399491094147,
+        "f1-score": 0.8624822097434927,
+        "support": 393.0
+      }
+    }
+  },
+  "feature_importances": [
+    {
+      "feature": "sex_male",
+      "importance": 0.3151
+    },
+    {
+      "feature": "title_Mr",
+      "importance": 0.2552
+    },
+    {
+      "feature": "fare",
+      "importance": 0.0839
+    },
+    {
+      "feature": "title_Miss",
+      "importance": 0.0678
+    },
+    {
+      "feature": "title_Mrs",
+      "importance": 0.0604
+    },
+    {
+      "feature": "pclass",
+      "importance": 0.0536
+    },
+    {
+      "feature": "age",
+      "importance": 0.0533
+    },
+    {
+      "feature": "family_size",
+      "importance": 0.0431
+    },
+    {
+      "feature": "sibsp",
+      "importance": 0.0223
+    },
+    {
+      "feature": "parch",
+      "importance": 0.0219
+    },
+    {
+      "feature": "embarked_S",
+      "importance": 0.0077
+    },
+    {
+      "feature": "embarked_Q",
+      "importance": 0.0062
+    },
+    {
+      "feature": "title_Master",
+      "importance": 0.0052
+    },
+    {
+      "feature": "title_Rev",
+      "importance": 0.0043
+    }
+  ],
+  "roc_curve": {
+    "fpr": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0041,
+      0.0082,
+      0.0122,
+      0.0122,
+      0.0163,
+      0.0204,
+      0.0245,
+      0.0245,
+      0.0286,
+      0.0327,
+      0.0367,
+      0.0449,
+      0.049,
+      0.0531,
+      0.0612,
+      0.0694,
+      0.0735,
+      0.0776,
+      0.0857,
+      0.098,
+      0.102,
+      0.1061,
+      0.1102,
+      0.1184,
+      0.1224,
+      0.1429,
+      0.1469,
+      0.1592,
+      0.1755,
+      0.1878,
+      0.2,
+      0.2245,
+      0.249,
+      0.2531,
+      0.2857,
+      0.302,
+      0.3143,
+      0.3347,
+      0.3918,
+      0.4082,
+      0.4245,
+      0.4653,
+      0.4776,
+      0.4857,
+      0.5388,
+      0.551,
+      0.5796,
+      0.5918,
+      0.6041,
+      0.6694,
+      0.6816,
+      0.7265,
+      0.7347,
+      0.7551,
+      0.7796,
+      0.7959,
+      0.8204,
+      0.8408,
+      0.8612,
+      0.8735,
+      0.8857,
+      0.8939,
+      0.9143,
+      0.9551,
+      0.9633,
+      1.0
+    ],
+    "tpr": [
+      0.0,
+      0.0405,
+      0.0878,
+      0.1081,
+      0.1757,
+      0.25,
+      0.2635,
+      0.3108,
+      0.4459,
+      0.4932,
+      0.5,
+      0.5338,
+      0.6014,
+      0.6284,
+      0.6351,
+      0.6486,
+      0.6689,
+      0.6757,
+      0.7162,
+      0.7365,
+      0.7432,
+      0.75,
+      0.7568,
+      0.777,
+      0.7905,
+      0.7973,
+      0.8041,
+      0.8108,
+      0.8176,
+      0.8378,
+      0.8446,
+      0.8514,
+      0.8514,
+      0.8581,
+      0.8649,
+      0.8649,
+      0.8716,
+      0.8851,
+      0.8919,
+      0.8919,
+      0.8986,
+      0.9054,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.9189,
+      0.9189,
+      0.9257,
+      0.9324,
+      0.9392,
+      0.9392,
+      0.9392,
+      0.9392,
+      0.9392,
+      0.9459,
+      0.9459,
+      0.9459,
+      0.9459,
+      0.9527,
+      0.9527,
+      0.9662,
+      0.973,
+      0.973,
+      0.9797,
+      0.9797,
+      0.9865,
+      0.9932,
+      1.0
+    ]
+  },
+  "precision_recall_curve": {
+    "precision": [
+      0.3766,
+      0.3852,
+      0.3914,
+      0.3984,
+      0.4017,
+      0.4052,
+      0.4106,
+      0.4179,
+      0.4294,
+      0.4357,
+      0.4528,
+      0.4728,
+      0.4826,
+      0.4929,
+      0.5075,
+      0.5211,
+      0.5333,
+      0.551,
+      0.5696,
+      0.5921,
+      0.6081,
+      0.6308,
+      0.6456,
+      0.66,
+      0.6839,
+      0.7005,
+      0.7127,
+      0.7356,
+      0.7545,
+      0.7812,
+      0.8052,
+      0.8163,
+      0.8298,
+      0.8519,
+      0.8605,
+      0.8862,
+      0.8974,
+      0.9009,
+      0.9143,
+      0.9394,
+      0.9348,
+      0.9302,
+      0.9375,
+      0.9559,
+      0.9516,
+      0.9464,
+      0.9388,
+      0.9302,
+      0.9722,
+      0.9667,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "recall": [
+      1.0,
+      0.9865,
+      0.9865,
+      0.9797,
+      0.9662,
+      0.9527,
+      0.9459,
+      0.9459,
+      0.9459,
+      0.9392,
+      0.9392,
+      0.9392,
+      0.9392,
+      0.9324,
+      0.9189,
+      0.9189,
+      0.9189,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.9122,
+      0.8986,
+      0.8919,
+      0.8919,
+      0.8851,
+      0.8716,
+      0.8649,
+      0.8514,
+      0.8446,
+      0.8378,
+      0.8108,
+      0.7905,
+      0.777,
+      0.75,
+      0.7365,
+      0.7095,
+      0.6757,
+      0.6486,
+      0.6284,
+      0.5811,
+      0.5405,
+      0.5068,
+      0.4392,
+      0.3986,
+      0.3581,
+      0.3108,
+      0.2703,
+      0.2365,
+      0.1959,
+      0.1622,
+      0.1216,
+      0.0676,
+      0.0203
+    ]
+  },
+  "sample_predictions": [
+    {
+      "name": "Stead, Mr. William Thomas",
+      "pclass": 1,
+      "sex": "male",
+      "age": 62.0,
+      "fare": 26.55,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.2109,
+      "is_correct": true
+    },
+    {
+      "name": "Carrau, Mr. Francisco M",
+      "pclass": 1,
+      "sex": "male",
+      "age": 28.0,
+      "fare": 47.1,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.2339,
+      "is_correct": true
+    },
+    {
+      "name": "Lievens, Mr. Rene Aime",
+      "pclass": 3,
+      "sex": "male",
+      "age": 24.0,
+      "fare": 9.5,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.0682,
+      "is_correct": true
+    },
+    {
+      "name": "Smyth, Miss. Julia",
+      "pclass": 3,
+      "sex": "female",
+      "age": 22.0,
+      "fare": 7.7333,
+      "title": "Miss",
+      "family_size": 0,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.8358,
+      "is_correct": true
+    },
+    {
+      "name": "Buckley, Miss. Katherine",
+      "pclass": 3,
+      "sex": "female",
+      "age": 18.5,
+      "fare": 7.2833,
+      "title": "Miss",
+      "family_size": 0,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.7652,
+      "is_correct": true
+    },
+    {
+      "name": "Goodwin, Miss. Lillian Amy",
+      "pclass": 3,
+      "sex": "female",
+      "age": 16.0,
+      "fare": 46.9,
+      "title": "Miss",
+      "family_size": 7,
+      "actual": "Nepřežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.5273,
+      "is_correct": false
+    },
+    {
+      "name": "Hunt, Mr. George Henry",
+      "pclass": 2,
+      "sex": "male",
+      "age": 33.0,
+      "fare": 12.275,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.099,
+      "is_correct": true
+    },
+    {
+      "name": "Skoog, Miss. Margit Elizabeth",
+      "pclass": 3,
+      "sex": "female",
+      "age": 2.0,
+      "fare": 27.9,
+      "title": "Miss",
+      "family_size": 5,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.295,
+      "is_correct": true
+    },
+    {
+      "name": "Nieminen, Miss. Manta Josefina",
+      "pclass": 3,
+      "sex": "female",
+      "age": 29.0,
+      "fare": 7.925,
+      "title": "Miss",
+      "family_size": 0,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.6461,
+      "is_correct": true
+    },
+    {
+      "name": "Abelson, Mrs. Samuel (Hannah Wizosky)",
+      "pclass": 2,
+      "sex": "female",
+      "age": 28.0,
+      "fare": 24.0,
+      "title": "Mrs",
+      "family_size": 1,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.8875,
+      "is_correct": true
+    },
+    {
+      "name": "Sobey, Mr. Samuel James Hayden",
+      "pclass": 2,
+      "sex": "male",
+      "age": 25.0,
+      "fare": 13.0,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.0749,
+      "is_correct": true
+    },
+    {
+      "name": "McDermott, Miss. Brigdet Delia",
+      "pclass": 3,
+      "sex": "female",
+      "age": 22.0,
+      "fare": 7.7875,
+      "title": "Miss",
+      "family_size": 0,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.8303,
+      "is_correct": true
+    },
+    {
+      "name": "Bonnell, Miss. Elizabeth",
+      "pclass": 1,
+      "sex": "female",
+      "age": 58.0,
+      "fare": 26.55,
+      "title": "Miss",
+      "family_size": 0,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.8514,
+      "is_correct": true
+    },
+    {
+      "name": "Herman, Mrs. Samuel (Jane Laver)",
+      "pclass": 2,
+      "sex": "female",
+      "age": 48.0,
+      "fare": 65.0,
+      "title": "Mrs",
+      "family_size": 3,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.8878,
+      "is_correct": true
+    },
+    {
+      "name": "Moubarek, Mrs. George (Omine Amenia\" Alexander)\"",
+      "pclass": 3,
+      "sex": "female",
+      "age": 35.5,
+      "fare": 15.2458,
+      "title": "Mrs",
+      "family_size": 2,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.6427,
+      "is_correct": true
+    },
+    {
+      "name": "Miles, Mr. Frank",
+      "pclass": 3,
+      "sex": "male",
+      "age": 30.0,
+      "fare": 8.05,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.0817,
+      "is_correct": true
+    },
+    {
+      "name": "Sage, Mr. George John Jr",
+      "pclass": 3,
+      "sex": "male",
+      "age": 30.0,
+      "fare": 69.55,
+      "title": "Mr",
+      "family_size": 10,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.0429,
+      "is_correct": true
+    },
+    {
+      "name": "Tobin, Mr. Roger",
+      "pclass": 3,
+      "sex": "male",
+      "age": 30.0,
+      "fare": 7.75,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.0359,
+      "is_correct": true
+    },
+    {
+      "name": "Harper, Miss. Annie Jessie \"Nina\"",
+      "pclass": 2,
+      "sex": "female",
+      "age": 6.0,
+      "fare": 33.0,
+      "title": "Miss",
+      "family_size": 1,
+      "actual": "Přežil",
+      "predicted": "Přežil",
+      "prob_survived": 0.8884,
+      "is_correct": true
+    },
+    {
+      "name": "Denkoff, Mr. Mitto",
+      "pclass": 3,
+      "sex": "male",
+      "age": 30.0,
+      "fare": 7.8958,
+      "title": "Mr",
+      "family_size": 0,
+      "actual": "Nepřežil",
+      "predicted": "Nepřežil",
+      "prob_survived": 0.072,
+      "is_correct": true
+    }
+  ]
+}

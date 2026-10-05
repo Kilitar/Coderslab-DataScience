@@ -1,0 +1,3866 @@
+{
+  "metadata": {
+    "dataset": "car_data.csv",
+    "total_rows": 19237,
+    "clean_rows": 19226,
+    "train_rows": 13458,
+    "test_rows": 5768,
+    "dropped_columns": [
+      "Unnamed: 0",
+      "id",
+      "model"
+    ],
+    "feature_count": 109,
+    "feature_names": [
+      "prod_year",
+      "engine_volume",
+      "mileage",
+      "cylinders",
+      "airbags",
+      "manufacturer_ALFA ROMEO",
+      "manufacturer_ASTON MARTIN",
+      "manufacturer_AUDI",
+      "manufacturer_BENTLEY",
+      "manufacturer_BMW",
+      "manufacturer_BUICK",
+      "manufacturer_CADILLAC",
+      "manufacturer_CHEVROLET",
+      "manufacturer_CHRYSLER",
+      "manufacturer_CITROEN",
+      "manufacturer_DAEWOO",
+      "manufacturer_DAIHATSU",
+      "manufacturer_DODGE",
+      "manufacturer_FERRARI",
+      "manufacturer_FIAT",
+      "manufacturer_FORD",
+      "manufacturer_GAZ",
+      "manufacturer_GMC",
+      "manufacturer_GREATWALL",
+      "manufacturer_HAVAL",
+      "manufacturer_HONDA",
+      "manufacturer_HUMMER",
+      "manufacturer_HYUNDAI",
+      "manufacturer_INFINITI",
+      "manufacturer_ISUZU",
+      "manufacturer_JAGUAR",
+      "manufacturer_JEEP",
+      "manufacturer_KIA",
+      "manufacturer_LAMBORGHINI",
+      "manufacturer_LANCIA",
+      "manufacturer_LAND ROVER",
+      "manufacturer_LEXUS",
+      "manufacturer_LINCOLN",
+      "manufacturer_MASERATI",
+      "manufacturer_MAZDA",
+      "manufacturer_MERCEDES-BENZ",
+      "manufacturer_MERCURY",
+      "manufacturer_MINI",
+      "manufacturer_MITSUBISHI",
+      "manufacturer_MOSKVICH",
+      "manufacturer_NISSAN",
+      "manufacturer_OPEL",
+      "manufacturer_PEUGEOT",
+      "manufacturer_PONTIAC",
+      "manufacturer_PORSCHE",
+      "manufacturer_RENAULT",
+      "manufacturer_ROLLS-ROYCE",
+      "manufacturer_ROVER",
+      "manufacturer_SAAB",
+      "manufacturer_SATURN",
+      "manufacturer_SCION",
+      "manufacturer_SEAT",
+      "manufacturer_SKODA",
+      "manufacturer_SSANGYONG",
+      "manufacturer_SUBARU",
+      "manufacturer_SUZUKI",
+      "manufacturer_TESLA",
+      "manufacturer_TOYOTA",
+      "manufacturer_UAZ",
+      "manufacturer_VAZ",
+      "manufacturer_VOLKSWAGEN",
+      "manufacturer_VOLVO",
+      "manufacturer_ZAZ",
+      "manufacturer_სხვა",
+      "category_Coupe",
+      "category_Goods wagon",
+      "category_Hatchback",
+      "category_Jeep",
+      "category_Limousine",
+      "category_Microbus",
+      "category_Minivan",
+      "category_Pickup",
+      "category_Sedan",
+      "category_Universal",
+      "leather_interior_Yes",
+      "fuel_type_Diesel",
+      "fuel_type_Hybrid",
+      "fuel_type_Hydrogen",
+      "fuel_type_LPG",
+      "fuel_type_Petrol",
+      "fuel_type_Plug-in Hybrid",
+      "gear_box_type_Manual",
+      "gear_box_type_Tiptronic",
+      "gear_box_type_Variator",
+      "drive_wheels_Front",
+      "drive_wheels_Rear",
+      "doors_4-5",
+      "doors_>5",
+      "wheel_Right-hand drive",
+      "color_Black",
+      "color_Blue",
+      "color_Brown",
+      "color_Carnelian red",
+      "color_Golden",
+      "color_Green",
+      "color_Grey",
+      "color_Orange",
+      "color_Pink",
+      "color_Purple",
+      "color_Red",
+      "color_Silver",
+      "color_Sky blue",
+      "color_White",
+      "color_Yellow"
+    ],
+    "categorical_columns": [
+      "manufacturer",
+      "category",
+      "leather_interior",
+      "fuel_type",
+      "gear_box_type",
+      "drive_wheels",
+      "doors",
+      "wheel",
+      "color"
+    ],
+    "target_statistics": {
+      "mean": 17178.59,
+      "median": 13172.0,
+      "std": 19750.01,
+      "min": 1.0,
+      "max": 872946.0
+    }
+  },
+  "grid_search": {
+    "param_grid": {
+      "max_depth": [
+        10,
+        15,
+        20
+      ],
+      "min_samples_leaf": [
+        1,
+        2,
+        4
+      ],
+      "n_estimators": [
+        50,
+        100,
+        150
+      ]
+    },
+    "scoring_metric": "neg_mean_squared_error",
+    "cv_folds": 3,
+    "best_params": {
+      "max_depth": 20,
+      "min_samples_leaf": 1,
+      "n_estimators": 100
+    },
+    "best_cv_rmse": 11822.9,
+    "top_10_configs": [
+      {
+        "params": {
+          "max_depth": 20,
+          "min_samples_leaf": 1,
+          "n_estimators": 100
+        },
+        "mean_test_rmse": 11822.9,
+        "mean_test_neg_mse": -139780962.0,
+        "std_test_score": 63871077.8,
+        "rank": 1
+      },
+      {
+        "params": {
+          "max_depth": 20,
+          "min_samples_leaf": 1,
+          "n_estimators": 150
+        },
+        "mean_test_rmse": 11864.11,
+        "mean_test_neg_mse": -140757206.59,
+        "std_test_score": 65653524.48,
+        "rank": 2
+      },
+      {
+        "params": {
+          "max_depth": 15,
+          "min_samples_leaf": 1,
+          "n_estimators": 100
+        },
+        "mean_test_rmse": 11930.48,
+        "mean_test_neg_mse": -142336325.68,
+        "std_test_score": 64094421.67,
+        "rank": 3
+      },
+      {
+        "params": {
+          "max_depth": 20,
+          "min_samples_leaf": 1,
+          "n_estimators": 50
+        },
+        "mean_test_rmse": 11939.46,
+        "mean_test_neg_mse": -142550811.52,
+        "std_test_score": 65326456.96,
+        "rank": 4
+      },
+      {
+        "params": {
+          "max_depth": 15,
+          "min_samples_leaf": 1,
+          "n_estimators": 150
+        },
+        "mean_test_rmse": 11941.58,
+        "mean_test_neg_mse": -142601441.75,
+        "std_test_score": 65593476.97,
+        "rank": 5
+      },
+      {
+        "params": {
+          "max_depth": 20,
+          "min_samples_leaf": 2,
+          "n_estimators": 100
+        },
+        "mean_test_rmse": 11971.43,
+        "mean_test_neg_mse": -143315050.34,
+        "std_test_score": 61055105.47,
+        "rank": 6
+      },
+      {
+        "params": {
+          "max_depth": 20,
+          "min_samples_leaf": 2,
+          "n_estimators": 150
+        },
+        "mean_test_rmse": 11991.66,
+        "mean_test_neg_mse": -143799850.41,
+        "std_test_score": 62448350.08,
+        "rank": 7
+      },
+      {
+        "params": {
+          "max_depth": 15,
+          "min_samples_leaf": 2,
+          "n_estimators": 100
+        },
+        "mean_test_rmse": 11998.18,
+        "mean_test_neg_mse": -143956411.07,
+        "std_test_score": 60695956.94,
+        "rank": 8
+      },
+      {
+        "params": {
+          "max_depth": 15,
+          "min_samples_leaf": 1,
+          "n_estimators": 50
+        },
+        "mean_test_rmse": 12012.68,
+        "mean_test_neg_mse": -144304401.08,
+        "std_test_score": 64845869.43,
+        "rank": 9
+      },
+      {
+        "params": {
+          "max_depth": 15,
+          "min_samples_leaf": 2,
+          "n_estimators": 150
+        },
+        "mean_test_rmse": 12017.17,
+        "mean_test_neg_mse": -144412310.73,
+        "std_test_score": 62361728.18,
+        "rank": 10
+      }
+    ]
+  },
+  "test_metrics": {
+    "mae": 4979.13,
+    "mse": 140818846.98,
+    "rmse": 11866.71,
+    "r2": 0.6492
+  },
+  "feature_importances": [
+    {
+      "feature": "prod_year",
+      "importance": 0.2047
+    },
+    {
+      "feature": "engine_volume",
+      "importance": 0.1437
+    },
+    {
+      "feature": "manufacturer_LAMBORGHINI",
+      "importance": 0.1299
+    },
+    {
+      "feature": "airbags",
+      "importance": 0.0918
+    },
+    {
+      "feature": "mileage",
+      "importance": 0.0903
+    },
+    {
+      "feature": "gear_box_type_Tiptronic",
+      "importance": 0.0679
+    },
+    {
+      "feature": "fuel_type_Diesel",
+      "importance": 0.0422
+    },
+    {
+      "feature": "cylinders",
+      "importance": 0.0325
+    },
+    {
+      "feature": "category_Sedan",
+      "importance": 0.0198
+    },
+    {
+      "feature": "drive_wheels_Front",
+      "importance": 0.0157
+    },
+    {
+      "feature": "category_Jeep",
+      "importance": 0.0114
+    },
+    {
+      "feature": "leather_interior_Yes",
+      "importance": 0.011
+    },
+    {
+      "feature": "manufacturer_MERCEDES-BENZ",
+      "importance": 0.0099
+    },
+    {
+      "feature": "fuel_type_Petrol",
+      "importance": 0.0088
+    },
+    {
+      "feature": "color_White",
+      "importance": 0.0081
+    },
+    {
+      "feature": "color_Black",
+      "importance": 0.008
+    },
+    {
+      "feature": "manufacturer_TOYOTA",
+      "importance": 0.0078
+    },
+    {
+      "feature": "manufacturer_LAND ROVER",
+      "importance": 0.0077
+    },
+    {
+      "feature": "manufacturer_BMW",
+      "importance": 0.0063
+    },
+    {
+      "feature": "manufacturer_FORD",
+      "importance": 0.0055
+    },
+    {
+      "feature": "manufacturer_LEXUS",
+      "importance": 0.0053
+    },
+    {
+      "feature": "manufacturer_BENTLEY",
+      "importance": 0.0053
+    },
+    {
+      "feature": "drive_wheels_Rear",
+      "importance": 0.0047
+    },
+    {
+      "feature": "color_Grey",
+      "importance": 0.004
+    },
+    {
+      "feature": "color_Silver",
+      "importance": 0.0037
+    },
+    {
+      "feature": "gear_box_type_Variator",
+      "importance": 0.0037
+    },
+    {
+      "feature": "manufacturer_PORSCHE",
+      "importance": 0.0031
+    },
+    {
+      "feature": "category_Coupe",
+      "importance": 0.0028
+    },
+    {
+      "feature": "manufacturer_JAGUAR",
+      "importance": 0.0025
+    },
+    {
+      "feature": "manufacturer_CHEVROLET",
+      "importance": 0.0025
+    },
+    {
+      "feature": "wheel_Right-hand drive",
+      "importance": 0.0024
+    },
+    {
+      "feature": "doors_4-5",
+      "importance": 0.0024
+    },
+    {
+      "feature": "manufacturer_KIA",
+      "importance": 0.0023
+    },
+    {
+      "feature": "manufacturer_HYUNDAI",
+      "importance": 0.0023
+    },
+    {
+      "feature": "fuel_type_LPG",
+      "importance": 0.0022
+    },
+    {
+      "feature": "color_Blue",
+      "importance": 0.002
+    },
+    {
+      "feature": "fuel_type_Hybrid",
+      "importance": 0.0018
+    },
+    {
+      "feature": "manufacturer_HONDA",
+      "importance": 0.0017
+    },
+    {
+      "feature": "color_Brown",
+      "importance": 0.0016
+    },
+    {
+      "feature": "category_Hatchback",
+      "importance": 0.0015
+    },
+    {
+      "feature": "manufacturer_AUDI",
+      "importance": 0.0014
+    },
+    {
+      "feature": "gear_box_type_Manual",
+      "importance": 0.0012
+    },
+    {
+      "feature": "category_Minivan",
+      "importance": 0.0011
+    },
+    {
+      "feature": "manufacturer_FERRARI",
+      "importance": 0.001
+    },
+    {
+      "feature": "color_Carnelian red",
+      "importance": 0.0009
+    },
+    {
+      "feature": "category_Universal",
+      "importance": 0.0009
+    },
+    {
+      "feature": "manufacturer_JEEP",
+      "importance": 0.0009
+    },
+    {
+      "feature": "fuel_type_Plug-in Hybrid",
+      "importance": 0.0008
+    },
+    {
+      "feature": "color_Orange",
+      "importance": 0.0008
+    },
+    {
+      "feature": "color_Red",
+      "importance": 0.0008
+    },
+    {
+      "feature": "color_Yellow",
+      "importance": 0.0007
+    },
+    {
+      "feature": "manufacturer_NISSAN",
+      "importance": 0.0007
+    },
+    {
+      "feature": "category_Pickup",
+      "importance": 0.0007
+    },
+    {
+      "feature": "manufacturer_VOLKSWAGEN",
+      "importance": 0.0006
+    },
+    {
+      "feature": "category_Microbus",
+      "importance": 0.0006
+    },
+    {
+      "feature": "manufacturer_SUZUKI",
+      "importance": 0.0005
+    },
+    {
+      "feature": "manufacturer_SSANGYONG",
+      "importance": 0.0005
+    },
+    {
+      "feature": "doors_>5",
+      "importance": 0.0005
+    },
+    {
+      "feature": "manufacturer_SUBARU",
+      "importance": 0.0005
+    },
+    {
+      "feature": "manufacturer_MAZDA",
+      "importance": 0.0005
+    },
+    {
+      "feature": "manufacturer_MITSUBISHI",
+      "importance": 0.0003
+    },
+    {
+      "feature": "color_Golden",
+      "importance": 0.0003
+    },
+    {
+      "feature": "color_Sky blue",
+      "importance": 0.0003
+    },
+    {
+      "feature": "category_Limousine",
+      "importance": 0.0002
+    },
+    {
+      "feature": "color_Green",
+      "importance": 0.0002
+    },
+    {
+      "feature": "manufacturer_DAEWOO",
+      "importance": 0.0002
+    },
+    {
+      "feature": "manufacturer_OPEL",
+      "importance": 0.0002
+    },
+    {
+      "feature": "manufacturer_CADILLAC",
+      "importance": 0.0002
+    },
+    {
+      "feature": "manufacturer_DODGE",
+      "importance": 0.0002
+    },
+    {
+      "feature": "manufacturer_MINI",
+      "importance": 0.0002
+    },
+    {
+      "feature": "manufacturer_INFINITI",
+      "importance": 0.0001
+    },
+    {
+      "feature": "manufacturer_MASERATI",
+      "importance": 0.0001
+    },
+    {
+      "feature": "manufacturer_TESLA",
+      "importance": 0.0001
+    },
+    {
+      "feature": "category_Goods wagon",
+      "importance": 0.0001
+    },
+    {
+      "feature": "color_Purple",
+      "importance": 0.0001
+    },
+    {
+      "feature": "manufacturer_LINCOLN",
+      "importance": 0.0001
+    },
+    {
+      "feature": "manufacturer_CITROEN",
+      "importance": 0.0001
+    },
+    {
+      "feature": "manufacturer_ASTON MARTIN",
+      "importance": 0.0001
+    },
+    {
+      "feature": "manufacturer_VOLVO",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_FIAT",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_SKODA",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_HUMMER",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_VAZ",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_BUICK",
+      "importance": 0.0
+    },
+    {
+      "feature": "color_Pink",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_CHRYSLER",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_GMC",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_ROLLS-ROYCE",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_RENAULT",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_GAZ",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_DAIHATSU",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_PEUGEOT",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_MERCURY",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_PONTIAC",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_ISUZU",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_UAZ",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_SCION",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_ALFA ROMEO",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_HAVAL",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_SAAB",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_ROVER",
+      "importance": 0.0
+    },
+    {
+      "feature": "fuel_type_Hydrogen",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_GREATWALL",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_LANCIA",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_MOSKVICH",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_ZAZ",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_სხვა",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_SEAT",
+      "importance": 0.0
+    },
+    {
+      "feature": "manufacturer_SATURN",
+      "importance": 0.0
+    }
+  ],
+  "scatter_sample": [
+    {
+      "actual": 12720.0,
+      "predicted": 14686.22
+    },
+    {
+      "actual": 5018.0,
+      "predicted": 8927.87
+    },
+    {
+      "actual": 17562.0,
+      "predicted": 14784.54
+    },
+    {
+      "actual": 1490.0,
+      "predicted": 2837.95
+    },
+    {
+      "actual": 314.0,
+      "predicted": 551.56
+    },
+    {
+      "actual": 5175.0,
+      "predicted": 7025.39
+    },
+    {
+      "actual": 4704.0,
+      "predicted": 14913.76
+    },
+    {
+      "actual": 2430.0,
+      "predicted": 2966.31
+    },
+    {
+      "actual": 784.0,
+      "predicted": 2040.87
+    },
+    {
+      "actual": 36137.0,
+      "predicted": 32654.69
+    },
+    {
+      "actual": 16621.0,
+      "predicted": 15584.81
+    },
+    {
+      "actual": 28000.0,
+      "predicted": 22816.61
+    },
+    {
+      "actual": 18000.0,
+      "predicted": 28641.29
+    },
+    {
+      "actual": 8154.0,
+      "predicted": 8159.92
+    },
+    {
+      "actual": 941.0,
+      "predicted": 1090.97
+    },
+    {
+      "actual": 15367.0,
+      "predicted": 18960.51
+    },
+    {
+      "actual": 13799.0,
+      "predicted": 12400.21
+    },
+    {
+      "actual": 46101.0,
+      "predicted": 75243.88
+    },
+    {
+      "actual": 65858.0,
+      "predicted": 67091.68
+    },
+    {
+      "actual": 23834.0,
+      "predicted": 27140.6
+    },
+    {
+      "actual": 25591.0,
+      "predicted": 20759.4
+    },
+    {
+      "actual": 1176.0,
+      "predicted": 1191.93
+    },
+    {
+      "actual": 2430.0,
+      "predicted": 46208.27
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 7826.14
+    },
+    {
+      "actual": 7200.0,
+      "predicted": 8061.88
+    },
+    {
+      "actual": 10349.0,
+      "predicted": 10923.57
+    },
+    {
+      "actual": 12388.0,
+      "predicted": 14778.6
+    },
+    {
+      "actual": 25274.0,
+      "predicted": 18165.42
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 21490.83
+    },
+    {
+      "actual": 250.0,
+      "predicted": 15621.13
+    },
+    {
+      "actual": 1568.0,
+      "predicted": 1524.52
+    },
+    {
+      "actual": 2901.0,
+      "predicted": 3133.1
+    },
+    {
+      "actual": 33500.0,
+      "predicted": 47302.52
+    },
+    {
+      "actual": 44533.0,
+      "predicted": 57200.48
+    },
+    {
+      "actual": 28830.0,
+      "predicted": 25144.69
+    },
+    {
+      "actual": 10036.0,
+      "predicted": 8817.63
+    },
+    {
+      "actual": 3763.0,
+      "predicted": 5188.81
+    },
+    {
+      "actual": 12112.0,
+      "predicted": 16652.02
+    },
+    {
+      "actual": 157.0,
+      "predicted": 4155.18
+    },
+    {
+      "actual": 2038.0,
+      "predicted": 2319.09
+    },
+    {
+      "actual": 23436.0,
+      "predicted": 27468.99
+    },
+    {
+      "actual": 32340.0,
+      "predicted": 25378.12
+    },
+    {
+      "actual": 3607.0,
+      "predicted": 3537.86
+    },
+    {
+      "actual": 21953.0,
+      "predicted": 15270.32
+    },
+    {
+      "actual": 28909.0,
+      "predicted": 23237.53
+    },
+    {
+      "actual": 1568.0,
+      "predicted": 7662.53
+    },
+    {
+      "actual": 14113.0,
+      "predicted": 18178.53
+    },
+    {
+      "actual": 16500.0,
+      "predicted": 22227.43
+    },
+    {
+      "actual": 25089.0,
+      "predicted": 18345.97
+    },
+    {
+      "actual": 392.0,
+      "predicted": 2589.69
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 8037.69
+    },
+    {
+      "actual": 43000.0,
+      "predicted": 28564.42
+    },
+    {
+      "actual": 22894.0,
+      "predicted": 21703.85
+    },
+    {
+      "actual": 16935.0,
+      "predicted": 13923.53
+    },
+    {
+      "actual": 549.0,
+      "predicted": 18401.04
+    },
+    {
+      "actual": 32145.0,
+      "predicted": 44624.11
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 10407.6
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 17711.44
+    },
+    {
+      "actual": 862.0,
+      "predicted": 3903.48
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 16615.59
+    },
+    {
+      "actual": 36065.0,
+      "predicted": 64882.59
+    },
+    {
+      "actual": 470.0,
+      "predicted": 4065.99
+    },
+    {
+      "actual": 314.0,
+      "predicted": 551.56
+    },
+    {
+      "actual": 30.0,
+      "predicted": 6924.94
+    },
+    {
+      "actual": 21953.0,
+      "predicted": 23391.73
+    },
+    {
+      "actual": 2000.0,
+      "predicted": 3226.7
+    },
+    {
+      "actual": 18500.0,
+      "predicted": 19246.02
+    },
+    {
+      "actual": 17719.0,
+      "predicted": 15192.59
+    },
+    {
+      "actual": 188.0,
+      "predicted": 725.97
+    },
+    {
+      "actual": 12231.0,
+      "predicted": 11399.95
+    },
+    {
+      "actual": 4077.0,
+      "predicted": 3611.81
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 23183.52
+    },
+    {
+      "actual": 314.0,
+      "predicted": 5256.64
+    },
+    {
+      "actual": 43952.0,
+      "predicted": 42920.86
+    },
+    {
+      "actual": 43655.0,
+      "predicted": 44530.46
+    },
+    {
+      "actual": 1803.0,
+      "predicted": 5397.2
+    },
+    {
+      "actual": 2038.0,
+      "predicted": 3265.77
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 9642.93
+    },
+    {
+      "actual": 251.0,
+      "predicted": 1497.73
+    },
+    {
+      "actual": 16107.0,
+      "predicted": 15800.89
+    },
+    {
+      "actual": 9722.0,
+      "predicted": 9552.14
+    },
+    {
+      "actual": 37959.0,
+      "predicted": 43995.18
+    },
+    {
+      "actual": 50767.0,
+      "predicted": 49364.82
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 4645.94
+    },
+    {
+      "actual": 19874.0,
+      "predicted": 20996.81
+    },
+    {
+      "actual": 37066.0,
+      "predicted": 41012.18
+    },
+    {
+      "actual": 29489.0,
+      "predicted": 25853.81
+    },
+    {
+      "actual": 11290.0,
+      "predicted": 12415.91
+    },
+    {
+      "actual": 3763.0,
+      "predicted": 3431.48
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 7206.85
+    },
+    {
+      "actual": 20071.0,
+      "predicted": 16502.71
+    },
+    {
+      "actual": 20005.0,
+      "predicted": 18778.2
+    },
+    {
+      "actual": 31.0,
+      "predicted": 4806.83
+    },
+    {
+      "actual": 9198.0,
+      "predicted": 10568.88
+    },
+    {
+      "actual": 36065.0,
+      "predicted": 30989.48
+    },
+    {
+      "actual": 55515.0,
+      "predicted": 49176.33
+    },
+    {
+      "actual": 1803.0,
+      "predicted": 1405.63
+    },
+    {
+      "actual": 44790.0,
+      "predicted": 45624.95
+    },
+    {
+      "actual": 21326.0,
+      "predicted": 21866.2
+    },
+    {
+      "actual": 862.0,
+      "predicted": 1730.24
+    },
+    {
+      "actual": 26657.0,
+      "predicted": 25663.51
+    },
+    {
+      "actual": 24029.0,
+      "predicted": 31194.97
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 17329.99
+    },
+    {
+      "actual": 14113.0,
+      "predicted": 15446.38
+    },
+    {
+      "actual": 18817.0,
+      "predicted": 12821.29
+    },
+    {
+      "actual": 52696.0,
+      "predicted": 46860.63
+    },
+    {
+      "actual": 26030.0,
+      "predicted": 24123.63
+    },
+    {
+      "actual": 10036.0,
+      "predicted": 8087.4
+    },
+    {
+      "actual": 53314.0,
+      "predicted": 41560.77
+    },
+    {
+      "actual": 40926.0,
+      "predicted": 47652.44
+    },
+    {
+      "actual": 20071.0,
+      "predicted": 20436.33
+    },
+    {
+      "actual": 12858.0,
+      "predicted": 12698.17
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 4821.44
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 11536.89
+    },
+    {
+      "actual": 15900.0,
+      "predicted": 15587.11
+    },
+    {
+      "actual": 24283.0,
+      "predicted": 37164.47
+    },
+    {
+      "actual": 314.0,
+      "predicted": 6923.78
+    },
+    {
+      "actual": 9.0,
+      "predicted": 8189.0
+    },
+    {
+      "actual": 4234.0,
+      "predicted": 7223.05
+    },
+    {
+      "actual": 862.0,
+      "predicted": 1019.2
+    },
+    {
+      "actual": 13328.0,
+      "predicted": 14059.98
+    },
+    {
+      "actual": 27598.0,
+      "predicted": 28369.59
+    },
+    {
+      "actual": 29793.0,
+      "predicted": 29759.15
+    },
+    {
+      "actual": 6586.0,
+      "predicted": 6881.85
+    },
+    {
+      "actual": 18817.0,
+      "predicted": 16315.49
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 8593.47
+    },
+    {
+      "actual": 8467.0,
+      "predicted": 8787.51
+    },
+    {
+      "actual": 13328.0,
+      "predicted": 13874.65
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 6564.39
+    },
+    {
+      "actual": 26343.0,
+      "predicted": 11363.68
+    },
+    {
+      "actual": 21326.0,
+      "predicted": 24821.69
+    },
+    {
+      "actual": 18503.0,
+      "predicted": 15943.01
+    },
+    {
+      "actual": 10349.0,
+      "predicted": 13110.54
+    },
+    {
+      "actual": 46022.0,
+      "predicted": 43280.78
+    },
+    {
+      "actual": 10349.0,
+      "predicted": 24589.09
+    },
+    {
+      "actual": 941.0,
+      "predicted": 2827.24
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 22991.35
+    },
+    {
+      "actual": 16894.0,
+      "predicted": 22470.58
+    },
+    {
+      "actual": 27598.0,
+      "predicted": 6750.34
+    },
+    {
+      "actual": 8000.0,
+      "predicted": 8815.15
+    },
+    {
+      "actual": 9565.0,
+      "predicted": 11498.74
+    },
+    {
+      "actual": 12858.0,
+      "predicted": 14015.02
+    },
+    {
+      "actual": 11133.0,
+      "predicted": 10745.76
+    },
+    {
+      "actual": 21326.0,
+      "predicted": 39526.34
+    },
+    {
+      "actual": 7997.0,
+      "predicted": 16923.97
+    },
+    {
+      "actual": 1254.0,
+      "predicted": 11185.77
+    },
+    {
+      "actual": 6899.0,
+      "predicted": 5751.8
+    },
+    {
+      "actual": 2195.0,
+      "predicted": 2898.97
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 9616.13
+    },
+    {
+      "actual": 7527.0,
+      "predicted": 2748.32
+    },
+    {
+      "actual": 30734.0,
+      "predicted": 29481.78
+    },
+    {
+      "actual": 19757.0,
+      "predicted": 5067.38
+    },
+    {
+      "actual": 30.0,
+      "predicted": 718.81
+    },
+    {
+      "actual": 12544.0,
+      "predicted": 24586.93
+    },
+    {
+      "actual": 8467.0,
+      "predicted": 9956.23
+    },
+    {
+      "actual": 16621.0,
+      "predicted": 16461.77
+    },
+    {
+      "actual": 15470.0,
+      "predicted": 17452.87
+    },
+    {
+      "actual": 29793.0,
+      "predicted": 29759.15
+    },
+    {
+      "actual": 28225.0,
+      "predicted": 25720.55
+    },
+    {
+      "actual": 11604.0,
+      "predicted": 27066.97
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 15885.93
+    },
+    {
+      "actual": 21442.0,
+      "predicted": 17360.19
+    },
+    {
+      "actual": 21326.0,
+      "predicted": 20929.63
+    },
+    {
+      "actual": 1098.0,
+      "predicted": 11061.48
+    },
+    {
+      "actual": 6586.0,
+      "predicted": 7230.28
+    },
+    {
+      "actual": 38737.0,
+      "predicted": 36355.73
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 11226.9
+    },
+    {
+      "actual": 4704.0,
+      "predicted": 3257.78
+    },
+    {
+      "actual": 4704.0,
+      "predicted": 2300.82
+    },
+    {
+      "actual": 36065.0,
+      "predicted": 32046.19
+    },
+    {
+      "actual": 3450.0,
+      "predicted": 2925.6
+    },
+    {
+      "actual": 12570.0,
+      "predicted": 11694.23
+    },
+    {
+      "actual": 25716.0,
+      "predicted": 18797.15
+    },
+    {
+      "actual": 63850.0,
+      "predicted": 57093.33
+    },
+    {
+      "actual": 18826.0,
+      "predicted": 17827.25
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 9890.44
+    },
+    {
+      "actual": 470.0,
+      "predicted": 6545.6
+    },
+    {
+      "actual": 9418.0,
+      "predicted": 12982.39
+    },
+    {
+      "actual": 706.0,
+      "predicted": 2187.49
+    },
+    {
+      "actual": 48998.0,
+      "predicted": 43089.69
+    },
+    {
+      "actual": 8154.0,
+      "predicted": 5574.6
+    },
+    {
+      "actual": 20005.0,
+      "predicted": 17585.19
+    },
+    {
+      "actual": 17562.0,
+      "predicted": 22837.69
+    },
+    {
+      "actual": 24148.0,
+      "predicted": 22203.47
+    },
+    {
+      "actual": 21012.0,
+      "predicted": 17604.9
+    },
+    {
+      "actual": 11400.0,
+      "predicted": 12044.53
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 5669.09
+    },
+    {
+      "actual": 17876.0,
+      "predicted": 21720.84
+    },
+    {
+      "actual": 29633.0,
+      "predicted": 42458.17
+    },
+    {
+      "actual": 25512.0,
+      "predicted": 31371.66
+    },
+    {
+      "actual": 470.0,
+      "predicted": 781.12
+    },
+    {
+      "actual": 21937.0,
+      "predicted": 22105.23
+    },
+    {
+      "actual": 3136.0,
+      "predicted": 10011.57
+    },
+    {
+      "actual": 4234.0,
+      "predicted": 2523.61
+    },
+    {
+      "actual": 941.0,
+      "predicted": 1362.76
+    },
+    {
+      "actual": 110.0,
+      "predicted": 3253.45
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 6097.58
+    },
+    {
+      "actual": 23207.0,
+      "predicted": 17305.55
+    },
+    {
+      "actual": 50178.0,
+      "predicted": 30886.91
+    },
+    {
+      "actual": 10663.0,
+      "predicted": 3100.62
+    },
+    {
+      "actual": 16480.0,
+      "predicted": 16028.0
+    },
+    {
+      "actual": 23935.0,
+      "predicted": 12409.52
+    },
+    {
+      "actual": 10192.0,
+      "predicted": 5901.88
+    },
+    {
+      "actual": 8781.0,
+      "predicted": 9758.31
+    },
+    {
+      "actual": 6899.0,
+      "predicted": 3291.47
+    },
+    {
+      "actual": 40976.0,
+      "predicted": 34772.0
+    },
+    {
+      "actual": 130148.0,
+      "predicted": 5554.79
+    },
+    {
+      "actual": 3607.0,
+      "predicted": 3546.56
+    },
+    {
+      "actual": 9252.0,
+      "predicted": 2138.88
+    },
+    {
+      "actual": 26033.0,
+      "predicted": 20809.11
+    },
+    {
+      "actual": 19121.0,
+      "predicted": 17169.03
+    },
+    {
+      "actual": 22947.0,
+      "predicted": 22454.12
+    },
+    {
+      "actual": 17562.0,
+      "predicted": 22443.98
+    },
+    {
+      "actual": 9565.0,
+      "predicted": 21691.99
+    },
+    {
+      "actual": 14113.0,
+      "predicted": 4492.22
+    },
+    {
+      "actual": 204.0,
+      "predicted": 42065.67
+    },
+    {
+      "actual": 14897.0,
+      "predicted": 12549.72
+    },
+    {
+      "actual": 11290.0,
+      "predicted": 11180.77
+    },
+    {
+      "actual": 22894.0,
+      "predicted": 11186.13
+    },
+    {
+      "actual": 16935.0,
+      "predicted": 10480.96
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 21483.32
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 7566.3
+    },
+    {
+      "actual": 45160.0,
+      "predicted": 42683.54
+    },
+    {
+      "actual": 1176.0,
+      "predicted": 4114.7
+    },
+    {
+      "actual": 30.0,
+      "predicted": 15238.2
+    },
+    {
+      "actual": 26814.0,
+      "predicted": 17491.04
+    },
+    {
+      "actual": 40142.0,
+      "predicted": 28765.96
+    },
+    {
+      "actual": 18531.0,
+      "predicted": 16435.81
+    },
+    {
+      "actual": 4547.0,
+      "predicted": 3387.37
+    },
+    {
+      "actual": 3136.0,
+      "predicted": 1571.27
+    },
+    {
+      "actual": 7317.0,
+      "predicted": 15564.55
+    },
+    {
+      "actual": 27093.0,
+      "predicted": 29912.57
+    },
+    {
+      "actual": 6586.0,
+      "predicted": 6212.0
+    },
+    {
+      "actual": 15053.0,
+      "predicted": 12954.07
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 13467.21
+    },
+    {
+      "actual": 24415.0,
+      "predicted": 19422.13
+    },
+    {
+      "actual": 9095.0,
+      "predicted": 16702.95
+    },
+    {
+      "actual": 2195.0,
+      "predicted": 5562.11
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 6868.06
+    },
+    {
+      "actual": 40471.0,
+      "predicted": 44795.39
+    },
+    {
+      "actual": 19444.0,
+      "predicted": 15820.73
+    },
+    {
+      "actual": 21953.0,
+      "predicted": 14912.8
+    },
+    {
+      "actual": 470.0,
+      "predicted": 2579.24
+    },
+    {
+      "actual": 2430.0,
+      "predicted": 1290.12
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 22925.15
+    },
+    {
+      "actual": 32311.0,
+      "predicted": 34718.3
+    },
+    {
+      "actual": 40.0,
+      "predicted": 3797.73
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 8424.5
+    },
+    {
+      "actual": 28539.0,
+      "predicted": 17551.65
+    },
+    {
+      "actual": 4300.0,
+      "predicted": 5842.16
+    },
+    {
+      "actual": 5700.0,
+      "predicted": 6465.25
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 10358.64
+    },
+    {
+      "actual": 27065.0,
+      "predicted": 22913.73
+    },
+    {
+      "actual": 25089.0,
+      "predicted": 23254.93
+    },
+    {
+      "actual": 13642.0,
+      "predicted": 18521.75
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 9640.45
+    },
+    {
+      "actual": 8781.0,
+      "predicted": 7414.32
+    },
+    {
+      "actual": 282.0,
+      "predicted": 427.42
+    },
+    {
+      "actual": 9879.0,
+      "predicted": 9176.62
+    },
+    {
+      "actual": 3450.0,
+      "predicted": 3375.03
+    },
+    {
+      "actual": 60000.0,
+      "predicted": 52044.0
+    },
+    {
+      "actual": 2352.0,
+      "predicted": 2815.7
+    },
+    {
+      "actual": 27924.0,
+      "predicted": 24727.32
+    },
+    {
+      "actual": 11760.0,
+      "predicted": 10019.84
+    },
+    {
+      "actual": 28241.0,
+      "predicted": 22639.92
+    },
+    {
+      "actual": 1725.0,
+      "predicted": 6343.86
+    },
+    {
+      "actual": 15053.0,
+      "predicted": 11391.53
+    },
+    {
+      "actual": 7527.0,
+      "predicted": 7781.77
+    },
+    {
+      "actual": 18817.0,
+      "predicted": 18986.25
+    },
+    {
+      "actual": 14740.0,
+      "predicted": 14322.13
+    },
+    {
+      "actual": 30.0,
+      "predicted": 6924.94
+    },
+    {
+      "actual": 13172.0,
+      "predicted": 8708.71
+    },
+    {
+      "actual": 12388.0,
+      "predicted": 11797.9
+    },
+    {
+      "actual": 470.0,
+      "predicted": 874.94
+    },
+    {
+      "actual": 94083.0,
+      "predicted": 67318.7
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 6664.23
+    },
+    {
+      "actual": 941.0,
+      "predicted": 1006.68
+    },
+    {
+      "actual": 7527.0,
+      "predicted": 7610.13
+    },
+    {
+      "actual": 157.0,
+      "predicted": 481.58
+    },
+    {
+      "actual": 8674.0,
+      "predicted": 9112.8
+    },
+    {
+      "actual": 4704.0,
+      "predicted": 6843.55
+    },
+    {
+      "actual": 132971.0,
+      "predicted": 100170.89
+    },
+    {
+      "actual": 470.0,
+      "predicted": 826.69
+    },
+    {
+      "actual": 37006.0,
+      "predicted": 22402.32
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 7789.61
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 10947.19
+    },
+    {
+      "actual": 1803.0,
+      "predicted": 1301.8
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 13055.52
+    },
+    {
+      "actual": 7527.0,
+      "predicted": 8657.32
+    },
+    {
+      "actual": 22266.0,
+      "predicted": 16051.69
+    },
+    {
+      "actual": 16308.0,
+      "predicted": 15438.6
+    },
+    {
+      "actual": 470.0,
+      "predicted": 4485.55
+    },
+    {
+      "actual": 45825.0,
+      "predicted": 48600.14
+    },
+    {
+      "actual": 13799.0,
+      "predicted": 15043.92
+    },
+    {
+      "actual": 392.0,
+      "predicted": 1972.37
+    },
+    {
+      "actual": 47042.0,
+      "predicted": 32699.5
+    },
+    {
+      "actual": 3763.0,
+      "predicted": 6912.01
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 11633.29
+    },
+    {
+      "actual": 24267.0,
+      "predicted": 24752.63
+    },
+    {
+      "actual": 10349.0,
+      "predicted": 8917.58
+    },
+    {
+      "actual": 22580.0,
+      "predicted": 18969.12
+    },
+    {
+      "actual": 1400.0,
+      "predicted": 4007.81
+    },
+    {
+      "actual": 30455.0,
+      "predicted": 34313.67
+    },
+    {
+      "actual": 13172.0,
+      "predicted": 18575.42
+    },
+    {
+      "actual": 25089.0,
+      "predicted": 23183.82
+    },
+    {
+      "actual": 56848.0,
+      "predicted": 44763.11
+    },
+    {
+      "actual": 11274.0,
+      "predicted": 13400.53
+    },
+    {
+      "actual": 17876.0,
+      "predicted": 22319.8
+    },
+    {
+      "actual": 6523.0,
+      "predicted": 7818.43
+    },
+    {
+      "actual": 33236.0,
+      "predicted": 31525.49
+    },
+    {
+      "actual": 10036.0,
+      "predicted": 11321.44
+    },
+    {
+      "actual": 14426.0,
+      "predicted": 18716.36
+    },
+    {
+      "actual": 16935.0,
+      "predicted": 14781.39
+    },
+    {
+      "actual": 30000.0,
+      "predicted": 39471.21
+    },
+    {
+      "actual": 24176.0,
+      "predicted": 21362.65
+    },
+    {
+      "actual": 11604.0,
+      "predicted": 9126.22
+    },
+    {
+      "actual": 10349.0,
+      "predicted": 11066.2
+    },
+    {
+      "actual": 170.0,
+      "predicted": 16951.95
+    },
+    {
+      "actual": 14166.0,
+      "predicted": 16949.16
+    },
+    {
+      "actual": 36110.0,
+      "predicted": 25672.82
+    },
+    {
+      "actual": 39201.0,
+      "predicted": 41103.26
+    },
+    {
+      "actual": 19444.0,
+      "predicted": 14097.21
+    },
+    {
+      "actual": 15685.0,
+      "predicted": 10944.58
+    },
+    {
+      "actual": 24709.0,
+      "predicted": 23390.0
+    },
+    {
+      "actual": 13485.0,
+      "predicted": 12331.81
+    },
+    {
+      "actual": 15612.0,
+      "predicted": 17764.43
+    },
+    {
+      "actual": 56450.0,
+      "predicted": 60710.97
+    },
+    {
+      "actual": 9722.0,
+      "predicted": 9307.65
+    },
+    {
+      "actual": 706.0,
+      "predicted": 1436.29
+    },
+    {
+      "actual": 3293.0,
+      "predicted": 6736.34
+    },
+    {
+      "actual": 28382.0,
+      "predicted": 32353.2
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 20898.65
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 8132.89
+    },
+    {
+      "actual": 12858.0,
+      "predicted": 43928.35
+    },
+    {
+      "actual": 1568.0,
+      "predicted": 1647.32
+    },
+    {
+      "actual": 20005.0,
+      "predicted": 18004.46
+    },
+    {
+      "actual": 48610.0,
+      "predicted": 57190.2
+    },
+    {
+      "actual": 6743.0,
+      "predicted": 7951.86
+    },
+    {
+      "actual": 8311.0,
+      "predicted": 7432.68
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 7162.62
+    },
+    {
+      "actual": 15000.0,
+      "predicted": 8453.79
+    },
+    {
+      "actual": 9722.0,
+      "predicted": 9172.92
+    },
+    {
+      "actual": 470.0,
+      "predicted": 8116.38
+    },
+    {
+      "actual": 17876.0,
+      "predicted": 18068.11
+    },
+    {
+      "actual": 38975.0,
+      "predicted": 21136.42
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 20293.52
+    },
+    {
+      "actual": 549.0,
+      "predicted": 8030.92
+    },
+    {
+      "actual": 2430.0,
+      "predicted": 4612.58
+    },
+    {
+      "actual": 6743.0,
+      "predicted": 10358.85
+    },
+    {
+      "actual": 12544.0,
+      "predicted": 11417.71
+    },
+    {
+      "actual": 20.0,
+      "predicted": 6958.82
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 18792.87
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 9497.23
+    },
+    {
+      "actual": 13000.0,
+      "predicted": 18120.78
+    },
+    {
+      "actual": 14113.0,
+      "predicted": 13590.83
+    },
+    {
+      "actual": 21953.0,
+      "predicted": 22093.59
+    },
+    {
+      "actual": 37006.0,
+      "predicted": 42401.35
+    },
+    {
+      "actual": 28909.0,
+      "predicted": 23237.53
+    },
+    {
+      "actual": 12617.0,
+      "predicted": 17797.17
+    },
+    {
+      "actual": 8386.0,
+      "predicted": 8490.04
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 4138.59
+    },
+    {
+      "actual": 549.0,
+      "predicted": 14427.45
+    },
+    {
+      "actual": 282.0,
+      "predicted": 784.89
+    },
+    {
+      "actual": 784.0,
+      "predicted": 4115.9
+    },
+    {
+      "actual": 941.0,
+      "predicted": 15229.2
+    },
+    {
+      "actual": 18817.0,
+      "predicted": 16031.88
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 8886.42
+    },
+    {
+      "actual": 53314.0,
+      "predicted": 55620.15
+    },
+    {
+      "actual": 28015.0,
+      "predicted": 23329.71
+    },
+    {
+      "actual": 18346.0,
+      "predicted": 16294.3
+    },
+    {
+      "actual": 18817.0,
+      "predicted": 16325.33
+    },
+    {
+      "actual": 4391.0,
+      "predicted": 3003.8
+    },
+    {
+      "actual": 14426.0,
+      "predicted": 12334.93
+    },
+    {
+      "actual": 40057.0,
+      "predicted": 39033.66
+    },
+    {
+      "actual": 470.0,
+      "predicted": 2934.12
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 15663.51
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 7876.33
+    },
+    {
+      "actual": 53314.0,
+      "predicted": 67195.2
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 9158.38
+    },
+    {
+      "actual": 48610.0,
+      "predicted": 28824.47
+    },
+    {
+      "actual": 25365.0,
+      "predicted": 19439.5
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 19976.26
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 6462.76
+    },
+    {
+      "actual": 11415.0,
+      "predicted": 14175.74
+    },
+    {
+      "actual": 18240.0,
+      "predicted": 21423.01
+    },
+    {
+      "actual": 18669.0,
+      "predicted": 17979.57
+    },
+    {
+      "actual": 20385.0,
+      "predicted": 31451.98
+    },
+    {
+      "actual": 22580.0,
+      "predicted": 8390.85
+    },
+    {
+      "actual": 14113.0,
+      "predicted": 13590.83
+    },
+    {
+      "actual": 5018.0,
+      "predicted": 5609.46
+    },
+    {
+      "actual": 13328.0,
+      "predicted": 13417.19
+    },
+    {
+      "actual": 40070.0,
+      "predicted": 42183.03
+    },
+    {
+      "actual": 94.0,
+      "predicted": 3103.38
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 16618.29
+    },
+    {
+      "actual": 53154.0,
+      "predicted": 46089.51
+    },
+    {
+      "actual": 25889.0,
+      "predicted": 21493.18
+    },
+    {
+      "actual": 25716.0,
+      "predicted": 23538.33
+    },
+    {
+      "actual": 4077.0,
+      "predicted": 7504.94
+    },
+    {
+      "actual": 33230.0,
+      "predicted": 34898.46
+    },
+    {
+      "actual": 2666.0,
+      "predicted": 3919.58
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 13966.78
+    },
+    {
+      "actual": 22947.0,
+      "predicted": 21428.32
+    },
+    {
+      "actual": 1490.0,
+      "predicted": 1498.39
+    },
+    {
+      "actual": 35043.0,
+      "predicted": 31680.98
+    },
+    {
+      "actual": 10663.0,
+      "predicted": 15685.05
+    },
+    {
+      "actual": 2195.0,
+      "predicted": 2774.02
+    },
+    {
+      "actual": 392.0,
+      "predicted": 878.21
+    },
+    {
+      "actual": 26657.0,
+      "predicted": 23571.59
+    },
+    {
+      "actual": 15053.0,
+      "predicted": 13480.68
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 10380.77
+    },
+    {
+      "actual": 14583.0,
+      "predicted": 12377.45
+    },
+    {
+      "actual": 8781.0,
+      "predicted": 32369.06
+    },
+    {
+      "actual": 1411.0,
+      "predicted": 5877.42
+    },
+    {
+      "actual": 96263.0,
+      "predicted": 85785.95
+    },
+    {
+      "actual": 32104.0,
+      "predicted": 28093.01
+    },
+    {
+      "actual": 18189.0,
+      "predicted": 11953.5
+    },
+    {
+      "actual": 16960.0,
+      "predicted": 18233.51
+    },
+    {
+      "actual": 17876.0,
+      "predicted": 16607.65
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 11390.59
+    },
+    {
+      "actual": 706.0,
+      "predicted": 1912.48
+    },
+    {
+      "actual": 27190.0,
+      "predicted": 17738.88
+    },
+    {
+      "actual": 15677.0,
+      "predicted": 18898.94
+    },
+    {
+      "actual": 549.0,
+      "predicted": 1698.64
+    },
+    {
+      "actual": 4861.0,
+      "predicted": 2382.17
+    },
+    {
+      "actual": 3450.0,
+      "predicted": 6975.14
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 16501.61
+    },
+    {
+      "actual": 34811.0,
+      "predicted": 34736.4
+    },
+    {
+      "actual": 18189.0,
+      "predicted": 10416.77
+    },
+    {
+      "actual": 19089.0,
+      "predicted": 17882.71
+    },
+    {
+      "actual": 11604.0,
+      "predicted": 16713.76
+    },
+    {
+      "actual": 24029.0,
+      "predicted": 22954.69
+    },
+    {
+      "actual": 10381.0,
+      "predicted": 11209.92
+    },
+    {
+      "actual": 45473.0,
+      "predicted": 20274.17
+    },
+    {
+      "actual": 392.0,
+      "predicted": 478.91
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 7185.03
+    },
+    {
+      "actual": 8467.0,
+      "predicted": 11300.22
+    },
+    {
+      "actual": 12231.0,
+      "predicted": 14164.79
+    },
+    {
+      "actual": 1019.0,
+      "predicted": 4746.77
+    },
+    {
+      "actual": 12544.0,
+      "predicted": 10638.8
+    },
+    {
+      "actual": 17562.0,
+      "predicted": 20014.17
+    },
+    {
+      "actual": 13485.0,
+      "predicted": 12891.93
+    },
+    {
+      "actual": 8075.0,
+      "predicted": 15203.15
+    },
+    {
+      "actual": 25089.0,
+      "predicted": 28643.29
+    },
+    {
+      "actual": 21639.0,
+      "predicted": 16853.57
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 9438.96
+    },
+    {
+      "actual": 80.0,
+      "predicted": 21673.7
+    },
+    {
+      "actual": 19416.0,
+      "predicted": 17041.3
+    },
+    {
+      "actual": 3763.0,
+      "predicted": 5186.06
+    },
+    {
+      "actual": 5645.0,
+      "predicted": 4083.91
+    },
+    {
+      "actual": 549.0,
+      "predicted": 2085.75
+    },
+    {
+      "actual": 3607.0,
+      "predicted": 3546.56
+    },
+    {
+      "actual": 2587.0,
+      "predicted": 3494.07
+    },
+    {
+      "actual": 1098.0,
+      "predicted": 1172.32
+    },
+    {
+      "actual": 862.0,
+      "predicted": 1910.19
+    },
+    {
+      "actual": 44846.0,
+      "predicted": 49525.95
+    },
+    {
+      "actual": 97219.0,
+      "predicted": 12483.44
+    },
+    {
+      "actual": 15483.0,
+      "predicted": 16069.79
+    },
+    {
+      "actual": 10976.0,
+      "predicted": 9883.85
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 15495.91
+    },
+    {
+      "actual": 470.0,
+      "predicted": 12020.99
+    },
+    {
+      "actual": 11604.0,
+      "predicted": 10249.95
+    },
+    {
+      "actual": 549.0,
+      "predicted": 9264.22
+    },
+    {
+      "actual": 39201.0,
+      "predicted": 44516.94
+    },
+    {
+      "actual": 5331.0,
+      "predicted": 8504.96
+    },
+    {
+      "actual": 79902.0,
+      "predicted": 72710.81
+    },
+    {
+      "actual": 3293.0,
+      "predicted": 2317.6
+    },
+    {
+      "actual": 188.0,
+      "predicted": 4468.17
+    },
+    {
+      "actual": 1411.0,
+      "predicted": 3962.88
+    },
+    {
+      "actual": 80.0,
+      "predicted": 12841.37
+    },
+    {
+      "actual": 1019.0,
+      "predicted": 6819.45
+    },
+    {
+      "actual": 65858.0,
+      "predicted": 53921.48
+    },
+    {
+      "actual": 251.0,
+      "predicted": 1313.51
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 14765.28
+    },
+    {
+      "actual": 11412.0,
+      "predicted": 15157.51
+    },
+    {
+      "actual": 6899.0,
+      "predicted": 6644.41
+    },
+    {
+      "actual": 15681.0,
+      "predicted": 15888.35
+    },
+    {
+      "actual": 1882.0,
+      "predicted": 4854.29
+    },
+    {
+      "actual": 78403.0,
+      "predicted": 121196.35
+    },
+    {
+      "actual": 34811.0,
+      "predicted": 47167.66
+    },
+    {
+      "actual": 25744.0,
+      "predicted": 22556.69
+    },
+    {
+      "actual": 14426.0,
+      "predicted": 18390.8
+    },
+    {
+      "actual": 23521.0,
+      "predicted": 20135.8
+    },
+    {
+      "actual": 9408.0,
+      "predicted": 12077.26
+    },
+    {
+      "actual": 1882.0,
+      "predicted": 19591.62
+    },
+    {
+      "actual": 11290.0,
+      "predicted": 11637.35
+    },
+    {
+      "actual": 11500.0,
+      "predicted": 13877.2
+    },
+    {
+      "actual": 26180.0,
+      "predicted": 26319.55
+    },
+    {
+      "actual": 18503.0,
+      "predicted": 12949.08
+    },
+    {
+      "actual": 10036.0,
+      "predicted": 7943.21
+    },
+    {
+      "actual": 6272.0,
+      "predicted": 6180.65
+    },
+    {
+      "actual": 21012.0,
+      "predicted": 20536.41
+    },
+    {
+      "actual": 42883.0,
+      "predicted": 40971.59
+    },
+    {
+      "actual": 125.0,
+      "predicted": 758.69
+    },
+    {
+      "actual": 2901.0,
+      "predicted": 4114.42
+    },
+    {
+      "actual": 11917.0,
+      "predicted": 6296.33
+    },
+    {
+      "actual": 8311.0,
+      "predicted": 7061.62
+    },
+    {
+      "actual": 47408.0,
+      "predicted": 42103.73
+    },
+    {
+      "actual": 6586.0,
+      "predicted": 6996.53
+    },
+    {
+      "actual": 14799.0,
+      "predicted": 18504.71
+    },
+    {
+      "actual": 24198.0,
+      "predicted": 35124.76
+    },
+    {
+      "actual": 7527.0,
+      "predicted": 12346.14
+    },
+    {
+      "actual": 56431.0,
+      "predicted": 73641.96
+    },
+    {
+      "actual": 18189.0,
+      "predicted": 25045.27
+    },
+    {
+      "actual": 40142.0,
+      "predicted": 28765.96
+    },
+    {
+      "actual": 26030.0,
+      "predicted": 15963.94
+    },
+    {
+      "actual": 1725.0,
+      "predicted": 2530.78
+    },
+    {
+      "actual": 17249.0,
+      "predicted": 9926.29
+    },
+    {
+      "actual": 10349.0,
+      "predicted": 11066.2
+    },
+    {
+      "actual": 470.0,
+      "predicted": 3038.44
+    },
+    {
+      "actual": 31047.0,
+      "predicted": 30712.8
+    },
+    {
+      "actual": 175622.0,
+      "predicted": 32392.64
+    },
+    {
+      "actual": 7840.0,
+      "predicted": 9360.64
+    },
+    {
+      "actual": 7213.0,
+      "predicted": 8792.52
+    },
+    {
+      "actual": 4500.0,
+      "predicted": 6610.81
+    },
+    {
+      "actual": 19757.0,
+      "predicted": 20478.17
+    },
+    {
+      "actual": 34108.0,
+      "predicted": 34433.05
+    },
+    {
+      "actual": 30734.0,
+      "predicted": 30255.08
+    },
+    {
+      "actual": 47217.0,
+      "predicted": 45588.29
+    },
+    {
+      "actual": 5959.0,
+      "predicted": 6563.69
+    },
+    {
+      "actual": 26475.0,
+      "predicted": 24189.68
+    },
+    {
+      "actual": 56136.0,
+      "predicted": 55278.11
+    },
+    {
+      "actual": 549.0,
+      "predicted": 9590.99
+    },
+    {
+      "actual": 6272.0,
+      "predicted": 9105.98
+    },
+    {
+      "actual": 8781.0,
+      "predicted": 9238.78
+    },
+    {
+      "actual": 3293.0,
+      "predicted": 5835.77
+    }
+  ],
+  "residuals_sample": [
+    -1966.22,
+    -3909.87,
+    2777.46,
+    -1347.95,
+    -237.56,
+    -1850.39,
+    -10209.76,
+    -536.31,
+    -1256.87,
+    3482.31,
+    1036.19,
+    5183.39,
+    -10641.29,
+    -5.92,
+    -149.97,
+    -3593.51,
+    1398.79,
+    -29142.88,
+    -1233.68,
+    -3306.6,
+    4831.6,
+    -15.93,
+    -43778.27,
+    4090.86,
+    -861.88,
+    -574.57,
+    -2390.6,
+    7108.58,
+    2030.17,
+    -15371.13,
+    43.48,
+    -232.1,
+    -13802.52,
+    -12667.48,
+    3685.31,
+    1218.37,
+    -1425.81,
+    -4540.02,
+    -3998.18,
+    -281.09,
+    -4032.99,
+    6961.88,
+    69.14,
+    6682.68,
+    5671.47,
+    -6094.53,
+    -4065.53,
+    -5727.43,
+    6743.03,
+    -2197.69,
+    -824.69,
+    14435.58,
+    1190.15,
+    3011.47,
+    -17852.04,
+    -12479.11,
+    1509.4,
+    -5794.44,
+    -3041.48,
+    633.41,
+    -28817.59,
+    -3595.99,
+    -237.56,
+    -6894.94,
+    -1438.73,
+    -1226.7,
+    -746.02,
+    2526.41,
+    -537.97,
+    831.05,
+    465.19,
+    337.48,
+    -4942.64,
+    1031.14,
+    -875.46,
+    -3594.2,
+    -1227.77,
+    7606.07,
+    -1246.73,
+    306.11,
+    169.86,
+    -6036.18,
+    1402.18,
+    2567.06,
+    -1122.81,
+    -3946.18,
+    3635.19,
+    -1125.91,
+    331.52,
+    2201.15,
+    3568.29,
+    1226.8,
+    -4775.83,
+    -1370.88,
+    5075.52,
+    6338.67,
+    397.37,
+    -834.95,
+    -540.2,
+    -868.24,
+    993.49,
+    -7165.97,
+    -1648.99,
+    -1333.38,
+    5995.71,
+    5835.37,
+    1906.37,
+    1948.6,
+    11753.23,
+    -6726.44,
+    -365.33,
+    159.83,
+    4586.56,
+    -560.89,
+    312.89,
+    -12881.47,
+    -6609.78,
+    -8180.0,
+    -2989.05,
+    -157.2,
+    -731.98,
+    -771.59,
+    33.85,
+    -295.85,
+    2501.51,
+    -1380.47,
+    -320.51,
+    -546.65,
+    4411.61,
+    14979.32,
+    -3495.69,
+    2559.99,
+    -2761.54,
+    2741.22,
+    -14240.09,
+    -1886.24,
+    529.65,
+    -5576.58,
+    20847.66,
+    -815.15,
+    -1933.74,
+    -1157.02,
+    387.24,
+    -18200.34,
+    -8926.97,
+    -9931.77,
+    1147.2,
+    -703.97,
+    -1776.13,
+    4778.68,
+    1252.22,
+    14689.62,
+    -688.81,
+    -12042.93,
+    -1489.23,
+    159.23,
+    -1982.87,
+    33.85,
+    2504.45,
+    -15462.97,
+    1363.07,
+    4081.81,
+    396.37,
+    -9963.48,
+    -644.28,
+    2381.27,
+    -250.9,
+    1446.22,
+    2403.18,
+    4018.81,
+    524.4,
+    875.77,
+    6918.85,
+    6756.67,
+    998.75,
+    2026.56,
+    -6075.6,
+    -3564.39,
+    -1481.49,
+    5908.31,
+    2579.4,
+    2419.81,
+    -5275.69,
+    1944.53,
+    3407.1,
+    -644.53,
+    6247.91,
+    -3844.84,
+    -12825.17,
+    -5859.66,
+    -311.12,
+    -168.23,
+    -6875.57,
+    1710.39,
+    -421.76,
+    -3143.45,
+    1115.42,
+    5901.45,
+    19291.09,
+    7562.38,
+    452.0,
+    11525.48,
+    4290.12,
+    -977.31,
+    3607.53,
+    6204.0,
+    124593.21,
+    60.44,
+    7113.12,
+    5223.89,
+    1951.97,
+    492.88,
+    -4881.98,
+    -12126.99,
+    9620.78,
+    -41861.67,
+    2347.28,
+    109.23,
+    11707.87,
+    6454.04,
+    2037.68,
+    1841.7,
+    2476.46,
+    -2938.7,
+    -15208.2,
+    9322.96,
+    11376.04,
+    2095.19,
+    1159.63,
+    1564.73,
+    -8247.55,
+    -2819.57,
+    374.0,
+    2098.93,
+    3781.79,
+    4992.87,
+    -7607.95,
+    -3367.11,
+    971.94,
+    -4324.39,
+    3623.27,
+    7040.2,
+    -2109.24,
+    1139.88,
+    595.85,
+    -2407.3,
+    -3757.73,
+    983.5,
+    10987.35,
+    -1542.16,
+    -765.25,
+    617.36,
+    4151.27,
+    1834.07,
+    -4879.75,
+    -232.45,
+    1366.68,
+    -145.42,
+    702.38,
+    74.97,
+    7956.0,
+    -463.7,
+    3196.68,
+    1740.16,
+    5601.08,
+    -4618.86,
+    3661.47,
+    -254.77,
+    -169.25,
+    417.87,
+    -6894.94,
+    4463.29,
+    590.1,
+    -404.94,
+    26764.3,
+    548.77,
+    -65.68,
+    -83.13,
+    -324.58,
+    -438.8,
+    -2139.55,
+    32800.11,
+    -356.69,
+    14603.68,
+    4127.39,
+    6301.81,
+    501.2,
+    2625.48,
+    -1130.32,
+    6214.31,
+    869.4,
+    -4015.55,
+    -2775.14,
+    -1244.92,
+    -1580.37,
+    14342.5,
+    -3149.01,
+    -3793.29,
+    -485.63,
+    1431.42,
+    3610.88,
+    -2607.81,
+    -3858.67,
+    -5403.42,
+    1905.18,
+    12084.89,
+    -2126.53,
+    -4443.8,
+    -1295.43,
+    1710.51,
+    -1285.44,
+    -4290.36,
+    2153.61,
+    -9471.21,
+    2813.35,
+    2477.78,
+    -717.2,
+    -16781.95,
+    -2783.16,
+    10437.18,
+    -1902.26,
+    5346.79,
+    4740.42,
+    1319.0,
+    1153.19,
+    -2152.43,
+    -4260.97,
+    414.35,
+    -730.29,
+    -3443.34,
+    -3971.2,
+    2622.35,
+    -292.89,
+    -31070.35,
+    -79.32,
+    2000.54,
+    -8580.2,
+    -1208.86,
+    878.32,
+    50.38,
+    6546.21,
+    549.08,
+    -7646.38,
+    -192.11,
+    17838.58,
+    -12453.52,
+    -7481.92,
+    -2182.58,
+    -3615.85,
+    1126.29,
+    -6938.82,
+    -1543.87,
+    -1657.23,
+    -5120.78,
+    522.17,
+    -140.59,
+    -5395.35,
+    5671.47,
+    -5180.17,
+    -104.04,
+    11542.41,
+    -13878.45,
+    -502.89,
+    -3331.9,
+    -14288.2,
+    2785.12,
+    6794.58,
+    -2306.15,
+    4685.29,
+    2051.7,
+    2491.67,
+    1387.2,
+    2091.07,
+    1023.34,
+    -2464.12,
+    17.49,
+    -36.33,
+    -13881.2,
+    2758.62,
+    19785.53,
+    5925.5,
+    -2727.26,
+    4513.24,
+    -2760.74,
+    -3183.01,
+    689.43,
+    -11066.98,
+    14189.15,
+    522.17,
+    -591.46,
+    -89.19,
+    -2113.03,
+    -3009.38,
+    -937.29,
+    7064.49,
+    4395.82,
+    2177.67,
+    -3427.94,
+    -1668.46,
+    -1253.58,
+    1714.22,
+    1518.68,
+    -8.39,
+    3362.02,
+    -5022.05,
+    -579.02,
+    -486.21,
+    3085.41,
+    1572.32,
+    -972.77,
+    2205.55,
+    -23588.06,
+    -4466.42,
+    10477.05,
+    4010.99,
+    6235.5,
+    -1273.51,
+    1268.35,
+    526.41,
+    -1206.48,
+    9451.12,
+    -3221.94,
+    -1149.64,
+    2478.83,
+    -3525.14,
+    7019.39,
+    74.6,
+    7772.23,
+    1206.29,
+    -5109.76,
+    1074.31,
+    -828.92,
+    25198.83,
+    -86.91,
+    654.97,
+    -2833.22,
+    -1933.79,
+    -3727.77,
+    1905.2,
+    -2452.17,
+    593.07,
+    -7128.15,
+    -3554.29,
+    4785.43,
+    1537.04,
+    -21593.7,
+    2374.7,
+    -1423.06,
+    1561.09,
+    -1536.75,
+    60.44,
+    -907.07,
+    -74.32,
+    -1048.19,
+    -4679.95,
+    84735.56,
+    -586.79,
+    1092.15,
+    185.09,
+    -11550.99,
+    1354.05,
+    -8715.22,
+    -5315.94,
+    -3173.96,
+    7191.19,
+    975.4,
+    -4280.17,
+    -2551.88,
+    -12761.37,
+    -5800.45,
+    11936.52,
+    -1062.51,
+    915.72,
+    -3745.51,
+    254.59,
+    -207.35,
+    -2972.29,
+    -42793.35,
+    -12356.66,
+    3187.31,
+    -3964.8,
+    3385.2,
+    -2669.26,
+    -17709.62,
+    -347.35,
+    -2377.2,
+    -139.55,
+    5553.92,
+    2092.79,
+    91.35,
+    475.59,
+    1911.41,
+    -633.69,
+    -1213.42,
+    5620.67,
+    1249.38,
+    5304.27,
+    -410.53,
+    -3705.71,
+    -10926.76,
+    -4819.14,
+    -17210.96,
+    -6856.27,
+    11376.04,
+    10066.06,
+    -805.78,
+    7322.71,
+    -717.2,
+    -2568.44,
+    334.2,
+    143229.36,
+    -1520.64,
+    -1579.52,
+    -2110.81,
+    -721.17,
+    -325.05,
+    478.92,
+    1628.71,
+    -604.69,
+    2285.32,
+    857.89,
+    -9041.99,
+    -2833.98,
+    -457.78,
+    -2542.77
+  ],
+  "sample_predictions": [
+    {
+      "manufacturer": "CHEVROLET",
+      "category": "Sedan",
+      "prod_year": 2011,
+      "fuel_type": "Petrol",
+      "engine_volume": 1.8,
+      "mileage": 135759.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 4,
+      "actual_price": 12720.0,
+      "predicted_price": 14686.22,
+      "abs_error": 1966.22,
+      "pct_error": 15.5
+    },
+    {
+      "manufacturer": "SUBARU",
+      "category": "Jeep",
+      "prod_year": 2013,
+      "fuel_type": "Petrol",
+      "engine_volume": 2.5,
+      "mileage": 98000.0,
+      "gear_box_type": "Manual",
+      "drive_wheels": "4x4",
+      "airbags": 6,
+      "actual_price": 15367.0,
+      "predicted_price": 22394.5,
+      "abs_error": 7027.5,
+      "pct_error": 45.7
+    },
+    {
+      "manufacturer": "HONDA",
+      "category": "Pickup",
+      "prod_year": 2009,
+      "fuel_type": "Petrol",
+      "engine_volume": 3.5,
+      "mileage": 256000.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "4x4",
+      "airbags": 6,
+      "actual_price": 30420.0,
+      "predicted_price": 18346.57,
+      "abs_error": 12073.43,
+      "pct_error": 39.7
+    },
+    {
+      "manufacturer": "TOYOTA",
+      "category": "Minivan",
+      "prod_year": 2013,
+      "fuel_type": "Hybrid",
+      "engine_volume": 1.8,
+      "mileage": 178314.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 12,
+      "actual_price": 3607.0,
+      "predicted_price": 7339.52,
+      "abs_error": 3732.52,
+      "pct_error": 103.5
+    },
+    {
+      "manufacturer": "HYUNDAI",
+      "category": "Sedan",
+      "prod_year": 2012,
+      "fuel_type": "Petrol",
+      "engine_volume": 1.6,
+      "mileage": 110000.0,
+      "gear_box_type": "Tiptronic",
+      "drive_wheels": "Front",
+      "airbags": 12,
+      "actual_price": 18189.0,
+      "predicted_price": 16245.14,
+      "abs_error": 1943.86,
+      "pct_error": 10.7
+    },
+    {
+      "manufacturer": "NISSAN",
+      "category": "Jeep",
+      "prod_year": 2010,
+      "fuel_type": "Diesel",
+      "engine_volume": 3.0,
+      "mileage": 167855.0,
+      "gear_box_type": "Manual",
+      "drive_wheels": "4x4",
+      "airbags": 6,
+      "actual_price": 42337.0,
+      "predicted_price": 32664.5,
+      "abs_error": 9672.5,
+      "pct_error": 22.8
+    },
+    {
+      "manufacturer": "HYUNDAI",
+      "category": "Sedan",
+      "prod_year": 2011,
+      "fuel_type": "Hybrid",
+      "engine_volume": 2.4,
+      "mileage": 224349.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 0,
+      "actual_price": 3450.0,
+      "predicted_price": 2318.12,
+      "abs_error": 1131.88,
+      "pct_error": 32.8
+    },
+    {
+      "manufacturer": "AUDI",
+      "category": "Sedan",
+      "prod_year": 2008,
+      "fuel_type": "Diesel",
+      "engine_volume": 3.0,
+      "mileage": 265000.0,
+      "gear_box_type": "Tiptronic",
+      "drive_wheels": "4x4",
+      "airbags": 8,
+      "actual_price": 37633.0,
+      "predicted_price": 21739.89,
+      "abs_error": 15893.11,
+      "pct_error": 42.2
+    },
+    {
+      "manufacturer": "MITSUBISHI",
+      "category": "Jeep",
+      "prod_year": 2014,
+      "fuel_type": "Petrol",
+      "engine_volume": 2.0,
+      "mileage": 83516.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "4x4",
+      "airbags": 8,
+      "actual_price": 18660.0,
+      "predicted_price": 20850.3,
+      "abs_error": 2190.3,
+      "pct_error": 11.7
+    },
+    {
+      "manufacturer": "TOYOTA",
+      "category": "Sedan",
+      "prod_year": 2014,
+      "fuel_type": "Hybrid",
+      "engine_volume": 2.5,
+      "mileage": 179381.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 12,
+      "actual_price": 11133.0,
+      "predicted_price": 10745.76,
+      "abs_error": 387.24,
+      "pct_error": 3.5
+    },
+    {
+      "manufacturer": "OPEL",
+      "category": "Universal",
+      "prod_year": 1998,
+      "fuel_type": "Diesel",
+      "engine_volume": 1.7,
+      "mileage": 0.0,
+      "gear_box_type": "Manual",
+      "drive_wheels": "Front",
+      "airbags": 2,
+      "actual_price": 2500.0,
+      "predicted_price": 4470.38,
+      "abs_error": 1970.38,
+      "pct_error": 78.8
+    },
+    {
+      "manufacturer": "MERCEDES-BENZ",
+      "category": "Jeep",
+      "prod_year": 2015,
+      "fuel_type": "Petrol",
+      "engine_volume": 2.0,
+      "mileage": 93304.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "4x4",
+      "airbags": 0,
+      "actual_price": 5018.0,
+      "predicted_price": 8927.87,
+      "abs_error": 3909.87,
+      "pct_error": 77.9
+    },
+    {
+      "manufacturer": "HYUNDAI",
+      "category": "Sedan",
+      "prod_year": 2011,
+      "fuel_type": "Petrol",
+      "engine_volume": 1.6,
+      "mileage": 147700.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 4,
+      "actual_price": 14834.0,
+      "predicted_price": 16396.53,
+      "abs_error": 1562.53,
+      "pct_error": 10.5
+    },
+    {
+      "manufacturer": "VOLKSWAGEN",
+      "category": "Sedan",
+      "prod_year": 2012,
+      "fuel_type": "Diesel",
+      "engine_volume": 2.0,
+      "mileage": 142000.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 8,
+      "actual_price": 21639.0,
+      "predicted_price": 15861.59,
+      "abs_error": 5777.41,
+      "pct_error": 26.7
+    },
+    {
+      "manufacturer": "TOYOTA",
+      "category": "Sedan",
+      "prod_year": 2018,
+      "fuel_type": "Petrol",
+      "engine_volume": 2.5,
+      "mileage": 80568.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 12,
+      "actual_price": 470.0,
+      "predicted_price": 7181.22,
+      "abs_error": 6711.22,
+      "pct_error": 1427.9
+    },
+    {
+      "manufacturer": "KIA",
+      "category": "Sedan",
+      "prod_year": 2014,
+      "fuel_type": "Hybrid",
+      "engine_volume": 2.4,
+      "mileage": 88000.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 10,
+      "actual_price": 11133.0,
+      "predicted_price": 18370.27,
+      "abs_error": 7237.27,
+      "pct_error": 65.0
+    },
+    {
+      "manufacturer": "MERCEDES-BENZ",
+      "category": "Sedan",
+      "prod_year": 2003,
+      "fuel_type": "Petrol",
+      "engine_volume": 5.0,
+      "mileage": 150000.0,
+      "gear_box_type": "Tiptronic",
+      "drive_wheels": "Rear",
+      "airbags": 12,
+      "actual_price": 11917.0,
+      "predicted_price": 13844.38,
+      "abs_error": 1927.38,
+      "pct_error": 16.2
+    },
+    {
+      "manufacturer": "HYUNDAI",
+      "category": "Sedan",
+      "prod_year": 2013,
+      "fuel_type": "Petrol",
+      "engine_volume": 1.6,
+      "mileage": 56746.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 4,
+      "actual_price": 26149.0,
+      "predicted_price": 18977.48,
+      "abs_error": 7171.52,
+      "pct_error": 27.4
+    },
+    {
+      "manufacturer": "HYUNDAI",
+      "category": "Sedan",
+      "prod_year": 2012,
+      "fuel_type": "Petrol",
+      "engine_volume": 1.6,
+      "mileage": 162911.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 4,
+      "actual_price": 13589.0,
+      "predicted_price": 17003.53,
+      "abs_error": 3414.53,
+      "pct_error": 25.1
+    },
+    {
+      "manufacturer": "MERCEDES-BENZ",
+      "category": "Sedan",
+      "prod_year": 1998,
+      "fuel_type": "Petrol",
+      "engine_volume": 2.4,
+      "mileage": 1700000.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Rear",
+      "airbags": 6,
+      "actual_price": 5959.0,
+      "predicted_price": 7077.91,
+      "abs_error": 1118.91,
+      "pct_error": 18.8
+    },
+    {
+      "manufacturer": "HYUNDAI",
+      "category": "Jeep",
+      "prod_year": 2011,
+      "fuel_type": "Diesel",
+      "engine_volume": 2.0,
+      "mileage": 161345.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "Front",
+      "airbags": 4,
+      "actual_price": 21652.0,
+      "predicted_price": 22680.6,
+      "abs_error": 1028.6,
+      "pct_error": 4.8
+    },
+    {
+      "manufacturer": "BMW",
+      "category": "Jeep",
+      "prod_year": 2016,
+      "fuel_type": "Petrol",
+      "engine_volume": 3.0,
+      "mileage": 0.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "4x4",
+      "airbags": 12,
+      "actual_price": 25716.0,
+      "predicted_price": 9650.56,
+      "abs_error": 16065.44,
+      "pct_error": 62.5
+    },
+    {
+      "manufacturer": "CHEVROLET",
+      "category": "Sedan",
+      "prod_year": 2015,
+      "fuel_type": "Petrol",
+      "engine_volume": 1.4,
+      "mileage": 100000.0,
+      "gear_box_type": "Tiptronic",
+      "drive_wheels": "Front",
+      "airbags": 8,
+      "actual_price": 17562.0,
+      "predicted_price": 14784.54,
+      "abs_error": 2777.46,
+      "pct_error": 15.8
+    },
+    {
+      "manufacturer": "AUDI",
+      "category": "Sedan",
+      "prod_year": 2008,
+      "fuel_type": "Petrol",
+      "engine_volume": 2.0,
+      "mileage": 240000.0,
+      "gear_box_type": "Tiptronic",
+      "drive_wheels": "Front",
+      "airbags": 10,
+      "actual_price": 11760.0,
+      "predicted_price": 22038.13,
+      "abs_error": 10278.13,
+      "pct_error": 87.4
+    },
+    {
+      "manufacturer": "LEXUS",
+      "category": "Jeep",
+      "prod_year": 2003,
+      "fuel_type": "Petrol",
+      "engine_volume": 4.7,
+      "mileage": 230000.0,
+      "gear_box_type": "Automatic",
+      "drive_wheels": "4x4",
+      "airbags": 0,
+      "actual_price": 600.0,
+      "predicted_price": 17262.97,
+      "abs_error": 16662.97,
+      "pct_error": 2777.2
+    }
+  ],
+  "category_unique_values": {
+    "manufacturer": [
+      "ACURA",
+      "ALFA ROMEO",
+      "ASTON MARTIN",
+      "AUDI",
+      "BENTLEY",
+      "BMW",
+      "BUICK",
+      "CADILLAC",
+      "CHEVROLET",
+      "CHRYSLER",
+      "CITROEN",
+      "DAEWOO",
+      "DAIHATSU",
+      "DODGE",
+      "FERRARI",
+      "FIAT",
+      "FORD",
+      "GAZ",
+      "GMC",
+      "GREATWALL",
+      "HAVAL",
+      "HONDA",
+      "HUMMER",
+      "HYUNDAI",
+      "INFINITI",
+      "ISUZU",
+      "JAGUAR",
+      "JEEP",
+      "KIA",
+      "LAMBORGHINI",
+      "LANCIA",
+      "LAND ROVER",
+      "LEXUS",
+      "LINCOLN",
+      "MASERATI",
+      "MAZDA",
+      "MERCEDES-BENZ",
+      "MERCURY",
+      "MINI",
+      "MITSUBISHI",
+      "MOSKVICH",
+      "NISSAN",
+      "OPEL",
+      "PEUGEOT",
+      "PONTIAC",
+      "PORSCHE",
+      "RENAULT",
+      "ROLLS-ROYCE",
+      "ROVER",
+      "SAAB",
+      "SATURN",
+      "SCION",
+      "SEAT",
+      "SKODA",
+      "SSANGYONG",
+      "SUBARU",
+      "SUZUKI",
+      "TESLA",
+      "TOYOTA",
+      "UAZ",
+      "VAZ",
+      "VOLKSWAGEN",
+      "VOLVO",
+      "ZAZ",
+      "სხვა"
+    ],
+    "category": [
+      "Cabriolet",
+      "Coupe",
+      "Goods wagon",
+      "Hatchback",
+      "Jeep",
+      "Limousine",
+      "Microbus",
+      "Minivan",
+      "Pickup",
+      "Sedan",
+      "Universal"
+    ],
+    "leather_interior": [
+      "No",
+      "Yes"
+    ],
+    "fuel_type": [
+      "CNG",
+      "Diesel",
+      "Hybrid",
+      "Hydrogen",
+      "LPG",
+      "Petrol",
+      "Plug-in Hybrid"
+    ],
+    "gear_box_type": [
+      "Automatic",
+      "Manual",
+      "Tiptronic",
+      "Variator"
+    ],
+    "drive_wheels": [
+      "4x4",
+      "Front",
+      "Rear"
+    ],
+    "doors": [
+      "2-3",
+      "4-5",
+      ">5"
+    ],
+    "wheel": [
+      "Left wheel",
+      "Right-hand drive"
+    ],
+    "color": [
+      "Beige",
+      "Black",
+      "Blue",
+      "Brown",
+      "Carnelian red",
+      "Golden",
+      "Green",
+      "Grey",
+      "Orange",
+      "Pink",
+      "Purple",
+      "Red",
+      "Silver",
+      "Sky blue",
+      "White",
+      "Yellow"
+    ]
+  }
+}

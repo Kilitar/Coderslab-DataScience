@@ -226,6 +226,37 @@ p_nlp_transformer_theory = st.Page("views/04_nlp_transformer_theory.py", title="
 p_nlp_bert_theory = st.Page("views/04_nlp_bert_theory.py", title="Teorie & Demo: BERT & Hugging Face Pipeline", icon="🤖", url_path="day4_nlp_bert_theory")
 p_nlp_day4_summary = st.Page("views/04_nlp_day_4_summary.py", title="Závěr Dne 4: Shrnutí & Kvíz", icon="🎓", url_path="day_4_summary")
 
+# Domácí úkoly (Session 2 / Mezi Dnem 4 a 5): Random Forest
+p_hw_titanic_rf = st.Page("views/04_homework_titanic_rf.py", title="DÚ 1: Titanic (Klasifikace) – Výsledky zadání", icon="🎯", url_path="hw_titanic_rf_results")
+p_hw_titanic_rf_critique = st.Page("views/04_homework_titanic_rf_critique.py", title="DÚ 1: Titanic (Klasifikace) – Expertní analýza", icon="🔬", url_path="hw_titanic_rf_critique")
+p_hw_titanic_rf_nb = st.Page("views/04_homework_titanic_rf_nb.py", title="DÚ 1: Titanic (Klasifikace) – Notebook", icon="🐍", url_path="hw_titanic_rf_nb")
+
+p_hw_car_price_rf = st.Page("views/04_homework_car_price_rf.py", title="DÚ 2: Ceny aut (Regrese) – Výsledky zadání", icon="🎯", url_path="hw_car_price_rf_results")
+p_hw_car_price_rf_critique = st.Page("views/04_homework_car_price_rf_critique.py", title="DÚ 2: Ceny aut (Regrese) – Expertní analýza", icon="🔬", url_path="hw_car_price_rf_critique")
+p_hw_car_price_rf_nb = st.Page("views/04_homework_car_price_rf_nb.py", title="DÚ 2: Ceny aut (Regrese) – Notebook", icon="🐍", url_path="hw_car_price_rf_nb")
+
+p_hw_diabetes_xgb = st.Page("views/04_homework_diabetes_xgb.py", title="DÚ 3: Diabetes (XGBoost) – Výsledky zadání", icon="🎯", url_path="hw_diabetes_xgb_results")
+p_hw_diabetes_xgb_critique = st.Page("views/04_homework_diabetes_xgb_critique.py", title="DÚ 3: Diabetes (XGBoost) – Expertní analýza", icon="🔬", url_path="hw_diabetes_xgb_critique")
+p_hw_diabetes_xgb_nb = st.Page("views/04_homework_diabetes_xgb_nb.py", title="DÚ 3: Diabetes (XGBoost) – Notebook", icon="🐍", url_path="hw_diabetes_xgb_nb")
+
+p_hw_calories_xgb = st.Page("views/04_homework_calories_xgb.py", title="DÚ 4: Kalorie při cvičení (XGBoost) – Výsledky zadání", icon="🎯", url_path="hw_calories_xgb_results")
+p_hw_calories_xgb_critique = st.Page("views/04_homework_calories_xgb_critique.py", title="DÚ 4: Kalorie při cvičení (XGBoost) – Expertní analýza", icon="🔬", url_path="hw_calories_xgb_critique")
+p_hw_calories_xgb_nb = st.Page("views/04_homework_calories_xgb_nb.py", title="DÚ 4: Kalorie při cvičení (XGBoost) – Notebook", icon="🐍", url_path="hw_calories_xgb_nb")
+
+p_hw_sonar_nn = st.Page("views/04_homework_sonar_nn.py", title="DÚ 5: Sonar (Neuronové sítě) – Výsledky zadání", icon="🎯", url_path="hw_sonar_nn_results")
+p_hw_sonar_nn_critique = st.Page("views/04_homework_sonar_nn_critique.py", title="DÚ 5: Sonar (Neuronové sítě) – Expertní analýza", icon="🔬", url_path="hw_sonar_nn_critique")
+p_hw_sonar_nn_nb = st.Page("views/04_homework_sonar_nn_nb.py", title="DÚ 5: Sonar (Neuronové sítě) – Notebook", icon="🐍", url_path="hw_sonar_nn_nb")
+
+p_hw_auto_mpg_nn = st.Page("views/04_homework_auto_mpg_nn.py", title="DÚ 6: Auto MPG (Neuronové sítě) – Výsledky zadání", icon="🎯", url_path="hw_auto_mpg_nn_results")
+p_hw_auto_mpg_nn_critique = st.Page("views/04_homework_auto_mpg_nn_critique.py", title="DÚ 6: Auto MPG (Neuronové sítě) – Expertní analýza", icon="🔬", url_path="hw_auto_mpg_nn_critique")
+p_hw_auto_mpg_nn_nb = st.Page("views/04_homework_auto_mpg_nn_nb.py", title="DÚ 6: Auto MPG (Neuronové sítě) – Notebook", icon="🐍", url_path="hw_auto_mpg_nn_nb")
+
+p_hw_mcdonalds_w2v = st.Page("views/04_homework_mcdonalds_w2v.py", title="DÚ 7: McDonald's (Word2Vec + SVM) – Výsledky zadání", icon="🎯", url_path="hw_mcdonalds_w2v_results")
+p_hw_mcdonalds_w2v_critique = st.Page("views/04_homework_mcdonalds_w2v_critique.py", title="DÚ 7: McDonald's (Word2Vec + SVM) – Expertní analýza", icon="🔬", url_path="hw_mcdonalds_w2v_critique")
+p_hw_mcdonalds_w2v_nb = st.Page("views/04_homework_mcdonalds_w2v_nb.py", title="DÚ 7: McDonald's (Word2Vec + SVM) – Notebook", icon="🐍", url_path="hw_mcdonalds_w2v_nb")
+
+p_hw_kaggle_guide = st.Page("views/04_homework_kaggle_guide.py", title="Průvodce: Jak nahrát notebook na Kaggle", icon="🌐", url_path="hw_kaggle_guide")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -442,6 +473,30 @@ nav = st.navigation(
         ],
         "23. Den 4: Shrnutí & Závěr Dne 4": [
             p_nlp_day4_summary,
+        ],
+        "24. Domácí úkoly (Session 2): Sítě & Ensembly": [
+            p_hw_titanic_rf,
+            p_hw_titanic_rf_critique,
+            p_hw_titanic_rf_nb,
+            p_hw_car_price_rf,
+            p_hw_car_price_rf_critique,
+            p_hw_car_price_rf_nb,
+            p_hw_diabetes_xgb,
+            p_hw_diabetes_xgb_critique,
+            p_hw_diabetes_xgb_nb,
+            p_hw_calories_xgb,
+            p_hw_calories_xgb_critique,
+            p_hw_calories_xgb_nb,
+            p_hw_sonar_nn,
+            p_hw_sonar_nn_critique,
+            p_hw_sonar_nn_nb,
+            p_hw_auto_mpg_nn,
+            p_hw_auto_mpg_nn_critique,
+            p_hw_auto_mpg_nn_nb,
+            p_hw_mcdonalds_w2v,
+            p_hw_mcdonalds_w2v_critique,
+            p_hw_mcdonalds_w2v_nb,
+            p_hw_kaggle_guide,
         ],
     }
 )

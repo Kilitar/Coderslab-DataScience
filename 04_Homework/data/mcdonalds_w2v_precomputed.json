@@ -1,0 +1,760 @@
+{
+  "metadata": {
+    "dataset": "mcdonalds_reviews.csv",
+    "source": "Kaggle McDonald's Store Reviews",
+    "total_reviews": 33236,
+    "train_reviews": 23265,
+    "test_reviews": 9971,
+    "embedding_dim": 100,
+    "vocab_size": 5456,
+    "classes": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "class_distribution": {
+      "positive": 15987,
+      "negative": 12457,
+      "neutral": 4792
+    }
+  },
+  "model_comparison": {
+    "svm_standard": {
+      "accuracy": 0.7849,
+      "f1_weighted": 0.7625,
+      "f1_macro": 0.6713
+    },
+    "svm_balanced": {
+      "accuracy": 0.7753,
+      "f1_weighted": 0.7699
+    },
+    "logistic_regression": {
+      "accuracy": 0.787,
+      "f1_weighted": 0.7671
+    }
+  },
+  "test_metrics": {
+    "accuracy": 0.7849,
+    "precision_macro": 0.7589,
+    "recall_macro": 0.6644,
+    "f1_macro": 0.6713,
+    "f1_weighted": 0.7625,
+    "confusion_matrix": [
+      [
+        3300,
+        60,
+        377
+      ],
+      [
+        543,
+        342,
+        553
+      ],
+      [
+        528,
+        84,
+        4184
+      ]
+    ],
+    "classification_report": {
+      "negative": {
+        "precision": 0.7549759780370625,
+        "recall": 0.8830612791008831,
+        "f1-score": 0.8140108534780464,
+        "support": 3737.0
+      },
+      "neutral": {
+        "precision": 0.7037037037037037,
+        "recall": 0.23783031988873435,
+        "f1-score": 0.35550935550935553,
+        "support": 1438.0
+      },
+      "positive": {
+        "precision": 0.8181462651544779,
+        "recall": 0.872393661384487,
+        "f1-score": 0.8443995963673058,
+        "support": 4796.0
+      },
+      "accuracy": 0.7848761408083442,
+      "macro avg": {
+        "precision": 0.7589419822984147,
+        "recall": 0.6644284201247014,
+        "f1-score": 0.6713066017849026,
+        "support": 9971.0
+      },
+      "weighted avg": {
+        "precision": 0.7779661662352126,
+        "recall": 0.7848761408083442,
+        "f1-score": 0.7625034075666944,
+        "support": 9971.0
+      }
+    },
+    "classification_report_text": "              precision    recall  f1-score   support\n\n    negative       0.75      0.88      0.81      3737\n     neutral       0.70      0.24      0.36      1438\n    positive       0.82      0.87      0.84      4796\n\n    accuracy                           0.78      9971\n   macro avg       0.76      0.66      0.67      9971\nweighted avg       0.78      0.78      0.76      9971\n"
+  },
+  "semantic_similarities": {
+    "burger": [
+      {
+        "word": "meat",
+        "similarity": 0.8097
+      },
+      {
+        "word": "hamburger",
+        "similarity": 0.779
+      },
+      {
+        "word": "cook",
+        "similarity": 0.7735
+      },
+      {
+        "word": "pickle",
+        "similarity": 0.7651
+      },
+      {
+        "word": "patty",
+        "similarity": 0.7632
+      },
+      {
+        "word": "raw",
+        "similarity": 0.7469
+      }
+    ],
+    "staff": [
+      {
+        "word": "employee",
+        "similarity": 0.7605
+      },
+      {
+        "word": "worker",
+        "similarity": 0.723
+      },
+      {
+        "word": "crew",
+        "similarity": 0.6076
+      },
+      {
+        "word": "importantly",
+        "similarity": 0.5938
+      },
+      {
+        "word": "server",
+        "similarity": 0.5851
+      },
+      {
+        "word": "associate",
+        "similarity": 0.5735
+      }
+    ],
+    "manager": [
+      {
+        "word": "manger",
+        "similarity": 0.8335
+      },
+      {
+        "word": "name",
+        "similarity": 0.7758
+      },
+      {
+        "word": "spanish",
+        "similarity": 0.7592
+      },
+      {
+        "word": "supervisor",
+        "similarity": 0.7399
+      },
+      {
+        "word": "duty",
+        "similarity": 0.739
+      },
+      {
+        "word": "apologized",
+        "similarity": 0.7377
+      }
+    ],
+    "clean": [
+      {
+        "word": "plenty",
+        "similarity": 0.6662
+      },
+      {
+        "word": "lighting",
+        "similarity": 0.6562
+      },
+      {
+        "word": "facility",
+        "similarity": 0.6542
+      },
+      {
+        "word": "neat",
+        "similarity": 0.6535
+      },
+      {
+        "word": "quiet",
+        "similarity": 0.6496
+      },
+      {
+        "word": "downside",
+        "similarity": 0.6444
+      }
+    ],
+    "dirty": [
+      {
+        "word": "filthy",
+        "similarity": 0.8753
+      },
+      {
+        "word": "messy",
+        "similarity": 0.7814
+      },
+      {
+        "word": "cleaned",
+        "similarity": 0.7682
+      },
+      {
+        "word": "trash",
+        "similarity": 0.758
+      },
+      {
+        "word": "overflowing",
+        "similarity": 0.7468
+      },
+      {
+        "word": "smell",
+        "similarity": 0.7335
+      }
+    ],
+    "cold": [
+      {
+        "word": "soggy",
+        "similarity": 0.7658
+      },
+      {
+        "word": "lukewarm",
+        "similarity": 0.7325
+      },
+      {
+        "word": "stale",
+        "similarity": 0.732
+      },
+      {
+        "word": "warm",
+        "similarity": 0.7165
+      },
+      {
+        "word": "cooked",
+        "similarity": 0.7163
+      },
+      {
+        "word": "luke",
+        "similarity": 0.7002
+      }
+    ],
+    "slow": [
+      {
+        "word": "awful",
+        "similarity": 0.651
+      },
+      {
+        "word": "extremely",
+        "similarity": 0.624
+      },
+      {
+        "word": "understaffed",
+        "similarity": 0.5959
+      },
+      {
+        "word": "speed",
+        "similarity": 0.5958
+      },
+      {
+        "word": "unorganized",
+        "similarity": 0.5923
+      },
+      {
+        "word": "poor",
+        "similarity": 0.5902
+      }
+    ],
+    "fresh": [
+      {
+        "word": "warm",
+        "similarity": 0.6898
+      },
+      {
+        "word": "hot",
+        "similarity": 0.6694
+      },
+      {
+        "word": "piping",
+        "similarity": 0.6575
+      },
+      {
+        "word": "luke",
+        "similarity": 0.6536
+      },
+      {
+        "word": "delicious",
+        "similarity": 0.6493
+      },
+      {
+        "word": "operational",
+        "similarity": 0.6226
+      }
+    ],
+    "delicious": [
+      {
+        "word": "tasty",
+        "similarity": 0.9017
+      },
+      {
+        "word": "perfect",
+        "similarity": 0.7654
+      },
+      {
+        "word": "perfectly",
+        "similarity": 0.7577
+      },
+      {
+        "word": "fantastic",
+        "similarity": 0.7563
+      },
+      {
+        "word": "tasting",
+        "similarity": 0.7533
+      },
+      {
+        "word": "yummy",
+        "similarity": 0.7523
+      }
+    ]
+  },
+  "pca_projection": [
+    {
+      "word": "burger",
+      "x": -4.9265,
+      "y": 3.6938,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "cheeseburger",
+      "x": -4.6538,
+      "y": 4.2843,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "sandwich",
+      "x": -5.3786,
+      "y": 6.0105,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "nugget",
+      "x": -5.3728,
+      "y": 5.7604,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "drink",
+      "x": -2.8359,
+      "y": 3.996,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "shake",
+      "x": -2.4208,
+      "y": 1.52,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "ice",
+      "x": -1.8521,
+      "y": 1.897,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "coffee",
+      "x": -2.4105,
+      "y": 1.8857,
+      "category": "Jídlo & Pití"
+    },
+    {
+      "word": "staff",
+      "x": 3.84,
+      "y": -1.3228,
+      "category": "Personál"
+    },
+    {
+      "word": "employee",
+      "x": 5.8503,
+      "y": 0.9904,
+      "category": "Personál"
+    },
+    {
+      "word": "manager",
+      "x": 6.2467,
+      "y": 3.1444,
+      "category": "Personál"
+    },
+    {
+      "word": "worker",
+      "x": 4.8678,
+      "y": 1.1849,
+      "category": "Personál"
+    },
+    {
+      "word": "crew",
+      "x": 3.7408,
+      "y": 0.2221,
+      "category": "Personál"
+    },
+    {
+      "word": "cashier",
+      "x": 4.484,
+      "y": 2.5742,
+      "category": "Personál"
+    },
+    {
+      "word": "customer",
+      "x": 5.4401,
+      "y": 0.0779,
+      "category": "Personál"
+    },
+    {
+      "word": "lady",
+      "x": 5.7974,
+      "y": 4.4636,
+      "category": "Personál"
+    },
+    {
+      "word": "girl",
+      "x": 3.8938,
+      "y": 3.8797,
+      "category": "Personál"
+    },
+    {
+      "word": "clean",
+      "x": 0.0572,
+      "y": -6.7554,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "dirty",
+      "x": 1.7452,
+      "y": -3.4412,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "fresh",
+      "x": -4.1696,
+      "y": -1.8595,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "hot",
+      "x": -4.9922,
+      "y": -0.9371,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "cold",
+      "x": -3.3256,
+      "y": 1.4354,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "slow",
+      "x": 1.8355,
+      "y": -1.7969,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "fast",
+      "x": -1.3561,
+      "y": -4.999,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "rude",
+      "x": 4.0189,
+      "y": 0.24,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "friendly",
+      "x": -0.571,
+      "y": -5.8366,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "polite",
+      "x": 0.9916,
+      "y": -2.4977,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "horrible",
+      "x": 2.3378,
+      "y": -0.3652,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "terrible",
+      "x": 1.924,
+      "y": -1.4269,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "worst",
+      "x": 1.367,
+      "y": -1.3914,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "best",
+      "x": -2.636,
+      "y": -4.0706,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "delicious",
+      "x": -4.4857,
+      "y": -3.2167,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "tasty",
+      "x": -3.0554,
+      "y": -2.3514,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "disgusting",
+      "x": -0.3301,
+      "y": -0.9014,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "gross",
+      "x": -0.5162,
+      "y": -0.7643,
+      "category": "Kvalita / Vlastnosti"
+    },
+    {
+      "word": "love",
+      "x": -3.1493,
+      "y": -3.3262,
+      "category": "Kvalita / Vlastnosti"
+    }
+  ],
+  "sample_predictions": [
+    {
+      "review": "Neutral",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "neutral",
+      "is_correct": true
+    },
+    {
+      "review": "Haven't seen a McDonald's so lost in my life :(",
+      "actual_stars": "1 star",
+      "actual": "negative",
+      "predicted": "negative",
+      "is_correct": true
+    },
+    {
+      "review": "I only took one glass and it was very thick. They should make them softer when drinking it.",
+      "actual_stars": "4 stars",
+      "actual": "positive",
+      "predicted": "negative",
+      "is_correct": false
+    },
+    {
+      "review": "Employees are not friendly",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Neutral",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "neutral",
+      "is_correct": true
+    },
+    {
+      "review": "MacDonald's was great. 8 th Ave. And 34th. St. Fast service great take out.",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "It was quick easy and close for an afternoon snack.",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Limited parking, homeless folks live nearby outside",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "negative",
+      "is_correct": false
+    },
+    {
+      "review": "Quick",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Took my nephew to play & eat. First one ive been to with a working interactive floor projection game. Suited my needs",
+      "actual_stars": "4 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Gets jammed packed with tourist. If you order on the app to pickup in store instead of thru the drive thru and decide to go inside they make you get in line for counter pickup which takes even longer....",
+      "actual_stars": "1 star",
+      "actual": "negative",
+      "predicted": "negative",
+      "is_correct": true
+    },
+    {
+      "review": "Excellent",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Late night meal choice was ok. Tried the new chicken sandwich was really good. You could only do take out.",
+      "actual_stars": "4 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Okay",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "positive",
+      "is_correct": false
+    },
+    {
+      "review": "Excellent",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Food was good, but the mens restroom was being cleaned for a long time and multiple men walked away or used the women's restroom.",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "negative",
+      "is_correct": false
+    },
+    {
+      "review": "Manager Maria truly rude!! Very bad service overall, ignored customers requests, asked her for a refill of sprite and ignored it twice, even customers behind were amazed by her attitude.",
+      "actual_stars": "1 star",
+      "actual": "negative",
+      "predicted": "negative",
+      "is_correct": true
+    },
+    {
+      "review": "Every time I come to the store there is a problemÃ¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã...",
+      "actual_stars": "1 star",
+      "actual": "negative",
+      "predicted": "negative",
+      "is_correct": true
+    },
+    {
+      "review": "Excellent customer service and well prepared food.  Drive-thru staff were professional and friendly. I even had eye contact and a smile!  This is how it's done!",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Value menu is really worth it, free refills, was glad I went even though it's Maccas.",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Neutral",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "neutral",
+      "is_correct": true
+    },
+    {
+      "review": "Excellent",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "This is the Devil of fast food and my family loves",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Neutral",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "neutral",
+      "is_correct": true
+    },
+    {
+      "review": "Rude staff.  Slow food delivery.  Kiosk may save the owner money but it is slow and convoluted.  Not sure why you take a number for table side service and then have to go to counter to pick it up.   F...",
+      "actual_stars": "1 star",
+      "actual": "negative",
+      "predicted": "negative",
+      "is_correct": true
+    },
+    {
+      "review": "I don't know where to start. OMG! This is the slowest MCDs restaurant in the world. Staff act like if they were on vacation. You can see in their faces that they hate working here and are just looking...",
+      "actual_stars": "1 star",
+      "actual": "negative",
+      "predicted": "negative",
+      "is_correct": true
+    },
+    {
+      "review": "5-30-19 - On the way back from all day at Universal Island of Adventures, so decided on a cheaper meal to end the night. Had dinner with family here. Busy night, but able to order our meals from the a...",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "negative",
+      "is_correct": false
+    },
+    {
+      "review": "McDonalds was great! The food tastes like in Ukraine or in Europe! Fried potatoes was amazing and the gave us : cheeseburger, 1liter cola and fried potatoes for 5.49$! It was very cheap!",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    },
+    {
+      "review": "Neutral",
+      "actual_stars": "3 stars",
+      "actual": "neutral",
+      "predicted": "neutral",
+      "is_correct": true
+    },
+    {
+      "review": "Excellent",
+      "actual_stars": "5 stars",
+      "actual": "positive",
+      "predicted": "positive",
+      "is_correct": true
+    }
+  ]
+}
