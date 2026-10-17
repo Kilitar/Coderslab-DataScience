@@ -280,6 +280,9 @@ p_pca_diamonds_nb = st.Page("views/05_pca_diamonds_nb.py", title="Cvičení: Dia
 # Den 5: Neřízené učení – Shlukování (K-Means)
 p_kmeans_theory = st.Page("views/05_kmeans_theory.py", title="Teorie: Shlukování & K-Means", icon="📖", url_path="day5_kmeans_theory")
 p_kmeans_impl = st.Page("views/05_kmeans_sample_implementation.py", title="Implementace: K-Means v Scikit-learn", icon="🛠️", url_path="day5_kmeans_sample_implementation")
+p_kmeans_mall_ex = st.Page("views/05_kmeans_mall_customers_exercise.py", title="Cvičení: Zákazníci OC – Výsledky", icon="🎯", url_path="day5_kmeans_mall_customers_results")
+p_kmeans_mall_critique = st.Page("views/05_kmeans_mall_customers_critique.py", title="Cvičení: Zákazníci OC – Rozbor", icon="🔬", url_path="day5_kmeans_mall_customers_critique")
+p_kmeans_mall_nb = st.Page("views/05_kmeans_mall_customers_nb.py", title="Cvičení: Zákazníci OC – Notebook", icon="🐍", url_path="day5_kmeans_mall_customers_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -535,6 +538,9 @@ nav = st.navigation(
         "27. Den 5: Neřízené učení – Shlukování (K-Means)": [
             p_kmeans_theory,
             p_kmeans_impl,
+            p_kmeans_mall_ex,
+            p_kmeans_mall_critique,
+            p_kmeans_mall_nb,
         ],
     }
 )

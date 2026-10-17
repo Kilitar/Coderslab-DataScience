@@ -302,8 +302,10 @@ Coderslab-DataScience/
 │       └── 02_nltk_and_spacy_guide.md   # Prework Session 2: Knihovny NLTK vs. spaCy (metody, architektura, VADER, NER, benchmarky)
 ├── 05_Unsupervised_Learning/            # Sekce neřízeného učení (PCA, K-Means, DBSCAN)
 │   ├── 01_pca_diamonds_exercise.ipynb   # Cvičení PCA na diamantech
+│   ├── 02_kmeans_mall_customers_exercise.ipynb # Cvičení K-Means: Segmentace zákazníků OC (mall_customers.csv)
 │   ├── data/
-│   │   └── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
+│   │   ├── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
+│   │   └── mall_customers_kmeans_precomputed.json # Předpočtené výsledky K-Means segmentace zákazníků
 │   └── theory/
 │       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
 │       ├── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
