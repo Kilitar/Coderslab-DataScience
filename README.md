@@ -307,13 +307,15 @@ Coderslab-DataScience/
 │   ├── 04_dbscan_moons_exercise.ipynb   # Cvičení DBSCAN na dvou půlměsících (make_moons, 500 vzorků, noise=0.10)
 │   ├── 05_anomaly_detection_lof_lab.ipynb # Laboratoř detekce anomálií & Local Outlier Factor (LOF)
 │   ├── 06_lof_blobs_exercise.ipynb      # Cvičení LOF na shlucích blobs_dataset.csv (kontaminace 2 % vs. 5 %, k=20)
+│   ├── 07_isolation_forest_sample_implementation.ipynb # Vzorová implementace Isolation Forest (make_blobs, 50 anomálií, decision contours)
 │   ├── data/
 │   │   ├── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
 │   │   ├── mall_customers_kmeans_precomputed.json # Předpočtené výsledky K-Means segmentace zákazníků
 │   │   ├── dbscan_circles_precomputed.json # Předpočtené výsledky DBSCAN shlukování & k-NN distance grafu
 │   │   ├── dbscan_moons_precomputed.json # Předpočtené výsledky DBSCAN na půlměsících (moons)
 │   │   ├── lof_anomaly_precomputed.json  # Předpočtené výsledky LOF na blobs_dataset a multi-density datech
-│   │   └── lof_blobs_exercise_precomputed.json # Předpočtené výsledky LOF cvičení na blobs_dataset (2 % vs 5 %)
+│   │   ├── lof_blobs_exercise_precomputed.json # Předpočtené výsledky LOF cvičení na blobs_dataset (2 % vs 5 %)
+│   │   └── isolation_forest_precomputed.json # Předpočtené výsledky Isolation Forest na make_blobs a 2D kontury
 │   └── theory/
 │       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
 │       ├── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
@@ -322,7 +324,8 @@ Coderslab-DataScience/
 │       ├── 04_dbscan_moons_exercise_guide.md # Cvičení DBSCAN na dvou půlměsících (make_moons, Chasm Bridging, Silhouette paradox)
 │       ├── 05_anomaly_detection_lof_theory.md # Teorie detekce anomálií, taxonomie, matematika LOF, iForest srovnání
 │       ├── 06_lof_sample_implementation_guide.md # Vzorová implementace LOF ze slajdů (make_blobs, ruční výpočet 5 bodů, výhody/nevýhody)
-│       └── 07_lof_blobs_exercise_guide.md # Průvodce cvičením LOF na blobs_dataset.csv (matematika, percentilový posun, business dopady)
+│       ├── 07_lof_blobs_exercise_guide.md # Průvodce cvičením LOF na blobs_dataset.csv (matematika, percentilový posun, business dopady)
+│       └── 08_isolation_forest_theory_and_implementation.md # Teorie & Vzorová implementace Isolation Forest (matematika c(n), stromy, subsampling)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)

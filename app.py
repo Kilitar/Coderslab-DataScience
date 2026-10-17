@@ -299,6 +299,11 @@ p_lof_blobs_ex = st.Page("views/05_lof_blobs_exercise.py", title="Cvičení: Blo
 p_lof_blobs_critique = st.Page("views/05_lof_blobs_critique.py", title="Cvičení: Blobs – Expertní rozbor", icon="🔬", url_path="day5_lof_blobs_critique")
 p_lof_blobs_nb = st.Page("views/05_lof_blobs_nb.py", title="Cvičení: Blobs – Notebook", icon="🐍", url_path="day5_lof_blobs_nb")
 
+# Den 5: Neřízené učení – Detekce anomálií (Isolation Forest)
+p_iforest_theory = st.Page("views/05_isolation_forest_theory.py", title="Teorie: Isolation Forest (iForest)", icon="📖", url_path="day5_isolation_forest_theory")
+p_iforest_impl = st.Page("views/05_isolation_forest_implementation.py", title="Implementace: Isolation Forest", icon="🛠️", url_path="day5_isolation_forest_implementation")
+p_iforest_nb = st.Page("views/05_isolation_forest_nb.py", title="Implementace: iForest – Notebook", icon="🐍", url_path="day5_isolation_forest_nb")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -571,6 +576,11 @@ nav = st.navigation(
             p_lof_blobs_ex,
             p_lof_blobs_critique,
             p_lof_blobs_nb,
+        ],
+        "30. Den 5: Neřízené učení – Detekce anomálií (Isolation Forest)": [
+            p_iforest_theory,
+            p_iforest_impl,
+            p_iforest_nb,
         ],
     }
 )
