@@ -303,13 +303,16 @@ Coderslab-DataScience/
 ├── 05_Unsupervised_Learning/            # Sekce neřízeného učení (PCA, K-Means, DBSCAN)
 │   ├── 01_pca_diamonds_exercise.ipynb   # Cvičení PCA na diamantech
 │   ├── 02_kmeans_mall_customers_exercise.ipynb # Cvičení K-Means: Segmentace zákazníků OC (mall_customers.csv)
+│   ├── 03_dbscan_circles_exercise.ipynb # Vzorová implementace DBSCAN na soustředných kruzích (make_circles)
 │   ├── data/
 │   │   ├── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
-│   │   └── mall_customers_kmeans_precomputed.json # Předpočtené výsledky K-Means segmentace zákazníků
+│   │   ├── mall_customers_kmeans_precomputed.json # Předpočtené výsledky K-Means segmentace zákazníků
+│   │   └── dbscan_circles_precomputed.json # Předpočtené výsledky DBSCAN shlukování & k-NN distance grafu
 │   └── theory/
 │       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
 │       ├── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
-│       └── 02_kmeans_sample_implementation_guide.md # Vzorová implementace K-Means v Scikit-learn (make_blobs, WCSS, Silhouette)
+│       ├── 02_kmeans_sample_implementation_guide.md # Vzorová implementace K-Means v Scikit-learn (make_blobs, WCSS, Silhouette)
+│       └── 03_dbscan_sample_implementation_guide.md # Vzorová implementace DBSCAN v Scikit-learn (make_circles, eps, k-NN)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)

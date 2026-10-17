@@ -284,6 +284,10 @@ p_kmeans_mall_ex = st.Page("views/05_kmeans_mall_customers_exercise.py", title="
 p_kmeans_mall_critique = st.Page("views/05_kmeans_mall_customers_critique.py", title="Cvičení: Zákazníci OC – Rozbor", icon="🔬", url_path="day5_kmeans_mall_customers_critique")
 p_kmeans_mall_nb = st.Page("views/05_kmeans_mall_customers_nb.py", title="Cvičení: Zákazníci OC – Notebook", icon="🐍", url_path="day5_kmeans_mall_customers_nb")
 
+# Den 5: Neřízené učení – Shlukování (DBSCAN)
+p_dbscan_impl = st.Page("views/05_dbscan_sample_implementation.py", title="Implementace: DBSCAN v Scikit-learn", icon="🛠️", url_path="day5_dbscan_sample_implementation")
+p_dbscan_impl_nb = st.Page("views/05_dbscan_sample_implementation_nb.py", title="Implementace: DBSCAN – Notebook", icon="🐍", url_path="day5_dbscan_sample_implementation_nb")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -541,6 +545,10 @@ nav = st.navigation(
             p_kmeans_mall_ex,
             p_kmeans_mall_critique,
             p_kmeans_mall_nb,
+        ],
+        "28. Den 5: Neřízené učení – Shlukování (DBSCAN)": [
+            p_dbscan_impl,
+            p_dbscan_impl_nb,
         ],
     }
 )
