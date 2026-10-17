@@ -300,6 +300,13 @@ Coderslab-DataScience/
 │   └── theory/
 │       ├── 01_introduction_to_nlp.md    # Prework Session 2: Principy NLP, pipeline, Stemming/Lemmatizace, TF-IDF, Word2Vec, 11 aplikací
 │       └── 02_nltk_and_spacy_guide.md   # Prework Session 2: Knihovny NLTK vs. spaCy (metody, architektura, VADER, NER, benchmarky)
+├── 05_Unsupervised_Learning/            # Sekce neřízeného učení (PCA, K-Means, DBSCAN)
+│   ├── 01_pca_diamonds_exercise.ipynb   # Cvičení PCA na diamantech
+│   ├── data/
+│   │   └── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
+│   └── theory/
+│       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
+│       └── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
