@@ -14,34 +14,124 @@ st.caption(
     "pomocí algoritmu K-Means, standardizace proměnných, určení optimálního k a vizualizace těžišť."
 )
 
-DATA_PATH = Path("05_Unsupervised_Learning/data/mall_customers_kmeans_precomputed.json")
+@st.cache_data
+def load_mall_customers_exercise_data():
+    candidates_json = [
+        Path("05_Unsupervised_Learning/data/mall_customers_kmeans_precomputed.json"),
+        Path(__file__).resolve().parent.parent / "05_Unsupervised_Learning/data/mall_customers_kmeans_precomputed.json",
+    ]
+    for p in candidates_json:
+        if p.exists():
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    d = json.load(f)
+                    if isinstance(d, dict) and "pairs" in d and "age_vs_spending" in d["pairs"]:
+                        return d
+            except Exception:
+                pass
+
+    # Fallback on-the-fly výpočet, pokud JSON chybí nebo je v mezipaměti neplatný
+    candidates_csv = [
+        Path("data/Downloadable materials for Session 3/mall_customers.csv"),
+        Path(__file__).resolve().parent.parent / "data/Downloadable materials for Session 3/mall_customers.csv",
+        Path("mall_customers.csv"),
+    ]
+    df_found = None
+    for cp in candidates_csv:
+        if cp.exists():
+            df_found = pd.read_csv(cp)
+            break
+
+    if df_found is None:
+        return None
+
+    # Rychlý fallback výpočet (< 25 ms)
+    from sklearn.cluster import KMeans
+    from sklearn.metrics import silhouette_score, davies_bouldin_score
+    from sklearn.preprocessing import StandardScaler
+
+    fallback_pairs = {
+        "age_vs_spending": {"features": ["age", "spending_score"], "default_k": 4},
+        "income_vs_spending": {"features": ["annual_income", "spending_score"], "default_k": 5},
+    }
+    fallback_res = {
+        "summary": {
+            "n_samples": len(df_found)
+        },
+        "pairs": {}
+    }
+
+    for p_key, p_cfg in fallback_pairs.items():
+        feats = p_cfg["features"]
+        scaler = StandardScaler()
+        X_s = scaler.fit_transform(df_found[feats])
+        inertias = []
+        silhouettes = [None]
+        davies_bouldin = [None]
+        models = {}
+
+        for k in range(1, 11):
+            km = KMeans(n_clusters=k, init="k-means++", n_init=10, random_state=42)
+            km.fit(X_s)
+            inertias.append(float(km.inertia_))
+            if k > 1:
+                sil = float(silhouette_score(X_s, km.labels_))
+                db = float(davies_bouldin_score(X_s, km.labels_))
+                silhouettes.append(sil)
+                davies_bouldin.append(db)
+                c_orig = scaler.inverse_transform(km.cluster_centers_)
+                profs = []
+                for cid in range(k):
+                    c_mask = km.labels_ == cid
+                    profs.append({
+                        "cluster_id": cid,
+                        "count": int(c_mask.sum()),
+                        "percentage": float(c_mask.sum() / len(df_found) * 100),
+                        "centers_orig": {f: float(c_orig[cid, idx]) for idx, f in enumerate(feats)},
+                        "centers_scaled": {f: float(km.cluster_centers_[cid, idx]) for idx, f in enumerate(feats)}
+                    })
+                models[str(k)] = {
+                    "inertia": float(km.inertia_),
+                    "silhouette": sil,
+                    "davies_bouldin": db,
+                    "labels": [int(l) for l in km.labels_],
+                    "centers_scaled": km.cluster_centers_.tolist(),
+                    "centers_orig": c_orig.tolist(),
+                    "profiles": profs
+                }
+
+        fallback_res["pairs"][p_key] = {
+            "name": p_key,
+            "features": feats,
+            "default_k": p_cfg["default_k"],
+            "k_range": list(range(1, 11)),
+            "inertias": inertias,
+            "silhouettes": silhouettes,
+            "davies_bouldin": davies_bouldin,
+            "models": models
+        }
+
+    return fallback_res
 
 
 @st.cache_data
-def load_precomputed():
-    if DATA_PATH.exists():
-        with open(DATA_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return None
-
-
-@st.cache_data
-def load_raw_df():
+def load_mall_customers_raw_df():
     candidates = [
-        "data/Downloadable materials for Session 3/mall_customers.csv",
-        "mall_customers.csv"
+        Path("data/Downloadable materials for Session 3/mall_customers.csv"),
+        Path(__file__).resolve().parent.parent / "data/Downloadable materials for Session 3/mall_customers.csv",
+        Path("mall_customers.csv")
     ]
     for p in candidates:
-        if Path(p).exists():
+        if p.exists():
             return pd.read_csv(p)
     return None
 
 
-data = load_precomputed()
-df_raw = load_raw_df()
+data = load_mall_customers_exercise_data()
+df_raw = load_mall_customers_raw_df()
 
-if not data or df_raw is None:
-    st.error("Předpočítaná data nebyla nalezena. Spusťte prosím skript scratch/precompute_mall_customers_kmeans.py.")
+if not data or "pairs" not in data or df_raw is None:
+    st.error("Data datasetu mall_customers.csv nebyla nalezena.")
     st.stop()
 
 pair_data = data["pairs"]["age_vs_spending"]

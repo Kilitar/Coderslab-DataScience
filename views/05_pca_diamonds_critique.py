@@ -18,14 +18,14 @@ DATA_PATH = Path("05_Unsupervised_Learning/data/pca_diamonds_precomputed.json")
 
 
 @st.cache_data
-def load_precomputed():
+def load_pca_diamonds_critique_precomputed():
     if DATA_PATH.exists():
         with open(DATA_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
     return None
 
 
-data = load_precomputed()
+data = load_pca_diamonds_critique_precomputed()
 
 if not data:
     st.error("Předpočítaná data nebyla nalezena.")
