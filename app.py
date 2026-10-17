@@ -287,6 +287,9 @@ p_kmeans_mall_nb = st.Page("views/05_kmeans_mall_customers_nb.py", title="Cviče
 # Den 5: Neřízené učení – Shlukování (DBSCAN)
 p_dbscan_impl = st.Page("views/05_dbscan_sample_implementation.py", title="Implementace: DBSCAN v Scikit-learn", icon="🛠️", url_path="day5_dbscan_sample_implementation")
 p_dbscan_impl_nb = st.Page("views/05_dbscan_sample_implementation_nb.py", title="Implementace: DBSCAN – Notebook", icon="🐍", url_path="day5_dbscan_sample_implementation_nb")
+p_dbscan_moons_ex = st.Page("views/05_dbscan_moons_exercise.py", title="Cvičení: Moons – Výsledky zadání", icon="🎯", url_path="day5_dbscan_moons_results")
+p_dbscan_moons_critique = st.Page("views/05_dbscan_moons_critique.py", title="Cvičení: Moons – Expertní rozbor", icon="🔬", url_path="day5_dbscan_moons_critique")
+p_dbscan_moons_nb = st.Page("views/05_dbscan_moons_nb.py", title="Cvičení: Moons – Notebook", icon="🐍", url_path="day5_dbscan_moons_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -549,6 +552,9 @@ nav = st.navigation(
         "28. Den 5: Neřízené učení – Shlukování (DBSCAN)": [
             p_dbscan_impl,
             p_dbscan_impl_nb,
+            p_dbscan_moons_ex,
+            p_dbscan_moons_critique,
+            p_dbscan_moons_nb,
         ],
     }
 )
