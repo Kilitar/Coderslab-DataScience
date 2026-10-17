@@ -307,6 +307,9 @@ p_iforest_scores_ex = st.Page("views/05_isolation_forest_student_scores_exercise
 p_iforest_scores_critique = st.Page("views/05_isolation_forest_student_scores_critique.py", title="Cvičení: Skóre studentů – Rozbor", icon="🔬", url_path="day5_iforest_student_scores_critique")
 p_iforest_scores_nb = st.Page("views/05_isolation_forest_student_scores_nb.py", title="Cvičení: Skóre studentů – Notebook", icon="🐍", url_path="day5_iforest_student_scores_nb")
 
+# Den 5: Shrnutí & Závěr Dne 5
+p_day5_summary = st.Page("views/05_day_5_summary.py", title="Závěr Dne 5: Velká syntéza", icon="🏆", url_path="day5_summary")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -587,6 +590,9 @@ nav = st.navigation(
             p_iforest_scores_ex,
             p_iforest_scores_critique,
             p_iforest_scores_nb,
+        ],
+        "31. Den 5: Shrnutí & Závěr Dne 5": [
+            p_day5_summary,
         ],
     }
 )

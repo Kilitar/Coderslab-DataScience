@@ -328,7 +328,8 @@ Coderslab-DataScience/
 │       ├── 06_lof_sample_implementation_guide.md # Vzorová implementace LOF ze slajdů (make_blobs, ruční výpočet 5 bodů, výhody/nevýhody)
 │       ├── 07_lof_blobs_exercise_guide.md # Průvodce cvičením LOF na blobs_dataset.csv (matematika, percentilový posun, business dopady)
 │       ├── 08_isolation_forest_theory_and_implementation.md # Teorie & Vzorová implementace Isolation Forest (matematika c(n), stromy, subsampling)
-│       └── 09_isolation_forest_student_scores_exercise_guide.md # Průvodce cvičením Isolation Forest na student_scores.csv (PCA, kontaminace 2.5 % vs 1.0 %)
+│       ├── 09_isolation_forest_student_scores_exercise_guide.md # Průvodce cvičením Isolation Forest na student_scores.csv (PCA, kontaminace 2.5 % vs 1.0 %)
+│       └── 10_day_5_unsupervised_learning_summary.md # Velká syntéza neřízeného učení Dne 5 (3 pilíře, matice modelů, desatero 2026)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
