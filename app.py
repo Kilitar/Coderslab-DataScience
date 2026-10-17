@@ -277,6 +277,9 @@ p_pca_diamonds_ex = st.Page("views/05_pca_diamonds_exercise.py", title="Cvičen�
 p_pca_diamonds_critique = st.Page("views/05_pca_diamonds_critique.py", title="Cvičení: Diamanty – Expertní rozbor", icon="🔬", url_path="day5_pca_diamonds_critique")
 p_pca_diamonds_nb = st.Page("views/05_pca_diamonds_nb.py", title="Cvičení: Diamanty – Notebook", icon="🐍", url_path="day5_pca_diamonds_nb")
 
+# Den 5: Neřízené učení – Shlukování (K-Means)
+p_kmeans_theory = st.Page("views/05_kmeans_theory.py", title="Teorie: Shlukování & K-Means", icon="📖", url_path="day5_kmeans_theory")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -527,6 +530,9 @@ nav = st.navigation(
             p_pca_diamonds_ex,
             p_pca_diamonds_critique,
             p_pca_diamonds_nb,
+        ],
+        "27. Den 5: Neřízené učení – Shlukování (K-Means)": [
+            p_kmeans_theory,
         ],
     }
 )
