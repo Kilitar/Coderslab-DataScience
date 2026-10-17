@@ -306,7 +306,8 @@ Coderslab-DataScience/
 │   │   └── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
 │   └── theory/
 │       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
-│       └── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
+│       ├── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
+│       └── 02_kmeans_sample_implementation_guide.md # Vzorová implementace K-Means v Scikit-learn (make_blobs, WCSS, Silhouette)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
