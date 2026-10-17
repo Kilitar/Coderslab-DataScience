@@ -273,6 +273,9 @@ p_prework_unsupervised_intro = st.Page("views/05_prework_unsupervised_learning_i
 # Den 5: Neřízené učení – Redukce dimenzionality (PCA)
 p_pca_theory = st.Page("views/05_pca_dimensionality_reduction_theory.py", title="Teorie: Redukce dimenzionality & Matematika PCA", icon="📖", url_path="day5_pca_theory")
 p_pca_impl = st.Page("views/05_pca_breast_cancer_implementation.py", title="Implementace: PCA v Scikit-learn (Breast Cancer)", icon="🛠️", url_path="day5_pca_breast_cancer_implementation")
+p_pca_diamonds_ex = st.Page("views/05_pca_diamonds_exercise.py", title="Cvičení: Diamanty – Výsledky zadání", icon="🎯", url_path="day5_pca_diamonds_results")
+p_pca_diamonds_critique = st.Page("views/05_pca_diamonds_critique.py", title="Cvičení: Diamanty – Expertní rozbor", icon="🔬", url_path="day5_pca_diamonds_critique")
+p_pca_diamonds_nb = st.Page("views/05_pca_diamonds_nb.py", title="Cvičení: Diamanty – Notebook", icon="🐍", url_path="day5_pca_diamonds_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -521,6 +524,9 @@ nav = st.navigation(
         "26. Den 5: Neřízené učení – Redukce dimenzionality (PCA)": [
             p_pca_theory,
             p_pca_impl,
+            p_pca_diamonds_ex,
+            p_pca_diamonds_critique,
+            p_pca_diamonds_nb,
         ],
     }
 )
