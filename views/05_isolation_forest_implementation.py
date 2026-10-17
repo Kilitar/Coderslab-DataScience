@@ -343,33 +343,25 @@ with tab_crit:
 
     b_col1, b_col2 = st.columns(2)
     with b_col1:
-        st.markdown(
-            """
-            <div style="background-color: #f0fdf4; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; height: 100%;">
-                <h4 style="margin: 0; color: #065f46;">✅ Výhody (Advantages ze slajdu 22)</h4>
-                <ul style="font-size: 0.9rem; color: #064e3b; margin-top: 8px; padding-left: 20px;">
-                    <li><b>Efektivita (Efficiency):</b> V porovnání s metodami založenými na vzdálenostech (k-NN, LOF) je iForest vysoce efektivní i při velkém počtu dimenzí.</li>
-                    <li><b>Škálovatelnost (Scalability):</b> Vynikající pro masivní datasety – staví mělké stromy na malých vzorcích (subsampling ψ = 256).</li>
-                    <li><b>Nevyžaduje normalizaci:</b> Odpadá předpoklad normality i nutnost transformace příznaků (StandardScaler).</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### ✅ Výhody (Advantages ze slajdu 22)")
+            st.markdown(
+                """
+                - **Efektivita (Efficiency):** V porovnání s metodami založenými na vzdálenostech (k-NN, LOF) je iForest vysoce efektivní i při velkém počtu dimenzí.
+                - **Škálovatelnost (Scalability):** Vynikající pro masivní datasety – staví mělké stromy na malých vzorcích (subsampling $\\psi = 256$).
+                - **Nevyžaduje normalizaci:** Odpadá předpoklad normality i nutnost transformace příznaků (StandardScaler).
+                """
+            )
     with b_col2:
-        st.markdown(
-            """
-            <div style="background-color: #fef2f2; padding: 18px; border-radius: 8px; border-left: 4px solid #ef4444; height: 100%;">
-                <h4 style="margin: 0; color: #991b1b;">⚠️ Nevýhody (Disadvantages ze slajdu 22)</h4>
-                <ul style="font-size: 0.9rem; color: #7f1d1d; margin-top: 8px; padding-left: 20px;">
-                    <li><b>Náhodnost (Randomness):</b> Výsledky se mohou mezi běhy mírně lišit kvůli náhodnému výběru os a řezů (nutnost zafixovat <code>random_state</code>).</li>
-                    <li><b>Problém se shluky anomálií (Clustering of anomalies):</b> Pokud anomálie vytvoří vlastní husté shluky, iForest je nedokáže snadno oddělit (vyžadují mnoho řezů).</li>
-                    <li><b>Axiální omezení:</b> Řezy jsou rovnoběžné s osami, což může selhávat u šikmých nelineárních závislostí.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### ⚠️ Nevýhody (Disadvantages ze slajdu 22)")
+            st.markdown(
+                """
+                - **Náhodnost (Randomness):** Výsledky se mohou mezi běhy mírně lišit kvůli náhodnému výběru os a řezů (nutnost zafixovat `random_state`).
+                - **Problém se shluky anomálií:** Pokud anomálie vytvoří vlastní husté shluky, iForest je nedokáže snadno oddělit (vyžadují mnoho řezů).
+                - **Axiální omezení:** Řezy jsou rovnoběžné s osami, což může selhávat u šikmých nelineárních závislostí.
+                """
+            )
 
     st.markdown("---")
     st.subheader("🔬 Srovnávací experiment: Kde triumfuje LOF a kde Isolation Forest?")

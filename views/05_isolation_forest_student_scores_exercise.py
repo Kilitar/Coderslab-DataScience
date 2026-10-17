@@ -170,44 +170,33 @@ with tab_proc:
 
     steps_col1, steps_col2, steps_col3 = st.columns(3)
     with steps_col1:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #3b82f6;">
-                <h4 style="margin: 0; color: #1e293b;">1. Výběr 3 sloupců</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Z 30 641 řádků vyfiltrujeme pouze <code>MathScore</code>, <code>ReadingScore</code> 
-                    a <code>WritingScore</code>. Ostatní socioekonomické znaky vynecháme.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Výběr 3 sloupců")
+            st.markdown(
+                """
+                Z 30 641 řádků vyfiltrujeme pouze `MathScore`, `ReadingScore` 
+                a `WritingScore`. Ostatní socioekonomické znaky vynecháme.
+                """
+            )
     with steps_col2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #10b981;">
-                <h4 style="margin: 0; color: #1e293b;">2. Redukce na 2D (PCA)</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Aplikace <code>PCA(n_components=2)</code>. První dvě komponenty vysvětlují <b>98.5 % rozptylu</b>: 
-                    PC1 = celkový výkon, PC2 = nepoměr matematiky vs. jazyka.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 2. Redukce na 2D (PCA)")
+            st.markdown(
+                """
+                Aplikace `PCA(n_components=2)`. První dvě komponenty vysvětlují **98.5 % rozptylu**: 
+                PC1 = celkový výkon, PC2 = nepoměr matematiky vs. jazyka.
+                """
+            )
     with steps_col3:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                <h4 style="margin: 0; color: #1e293b;">3. Isolation Forest</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Natrénování modelu s <code>contamination=0.025</code> (766 anomálií) a následné porovnání 
-                    s <code>contamination=0.010</code> (307 nejradikálnějších anomálií).
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Isolation Forest")
+            st.markdown(
+                """
+                Natrénování modelu s `contamination=0.025` (766 anomálií) a následné porovnání 
+                s `contamination=0.010` (307 nejradikálnějších anomálií).
+                """
+            )
+
 
     st.markdown("---")
     st.markdown("#### Ukázkový kód z vypracovaného Jupyter Notebooku:")

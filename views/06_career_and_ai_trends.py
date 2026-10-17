@@ -43,56 +43,41 @@ with tab_genai:
 
     c_g1, c_g2, c_g3 = st.columns(3)
     with c_g1:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #6366f1; height: 100%;">
-                <h4 style="color: #1e1b4b; margin: 0;">💬 Velké jazykové modely (LLMs)</h4>
-                <p style="font-size: 0.88rem; color: #475569; margin-top: 8px;">
-                    Modely s desítkami až stovkami miliard parametrů trénované na předpověď dalšího tokenu.
-                </p>
-                <ul style="font-size: 0.85rem; color: #334155;">
-                    <li><b>OpenAI (GPT-4o, ChatGPT):</b> Univerzální asistent s podporou kódu a multimodality.</li>
-                    <li><b>Google (Gemini 1.5 Pro):</b> Extrémní kontextové okno (až 2M tokenů) a multimodální chápání.</li>
-                    <li><b>Meta (LLaMA 3):</b> Špičkové open-weight modely pro privátní on-premise nasazení.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 💬 Velké jazykové modely (LLMs)")
+            st.markdown(
+                """
+                Modely s desítkami až stovkami miliard parametrů trénované na předpověď dalšího tokenu.
+
+                - **OpenAI (GPT-4o, ChatGPT):** Univerzální asistent s podporou kódu a multimodality.
+                - **Google (Gemini 1.5 Pro):** Extrémní kontextové okno (až 2M tokenů) a multimodální chápání.
+                - **Meta (LLaMA 3):** Špičkové open-weight modely pro privátní on-premise nasazení.
+                """
+            )
     with c_g2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #ec4899; height: 100%;">
-                <h4 style="color: #831843; margin: 0;">🎨 Difúzní obrazové modely</h4>
-                <p style="font-size: 0.88rem; color: #475569; margin-top: 8px;">
-                    Generování fotorealistických děl a grafiky z textového popisu (Text-to-Image).
-                </p>
-                <ul style="font-size: 0.85rem; color: #334155;">
-                    <li><b>Midjourney:</b> Špičková estetika, grafický design, filmový vzhled.</li>
-                    <li><b>DALL-E 3:</b> Hluboká integrace s ChatGPT a precizní dodržování složitých zadání.</li>
-                    <li><b>Stable Diffusion:</b> Open-source standard s plnou kontrolou nad váhami a LoRA adaptéry.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 🎨 Difúzní obrazové modely")
+            st.markdown(
+                """
+                Generování fotorealistických děl a grafiky z textového popisu (Text-to-Image).
+
+                - **Midjourney:** Špičková estetika, grafický design, filmový vzhled.
+                - **DALL-E 3:** Hluboká integrace s ChatGPT a precizní dodržování složitých zadání.
+                - **Stable Diffusion:** Open-source standard s plnou kontrolou nad váhami a LoRA adaptéry.
+                """
+            )
     with c_g3:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; height: 100%;">
-                <h4 style="color: #064e3b; margin: 0;">💻 Asistované programování</h4>
-                <p style="font-size: 0.88rem; color: #475569; margin-top: 8px;">
-                    Párové programování, automatizace testů a generování datových pipeline.
-                </p>
-                <ul style="font-size: 0.85rem; color: #334155;">
-                    <li><b>Cursor / GitHub Copilot:</b> Kontextové doplňování kódu napříč celým repozitářem.</li>
-                    <li><b>Antigravity / Gemini CLI:</b> Agentické řešení komplexních úloh přímo v IDE a terminálu.</li>
-                    <li><b>Claude 3.5 Sonnet:</b> Bezkonkurenční schopnost v refaktoringu a logickém ladění.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 💻 Asistované programování")
+            st.markdown(
+                """
+                Párové programování, automatizace testů a generování datových pipeline.
+
+                - **Cursor / GitHub Copilot:** Kontextové doplňování kódu napříč celým repozitářem.
+                - **Antigravity / Gemini CLI:** Agentické řešení komplexních úloh přímo v IDE a terminálu.
+                - **Claude 3.5 Sonnet:** Bezkonkurenční schopnost v refaktoringu a logickém ladění.
+                """
+            )
 
     st.markdown("---")
     st.subheader("⚠️ Zásadní limity a výzvy LLM pro datové vědce")
@@ -243,59 +228,44 @@ with tab_career:
 
     c_r1, c_r2, c_r3 = st.columns(3)
     with c_r1:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-top: 4px solid #3b82f6;">
-                <h4 style="margin: 0; color: #1e3a8a;">📊 Data Scientist / Analytik</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Most mezi byznysem a daty.
-                </p>
-                <ul style="font-size: 0.85rem; color: #334155;">
-                    <li>A/B testování a statistické hypotézy</li>
-                    <li>Feature Engineering a doménové znalosti</li>
-                    <li>Prediktivní modelování (Churn, LTV, cenotvorba)</li>
-                    <li>Prezentace a vizualizace pro management</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 📊 Data Scientist / Analytik")
+            st.markdown(
+                """
+                *Most mezi byznysem a daty.*
+
+                - A/B testování a statistické hypotézy
+                - Feature Engineering a doménové znalosti
+                - Prediktivní modelování (Churn, LTV, cenotvorba)
+                - Prezentace a vizualizace pro management
+                """
+            )
     with c_r2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-top: 4px solid #10b981;">
-                <h4 style="margin: 0; color: #064e3b;">⚙️ Machine Learning Engineer</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Přenášení modelů do škálovatelné produkce.
-                </p>
-                <ul style="font-size: 0.85rem; color: #334155;">
-                    <li>MLOps, Docker, Kubernetes, CI/CD pro ML</li>
-                    <li>Optimalizace latence a kvantizace modelů (ONNX)</li>
-                    <li>REST API, mikroservisy (FastAPI, Triton)</li>
-                    <li>Monitoring driftu a automatizovaný retraining</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### ⚙️ Machine Learning Engineer")
+            st.markdown(
+                """
+                *Přenášení modelů do škálovatelné produkce.*
+
+                - MLOps, Docker, Kubernetes, CI/CD pro ML
+                - Optimalizace latence a kvantizace modelů (ONNX)
+                - REST API, mikroservisy (FastAPI, Triton)
+                - Monitoring driftu a automatizovaný retraining
+                """
+            )
     with c_r3:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-top: 4px solid #8b5cf6;">
-                <h4 style="margin: 0; color: #4c1d95;">🤖 AI / LLM Application Engineer</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Tvorba moderních aplikací nad velkými modely.
-                </p>
-                <ul style="font-size: 0.85rem; color: #334155;">
-                    <li>RAG architektury a vektorové databáze</li>
-                    <li>Jemné doladění (Fine-Tuning, LoRA, QLoRA)</li>
-                    <li>Autonomní AI agenti a orchestrace (LangChain, LlamaIndex)</li>
-                    <li>Evaluace a bezpečnost LLM systémů</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 🤖 AI / LLM Engineer")
+            st.markdown(
+                """
+                *Tvorba moderních aplikací nad velkými modely.*
+
+                - RAG architektury a vektorové databáze
+                - Jemné doladění (Fine-Tuning, LoRA, QLoRA)
+                - Autonomní AI agenti a orchestrace (LangChain, LlamaIndex)
+                - Evaluace a bezpečnost LLM systémů
+                """
+            )
 
     st.markdown("---")
     st.success(

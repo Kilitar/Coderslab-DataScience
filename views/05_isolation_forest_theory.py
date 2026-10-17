@@ -52,33 +52,28 @@ with tab_arch:
 
     col_box1, col_box2 = st.columns(2)
     with col_box1:
-        st.markdown(
-            """
-            <div style="background-color: #fef2f2; padding: 18px; border-radius: 8px; border-left: 4px solid #ef4444; height: 100%;">
-                <h4 style="margin: 0; color: #991b1b;">🔴 Anomálie (Outliers)</h4>
-                <p style="font-size: 0.95rem; color: #7f1d1d; margin-top: 8px;">
-                    Leží v řídce osídlených oblastech. Náhodný řez provedený v prostoru znaků má vysokou pravděpodobnost, 
-                    že anomálii oddělí od zbytku dat téměř okamžitě. 
-                    <br><b>Výsledek: Velmi malá hloubka stromu (krátká cesta h(x) od kořene).</b>
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 🔴 Anomálie (Outliers)")
+            st.markdown(
+                """
+                Leží v řídce osídlených oblastech. Náhodný řez provedený v prostoru znaků má vysokou pravděpodobnost, 
+                že anomálii oddělí od zbytku dat téměř okamžitě. 
+                
+                **Výsledek:** Velmi malá hloubka stromu (krátká cesta $h(x)$ od kořene).
+                """
+            )
     with col_box2:
-        st.markdown(
-            """
-            <div style="background-color: #eff6ff; padding: 18px; border-radius: 8px; border-left: 4px solid #3b82f6; height: 100%;">
-                <h4 style="margin: 0; color: #1e40af;">🔵 Běžná pozorování (Inliers)</h4>
-                <p style="font-size: 0.95rem; color: #1e3a8a; margin-top: 8px;">
-                    Jsou nahloučena v hustých klastrech. Aby náhodný řez izoloval jediný bod uvnitř shluku, 
-                    musí strom provést velké množství postupných jemných dělení. 
-                    <br><b>Výsledek: Velká hloubka stromu (dlouhá cesta h(x) od kořene).</b>
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 🔵 Běžná pozorování (Inliers)")
+            st.markdown(
+                """
+                Jsou nahloučena v hustých klastrech. Aby náhodný řez izoloval jediný bod uvnitř shluku, 
+                musí strom provést velké množství postupných jemných dělení. 
+                
+                **Výsledek:** Velká hloubka stromu (dlouhá cesta $h(x)$ od kořene).
+                """
+            )
+
 
     st.markdown("---")
     st.markdown("#### Schéma rekurzivního dělení prostoru:")
@@ -274,59 +269,44 @@ with tab_prod:
 
     p_col1, p_col2 = st.columns(2)
     with p_col1:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #065f46;">1. Magie Subsamplingu (max_samples = 256)</h4>
-                <p style="font-size: 0.9rem; color: #064e3b; margin-top: 8px;">
-                    Mnoho inženýrů intuitivně nastavuje <code>max_samples=len(X)</code> ve víře, že více dat zlepší model. 
-                    <b>To je kardinální chyba!</b> Větší vzorek způsobuje tzv. <i>Swamping</i> (běžné body obklopí anomálie) 
-                    a <i>Masking</i> (anomálie vytvoří vlastní husté shluky). 
-                    Hodnota <b>ψ = 256</b> je matematicky optimální pro téměř jakkoliv velký dataset.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e40af;">2. Rozhodovací funkce vs. Pevná kontaminace</h4>
-                <p style="font-size: 0.9rem; color: #1e3a8a; margin-top: 8px;">
-                    V produkčním API nevolte binární <code>fit_predict()</code> s fixní <code>contamination</code>. 
-                    Místo toho ukládejte spojité skóre z <code>decision_function()</code> a kalibrujte 
-                    rozhodovací práh dynamicky podle ekonomické nákladové matice (Cost Matrix).
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Magie Subsamplingu (max_samples = 256)")
+            st.markdown(
+                """
+                Mnoho inženýrů intuitivně nastavuje `max_samples=len(X)` ve víře, že více dat zlepší model. 
+                **To je kardinální chyba!** Větší vzorek způsobuje tzv. *Swamping* (běžné body obklopí anomálie) 
+                a *Masking* (anomálie vytvoří vlastní husté shluky). 
+                Hodnota **ψ = 256** je matematicky optimální pro téměř jakkoliv velký dataset.
+                """
+            )
+        with st.container(border=True):
+            st.markdown("### 2. Rozhodovací funkce vs. Pevná kontaminace")
+            st.markdown(
+                """
+                V produkčním API nevolte binární `fit_predict()` s fixní `contamination`. 
+                Místo toho ukládejte spojité skóre z `decision_function()` a kalibrujte 
+                rozhodovací práh dynamicky podle ekonomické nákladové matice (Cost Matrix).
+                """
+            )
 
     with p_col2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #92400e;">3. Extended Isolation Forest (EIF)</h4>
-                <p style="font-size: 0.9rem; color: #78350f; margin-top: 8px;">
-                    Standardní iForest štěpí prostor pouze rovnoběžně s osami (Axis-Aligned). 
-                    To vytváří pravoúhlé artefakty a falešné zóny anomálií u šikmých korelací. 
-                    Pro korelovaná data zvažte <b>Extended Isolation Forest</b>, který volí náhodné nadroviny 
-                    s náhodným směrovým vektorem.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #ef4444; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #991b1b;">4. Ochrana před dimenzionálním šumem</h4>
-                <p style="font-size: 0.9rem; color: #7f1d1d; margin-top: 8px;">
-                    Ačkoliv je iForest mnohem odolnější vůči dimenzionalitě než k-NN, pokud dataset obsahuje 
-                    stovky irelevantních šumových příznaků, náhodný výběr os způsobí degradaci stromů. 
-                    Doporučuje se omezit <code>max_features</code> nebo předem provést selekci znaků.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Extended Isolation Forest (EIF)")
+            st.markdown(
+                """
+                Standardní iForest štěpí prostor pouze rovnoběžně s osami (Axis-Aligned). 
+                To vytváří pravoúhlé artefakty a falešné zóny anomálií u šikmých korelací. 
+                Pro korelovaná data zvažte **Extended Isolation Forest**, který volí náhodné nadroviny 
+                s náhodným směrovým vektorem.
+                """
+            )
+        with st.container(border=True):
+            st.markdown("### 4. Ochrana před dimenzionálním šumem")
+            st.markdown(
+                """
+                Ačkoliv je iForest mnohem odolnější vůči dimenzionalitě než k-NN, pokud dataset obsahuje 
+                stovky irelevantních šumových příznaků, náhodný výběr os způsobí degradaci stromů. 
+                Doporučuje se omezit `max_features` nebo předem provést selekci znaků.
+                """
+            )
+

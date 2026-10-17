@@ -152,53 +152,37 @@ with tab_nature:
 
     c_b1, c_b2 = st.columns(2)
     with c_b1:
-        st.markdown(
-            """
-            <div style="background-color: #eff6ff; padding: 20px; border-radius: 8px; border-left: 5px solid #3b82f6;">
-                <h4 style="color: #1e3a8a; margin: 0;">⚡ 1. Real-Time (Online) Inference</h4>
-                <p style="color: #1e40af; font-size: 0.9rem; margin-top: 8px;">
-                    Model je zabalen jako webová služba (REST API / gRPC) a čeká na příchozí HTTP požadavky.
-                </p>
-                <ul style="color: #1e3a8a; font-size: 0.88rem;">
-                    <li><b>Princip:</b> Synchronní Request $\rightarrow$ Response smyčka.</li>
-                    <li><b>Typická latence:</b> 10 ms – 200 ms.</li>
-                    <li><b>Typické technologie:</b> FastAPI, Flask, Triton Inference Server, Docker, Kubernetes.</li>
-                    <li><b>Příklady:</b>
-                        <ul>
-                            <li>Okamžité ocenění bytu po vyplnění formuláře na realitním portálu.</li>
-                            <li>Fraud detection při autorizaci platební karty (zamítnutí do 100 ms).</li>
-                            <li>Chatbot a generování textu v reálném čase.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### ⚡ 1. Real-Time (Online) Inference")
+            st.markdown(
+                """
+                Model je zabalen jako webová služba (REST API / gRPC) a čeká na příchozí HTTP požadavky.
+
+                - **Princip:** Synchronní Request $\\rightarrow$ Response smyčka.
+                - **Typická latence:** 10 ms – 200 ms.
+                - **Typické technologie:** FastAPI, Flask, Triton Inference Server, Docker, Kubernetes.
+                - **Příklady z praxe:**
+                    - Okamžité ocenění bytu po vyplnění formuláře na realitním portálu.
+                    - Fraud detection při autorizaci platební karty (zamítnutí do 100 ms).
+                    - Chatbot a generování textu v reálném čase.
+                """
+            )
     with c_b2:
-        st.markdown(
-            """
-            <div style="background-color: #f0fdf4; padding: 20px; border-radius: 8px; border-left: 5px solid #22c55e;">
-                <h4 style="color: #14532d; margin: 0;">📦 2. Batch (Dávková) Inference</h4>
-                <p style="color: #166534; font-size: 0.9rem; margin-top: 8px;">
-                    Model se spouští v naplánovaných intervalech (např. každou noc v 02:00) na obrovských objemech dat.
-                </p>
-                <ul style="color: #14532d; font-size: 0.88rem;">
-                    <li><b>Princip:</b> Asynchronní hromadné zpracování databáze s uložením výsledků do SQL/NoSQL.</li>
-                    <li><b>Typická latence:</b> Minuty až hodiny (není kritická).</li>
-                    <li><b>Typické technologie:</b> Apache Airflow, Cron, Spark, Ray, Google BigQuery.</li>
-                    <li><b>Příklady:</b>
-                        <ul>
-                            <li>Doporučovací systém nabídek práce: noční přepočet skóre pro 500 000 uživatelů.</li>
-                            <li>Měsíční scoring pravděpodobnosti odchodu zákazníka (Churn prediction).</li>
-                            <li>Dávková segmentace klientů marketingového oddělení.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 📦 2. Batch (Dávková) Inference")
+            st.markdown(
+                """
+                Model se spouští v naplánovaných intervalech (např. každou noc v 02:00) na velkých objemech dat.
+
+                - **Princip:** Asynchronní hromadné zpracování databáze s uložením výsledků do SQL/NoSQL.
+                - **Typická latence:** Minuty až hodiny (není kritická).
+                - **Typické technologie:** Apache Airflow, Cron, Spark, Ray, Google BigQuery.
+                - **Příklady z praxe:**
+                    - Doporučovací systém nabídek práce: noční přepočet skóre pro 500 000 uživatelů.
+                    - Měsíční scoring pravděpodobnosti odchodu zákazníka (Churn prediction).
+                    - Dávková segmentace klientů marketingového oddělení.
+                """
+            )
 
     st.markdown("---")
     st.subheader("💡 Pravidlo volby: Kdy co zvolit?")

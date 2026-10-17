@@ -338,58 +338,44 @@ with tab_prod:
     
     g_col1, g_col2 = st.columns(2)
     with g_col1:
-        st.markdown(
-            """
-            <div style="background-color: #fef2f2; padding: 18px; border-radius: 8px; border-left: 4px solid #ef4444; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #991b1b;">1. Pozor na rozdíl: Outlier vs. Novelty Detection!</h4>
-                <p style="font-size: 0.9rem; color: #7f1d1d; margin-top: 8px;">
-                    Standardně je LOF <b>transductivní</b>: nemá metodu <code>predict()</code> pro nová pozorování! 
-                    Pokud potřebujete model nasadit do REST API a skórovat příchozí transakce za běhu, 
-                    <b>musíte explicitně nastavit <code>novelty=True</code></b> při inicializaci. Jinak zavolání 
-                    <code>predict()</code> vyvolá <code>AttributeError</code>!
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style="background-color: #fffbeb; padding: 18px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #92400e;">2. Problém kvadratické škálovatelnosti O(N²)</h4>
-                <p style="font-size: 0.9rem; color: #78350f; margin-top: 8px;">
-                    Při N = 10 000 zabere výpočet milisekundy. Při N = 500 000 LOF zahltí RAM i CPU 
-                    (výpočet matice vzdáleností). Pro velká data použijte aproximaci (např. <code>algorithm='ball_tree'</code>) 
-                    nebo předtrénujte model na reprezentativním vzorku s <code>novelty=True</code>.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Pozor na rozdíl: Outlier vs. Novelty Detection!")
+            st.markdown(
+                """
+                Standardně je LOF **transductivní**: nemá metodu `predict()` pro nová pozorování! 
+                Pokud potřebujete model nasadit do REST API a skórovat příchozí transakce za běhu, 
+                **musíte explicitně nastavit `novelty=True`** při inicializaci. Jinak zavolání 
+                `predict()` vyvolá `AttributeError`!
+                """
+            )
+        with st.container(border=True):
+            st.markdown("### 2. Problém kvadratické škálovatelnosti O(N²)")
+            st.markdown(
+                """
+                Při N = 10 000 zabere výpočet milisekundy. Při N = 500 000 LOF zahltí RAM i CPU 
+                (výpočet matice vzdáleností). Pro velká data použijte aproximaci (např. `algorithm='ball_tree'`) 
+                nebo předtrénujte model na reprezentativním vzorku s `novelty=True`.
+                """
+            )
 
     with g_col2:
-        st.markdown(
-            """
-            <div style="background-color: #eff6ff; padding: 18px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e40af;">3. Prokletí dimenzionality (Curse of Dimensionality)</h4>
-                <p style="font-size: 0.9rem; color: #1e3a8a; margin-top: 8px;">
-                    Pokud má dataset více než 20–30 příznaků, eukleidovské vzdálenosti se stávají ekvidistantními 
-                    (všechny body jsou od sebe stejně daleko). Skóre LOF zkolabuje k hodnotě 1.0. 
-                    <b>Pravidlo:</b> Před LOF vždy proveďte selekci příznaků nebo redukci dimenzionality (PCA / UMAP).
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style="background-color: #f0fdf4; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #065f46;">4. Povinnost standardizace (Feature Scaling)</h4>
-                <p style="font-size: 0.9rem; color: #064e3b; margin-top: 8px;">
-                    Jelikož LOF počítá k-vzdálenost v prostoru znaků, příznak s velkým rozptylem 
-                    (např. roční příjem v dolarech) zcela přehluší příznak s malým rozptylem (např. věk). 
-                    Vždy zařaďte <code>StandardScaler</code> nebo <code>RobustScaler</code> jako první krok pipeline.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Prokletí dimenzionality (Curse of Dimensionality)")
+            st.markdown(
+                """
+                Pokud má dataset více než 20–30 příznaků, eukleidovské vzdálenosti se stávají ekvidistantními 
+                (všechny body jsou od sebe stejně daleko). Skóre LOF zkolabuje k hodnotě 1.0. 
+                
+                **Pravidlo:** Před LOF vždy proveďte selekci příznaků nebo redukci dimenzionality (PCA / UMAP).
+                """
+            )
+        with st.container(border=True):
+            st.markdown("### 4. Povinnost standardizace (Feature Scaling)")
+            st.markdown(
+                """
+                Jelikož LOF počítá k-vzdálenost v prostoru znaků, příznak s velkým rozptylem 
+                (např. roční příjem v dolarech) zcela přehluší příznak s malým rozptylem (např. věk). 
+                Vždy zařaďte `StandardScaler` nebo `RobustScaler` jako první krok pipeline.
+                """
+            )
+

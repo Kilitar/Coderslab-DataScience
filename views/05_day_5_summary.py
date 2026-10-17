@@ -44,58 +44,43 @@ with tab_pillars:
 
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.markdown(
-            r"""
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; height: 100%;">
-                <h4 style="margin: 0; color: #1e293b;">1. Redukce dimenzionality</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    <b>Cíl:</b> Komprese proměnných z $\mathbb{R}^D$ do $\mathbb{R}^d$ ($d \ll D$) s minimální ztrátou rozptylu.
-                </p>
-                <ul style="font-size: 0.88rem; color: #334155; padding-left: 18px;">
-                    <li><b>PCA:</b> Lineární maximalizace rozptylu podél ortogonálních os.</li>
-                    <li><b>t-SNE:</b> Nelineární zachování lokálního sousedství pro 2D grafy.</li>
-                    <li><b>LDA:</b> Hledání os maximalizujících separaci mezi skupinami.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Redukce dimenzionality")
+            st.markdown(
+                """
+                **Cíl:** Komprese proměnných z $\\mathbb{R}^D$ do $\\mathbb{R}^d$ ($d \\ll D$) s minimální ztrátou rozptylu.
+
+                - **PCA:** Lineární maximalizace rozptylu podél ortogonálních os.
+                - **t-SNE:** Nelineární zachování lokálního sousedství pro 2D grafy.
+                - **LDA:** Hledání os maximalizujících separaci mezi skupinami.
+                """
+            )
 
     with c2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981; height: 100%;">
-                <h4 style="margin: 0; color: #1e293b;">2. Shluková analýza</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    <b>Cíl:</b> Automatické seskupení podobných pozorování do přirozených klastrů.
-                </p>
-                <ul style="font-size: 0.88rem; color: #334155; padding-left: 18px;">
-                    <li><b>K-Means:</b> Minimalizace WCSS kolem k centroidů (sférické shluky).</li>
-                    <li><b>DBSCAN:</b> Hustotní shlukování (nekonvexní tvary, filtrace šumu).</li>
-                    <li><b>Využití:</b> Segmentace zákazníků, text clustering, medicína.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 2. Shluková analýza")
+            st.markdown(
+                """
+                **Cíl:** Automatické seskupení podobných pozorování do přirozených klastrů.
+
+                - **K-Means:** Minimalizace WCSS kolem k centroidů (sférické shluky).
+                - **DBSCAN:** Hustotní shlukování (nekonvexní tvary, filtrace šumu).
+                - **Využití:** Segmentace zákazníků, text clustering, medicína.
+                """
+            )
 
     with c3:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b; height: 100%;">
-                <h4 style="margin: 0; color: #1e293b;">3. Detekce anomálií</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    <b>Cíl:</b> Identifikace vzácných, neobvyklých či podezřelých vzorů v datech.
-                </p>
-                <ul style="font-size: 0.88rem; color: #334155; padding-left: 18px;">
-                    <li><b>Isolation Forest:</b> Přímá stromová izolace (škáluje na miliony řádků).</li>
-                    <li><b>Local Outlier Factor:</b> Lokální hustota vůči k-sousedům.</li>
-                    <li><b>Využití:</b> Detekce bankovních podvodů, kybernetika, čištění dat.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Detekce anomálií")
+            st.markdown(
+                """
+                **Cíl:** Identifikace vzácných, neobvyklých či podezřelých vzorů v datech.
+
+                - **Isolation Forest:** Přímá stromová izolace (škáluje na miliony řádků).
+                - **Local Outlier Factor:** Lokální hustota vůči k-sousedům.
+                - **Využití:** Detekce bankovních podvodů, kybernetika, čištění dat.
+                """
+            )
 
     st.markdown("---")
     st.subheader("⚖️ Klíčové srovnání: Supervised vs. Unsupervised učení")
@@ -206,63 +191,51 @@ with tab_symbiosis:
 
     s_c1, s_c2 = st.columns(2)
     with s_c1:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e293b;">1. Čištění trénovacích dat od toxických anomálií</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Odlehlá pozorování (např. chyby zápisu z čidel) brutálně vychylují regresní přímku OLS 
-                    nebo nutí stromy štěpit zbytečné hluboké větve. 
-                    <br><b>Workflow:</b> Natrénujte <code>IsolationForest</code>, vyfiltrujte nejextrémnější 1–2 % anomálií 
-                    a finální model trénujte na čistých datech.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e293b;">2. Eliminace multikolinearity v lineárních modelech</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Pokud máme stovky silně korelovaných znaků, OLS má nestabilní koeficienty s obří variancí (vysoké VIF).
-                    <br><b>Workflow:</b> Aplikujte <code>PCA</code>, ponechte prvních $k$ ortogonálních komponent 
-                    vysvětlujících 95 % rozptylu (Principal Component Regression - PCR).
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Čištění trénovacích dat od toxických anomálií")
+            st.markdown(
+                """
+                Odlehlá pozorování (např. chyby zápisu z čidel) brutálně vychylují regresní přímku OLS 
+                nebo nutí stromy štěpit zbytečné hluboké větve. 
+                
+                **Workflow:** Natrénujte `IsolationForest`, vyfiltrujte nejextrémnější 1–2 % anomálií 
+                a finální model trénujte na čistých datech.
+                """
+            )
+        with st.container(border=True):
+            st.markdown("### 2. Eliminace multikolinearity v lineárních modelech")
+            st.markdown(
+                """
+                Pokud máme stovky silně korelovaných znaků, OLS má nestabilní koeficienty s obří variancí (vysoké VIF).
+                
+                **Workflow:** Aplikujte `PCA`, ponechte prvních $k$ ortogonálních komponent 
+                vysvětlujících 95 % rozptylu (Principal Component Regression - PCR).
+                """
+            )
 
     with s_c2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e293b;">3. Klastrové vzdálenosti jako nové prediktory</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Natrénujte <code>KMeans(n_clusters=k)</code> na datech a pomocí <code>.transform(X)</code> 
-                    vygenerujte vzdálenosti ke všem $k$ těžištím. 
-                    <br><b>Workflow:</b> Tyto vzdálenosti přidejte jako nové nelineární příznaky pro gradient boosting. 
-                    Strom pak dokáže snadno oddělit lokální chování trhu.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #8b5cf6; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e293b;">4. Semi-Supervised Learning & Pseudo-Labeling</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Pokud máte 100 000 neoznačených řádků a pouze 1 000 označených, shlukování seskupí 
-                    neoznačená data kolem známých vzorků.
-                    <br><b>Workflow:</b> Přenesení labelů na těsně přiléhající sousedy uvnitř hustých shluků 
-                    dramaticky rozšiřuje trénovací množinu.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Klastrové vzdálenosti jako nové prediktory")
+            st.markdown(
+                """
+                Natrénujte `KMeans(n_clusters=k)` na datech a pomocí `.transform(X)` 
+                vygenerujte vzdálenosti ke všem $k$ těžištím. 
+                
+                **Workflow:** Tyto vzdálenosti přidejte jako nové nelineární příznaky pro gradient boosting. 
+                Strom pak dokáže snadno oddělit lokální chování trhu.
+                """
+            )
+        with st.container(border=True):
+            st.markdown("### 4. Semi-Supervised Learning & Pseudo-Labeling")
+            st.markdown(
+                """
+                Pokud máte 100 000 neoznačených řádků a pouze 1 000 označených, shlukování seskupí 
+                neoznačená data kolem známých vzorků.
+                
+                **Workflow:** Přenesení labelů na těsně přiléhající sousedy uvnitř hustých shluků 
+                dramaticky rozšiřuje trénovací množinu.
+                """
+            )
 
 # -----------------------------------------------------------------------------
 # TAB 4: Znalostní kvíz (Quiz Time)

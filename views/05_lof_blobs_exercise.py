@@ -164,44 +164,33 @@ with tab_proc:
 
     step_cols = st.columns(3)
     with step_cols[0]:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #3b82f6;">
-                <h4 style="margin: 0; color: #1e293b;">1. Příprava dat & Standardizace</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Načtení <code>blobs_dataset.csv</code> (1 000 bodů, 2 příznaky). Transformace pomocí <code>StandardScaler</code>, 
-                    neboť LOF spoléhá na eukleidovskou metriku.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Příprava dat & Škálování")
+            st.markdown(
+                """
+                Načtení `blobs_dataset.csv` (1 000 bodů, 2 příznaky). Transformace pomocí `StandardScaler`, 
+                neboť LOF spoléhá na eukleidovskou metriku.
+                """
+            )
     with step_cols[1]:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #10b981;">
-                <h4 style="margin: 0; color: #1e293b;">2. Model A: Contamination = 2 %</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Inicializace <code>LocalOutlierFactor(n_neighbors=20, contamination=0.02)</code>. 
-                    Detekce přesně 20 nejextrémnějších anomálií v prázdném prostoru.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 2. Model A: Contamination = 2 %")
+            st.markdown(
+                """
+                Inicializace `LocalOutlierFactor(n_neighbors=20, contamination=0.02)`. 
+                Detekce přesně 20 nejextrémnějších anomálií v prázdném prostoru.
+                """
+            )
     with step_cols[2]:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                <h4 style="margin: 0; color: #1e293b;">3. Model B: Contamination = 5 %</h4>
-                <p style="font-size: 0.9rem; color: #475569; margin-top: 8px;">
-                    Přenastavení na <code>contamination=0.05</code>. Detekce 50 bodů (+30 nových na periferii shluků). 
-                    Skóre LOF se nemění, pouze klesá rozhodovací práh.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Model B: Contamination = 5 %")
+            st.markdown(
+                """
+                Přenastavení na `contamination=0.05`. Detekce 50 bodů (+30 nových na periferii shluků). 
+                Skóre LOF se nemění, pouze klesá rozhodovací práh.
+                """
+            )
+
 
     st.markdown("---")
     st.markdown("#### Ukázkový kód z vypracovaného Jupyter Notebooku:")

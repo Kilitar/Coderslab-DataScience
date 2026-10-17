@@ -114,33 +114,26 @@ with tab_pca_dim:
 
     col_a, col_b = st.columns(2)
     with col_a:
-        st.markdown(
-            """
-            <div style="background-color: #eff6ff; padding: 18px; border-radius: 8px; border-left: 4px solid #3b82f6; height: 100%;">
-                <h4 style="margin: 0; color: #1e40af;">Varianta A: PCA 2D → Isolation Forest (Zadání)</h4>
-                <ul style="font-size: 0.9rem; color: #1e3a8a; margin-top: 8px; padding-left: 20px;">
-                    <li><b>Výhoda:</b> Dokonalá vizuální korespondence – body označené za anomálie leží na okraji 2D zobrazeného elipsoidu.</li>
-                    <li><b>Riziko:</b> Ztráta zbývajících <b>1.53 % rozptylu</b> (3. hlavní komponenta). Ta reprezentuje jemný rozdíl mezi čtením a psaním.</li>
-                    <li><b>Axiální posun:</b> Náhodné pravoúhlé řezy v prostoru PC1/PC2 odpovídají <i>šikmým rovinám</i> v původním prostoru známek!</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### Varianta A: PCA 2D → Isolation Forest (Zadání)")
+            st.markdown(
+                """
+                - **Výhoda:** Dokonalá vizuální korespondence – body označené za anomálie leží na okraji 2D zobrazeného elipsoidu.
+                - **Riziko:** Ztráta zbývajících **1.53 % rozptylu** (3. hlavní komponenta). Ta reprezentuje jemný rozdíl mezi čtením a psaním.
+                - **Axiální posun:** Náhodné pravoúhlé řezy v prostoru PC1/PC2 odpovídají *šikmým rovinám* v původním prostoru známek!
+                """
+            )
     with col_b:
-        st.markdown(
-            """
-            <div style="background-color: #f0fdf4; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; height: 100%;">
-                <h4 style="margin: 0; color: #065f46;">Varianta B: Isolation Forest 3D → PCA pouze pro graf</h4>
-                <ul style="font-size: 0.9rem; color: #064e3b; margin-top: 8px; padding-left: 20px;">
-                    <li><b>Výhoda:</b> Žádná ztráta informace – model pracuje přímo s reálnými škálami testů (0–100).</li>
-                    <li><b>Lepší interpretace stromů:</b> Štěpící pravidla mají přímý význam (např. <code>MathScore < 24.5</code>).</li>
-                    <li><b>Vizuální paradox:</b> Některé anomálie se v 2D grafu mohou zdát uvnitř elipsy, protože byly odlehlé právě ve 3. zahozené dimenzi!</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### Varianta B: Isolation Forest 3D → PCA pouze pro graf")
+            st.markdown(
+                """
+                - **Výhoda:** Žádná ztráta informace – model pracuje přímo s reálnými škálami testů (0–100).
+                - **Lepší interpretace stromů:** Štěpící pravidla mají přímý význam (např. `MathScore < 24.5`).
+                - **Vizuální paradox:** Některé anomálie se v 2D grafu mohou zdát uvnitř elipsy, protože byly odlehlé právě ve 3. zahozené dimenzi!
+                """
+            )
+
 
     st.markdown("---")
     st.subheader("📊 Analýza shody: Kolik anomálií se shoduje?")
@@ -172,50 +165,41 @@ with tab_types:
 
     t_col1, t_col2, t_col3 = st.columns(3)
     with t_col1:
-        st.markdown(
-            """
-            <div style="background-color: #fef2f2; padding: 18px; border-radius: 8px; border-left: 4px solid #ef4444; height: 100%;">
-                <h4 style="margin: 0; color: #991b1b;">1. Extrémní akademické selhání</h4>
-                <p style="font-size: 0.9rem; color: #7f1d1d; margin-top: 8px;">
-                    <b>Profil:</b> Matematika 0–25, Čtení 0–25, Psaní 0–25.
-                    <br><br>
-                    Studenti s celkovým selháním nebo neúčastí na testech. V PCA se nacházejí v extrémním záporném cípu PC1.
-                    <br><b>Akční doporučení:</b> Okamžitá sociální intervence a doučování.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Extrémní akademické selhání")
+            st.markdown(
+                """
+                **Profil:** Matematika 0–25, Čtení 0–25, Psaní 0–25.
+
+                Studenti s celkovým selháním nebo neúčastí na testech. V PCA se nacházejí v extrémním záporném cípu PC1.
+                
+                **Akční doporučení:** Okamžitá sociální intervence a doučování.
+                """
+            )
     with t_col2:
-        st.markdown(
-            """
-            <div style="background-color: #fffbeb; padding: 18px; border-radius: 8px; border-left: 4px solid #f59e0b; height: 100%;">
-                <h4 style="margin: 0; color: #92400e;">2. Kognitivní asymetrie (Disbalance)</h4>
-                <p style="font-size: 0.9rem; color: #78350f; margin-top: 8px;">
-                    <b>Profil:</b> Matematika 95, Čtení 25, Psaní 20 (nebo opačně).
-                    <br><br>
-                    Studenti s výrazným jednostranným talentem nebo naopak specifickou poruchou učení (dyslexie/dysgrafie). V PCA tvoří extrémní hodnoty na ose PC2.
-                    <br><b>Akční doporučení:</b> Individuální vzdělávací plán.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 2. Kognitivní asymetrie (Disbalance)")
+            st.markdown(
+                """
+                **Profil:** Matematika 95, Čtení 25, Psaní 20 (nebo opačně).
+
+                Studenti s výrazným jednostranným talentem nebo naopak specifickou poruchou učení (dyslexie/dysgrafie). V PCA tvoří extrémní hodnoty na ose PC2.
+                
+                **Akční doporučení:** Individuální vzdělávací plán.
+                """
+            )
     with t_col3:
-        st.markdown(
-            """
-            <div style="background-color: #f0fdf4; padding: 18px; border-radius: 8px; border-left: 4px solid #10b981; height: 100%;">
-                <h4 style="margin: 0; color: #065f46;">3. Perfektní premianti (100 %)</h4>
-                <p style="font-size: 0.9rem; color: #064e3b; margin-top: 8px;">
-                    <b>Profil:</b> Matematika 100, Čtení 100, Psaní 100.
-                    <br><br>
-                    V neřízené detekci anomálií je anomálií <b>jakýkoliv izolovaný extrém</b>. Tito studenti leží na opačném konci distribuce a stromy je izolují stejně snadno jako propadlíky!
-                    <br><b>Akční doporučení:</b> Stipendijní program.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 3. Perfektní premianti (100 %)")
+            st.markdown(
+                """
+                **Profil:** Matematika 100, Čtení 100, Psaní 100.
+
+                V neřízené detekci anomálií je anomálií **jakýkoliv izolovaný extrém**. Tito studenti leží na opačném konci distribuce a stromy je izolují stejně snadno jako propadlíky!
+                
+                **Akční doporučení:** Stipendijní program.
+                """
+            )
 
 # -----------------------------------------------------------------------------
 # TAB 3: Etická & Nákladová kalibrace
@@ -231,31 +215,23 @@ with tab_ethical:
 
     eth_col1, eth_col2 = st.columns(2)
     with eth_col1:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 14px;">
-                <h5 style="margin: 0; color: #b45309;">⚠️ Riziko Falešného poplachu (False Positive – příliš vysoká kontaminace 2.5 %)</h5>
-                <p style="font-size: 0.88rem; color: #475569; margin-top: 6px;">
-                    Označení běžného, jen mírně slabšího žáka za „anomálního“. 
-                    Může vést ke stigmatizaci, ztrátě motivace a přetížení školních psychologů zbytečnými pohovory.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### ⚠️ Riziko Falešného poplachu (False Positive – 2.5 %)")
+            st.markdown(
+                """
+                Označení běžného, jen mírně slabšího žáka za „anomálního“. 
+                Může vést ke stigmatizaci, ztrátě motivace a přetížení školních psychologů zbytečnými pohovory.
+                """
+            )
     with eth_col2:
-        st.markdown(
-            """
-            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #ef4444; margin-bottom: 14px;">
-                <h5 style="margin: 0; color: #991b1b;">🚨 Riziko Nezjištěné anomálie (False Negative – příliš nízká kontaminace < 0.5 %)</h5>
-                <p style="font-size: 0.88rem; color: #475569; margin-top: 6px;">
-                    Přehlédnutí studenta v těžké krizové situaci nebo se skrytou poruchou učení. 
-                    Následkem může být předčasný odchod ze vzdělávacího systému.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 🚨 Riziko Nezjištěné anomálie (False Negative – < 0.5 %)")
+            st.markdown(
+                """
+                Přehlédnutí studenta v těžké krizové situaci nebo se skrytou poruchou učení. 
+                Následkem může být předčasný odchod ze vzdělávacího systému.
+                """
+            )
 
     st.markdown("#### Doporučená metodická strategie pro školy:")
     st.success(
@@ -272,31 +248,24 @@ with tab_guard:
     
     g_c1, g_c2 = st.columns(2)
     with g_c1:
-        st.markdown(
-            """
-            <div style="background-color: #fef2f2; padding: 18px; border-radius: 8px; border-left: 4px solid #ef4444; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #991b1b;">1. Ochrana před socioekonomickým zkreslením (Bias)</h4>
-                <p style="font-size: 0.9rem; color: #7f1d1d; margin-top: 8px;">
-                    V datasetu jsou sloupce jako <code>ParentEduc</code>, <code>LunchType</code> nebo <code>EthnicGroup</code>. 
-                    Pokud by model trénoval na těchto znacích, hrozí diskriminace. 
-                    <b>Správný postup z cvičení:</b> Model trénuje výhradně na objektivních výsledcích testů. 
-                    Socioekonomické znaky se smí zkoumat až následně v rámci kauzální analýzy pomoci.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 1. Ochrana před socioekonomickým zkreslením (Bias)")
+            st.markdown(
+                """
+                V datasetu jsou sloupce jako `ParentEduc`, `LunchType` nebo `EthnicGroup`. 
+                Pokud by model trénoval na těchto znacích, hrozí diskriminace. 
+                
+                **Správný postup z cvičení:** Model trénuje výhradně na objektivních výsledcích testů. 
+                Socioekonomické znaky se smí zkoumat až následně v rámci kauzální analýzy pomoci.
+                """
+            )
     with g_c2:
-        st.markdown(
-            """
-            <div style="background-color: #eff6ff; padding: 18px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 16px;">
-                <h4 style="margin: 0; color: #1e40af;">2. Požadavek na vysvětlitelnost (Explainable AI)</h4>
-                <p style="font-size: 0.9rem; color: #1e3a8a; margin-top: 8px;">
-                    Dle směrnice EU AI Act patří systémy hodnotící studenty do <b>vysoce rizikových aplikací (High-Risk AI)</b>. 
-                    Nestačí vrátit štítek <code>-1</code>. Každé označení studenta za anomálii musí obsahovat 
-                    konkrétní zdůvodnění (např. <i>„Matematické skóre 18 bodů leží 3.2 sm. odchylky pod průměrem školy“</i>).
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("### 2. Požadavek na vysvětlitelnost (Explainable AI)")
+            st.markdown(
+                """
+                Dle směrnice EU AI Act patří systémy hodnotící studenty do **vysoce rizikových aplikací (High-Risk AI)**. 
+                Nestačí vrátit štítek `-1`. Každé označení studenta za anomálii musí obsahovat 
+                konkrétní zdůvodnění (např. *„Matematické skóre 18 bodů leží 3.2 sm. odchylky pod průměrem školy“*).
+                """
+            )

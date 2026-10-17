@@ -220,20 +220,16 @@ with tab_selector:
         st.write(f"**Proč právě tento model:** {desc}")
         st.info(f"💡 **Alternativní varianta:** {alt}")
     with res_c2:
-        st.markdown(
-            """
-            <div style="background-color: #f1f5f9; padding: 16px; border-radius: 8px; border-left: 4px solid #6366f1;">
-                <b>Doporučený postup ověření:</b>
-                <ol style="margin: 0; padding-left: 18px; font-size: 0.9rem;">
-                    <li>Vytvořit jednoduchý baseline model.</li>
-                    <li>Ověřit metriky na K-Fold křížové validaci.</li>
-                    <li>Zkusit komplexnější ansámbl (XGBoost/RF).</li>
-                    <li>Porovnat přínos vs. latenci v produkci.</li>
-                </ol>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        with st.container(border=True):
+            st.markdown("🎯 **Doporučený postup ověření:**")
+            st.markdown(
+                """
+                1. Vytvořit jednoduchý baseline model.
+                2. Ověřit metriky na K-Fold křížové validaci.
+                3. Zkusit komplexnější ansámbl (XGBoost/RF).
+                4. Porovnat přínos vs. latenci v produkci.
+                """
+            )
 
 # -----------------------------------------------------------------------------
 # TAB 3: Metriky & Pasti v praxi
