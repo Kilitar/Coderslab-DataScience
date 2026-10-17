@@ -310,6 +310,11 @@ p_iforest_scores_nb = st.Page("views/05_isolation_forest_student_scores_nb.py", 
 # Den 5: Shrnutí & Závěr Dne 5
 p_day5_summary = st.Page("views/05_day_5_summary.py", title="Závěr Dne 5: Velká syntéza", icon="🏆", url_path="day5_summary")
 
+# Závěr kurzu: Celkové shrnutí & Produkční nasazení (Course Summary & Productionizing)
+p_course_summary = st.Page("views/06_course_summary_recap.py", title="Celkové shrnutí ML kurzu", icon="🎓", url_path="course_summary")
+p_mlops_deploy = st.Page("views/06_mlops_productionizing.py", title="Produkční nasazení & MLOps", icon="🚀", url_path="mlops_productionizing")
+p_ai_trends = st.Page("views/06_career_and_ai_trends.py", title="Trendy AI & Kam dál", icon="🔮", url_path="ai_trends_future")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -593,6 +598,15 @@ nav = st.navigation(
         ],
         "31. Den 5: Shrnutí & Závěr Dne 5": [
             p_day5_summary,
+        ],
+        "32. Závěr Kurzu: Celkové shrnutí ML": [
+            p_course_summary,
+        ],
+        "33. Závěr Kurzu: Produkční nasazení (MLOps)": [
+            p_mlops_deploy,
+        ],
+        "34. Závěr Kurzu: Trendy AI & Kam dál": [
+            p_ai_trends,
         ],
     }
 )

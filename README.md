@@ -330,6 +330,11 @@ Coderslab-DataScience/
 │       ├── 08_isolation_forest_theory_and_implementation.md # Teorie & Vzorová implementace Isolation Forest (matematika c(n), stromy, subsampling)
 │       ├── 09_isolation_forest_student_scores_exercise_guide.md # Průvodce cvičením Isolation Forest na student_scores.csv (PCA, kontaminace 2.5 % vs 1.0 %)
 │       └── 10_day_5_unsupervised_learning_summary.md # Velká syntéza neřízeného učení Dne 5 (3 pilíře, matice modelů, desatero 2026)
+├── 06_Final_Project/                    # Závěrečný projekt & Závěr kurzu
+│   └── theory/
+│       ├── 01_machine_learning_course_summary.md # Velká retrospektiva celého kurzu ML (0. až 5. den, rozhodovací strom modelů)
+│       ├── 02_productionizing_machine_learning_models.md # MLOps: Produkční nasazení (Cloud/Edge/On-Prem, Real-time vs Batch, Drift)
+│       └── 03_further_development_and_ai_trends.md # Trendy v AI, Generativní AI, LLMs, AI v bezpečnosti, knihy & komunity
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
@@ -341,6 +346,12 @@ Coderslab-DataScience/
     ├── 02_decision_tree_*.py            # Den 2 moduly rozhodovacích stromů (Teorie, Cvičení 1 & 2, Ukázka, Notebooky)
     ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
     ├── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
+    ├── 03_*.py                          # Den 3 moduly ansámblů, sítí a tuningu
+    ├── 04_*.py                          # Den 4 NLP moduly & Prework
+    ├── 05_*.py                          # Den 5 Neřízené učení (PCA, K-Means, DBSCAN, LOF, Isolation Forest, Závěr)
+    ├── 06_course_summary_recap.py       # Závěr kurzu: Celková retrospektiva, selektor modelů a Grand Quiz
+    ├── 06_mlops_productionizing.py      # Závěr kurzu: Produkční nasazení, kalkulátor architektur, simulátor Data Driftu
+    ├── 06_career_and_ai_trends.py       # Závěr kurzu: AI trendy, GenAI, LLMs, AI v kyberbezpečnosti a knihovna zdrojů
     ├── 03_hyperparameter_tuning_theory.py # Homework: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
     ├── 03_hyperparameters_diamonds_exercise_1.py # Homework: Cvičení 1 (Diamanty - výsledky zadání a ověření metrik)
     ├── 03_hyperparameters_diamonds_nb.py # Homework: Cvičení 1 (Diamanty - interaktivní notebook)
