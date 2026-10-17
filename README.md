@@ -334,7 +334,8 @@ Coderslab-DataScience/
 │   └── theory/
 │       ├── 01_machine_learning_course_summary.md # Velká retrospektiva celého kurzu ML (0. až 5. den, rozhodovací strom modelů)
 │       ├── 02_productionizing_machine_learning_models.md # MLOps: Produkční nasazení (Cloud/Edge/On-Prem, Real-time vs Batch, Drift)
-│       └── 03_further_development_and_ai_trends.md # Trendy v AI, Generativní AI, LLMs, AI v bezpečnosti, knihy & komunity
+│       ├── 03_further_development_and_ai_trends.md # Trendy v AI, Generativní AI, LLMs, AI v bezpečnosti, knihy & komunity
+│       └── 04_modern_ml_2026_rag_agents_lora.md # Moderní ML 2026: RAG, LoRA, AI Agenti (ReAct), HNSW a XAI (SHAP)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
@@ -352,6 +353,7 @@ Coderslab-DataScience/
     ├── 06_course_summary_recap.py       # Závěr kurzu: Celková retrospektiva, selektor modelů a Grand Quiz
     ├── 06_mlops_productionizing.py      # Závěr kurzu: Produkční nasazení, kalkulátor architektur, simulátor Data Driftu
     ├── 06_career_and_ai_trends.py       # Závěr kurzu: AI trendy, GenAI, LLMs, AI v kyberbezpečnosti a knihovna zdrojů
+    ├── 06_modern_ml_rag_agents.py       # Moderní ML 2026: Živý RAG simulátor, RAG vs LoRA vs Prompting, ReAct agenti
     ├── 03_hyperparameter_tuning_theory.py # Homework: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
     ├── 03_hyperparameters_diamonds_exercise_1.py # Homework: Cvičení 1 (Diamanty - výsledky zadání a ověření metrik)
     ├── 03_hyperparameters_diamonds_nb.py # Homework: Cvičení 1 (Diamanty - interaktivní notebook)
