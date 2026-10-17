@@ -318,7 +318,8 @@ Coderslab-DataScience/
 │       ├── 02_kmeans_sample_implementation_guide.md # Vzorová implementace K-Means v Scikit-learn (make_blobs, WCSS, Silhouette)
 │       ├── 03_dbscan_sample_implementation_guide.md # Vzorová implementace DBSCAN v Scikit-learn (make_circles, eps, k-NN)
 │       ├── 04_dbscan_moons_exercise_guide.md # Cvičení DBSCAN na dvou půlměsících (make_moons, Chasm Bridging, Silhouette paradox)
-│       └── 05_anomaly_detection_lof_theory.md # Teorie detekce anomálií, taxonomie, matematika LOF, iForest srovnání
+│       ├── 05_anomaly_detection_lof_theory.md # Teorie detekce anomálií, taxonomie, matematika LOF, iForest srovnání
+│       └── 06_lof_sample_implementation_guide.md # Vzorová implementace LOF ze slajdů (make_blobs, ruční výpočet 5 bodů, výhody/nevýhody)
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
