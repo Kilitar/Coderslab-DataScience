@@ -303,6 +303,9 @@ p_lof_blobs_nb = st.Page("views/05_lof_blobs_nb.py", title="Cvičení: Blobs –
 p_iforest_theory = st.Page("views/05_isolation_forest_theory.py", title="Teorie: Isolation Forest (iForest)", icon="📖", url_path="day5_isolation_forest_theory")
 p_iforest_impl = st.Page("views/05_isolation_forest_implementation.py", title="Implementace: Isolation Forest", icon="🛠️", url_path="day5_isolation_forest_implementation")
 p_iforest_nb = st.Page("views/05_isolation_forest_nb.py", title="Implementace: iForest – Notebook", icon="🐍", url_path="day5_isolation_forest_nb")
+p_iforest_scores_ex = st.Page("views/05_isolation_forest_student_scores_exercise.py", title="Cvičení: Skóre studentů – Výsledky", icon="🎯", url_path="day5_iforest_student_scores_results")
+p_iforest_scores_critique = st.Page("views/05_isolation_forest_student_scores_critique.py", title="Cvičení: Skóre studentů – Rozbor", icon="🔬", url_path="day5_iforest_student_scores_critique")
+p_iforest_scores_nb = st.Page("views/05_isolation_forest_student_scores_nb.py", title="Cvičení: Skóre studentů – Notebook", icon="🐍", url_path="day5_iforest_student_scores_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -581,6 +584,9 @@ nav = st.navigation(
             p_iforest_theory,
             p_iforest_impl,
             p_iforest_nb,
+            p_iforest_scores_ex,
+            p_iforest_scores_critique,
+            p_iforest_scores_nb,
         ],
     }
 )
