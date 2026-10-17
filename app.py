@@ -295,6 +295,9 @@ p_dbscan_moons_nb = st.Page("views/05_dbscan_moons_nb.py", title="Cvičení: Moo
 p_lof_theory = st.Page("views/05_anomaly_detection_lof_theory.py", title="Teorie: Detekce anomálií & LOF", icon="📖", url_path="day5_anomaly_detection_lof_theory")
 p_lof_impl = st.Page("views/05_anomaly_detection_lof.py", title="Implementace: LOF v Scikit-learn", icon="🛠️", url_path="day5_anomaly_detection_lof_implementation")
 p_lof_nb = st.Page("views/05_anomaly_detection_lof_nb.py", title="Detekce anomálií: LOF – Notebook", icon="🐍", url_path="day5_anomaly_detection_lof_nb")
+p_lof_blobs_ex = st.Page("views/05_lof_blobs_exercise.py", title="Cvičení: Blobs – Výsledky zadání", icon="🎯", url_path="day5_lof_blobs_results")
+p_lof_blobs_critique = st.Page("views/05_lof_blobs_critique.py", title="Cvičení: Blobs – Expertní rozbor", icon="🔬", url_path="day5_lof_blobs_critique")
+p_lof_blobs_nb = st.Page("views/05_lof_blobs_nb.py", title="Cvičení: Blobs – Notebook", icon="🐍", url_path="day5_lof_blobs_nb")
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
@@ -565,6 +568,9 @@ nav = st.navigation(
             p_lof_theory,
             p_lof_impl,
             p_lof_nb,
+            p_lof_blobs_ex,
+            p_lof_blobs_critique,
+            p_lof_blobs_nb,
         ],
     }
 )
