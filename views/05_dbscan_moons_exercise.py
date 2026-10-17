@@ -109,6 +109,14 @@ if not data or "points" not in data:
 
 pts = data["points"]
 df_pts = pd.DataFrame(pts)
+
+# Defenzivní kontrola sloupců
+if "opt_dbscan_label" not in df_pts.columns:
+    df_pts["opt_dbscan_label"] = DBSCAN(eps=0.25, min_samples=8).fit_predict(df_pts[["x_scaled", "y_scaled"]].values)
+for col in ["is_core", "is_border", "is_noise"]:
+    if col not in df_pts.columns:
+        df_pts[col] = False
+
 meta = data.get("dataset_meta", {})
 opt_m = data["models_comparison"]["dbscan_optimal"]
 

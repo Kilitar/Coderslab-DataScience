@@ -94,7 +94,26 @@ if not critique_data or "points" not in critique_data:
     st.stop()
 
 df_pts = pd.DataFrame(critique_data["points"])
-mc = critique_data["models_comparison"]
+mc = critique_data.get("models_comparison", {})
+
+# Defenzivní rekonstrukce sloupců pro zamezení KeyError při mezipaměti Streamlitu
+if "ward_label" not in df_pts.columns and "agg_ward_k2" in mc and "labels" in mc["agg_ward_k2"]:
+    df_pts["ward_label"] = mc["agg_ward_k2"]["labels"]
+elif "ward_label" not in df_pts.columns:
+    df_pts["ward_label"] = AgglomerativeClustering(n_clusters=2, linkage="ward").fit_predict(df_pts[["x_scaled", "y_scaled"]].values)
+
+if "single_label" not in df_pts.columns and "agg_single_k2" in mc and "labels" in mc["agg_single_k2"]:
+    df_pts["single_label"] = mc["agg_single_k2"]["labels"]
+elif "single_label" not in df_pts.columns:
+    df_pts["single_label"] = AgglomerativeClustering(n_clusters=2, linkage="single").fit_predict(df_pts[["x_scaled", "y_scaled"]].values)
+
+if "kmeans_label" not in df_pts.columns and "kmeans_k2" in mc and "labels" in mc["kmeans_k2"]:
+    df_pts["kmeans_label"] = mc["kmeans_k2"]["labels"]
+elif "kmeans_label" not in df_pts.columns:
+    df_pts["kmeans_label"] = KMeans(n_clusters=2, random_state=42, n_init=10).fit_predict(df_pts[["x_scaled", "y_scaled"]].values)
+
+if "opt_dbscan_label" not in df_pts.columns:
+    df_pts["opt_dbscan_label"] = DBSCAN(eps=0.25, min_samples=8).fit_predict(df_pts[["x_scaled", "y_scaled"]].values)
 
 # Horní KPI srovnání
 c1, c2, c3, c4 = st.columns(4)
