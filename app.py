@@ -291,6 +291,11 @@ p_dbscan_moons_ex = st.Page("views/05_dbscan_moons_exercise.py", title="Cvičen�
 p_dbscan_moons_critique = st.Page("views/05_dbscan_moons_critique.py", title="Cvičení: Moons – Expertní rozbor", icon="🔬", url_path="day5_dbscan_moons_critique")
 p_dbscan_moons_nb = st.Page("views/05_dbscan_moons_nb.py", title="Cvičení: Moons – Notebook", icon="🐍", url_path="day5_dbscan_moons_nb")
 
+# Den 5: Neřízené učení – Detekce anomálií (LOF)
+p_lof_theory = st.Page("views/05_anomaly_detection_lof_theory.py", title="Teorie: Detekce anomálií & LOF", icon="📖", url_path="day5_anomaly_detection_lof_theory")
+p_lof_impl = st.Page("views/05_anomaly_detection_lof.py", title="Implementace: LOF v Scikit-learn", icon="🛠️", url_path="day5_anomaly_detection_lof_implementation")
+p_lof_nb = st.Page("views/05_anomaly_detection_lof_nb.py", title="Detekce anomálií: LOF – Notebook", icon="🐍", url_path="day5_anomaly_detection_lof_nb")
+
 # Hierarchická navigace přehledně členěná dle tematických bloků
 nav = st.navigation(
     {
@@ -555,6 +560,11 @@ nav = st.navigation(
             p_dbscan_moons_ex,
             p_dbscan_moons_critique,
             p_dbscan_moons_nb,
+        ],
+        "29. Den 5: Neřízené učení – Detekce anomálií (LOF)": [
+            p_lof_theory,
+            p_lof_impl,
+            p_lof_nb,
         ],
     }
 )

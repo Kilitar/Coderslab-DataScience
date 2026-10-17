@@ -300,22 +300,25 @@ Coderslab-DataScience/
 │   └── theory/
 │       ├── 01_introduction_to_nlp.md    # Prework Session 2: Principy NLP, pipeline, Stemming/Lemmatizace, TF-IDF, Word2Vec, 11 aplikací
 │       └── 02_nltk_and_spacy_guide.md   # Prework Session 2: Knihovny NLTK vs. spaCy (metody, architektura, VADER, NER, benchmarky)
-├── 05_Unsupervised_Learning/            # Sekce neřízeného učení (PCA, K-Means, DBSCAN)
+├── 05_Unsupervised_Learning/            # Sekce neřízeného učení (PCA, K-Means, DBSCAN, LOF)
 │   ├── 01_pca_diamonds_exercise.ipynb   # Cvičení PCA na diamantech
 │   ├── 02_kmeans_mall_customers_exercise.ipynb # Cvičení K-Means: Segmentace zákazníků OC (mall_customers.csv)
 │   ├── 03_dbscan_circles_exercise.ipynb # Vzorová implementace DBSCAN na soustředných kruzích (make_circles)
 │   ├── 04_dbscan_moons_exercise.ipynb   # Cvičení DBSCAN na dvou půlměsících (make_moons, 500 vzorků, noise=0.10)
+│   ├── 05_anomaly_detection_lof_lab.ipynb # Laboratoř detekce anomálií & Local Outlier Factor (LOF)
 │   ├── data/
 │   │   ├── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
 │   │   ├── mall_customers_kmeans_precomputed.json # Předpočtené výsledky K-Means segmentace zákazníků
 │   │   ├── dbscan_circles_precomputed.json # Předpočtené výsledky DBSCAN shlukování & k-NN distance grafu
-│   │   └── dbscan_moons_precomputed.json # Předpočtené výsledky DBSCAN na půlměsících (moons)
+│   │   ├── dbscan_moons_precomputed.json # Předpočtené výsledky DBSCAN na půlměsících (moons)
+│   │   └── lof_anomaly_precomputed.json  # Předpočtené výsledky LOF na blobs_dataset a multi-density datech
 │   └── theory/
 │       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
 │       ├── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
 │       ├── 02_kmeans_sample_implementation_guide.md # Vzorová implementace K-Means v Scikit-learn (make_blobs, WCSS, Silhouette)
 │       ├── 03_dbscan_sample_implementation_guide.md # Vzorová implementace DBSCAN v Scikit-learn (make_circles, eps, k-NN)
-│       └── 04_dbscan_moons_exercise_guide.md # Cvičení DBSCAN na dvou půlměsících (make_moons, Chasm Bridging, Silhouette paradox)
+│       ├── 04_dbscan_moons_exercise_guide.md # Cvičení DBSCAN na dvou půlměsících (make_moons, Chasm Bridging, Silhouette paradox)
+│       └── 05_anomaly_detection_lof_theory.md # Teorie detekce anomálií, taxonomie, matematika LOF, iForest srovnání
 └── views/                               # Jednotlivé podstránky Streamlit aplikace
     ├── 00_home.py                       # Úvodní rozcestník a sylabus
     ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
