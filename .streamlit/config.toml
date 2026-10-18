@@ -1,0 +1,4 @@
+[server]
+# Avoid introspection of lazy Transformers modules by the development watcher.
+# Restart the server after code updates; browser interactions still rerun normally.
+fileWatcherType = "none"
