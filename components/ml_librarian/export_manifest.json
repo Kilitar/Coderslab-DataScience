@@ -1,7 +1,7 @@
 {
   "source_repository": "https://github.com/Kilitar/ML_Librarian",
   "normalization": "text-lf",
-  "base_commit": "fcc28a50bc224f172b12f4d26b0ed2d2795d3464",
+  "base_commit": "707fc4f63fc2f7b079aa4d5c393af598ac04403f",
   "source_worktree_modified": false,
   "files": {
     "app.py": "daa6f04bbaa503ddcbabaa5c8a37eec022807fc26551a126f20c8c15fca41086",
@@ -10,7 +10,7 @@
     "requirements-librarian.txt": "5427b81bbf7d6a5003e9f456404a5dc189eee6e4671f9f3feb8b034b4fd49d5f",
     "src/librarian/acronyms.py": "d89d7187c311a3c941b35545f13f01813c9e12e765c0e946073905eb25ffa5a8",
     "src/librarian/answerability.py": "6dc831f43b8a533bdb398ed8c6b558ba91740b0c0f7c706ffc5bb875caf1d5a1",
-    "src/librarian/answer_generation.py": "d1627ad4fb379040ebf75e4a5f754a87619c3cbadff4bf10e2be3223738e1ca6",
+    "src/librarian/answer_generation.py": "1ee6e225fcdd84662346aeecb84716db714dd8a9970be104b193fef5153798a0",
     "src/librarian/attach_routes.py": "c2400e0e8e6e868ce9beaf548b29016276c68fd043bb1d7af425a734f242477f",
     "src/librarian/audit_calibration_collection_labels.py": "961a8f1ff82ddc36e2073f3b5cdd2f2c58b4c2db5fe650133a9a114d9b829381",
     "src/librarian/audit_calibration_data.py": "acdee2f3cd99c9dff06a78a40110b6919a8e0ef3fa66dfbb88181957e4fcc2ef",
