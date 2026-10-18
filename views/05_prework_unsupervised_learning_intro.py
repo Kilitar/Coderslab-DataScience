@@ -54,7 +54,7 @@ def render_unsupervised_learning_intro_view():
         st.subheader("1. Fundamentální rozdíl: Učení s učitelem vs. Učení bez učitele")
 
         st.markdown(
-            """
+            r"""
             Během prvních čtyř dnů kurzu jsme se věnovali **učení s učitelem (Supervised Learning)**, 
             kde algoritmus dostává dvojice $(X, y)$ a učí se mapovací funkci $f(X) \approx y$.
             
