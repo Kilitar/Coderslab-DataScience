@@ -1,11 +1,11 @@
 {
   "source_repository": "https://github.com/Kilitar/ML_Librarian",
   "normalization": "text-lf",
-  "base_commit": "3f8b5ae3cab4ca3a713cd292ab4d5d9da041ed0b",
+  "base_commit": "ff4d38993c29745beb1a693aa49a3649cd97ab72",
   "source_worktree_modified": false,
   "files": {
     "app.py": "daa6f04bbaa503ddcbabaa5c8a37eec022807fc26551a126f20c8c15fca41086",
-    "embedded.py": "946c95fa325b959bca0563d03da4d583dd746a6e866ed2e84585860a72533ebd",
+    "embedded.py": "98bba0248e5d48b28b200342443f0169f68da326fa7043e34942c2a15c005f2b",
     "dock.py": "984804cb3ff4d22aba2be9c4626d92250125bd23126d579cc628337ca4866072",
     "requirements-librarian.txt": "5427b81bbf7d6a5003e9f456404a5dc189eee6e4671f9f3feb8b034b4fd49d5f",
     "src/librarian/acronyms.py": "d89d7187c311a3c941b35545f13f01813c9e12e765c0e946073905eb25ffa5a8",
@@ -37,7 +37,7 @@
     "src/librarian/concepts.py": "892754589b3f78ad032948a249726c8475afd0c4751de473fca497782a294180",
     "src/librarian/constraints.py": "67faea80ba0753f4556964099a6d2ac276747f1e714369d2dcb504b787cb7632",
     "src/librarian/demo_generation.py": "96dbba0693758c83d8eea02afe06dcd6030addc2e67a2534f071e1d78c45f2fd",
-    "src/librarian/deployment_bundle.py": "57c1de5dc3dcb8483b9dacb6b3852aef28c3f59d683951a255dfa36b4b04f693",
+    "src/librarian/deployment_bundle.py": "9237c9a4d0bf2be03df8a899924417fc3a1b15222c1abf920d06f40a33939609",
     "src/librarian/diagnose_base_calibration.py": "efe8efcd112895317f05e17c633c734eddc33b2115579b7c199f16d076b7e252",
     "src/librarian/diversify.py": "38b45c357545bacf74bba8242ea930d2300243f1a405bf53b8362c571844c176",
     "src/librarian/domain_guard.py": "2695856417a05cf77e6a275685e481d34ce74d5a93ed9be0611c4d269e3d47c4",
@@ -53,7 +53,7 @@
     "src/librarian/evaluate_retrieval.py": "bb81ad053d9ca4c911ac8321d8ed847d046b77fa92814c3a06da539d04a45b73",
     "src/librarian/evaluate_semantic_fresh.py": "48ae960318bf21b64ea824fca4583ba7982f96757d40cdd5e0cc321f6df92162",
     "src/librarian/evidence_gate.py": "6795c0b6dda2be851ee1324887829fcd5d0841f9097fec3fb415b787aac783e6",
-    "src/librarian/export_course_module.py": "7979ee2f0c3d9053a681609ed7ea5e9e98a25d2477575b5f3e2cb737d5eb0ee0",
+    "src/librarian/export_course_module.py": "b472f8f017ec703793a1e08d87ad7c9a4e1ec8eef168e47bfcfb43dfb1ed3f42",
     "src/librarian/heading_context.py": "803cc9012e360b785bc0a99ebc0f6d01127a846b2b7e699c60bbcdbe5eabbbb6",
     "src/librarian/hybrid.py": "6b91ca33021706e58decb4b1c5fc2968d38cfcc36b4e25bacdba5bb0e48246f9",
     "src/librarian/ingest.py": "7b602e0fea2461b4a978aee5d551e3dc84a0ddaae51952d3b3c507e5611f4322",
@@ -102,7 +102,7 @@
     "docs/COMPARISON_TUNING.md": "cdc590817fafd1dc2d35569ddba2f577153214d35800b335eca17d53fa85c239",
     "docs/CONSTRAINT_RERANKING.md": "aa8237d7db8c6d1c50a60c862b408dc8725238824d09d6f7a78adec2c8ab2319",
     "docs/CONTEXTUAL_COMPARISON.md": "b2b604a82e2a03724994827e200cf81cce7d633aacd32c31bd4e9cd6c911ffd4",
-    "docs/COURSE_INTEGRATION.md": "f2000cccf0c3c1877f574ea9219c6ec0ebeebff0c3bfa63e8a7eb41c2330df7b",
+    "docs/COURSE_INTEGRATION.md": "431dba39d2dea9e9be572f79adc6ae12b80b2a887a862dcfa79343d96ae12b2a",
     "docs/DEMO_GENERATION.md": "c791e0f3dc7425c58722186d09bbd17072fc6d431ec55c3894b39b22a25b7c86",
     "docs/DOMAIN_BREADTH.md": "afd28ad8fd63e3206996177a6ba3a29cfbe4e32552f1df3bb840d115c83130fc",
     "docs/DOMAIN_PROBE.md": "3d0b323f2d7f24876a9d94e01fed45cf52e16e68622d24ad25adc9fc77bc136c",
@@ -113,7 +113,7 @@
     "docs/EVALUATION_QUALITY.md": "f808a60acaaeeaeffc70715012691407130cbf03b374fdfe31c5e399520d40ff",
     "docs/GREY_DOMAIN_GUARD.md": "ac1e1c8f33f0fdeb39995542d4ade7d1704f92454ba24e280b708761a6d1b383",
     "docs/GUARDRAILS.md": "879c86f3ebcbed5709892a43b57d06198d973d4c25e01484851ddafb392d57f3",
-    "docs/HANDOFF.md": "79ea4ed62abcec429d9bd4c3727b438f6fa7cf8bab196ff8829222ed4b26066d",
+    "docs/HANDOFF.md": "9eca05323a8b97981471bd846cdb2ccb805ce3c61afb82a910e6aa279cb91b94",
     "docs/HEADING_CONTEXT.md": "2a1c3a1e871461f30f59deb21a141accd24a3751af8e0d42cc9a2d44ba0daae8",
     "docs/HYBRID_EXPERIMENT.md": "d1139b2e9cd92540fd2e2405a139adbfdd9298e0e0316cc1ed90647efdbce57f",
     "docs/IMPLEMENTATION_PLAN.md": "1e91b2fff8401a77e31e903a9b010f784bbd98d0f21c46faef146f92760887fe",
@@ -131,7 +131,7 @@
     "docs/SEMANTIC_VALIDATION.md": "37377f62931b41f776d3155b4f09b568cb5c68d3d3280f9b27328e2cd3a8d65a",
     "docs/SOURCE_FILTERS.md": "ab27a902dac5ef05019760f618690293e71e5d92afd15a0f9ae3afc829e1961c",
     "docs/SOURCE_VIEWER.md": "a562a7a9d577c31e03671e2505a2179a081f1a5c14033f2d9d510fc791819b24",
-    "docs/STREAMLIT_DEPLOYMENT.md": "ea215bb66edabc7e44679d89bb87bdd7c700fa179f6f518f4a40d5ad57d3c0d2",
+    "docs/STREAMLIT_DEPLOYMENT.md": "fd6f6b62537b230ce26eb11122d6201e37d32765b9052225d3e6e626a7e01da1",
     "docs/SUPERVISED_PAIR_PILOT.md": "f43ca30cd422e08c59d7fd5cb2318b58b9f3232f8cc66e324b2e816eddbbabc4",
     "docs/SUPERVISED_PAIR_V2.md": "810f48908601d90da25b3f94299b7e055b50b5bd5d81bfe20a4d4d4baf2b5940",
     "docs/lecturer/01_problem.md": "aa4be3c8d63650af083be2f463625f092214e02e93b215acf2d8463728e5092f",
@@ -166,6 +166,7 @@
     "eval/supervised_pair_v2_summary.json": "f95a9e10acef335e336d1f63dc95ee988d9d7e8fc1ac5951531c37f636dba0e4",
     "eval/domain_probe_training.json": "d8ec1c819f09a40011c1d3fb1ad13853973f6444eb08fc3778a7c9e8cba3fc31",
     "deployment/artifacts.json": "5113db07910770a60dd6f3b3cc48785bcdc1084d4bb0cd1446f4cf894f676fef",
-    "data/Icons/codesrlab_logo_square.png": "07941603bafea853518ffc9b8f733702091a2e5748aeac43e8afbd6c3ac0e2b5"
+    "data/Icons/codesrlab_logo_square.png": "07941603bafea853518ffc9b8f733702091a2e5748aeac43e8afbd6c3ac0e2b5",
+    "deployment/runtime.zip": "9b2394abedaf3aac6c3b52d548f7d90aa32ee2310e9b89bb8b4b84d7b4cc2d78"
   }
 }

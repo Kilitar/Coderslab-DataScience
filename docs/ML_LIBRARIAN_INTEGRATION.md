@@ -1,3 +1,5 @@
+> Runtime data now ships with this course module as `components/ml_librarian/deployment/runtime.zip`. First open automatically installs and verifies it. No `RUNTIME_BUNDLE_URL` or separate data hosting is required. Update component exports with `--include-runtime`; Groq setup is only for generated answers.
+
 # ML Librarian integrated into the course
 
 Explicit user authorization on2026-10-18 permits only deployment-related course
