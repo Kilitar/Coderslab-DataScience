@@ -16,7 +16,7 @@ statsmodels>=0.14.0
 hyperopt>=0.2.7
 
 # Web Application & Dashboard
-streamlit>=1.38.0
+streamlit>=1.50.0,<2
 
 # Utilities
 python-dotenv>=1.0.0
@@ -37,3 +37,6 @@ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0
 # jupyter>=1.1.0
 # ipykernel>=6.29.0
 # kaggle>=1.6.0
+
+# Integrated ML Librarian (no training runs inside course views)
+-r components/ml_librarian/requirements-librarian.txt

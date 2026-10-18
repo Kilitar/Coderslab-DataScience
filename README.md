@@ -402,3 +402,8 @@ Coderslab-DataScience/
 ## 📜 Licence & Podmínky užití
 
 Tento projekt je určen pro vzdělávací a studijní účely v rámci studia Data Science. Původní koncepty úloh náleží vzdělávací akademii **[Coders Lab](https://coderslab.cz/cz/)**. Kód implementace aplikace, interaktivní moduly a doplňující analýzy jsou volně k dispozici pod licencí MIT.
+
+
+## Integrovaný ML Librarian
+
+V navigaci **36. Projekt: ML Librarian** jsou stránky vyhledávání a dokumentace pro lektora. Modul běží uvnitř stejné aplikace; lektor nezadává API klíč ani model. Jednorázové serverové nastavení a postup aktualizace jsou v [docs/ML_LIBRARIAN_INTEGRATION.md](docs/ML_LIBRARIAN_INTEGRATION.md). Zdrojový vývoj zůstává v odděleném repozitáři ML_Librarian.

@@ -41,3 +41,10 @@ scratch/
 Resources/
 *.pdf
 
+
+# Librarian runtime data, model cache and server secrets
+components/ml_librarian/data/normalized/
+components/ml_librarian/data/index/
+components/ml_librarian/data/snapshot/
+components/ml_librarian/.cache/
+.streamlit/secrets.toml
