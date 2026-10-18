@@ -1,7 +1,7 @@
 {
   "source_repository": "https://github.com/Kilitar/ML_Librarian",
   "normalization": "text-lf",
-  "base_commit": "e7018a8c4dd049ad56bb964409acbf9e692bc6b6",
+  "base_commit": "7ea3b6c809a28eafa082181e0c1a5719e29bc640",
   "source_worktree_modified": false,
   "files": {
     "app.py": "daa6f04bbaa503ddcbabaa5c8a37eec022807fc26551a126f20c8c15fca41086",
@@ -36,7 +36,7 @@
     "src/librarian/comparisons.py": "f1c3ecc48bffba4feac64012657e71842fc23d512eb400af4e95753e485b3652",
     "src/librarian/concepts.py": "892754589b3f78ad032948a249726c8475afd0c4751de473fca497782a294180",
     "src/librarian/constraints.py": "67faea80ba0753f4556964099a6d2ac276747f1e714369d2dcb504b787cb7632",
-    "src/librarian/course_links.py": "546d5adaa75eb19fd04159f39f7de7e3df3ef519214a344a748dadbf6246c990",
+    "src/librarian/course_links.py": "ac777ce5b3a36b24493d521125e403b209f87f372eb25d64a6b40dc3f2e147e3",
     "src/librarian/demo_generation.py": "96dbba0693758c83d8eea02afe06dcd6030addc2e67a2534f071e1d78c45f2fd",
     "src/librarian/deployment_bundle.py": "9237c9a4d0bf2be03df8a899924417fc3a1b15222c1abf920d06f40a33939609",
     "src/librarian/diagnose_base_calibration.py": "efe8efcd112895317f05e17c633c734eddc33b2115579b7c199f16d076b7e252",
