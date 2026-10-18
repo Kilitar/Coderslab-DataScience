@@ -1,13 +1,15 @@
 # 🔬 Data Science & Machine Learning Portfolio (Streamlit App)
 
-[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.38+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.50+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.5+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![Plotly](https://img.shields.io/badge/Plotly-5.24+-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)](https://plotly.com/)
 [![Coders Lab](https://img.shields.io/badge/Vychází_z-Coders_Lab_CZ-00C48C?style=for-the-badge)](https://coderslab.cz/cz/)
 [![AI Orchestration](https://img.shields.io/badge/AI_Orchestration-Google_Antigravity-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/)
 
-> Komplexní interaktivní výuková platforma a analytické portfolio pro regresní modelování, strojové učení a diagnostiku modelů v Pythonu.
+> Osobní zápisky z kurzu Coders Lab rozšířené do interaktivního portfolia: regrese, klasifikace, pokročilé ML, NLP, neřízené učení, MLOps a vlastní projekt RAG.
+
+**Veřejná aplikace:** [Data Science & ML Portfolio](https://mldatasciencecoderslab.streamlit.app/) · **Závěrečný projekt:** [ML Projekt Librarian](https://mldatasciencecoderslab.streamlit.app/ml_librarian_lecturer)
 
 ---
 
@@ -16,10 +18,12 @@
 ### 🏫 Vzdělávací základ & Kurikulum
 Základní pedagogická struktura, datové sady a cvičení v tomto projektu vycházejí z materiálů a sylabu akreditovaného kurzu **Data Science / Machine Learning** vzdělávací IT akademie **[Coders Lab Česká republika](https://coderslab.cz/cz/)**.
 
-### 🤖 Realizace & Autonomní AI Orchestrace (Google Antigravity)
+### 🤖 Realizace, AI orchestrace a role autora
 Tento repozitář byl koncipován, architektonicky navržen a softwarově implementován formou **pokročilého párového programování (Pair Programming) a agentní AI orchestrace v prostředí [Google Antigravity (Antigravity IDE)](https://deepmind.google/)**.
 
 - **Synergie člověk + AI:** Uživatel definuje strategické zadání, věcné mantinely a ověřuje pedagogickou integritu; AI agent Antigravity obstarává end-to-end softwarové inženýrství, matematické formulace v KaTeX, konstrukci Scikit-learn pipeline, diagnostiku chyb, generování interaktivních komponent v Plotly/Streamlit a automatické spouštění Jupyter sešitů.
+Samostatný závěrečný projekt **ML Librarian** vznikal AI orchestrací ve spolupráci s **GPT 6**, s průběžnou oponenturou **Gemini Argon a Claude 5**. Autor průběžně konzultoval a ověřoval jednotlivé kroky implementačního plánu, testoval aplikaci a rozhodoval o prioritách. Tato spolupráce popisuje proces vývoje, nikoli nezávislou přejímku kvality.
+
 - **Přidaná hodnota nad rámec původních osnov:**
   - Moderní **Streamlit webová aplikace** s interaktivními vizualizacemi v Plotly a hierarchickou navigací.
   - **What-If inferenční simulátory** napojené na reálně natrénované Scikit-learn modely v reálném čase.
@@ -30,33 +34,35 @@ Tento repozitář byl koncipován, architektonicky navržen a softwarově implem
 
 ## 🌟 O projektu & Architektura aplikace
 
-Aplikace slouží jako referenční příručka a praktická laboratoř pro **Den 1: Regresní modely (Supervised Learning)**. Každé téma je rozděleno do tří provázaných pilířů:
+Streamlit původně sloužil jako můj **záznamník a zápisky z kurzu**. Sdílel jsem jej s lektorem a kolegy; opakované využívání i dalšími účastníky mě potěšilo. Dnes pokrývá všech pět kurzových dnů, domácí úlohy i navazující projekt.
+
+Většina témat propojuje teorii, výsledky zadání, expertní rozbor a Jupyter notebook. Základní členění:
 
 1. **📖 Teoretický základ:** Matematické formulace ($y = \mathbf{X}\boldsymbol{\beta} + \varepsilon$, ztrátové funkce, regularizační pokuty), geometrické interpretace a metodické poznámky.
 2. **🎯 Školní výsledky zadání:** Přesné splnění úloh z kurzu včetně natrénování modelů a vyhodnocení základních metrik.
 3. **🔬 Expertní analýza & Kritika:** Hlubší vhled za hranice základních zadání (analýza časového posunu u nemovitostí, gemologické paradoxy u diamantů, Rungeův jev u polynomů, prořezávání stromů).
 
-```mermaid
-flowchart TD
-    A["00. Den 0: Prework (Úvod do DS & ML)"] --> B["01. Den 1: Lineární regrese OLS"]
-    B --> C["02. Den 1: Metriky regresních modelů"]
-    C --> D["03. Den 1: Regularizace (Ridge, Lasso, Elastic Net)"]
-    D --> E["04. Den 1: Polynomiální regrese"]
-    E --> F["05. Den 1: Rozhodovací stromy & Ansámbly"]
-    F --> G["06. Den 1: Závěr Dne 1 (Velká syntéza regrese)"]
-    G --> H["07. Den 1: Extras (Expertní laboratoř)"]
-    H --> I["08. Den 2: K-Nearest Neighbors (k-NN)"]
-    I --> J["09. Den 2: Metriky klasifikačních modelů"]
-    J --> K["10. Den 2: Logistická regrese (Sigmoida, MLE, Prahování)"]
-    K --> L["11. Den 2: Rozhodovací stromy (Gini, Entropie, Overfitting)"]
-    L --> M["12. Den 2: Support Vector Machines (SVM, Nadrovina, Jádrový trik)"]
-```
+| Část kurzu | Obsah |
+|---|---|
+| Prework | Základy Data Science, statistika, Python stack, příprava dat a Scikit-learn. |
+| Den 1 · regrese | OLS, metriky, regularizace, polynomy, rozhodovací stromy a ansámbly. |
+| Den 2 · klasifikace | k-NN, klasifikační metriky, logistická regrese, stromy a SVM. |
+| Mezi dny 2 a 3 | Hyperparametry, křížová validace, Grid/Random/Bayes search; úlohy s betonem a diabetem. |
+| Den 3 · pokročilé ML | Bagging, Random Forest, boosting/XGBoost, neuronové sítě a diagnostické laboratoře. |
+| Den 4 · NLP | Předzpracování, NLTK/spaCy, BoW, TF-IDF, Word2Vec/Gensim, Transformer a BERT. |
+| Domácí úlohy Session 2 | Titanic, ceny aut, diabetes, kalorie, sonar, Auto MPG a Word2Vec nad daty McDonald's. |
+| Den 5 · neřízené učení | PCA, K-Means, DBSCAN, LOF, Isolation Forest a jejich srovnání. |
+| Závěr kurzu | Celkové shrnutí, produkční nasazení/MLOps, další rozvoj a trendy AI. |
+| Moderní ML 2026 | Výukové simulátory RAG, srovnání s LoRA a promptingem, agenti a produkční šablona. |
+| ML Projekt Librarian | Vlastní RAG nad materiály kurzu, pravý dock a příběh vývoje pro lektora. |
+
+Výukový **RAG simulátor** v části Moderní ML 2026 a **ML Librarian** jsou dva různé moduly: první vysvětluje princip na ukázkové znalostní bázi, druhý vyhledává ve zpracovaných materiálech kurzu.
 
 ---
 
-## 📊 Reálné datasety & Benchmarky
+## 📊 Vybrané datasety a výsledky experimentů
 
-Experimenty jsou prováděny na reálných datových sadách z praxe:
+Níže jsou vybrané výsledky původních kurzových experimentů, nikoli úplný přehled všech modelů nebo nový nezávislý benchmark. Interpretace závisí na konkrétní přípravě dat, rozdělení a metrice; postupy a další výsledky jsou v příslušných noteboocích a analytických stránkách.
 
 ### 1. Nemovitosti v King County, Seattle (`kc_house_data.csv`)
 - **21 613 prodejů domů** z let 2014–2015.
@@ -100,7 +106,20 @@ Experimenty jsou prováděny na reálných datových sadách z praxe:
 
 ---
 
+## 🧪 Navazující interaktivní laboratoře
+
+- **Pokročilé ML:** kreslení a rozpoznávání MNIST, 2D neuronová síť, backpropagation, rozměry vrstev, variabilita baggingu, rezidua boostingu a nákladové prahování.
+- **NLP:** práce s českým i anglickým textem, tokenizace a lemmatizace, vektorizace, sentiment, slovní vnoření a vysvětlení self-attention.
+- **Neřízené učení:** redukce dimenzionality, segmentace zákazníků, hustotní shlukování a detekce odlehlých pozorování.
+- **Závěr a MLOps:** přechod od experimentu k nasazení, provozní úskalí, RAG a agentní architektury.
+
+Některé moduly používají předpočtené výsledky nebo uložené modely; výuková simulace není automaticky nový trénink modelu. Dostupnost konkrétních funkcí závisí na příslušných datech a závislostech.
+
+---
+
 ## 🚀 Jak aplikaci spustit lokálně (Quickstart)
+
+Repozitář připíná Python **3.11** v `.python-version`. Níže uvedený postup spouští aplikaci; reprodukce všech trénovacích notebooků může vyžadovat další balíčky a vstupní data.
 
 ### 1. Klonování repozitáře
 ```bash
@@ -137,265 +156,39 @@ Aplikace se automaticky otevře ve vašem výchozím webovém prohlížeči na a
 
 ```text
 Coderslab-DataScience/
-├── app.py                                # Hlavní vstupní bod Streamlit aplikace (navigace)
-├── requirements.txt                      # Seznam závislostí pro běh projektu
-├── 01_Regression/                        # Podklady, skripty a teorie pro Den 1
-│   ├── 01_linear_regression_exercise_1.py
-│   ├── 02_linear_regression_exercise_2.py
-│   ├── 03_regression_metrics_exercise_1.py
-│   ├── 04_regression_metrics_exercise_2.py
-│   ├── 05_regularization_exercise_1.py
-│   ├── 06_regularization_exercise_2.py
-│   ├── 07_polynomial_regression_exercise.py
-│   ├── 08_decision_tree_exercise_1.py
-│   ├── 09_decision_tree_exercise_2.py
-│   ├── 10_homework_concrete_preprocessing.py # DÚ: Příprava dat pro modely (Pevnost betonu, audit, 25 duplicit, standardizace)
-│   ├── 10_homework_concrete_preprocessing.ipynb # Vypracovaný a spuštěný Jupyter Notebook přípravy dat
-│   ├── 11_homework_concrete_linear_regression.py # DÚ: Lineární regrese na betonu (70/30, linear_reg, R2=56.1 %, RMSE=11.24 MPa)
-│   ├── 11_homework_concrete_linear_regression.ipynb # Vypracovaný a spuštěný Jupyter Notebook lineární regrese
-│   ├── 12_homework_concrete_regularization.py # DÚ: Regularizace na betonu (ElasticNet R2=56.2 % i LogisticRegression Acc=83.8 %)
-│   ├── 12_homework_concrete_regularization.ipynb # Vypracovaný a spuštěný Jupyter Notebook regularizace
-│   ├── 13_homework_concrete_decision_tree.py # DÚ: Rozhodovací strom na betonu (GridSearchCV, MAE=4.40 MPa, R2=84.8 %)
-│   ├── 13_homework_concrete_decision_tree.ipynb # Vypracovaný a spuštěný Jupyter Notebook rozhodovacího stromu
-│   ├── 14_homework_concrete_decision_tree_random.py # DÚ: Rozhodovací strom s RandomizedSearchCV (4 parametry, MAE=4.39 MPa)
-│   ├── 14_homework_concrete_decision_tree_random.ipynb # Vypracovaný a spuštěný Jupyter Notebook náhodného ladění stromu
-│   ├── data/                            # Datové sady (CSV) a optimalizované JSON cache
-│   │   ├── kc_house_data.csv
-│   │   ├── diamonds.csv
-│   │   ├── concrete_data.csv            # Surový laboratorní dataset pevnosti betonu (1030 vzorků)
-│   │   ├── concrete_data_preprocessed.csv # Očištěný a standardizovaný dataset (1005 unikátních vzorků)
-│   │   ├── concrete_preprocessing_precomputed.json # Předpočtená cache přípravy dat
-│   │   ├── concrete_linear_regression_precomputed.json # Předpočtená cache lineární regrese
-│   │   ├── concrete_regularization_precomputed.json # Předpočtená cache regularizace
-│   │   ├── concrete_decision_tree_precomputed.json # Předpočtená cache rozhodovacího stromu (GridSearchCV)
-│   │   ├── concrete_decision_tree_random_precomputed.json # Předpočtená cache rozhodovacího stromu (RandomizedSearchCV)
-│   │   ├── diamonds_poly_precomputed.json
-│   │   └── kc_time_analysis_precomputed.json
-│   └── theory/                          # Detailní teoretické průvodce a rekapitulace
-│       ├── 01_linear_regression_theory.md
-│       ├── 02_regression_metrics_theory.md
-│       ├── 03_regularization_theory.md
-│       ├── 05_polynomial_regression_theory.md
-│       ├── 06_decision_tree_regression_theory.md
-│       └── 07_day_1_summary.md
-├── 02_Classification/                    # Podklady, skripty a teorie pro Den 2 (Klasifikace)
-│   ├── 01_knn_penguins_exercise.py       # Úvodní analýza: Palmer Penguins (Analýza selhání neškálování)
-│   ├── 01_knn_penguins_exercise.ipynb    # Vypracovaný sešit úvodní demonstrace
-│   ├── 02_knn_lumbar_exercise_1.py       # Cvičení 1: Diagnostika bederní páteře (10 kroků zadání, L2 norma)
-│   ├── 02_knn_lumbar_exercise_1.ipynb    # Vypracovaný a spuštěný Jupyter Notebook páteře
-│   ├── 03_knn_penguins_exercise_2.py     # Cvičení 2: Druhy tučňáků (9 kroků zadání, normalizace, k in [1, 35])
-│   ├── 03_knn_penguins_exercise_2.ipynb  # Vypracovaný a spuštěný Jupyter Notebook tučňáků
-│   ├── 04_classification_metrics_lumbar_exercise_1.py # Cvičení 1: Metriky klasifikace páteře (CM, Precision, Recall, F1, k-sweep)
-│   ├── 04_classification_metrics_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook metrik
-│   ├── 05_classification_metrics_penguins_exercise_2.py # Cvičení 2: Multiclass metriky tučňáků (CM 3x3, Weighted F1, k-sweep)
-│   ├── 05_classification_metrics_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook multiclass metrik
-│   ├── 06_logistic_regression_exercise.py # Logistická regrese: Školní syntetická úloha, OLS vs. Sigmoida, Threshold Sweep
-│   ├── 06_logistic_regression_exercise.ipynb # Vypracovaný a spuštěný Jupyter Notebook logistické regrese
-│   ├── 07_logistic_regression_lumbar_exercise_1.py # Cvičení 1: Bederní páteř (75/25, baseline C=1.0, optimalizace C=5.0 pro Precision)
-│   ├── 07_logistic_regression_lumbar_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
-│   ├── 08_logistic_regression_penguins_exercise_2.py # Cvičení 2: Tučňáci (70/30, class_weight='balanced', ladění C z 59.6 % na 91.7 %)
-│   ├── 08_logistic_regression_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 2
-│   ├── 14_svm_lumbar_exercise_1.py       # Cvičení 1: Bederní páteř (SVM s jádry Linear a RBF, ladění C a gamma)
-│   ├── 14_svm_lumbar_exercise_1.ipynb    # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
-│   ├── 15_homework_diabetes_preprocessing.py # Homework: Příprava dat diabetu (imputace nul, rozdělení, škálování)
-│   ├── 15_homework_diabetes_preprocessing.ipynb # Vypracovaný a spuštěný Jupyter Notebook přípravy diabetu
-│   ├── 16_homework_diabetes_knn.py       # Homework: k-NN klasifikace diabetu (GridSearchCV n_neighbors & metric, F1 vs Recall)
-│   ├── 16_homework_diabetes_knn.ipynb    # Vypracovaný a spuštěný Jupyter Notebook cvičení k-NN
-│   ├── 17_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearchCV C, Odds Ratios)
-│   ├── 17_homework_diabetes_logistic_regression.ipynb # Vypracovaný a spuštěný Jupyter Notebook LogReg
-│   ├── 18_homework_diabetes_svm.py       # Homework: SVM klasifikace diabetu (Bayesovská optimalizace Hyperopt, srovnání 3 modelů)
-│   ├── 18_homework_diabetes_svm.ipynb    # Vypracovaný a spuštěný Jupyter Notebook SVM
-│   ├── 19_homework_session1_modern_benchmark_2026.py # SOTA Benchmark 2026: Srovnání s HistGradientBoosting, XGBoost a Random Forest
-│   ├── data/                            # Datové sady (Palmer Penguins, Lumbar, Diabetes) a JSON cache
-│   │   ├── diabetes.csv                 # Původní Pima Indians Diabetes dataset
-│   │   ├── diabetes_scaled.csv          # Výsledný předzpracovaný a standardizovaný dataset
-│   │   ├── diabetes_preprocessing_precomputed.json # Předpočtené statistiky, korelace a škálování
-│   │   ├── diabetes_knn_precomputed.json # Předpočtený k-NN grid search, k-sweep, ROC křivka a matice záměn
-│   │   ├── diabetes_logistic_precomputed.json # Předpočtené výsledky RandomizedSearchCV LogReg, Odds Ratios a srovnání
-│   │   ├── diabetes_svm_precomputed.json # Předpočtené výsledky Bayesovské optimalizace Hyperopt a velké srovnání 3 modelů
-│   │   ├── session1_modern_benchmark_precomputed.json # SOTA 2026 srovnání, Permutation Importance a Cost Matrix
-│   │   ├── lumbar_data.csv
-│   │   ├── lumbar_normalized_df.csv     # Výsledný normalizovaný dataset páteře
-│   │   ├── lumbar_df_normalized.csv
-│   │   ├── lumbar_knn_precomputed.json
-│   │   ├── lumbar_metrics_exercise_1_precomputed.json # Předpočtené metriky páteře, sweep k in [1, 25] a ROC
-│   │   ├── lumbar_logistic_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 logistické regrese
-│   │   ├── logistic_regression_precomputed.json # Předpočtená analýza logistické regrese a threshold sweep
-│   │   ├── penguins_size.csv
-│   │   ├── penguins_df_normalized.csv   # Výsledný normalizovaný dataset tučňáků dle kroku 9
-│   │   ├── penguins_knn_precomputed.json
-│   │   ├── penguins_exercise_2_precomputed.json
-│   │   ├── penguins_metrics_exercise_2_precomputed.json # Předpočtené multiclass metriky a sweep k in [1, 35]
-│   │   ├── penguins_logistic_exercise_2_precomputed.json # Předpočtené výsledky cvičení 2 logistické regrese (multiclass)
-│   │   ├── decision_tree_classification_precomputed.json # Předpočtené výsledky klasifikačního stromu a sweep hloubek
-│   │   ├── lumbar_decision_tree_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 rozhodovacího stromu (páteř)
-│   │   ├── penguins_decision_tree_exercise_2_precomputed.json # Předpočtené výsledky cvičení 2 rozhodovacího stromu (tučňáci)
-│   │   ├── svm_theory_precomputed.json       # Předpočtená srovnání jader SVM, citlivost C/gamma a 3D deka
-│   │   ├── svm_classification_sample_precomputed.json # Předpočtené výsledky školního modelu SVC (RBF, Poly, Linear)
-│   │   └── lumbar_svm_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 SVM (páteř)
-│   ├── plots/                           # Diagnostické PNG vizualizace
-│   │   ├── lumbar_knn_k_curve.png
-│   │   ├── lumbar_knn_confusion_matrix.png
-│   │   ├── lumbar_metrics_cm_heatmap.png # Matice záměn páteře (k=5)
-│   │   ├── lumbar_metrics_k_sweep.png    # Křivky metrik Train vs Test, Recall, F1
-│   │   ├── lumbar_metrics_roc_curve.png  # ROC křivka páteře (AUC = 0.821)
-│   │   ├── lumbar_logistic_c_tuning.png  # Křivka Precision vs C a matice záměn páteře
-│   │   ├── lumbar_tree_depth_precision_curve.png # Křivka Precision a Accuracy vs max_depth
-│   │   ├── lumbar_tree_structure_d3.png  # Struktura vyváženého stromu (max_depth=3)
-│   │   ├── lumbar_tree_structure_stump.png # Struktura rozhodovacího pařezu (max_depth=1)
-│   │   ├── lumbar_tree_cm_comparison.png # Srovnání matic záměn stromů
-│   │   ├── lumbar_svm_c_gamma_tuning.png # Křivky ladění parametrů C a gamma u SVM
-│   │   ├── lumbar_svm_cm_comparison.png  # Srovnání matic záměn SVM modelů páteře
-│   │   ├── penguins_tree_depth_curve.png # Křivka Precision tučňáků vs max_depth
-│   │   ├── penguins_tree_structure_opt.png # Struktura optimálního stromu tučňáků (max_depth=4)
-│   │   ├── penguins_tree_cm_comparison.png # Srovnání matic záměn stromu tučňáků
-│   │   ├── svm_kernel_comparison.png     # Srovnání 4 jader SVM (Linear, Poly, RBF, Sigmoid) a podpůrných vektorů
-│   │   ├── svm_c_gamma_grid.png          # Mřížka vlivu hyperparametrů C a gamma na tvar hranice RBF
-│   │   ├── svm_sample_decision_regions.png # 2D projekce rozhodovacích oblastí a podpůrných vektorů SVC
-│   │   ├── svm_sample_kernel_comparison.png # Sloupcový graf Accuracy a Precision jader ze slajdů
-│   │   ├── logistic_regression_comparison.png # Srovnání OLS vs Sigmoida a Threshold curve
-│   │   ├── decision_tree_sample_plot.png # Vizuální architektura stromu (plot_tree)
-│   │   ├── decision_tree_overfitting_curve.png # Křivka přeučení Train vs Test accuracy
-│   │   ├── penguins_ex2_k_curve.png
-│   │   ├── penguins_ex2_confusion_matrix.png
-│   │   ├── penguins_metrics_cm_k5.png    # Matice záměn tučňáků pro k=5
-│   │   ├── penguins_metrics_cm_k2.png    # Matice záměn tučňáků pro optimum k=2
-│   │   ├── penguins_metrics_k_sweep.png  # Křivky metrik pro k in [1, 35]
-│   │   ├── knn_k_accuracy_curve.png
-│   │   ├── knn_scaling_comparison.png
-│   │   └── knn_confusion_matrix.png
-│   └── theory/                          # Teoretické markdown příručky
-│       ├── 01_knn_theory.md             # Eukleidovská, Manhattanská, Minkowského metrika, Voronoi, kletba dimenzionality
-│       ├── 02_knn_implementation_guide.md # Scikit-learn KNeighborsClassifier, kd-tree/ball-tree, .kneighbors()
-│       ├── 03_classification_metrics_theory.md # Matice záměn, Precision, Recall, Specificity, F1, ROC-AUC, Log Loss
-│       ├── 04_logistic_regression_theory.md # Sigmoida, Logit, Odvození MLE, Log Loss, Asymetrie prahování
-│       ├── 05_decision_tree_classification_theory.md # CART, Gini Impurity, Shannonova entropie, Information Gain, Pruning
-│       ├── 06_svm_theory.md             # Podpůrné vektory, Nadroviny, Okraj, Jádrový trik (Kernel Trick), OvO/OvR
-│       └── 07_day_2_summary.md          # Ucelené shrnutí 2. dne (k-NN, LogReg, DT, SVM, Metriky, Srovnání, Kvíz)
-├── 03_Advanced_ML_Neural_Networks/       # Homework blok (Mezi Dny 2 a 3): Tuning hyperparametrů, Grid/Random/Bayes & CV
-│   ├── 01_hyperparameter_optimization_sample.py # Ukázková implementace: GridSearchCV, RandomizedSearchCV, Hyperopt
-│   ├── 01_hyperparameter_optimization_sample.ipynb # Spuštěný Jupyter Notebook s výstupy a křivkami
-│   ├── 02_hyperparameters_diamonds_exercise_1.py # Cvičení 1: Diamanty (GridSearchCV pro max_depth a criterion, úprava funkce)
-│   ├── 02_hyperparameters_diamonds_exercise_1.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 1
-│   ├── 03_hyperparameters_penguins_exercise_2.py # Cvičení 2: Tučňáci (RandomizedSearchCV pro 4 parametry SVM: kernel, C, gamma, degree)
-│   ├── 03_hyperparameters_penguins_exercise_2.ipynb # Vypracovaný a spuštěný Jupyter Notebook cvičení 2
-│   ├── data/
-│   │   ├── hyperparameter_optimization_sample_precomputed.json # Předpočtené výsledky 3 optimalizačních technik
-│   │   ├── diamonds_hyperparameters_exercise_1_precomputed.json # Předpočtené výsledky cvičení 1 (diamanty)
-│   │   └── penguins_hyperparameters_exercise_2_precomputed.json # Předpočtené výsledky cvičení 2 (tučňáci)
-│   ├── plots/
-│   │   ├── hyperopt_grid_search_heatmap.png  # Heatmapa validačního Recall (max_depth vs criterion)
-│   │   ├── hyperopt_random_search_scatter.png # 2D prostor náhodných pokusů C a gamma
-│   │   ├── hyperopt_bayesian_convergence.png  # Konvergenční křivka TPE (Hyperopt)
-│   │   ├── diamonds_grid_search_depth_curve.png # Křivka chyb RMSE vs max_depth u diamantů
-│   │   ├── diamonds_grid_residuals_comparison.png # Srovnání reziduí původního a optimálního modelu
-│   │   ├── penguins_svm_cm_comparison.png    # Srovnání matic záměn Baseline vs Tuned SVM
-│   │   └── penguins_random_search_distribution.png # Rozložení náhodně vzorkovaných parametrů C a gamma
-│   └── theory/
-│       ├── 01_hyperparameter_tuning_theory.md # Parametry vs. Hyperparametry, K-Fold CV, Grid/Random/Bayes Search
-│       ├── 02_hyperparameter_optimization_implementation_guide.md # Detailní implementační průvodce (Scikit-learn & Hyperopt)
-│       ├── 03_introduction_to_neural_networks.md # Prework Session 2: Teorie neuronových sítí, 6 aktivačních funkcí, mizející gradient, typologie
-│       └── 04_ensemble_methods_and_bagging_theory.md # Den 3: Teorie ansámblů, Bias-Variance kompromis, Voting, Stacking, Bagging, Boosting
-├── 04_NLP/                              # Sekce Natural Language Processing (Dny 3 a 4)
-│   └── theory/
-│       ├── 01_introduction_to_nlp.md    # Prework Session 2: Principy NLP, pipeline, Stemming/Lemmatizace, TF-IDF, Word2Vec, 11 aplikací
-│       └── 02_nltk_and_spacy_guide.md   # Prework Session 2: Knihovny NLTK vs. spaCy (metody, architektura, VADER, NER, benchmarky)
-├── 05_Unsupervised_Learning/            # Sekce neřízeného učení (PCA, K-Means, DBSCAN, LOF)
-│   ├── 01_pca_diamonds_exercise.ipynb   # Cvičení PCA na diamantech
-│   ├── 02_kmeans_mall_customers_exercise.ipynb # Cvičení K-Means: Segmentace zákazníků OC (mall_customers.csv)
-│   ├── 03_dbscan_circles_exercise.ipynb # Vzorová implementace DBSCAN na soustředných kruzích (make_circles)
-│   ├── 04_dbscan_moons_exercise.ipynb   # Cvičení DBSCAN na dvou půlměsících (make_moons, 500 vzorků, noise=0.10)
-│   ├── 05_anomaly_detection_lof_lab.ipynb # Laboratoř detekce anomálií & Local Outlier Factor (LOF)
-│   ├── 06_lof_blobs_exercise.ipynb      # Cvičení LOF na shlucích blobs_dataset.csv (kontaminace 2 % vs. 5 %, k=20)
-│   ├── 07_isolation_forest_sample_implementation.ipynb # Vzorová implementace Isolation Forest (make_blobs, 50 anomálií, decision contours)
-│   ├── 08_isolation_forest_student_scores_exercise.ipynb # Cvičení Isolation Forest: Detekce anomálií studentů (student_scores.csv, PCA 2D)
-│   ├── data/
-│   │   ├── pca_diamonds_precomputed.json # Předpočtené výsledky PCA rozboru
-│   │   ├── mall_customers_kmeans_precomputed.json # Předpočtené výsledky K-Means segmentace zákazníků
-│   │   ├── dbscan_circles_precomputed.json # Předpočtené výsledky DBSCAN shlukování & k-NN distance grafu
-│   │   ├── dbscan_moons_precomputed.json # Předpočtené výsledky DBSCAN na půlměsících (moons)
-│   │   ├── lof_anomaly_precomputed.json  # Předpočtené výsledky LOF na blobs_dataset a multi-density datech
-│   │   ├── lof_blobs_exercise_precomputed.json # Předpočtené výsledky LOF cvičení na blobs_dataset (2 % vs 5 %)
-│   │   ├── isolation_forest_precomputed.json # Předpočtené výsledky Isolation Forest na make_blobs a 2D kontury
-│   │   └── iforest_student_scores_precomputed.json # Předpočtené výsledky cvičení Isolation Forest na student_scores (2.5 % vs 1.0 %)
-│   └── theory/
-│       ├── 01_clustering_theory.md      # Den 5: Shluková analýza, K-Means, DBSCAN, taxonomie, diagnostika, guardrails 2026
-│       ├── 01_kmeans_clustering_theory.md # Teoretický rozbor K-Means a shlukování
-│       ├── 02_kmeans_sample_implementation_guide.md # Vzorová implementace K-Means v Scikit-learn (make_blobs, WCSS, Silhouette)
-│       ├── 03_dbscan_sample_implementation_guide.md # Vzorová implementace DBSCAN v Scikit-learn (make_circles, eps, k-NN)
-│       ├── 04_dbscan_moons_exercise_guide.md # Cvičení DBSCAN na dvou půlměsících (make_moons, Chasm Bridging, Silhouette paradox)
-│       ├── 05_anomaly_detection_lof_theory.md # Teorie detekce anomálií, taxonomie, matematika LOF, iForest srovnání
-│       ├── 06_lof_sample_implementation_guide.md # Vzorová implementace LOF ze slajdů (make_blobs, ruční výpočet 5 bodů, výhody/nevýhody)
-│       ├── 07_lof_blobs_exercise_guide.md # Průvodce cvičením LOF na blobs_dataset.csv (matematika, percentilový posun, business dopady)
-│       ├── 08_isolation_forest_theory_and_implementation.md # Teorie & Vzorová implementace Isolation Forest (matematika c(n), stromy, subsampling)
-│       ├── 09_isolation_forest_student_scores_exercise_guide.md # Průvodce cvičením Isolation Forest na student_scores.csv (PCA, kontaminace 2.5 % vs 1.0 %)
-│       └── 10_day_5_unsupervised_learning_summary.md # Velká syntéza neřízeného učení Dne 5 (3 pilíře, matice modelů, desatero 2026)
-├── 06_Final_Project/                    # Závěrečný projekt & Závěr kurzu
-│   └── theory/
-│       ├── 01_machine_learning_course_summary.md # Velká retrospektiva celého kurzu ML (0. až 5. den, rozhodovací strom modelů)
-│       ├── 02_productionizing_machine_learning_models.md # MLOps: Produkční nasazení (Cloud/Edge/On-Prem, Real-time vs Batch, Drift)
-│       ├── 03_further_development_and_ai_trends.md # Trendy v AI, Generativní AI, LLMs, AI v bezpečnosti, knihy & komunity
-│       └── 04_modern_ml_2026_rag_agents_lora.md # Moderní ML 2026: RAG, LoRA, AI Agenti (ReAct), HNSW a XAI (SHAP)
-└── views/                               # Jednotlivé podstránky Streamlit aplikace
-    ├── 00_home.py                       # Úvodní rozcestník a sylabus
-    ├── 00_prework_*.py                  # Moduly přípravného bloku (Prework)
-    ├── 01_*.py                          # Stránky úloh, notebooků a analýz Dne 1
-    ├── 01_extras_*.py                   # Day 1 Extras (What-If, Mapy, Pruning, Taháky)
-    ├── 02_knn_*.py                      # Den 2 moduly k-NN (Teorie, Implementace, Výsledky, Expertní analýzy, Notebooky)
-    ├── 02_metrics_*.py                  # Den 2 moduly metrik (Teorie matice záměn, Multiclass evaluace, Expertní analýzy & Cost matrix, Notebooky)
-    ├── 02_logistic_regression_*.py      # Den 2 moduly logistické regrese (Teorie, Ukázková laboratoř & Simulátory, Notebook)
-    ├── 02_decision_tree_*.py            # Den 2 moduly rozhodovacích stromů (Teorie, Cvičení 1 & 2, Ukázka, Notebooky)
-    ├── 02_svm_*.py                      # Den 2 moduly SVM (Teorie, Cvičení 1, Ukázka ze slajdů, 3D analogie s dekou, Notebook)
-    ├── 02_day_2_summary.py              # Den 2: Ucelené shrnutí 4 klasifikátorů, srovnávací matice & interaktivní kvíz
-    ├── 03_*.py                          # Den 3 moduly ansámblů, sítí a tuningu
-    ├── 04_*.py                          # Den 4 NLP moduly & Prework
-    ├── 05_*.py                          # Den 5 Neřízené učení (PCA, K-Means, DBSCAN, LOF, Isolation Forest, Závěr)
-    ├── 06_course_summary_recap.py       # Závěr kurzu: Celková retrospektiva, selektor modelů a Grand Quiz
-    ├── 06_mlops_productionizing.py      # Závěr kurzu: Produkční nasazení, kalkulátor architektur, simulátor Data Driftu
-    ├── 06_career_and_ai_trends.py       # Závěr kurzu: AI trendy, GenAI, LLMs, AI v kyberbezpečnosti a knihovna zdrojů
-    ├── 06_modern_ml_rag_agents.py       # Moderní ML 2026: Živý RAG simulátor, RAG vs LoRA vs Prompting, ReAct agenti
-    ├── 03_hyperparameter_tuning_theory.py # Homework: Teorie ladění hyperparametrů, K-Fold CV & kalkulátor náročnosti
-    ├── 03_hyperparameters_diamonds_exercise_1.py # Homework: Cvičení 1 (Diamanty - výsledky zadání a ověření metrik)
-    ├── 03_hyperparameters_diamonds_nb.py # Homework: Cvičení 1 (Diamanty - interaktivní notebook)
-    ├── 03_hyperparameters_penguins_exercise_2.py # Homework: Cvičení 2 (Tučňáci - výsledky ladění SVM)
-    ├── 03_hyperparameters_penguins_nb.py # Homework: Cvičení 2 (Tučňáci - interaktivní notebook)
-    ├── 03_hyperparameter_optimization_sample.py # Homework: Ukázková laboratoř (GridSearch, RandomizedSearch, Hyperopt)
-    ├── 03_hyperparameter_optimization_nb.py # Homework: Interaktivní Jupyter Notebook prohlížeč tuningu
-    ├── 01_homework_concrete_preprocessing.py # Homework: Příprava dat betonu (audit, histogramy, scatter, matice, škálování)
-    ├── 01_homework_concrete_preprocessing_nb.py # Homework: Příprava dat betonu – interaktivní notebook
-    ├── 01_homework_concrete_linear_regression.py # Homework: Lineární regrese betonu (70/30, metriky, koeficienty, rezidua)
-    ├── 01_homework_concrete_linear_regression_nb.py # Homework: Lineární regrese betonu – interaktivní notebook
-    ├── 01_homework_concrete_regularization.py # Homework: Regularizace betonu (ElasticNet R2=56.2 %, LogReg Acc=83.8 %)
-    ├── 01_homework_concrete_regularization_nb.py # Homework: Regularizace betonu – interaktivní notebook
-    ├── 01_homework_concrete_decision_tree.py # Homework: Rozhodovací strom betonu (GridSearchCV, MAE=4.40 MPa, R2=84.8 %)
-    ├── 01_homework_concrete_decision_tree_nb.py # Homework: Rozhodovací strom betonu – interaktivní notebook
-    ├── 01_homework_concrete_decision_tree_random.py # Homework: Rozhodovací strom betonu (RandomizedSearchCV, MAE=4.39 MPa)
-    ├── 01_homework_concrete_decision_tree_random_nb.py # Homework: Rozhodovací strom betonu (Randomized) – notebook
-    ├── 02_homework_diabetes_preprocessing.py # Homework: Příprava dat pro klasifikaci (Diabetes – imputace, nulové hodnoty, škálování)
-    ├── 02_homework_diabetes_preprocessing_nb.py # Homework: Příprava dat pro klasifikaci (Diabetes) – interaktivní notebook
-    ├── 02_homework_diabetes_knn.py      # Homework: k-NN klasifikace diabetu (GridSearch heatmapa, K-sweep, ROC, práh)
-    ├── 02_homework_diabetes_knn_nb.py   # Homework: k-NN klasifikace diabetu – interaktivní notebook
-    ├── 02_homework_diabetes_logistic_regression.py # Homework: Logistická regrese diabetu (RandomizedSearch C, Odds Ratios, srovnání)
-    ├── 02_homework_diabetes_logistic_regression_nb.py # Homework: Logistická regrese diabetu – interaktivní notebook
-    ├── 02_homework_diabetes_svm.py      # Homework: SVM klasifikace diabetu (Hyperopt konvergence, podpora, velké srovnání 3 modelů)
-    ├── 02_homework_diabetes_svm_nb.py   # Homework: SVM klasifikace diabetu – interaktivní notebook
-    ├── 02_homework_session1_modern_synthesis.py # Syntéza Session 1: SOTA Benchmark 2026 (XGBoost, HistGradientBoosting, Cost Matrix, Paradigmy)
-    ├── 03_prework_neural_networks_intro.py # Prework Session 2: Interaktivní playground neuronu, aktivační funkce, kalkulátor ceny auta a kvíz
-    ├── 04_prework_nlp_intro.py          # Prework Session 2: Interaktivní pipeline simulátor, Stemming vs Lemma, Word2Vec mapa, 11 aplikací
-    ├── 04_prework_nltk_spacy.py         # Prework Session 2: Laboratoř NLTK vs. spaCy (metody, VADER, NER, POS rozdělení, benchmarky)
-    └── 03_ensemble_bagging_theory.py    # Den 3: Teorie ansámblů & Bagging (Bias-Variance kalkulátor, Bootstrapping simulátor, Heart test)
+├── app.py                              # Navigace kurzu a společný dock
+├── requirements.txt                    # Závislosti aplikace včetně Librariana
+├── .python-version                     # Požadovaná verze Pythonu
+├── .streamlit/                         # Konfigurace; skutečné secrets nepatří do Gitu
+├── 00_Prework/                         # Úvod, statistika a příprava dat
+├── 01_Regression/                      # Regrese a související domácí úlohy
+├── 02_Classification/                  # Klasifikace a diagnostika
+├── 03_Advanced_ML_Neural_Networks/      # Tuning, ansámbly a neuronové sítě
+├── 04_NLP/                             # Textová data, vektorizace a transformery
+├── 04_Homework/                        # Navazující domácí úlohy
+├── 05_Unsupervised_Learning/            # PCA, shlukování a detekce anomálií
+├── 06_Final_Project/                   # Shrnutí, MLOps a moderní ML
+├── views/                              # Stránky, laboratoře a prohlížeč notebooků
+├── components/ml_librarian/            # Verzovaný export samostatného RAG projektu
+├── data/                               # Sdílená data a grafické podklady
+├── models/                             # Uložené modelové artefakty
+└── docs/                               # Projektové a integrační podklady
 ```
+
+Konkrétní soubory a jejich návaznosti jsou dostupné v jednotlivých složkách a v navigaci aplikace. Dostupnost autorských kurzových materiálů se řídí jejich vlastními podmínkami.
 
 ---
 
-## 🛠️ Použité technologie & Knihovny
+## 🛠️ Použité technologie a knihovny
 
-- **AI Orchestrace & Vývojové prostředí:** [Google Antigravity IDE](https://deepmind.google/) (Agentic Pair Programming & Workflow Orchestration)
-- **Frontend & Dashboard:** [Streamlit](https://streamlit.io/)
-- **Machine Learning & Preprocessing:** [Scikit-learn](https://scikit-learn.org/) (LinearRegression, Ridge, Lasso, ElasticNet, DecisionTreeRegressor, HistGradientBoostingRegressor, KNeighborsClassifier, StandardScaler, Normalizer, PolynomialFeatures)
-- **Data Wrangling:** [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/)
-- **Interaktivní vizualizace:** [Plotly Express & Graph Objects](https://plotly.com/python/)
-- **Generování PDF:** [ReportLab](https://www.reportlab.com/)
+- **Aplikace a vizualizace:** Streamlit, Plotly, Pandas a NumPy; Matplotlib/Seaborn pro analytické a notebookové podklady.
+- **Modelování a diagnostika:** Scikit-learn, XGBoost, SciPy, Statsmodels, Hyperopt a Joblib.
+- **NLP:** NLTK, spaCy a navazující výukové moduly pro slovní vnoření a transformery.
+- **ML Librarian:** Sentence Transformers, vícejazyčné E5 embeddingy, TF-IDF, cross-encoder a volitelné generování přes Groq API.
+- **Příprava materiálů:** pypdf a nbformat; trénovací a rozšiřující notebooky mají vlastní požadavky.
+- **Vývoj:** Google Antigravity a AI spolupráce popsaná výše.
+
+Závislosti aplikace určuje [requirements.txt](requirements.txt), rozšíření RAG [requirements-librarian.txt](components/ml_librarian/requirements-librarian.txt).
 
 ---
 
@@ -404,8 +197,33 @@ Coderslab-DataScience/
 Tento projekt je určen pro vzdělávací a studijní účely v rámci studia Data Science. Původní koncepty úloh náleží vzdělávací akademii **[Coders Lab](https://coderslab.cz/cz/)**. Kód implementace aplikace, interaktivní moduly a doplňující analýzy jsou volně k dispozici pod licencí MIT.
 
 
-## Integrovaný ML Librarian
+## 📚 Integrovaný ML Librarian
 
-V navigaci **36. Projekt: ML Librarian** jsou stránky vyhledávání a dokumentace pro lektora. Modul běží uvnitř stejné aplikace; lektor nezadává API klíč ani model. Jednorázové serverové nastavení a postup aktualizace jsou v [docs/ML_LIBRARIAN_INTEGRATION.md](docs/ML_LIBRARIAN_INTEGRATION.md). Zdrojový vývoj zůstává v odděleném repozitáři ML_Librarian.
+Samostatný závěrečný projekt rozšiřuje již existující studijní prostředí. Cílem bylo prakticky použít znalosti z kurzu na vlastní aplikaci místo původního kurzového příkladu a samostatně se naučit další postupy.
 
-Librarian je dostupný také přes plovoucí tlačítko **📚 Librarian** vpravo dole na všech stránkách kurzu. Panel zachovává odeslaný dotaz, výsledky a odpověď při přechodu mezi lekcemi; dokumentace pro lektora zůstává samostatnou stránkou.
+### Použití v aplikaci
+
+1. Na kterékoli stránce otevři tlačítko **📚 Librarian** vpravo dole.
+2. Zadej otázku česky, anglicky nebo polsky.
+3. Ve **V čem hledat** zvol checkboxy typu materiálu a původu zdroje; výchozí výběr zahrnuje vše.
+4. Prohlédni nalezené úryvky, jejich původ a relevanci. Odkaz **Otevřít v kurzu** vede na přímo přiřazenou stránku; **Související stránka kurzu** označuje tematickou vazbu, nikoli shodný text.
+5. Pokud je dostupná konfigurace a opora v materiálech, lze výslovně odeslat otázku a nejvýše pět úryvků službě Groq a požádat o odpověď s citacemi. Návštěvník nevyplňuje vlastní klíč ani model.
+
+Odeslaný dotaz, výsledky a odpověď se uchovávají v aktuální relaci i při přechodu mezi lekcemi; obnovení stránky může relaci ukončit. Skóre relevance není pravděpodobnost správnosti a doslovná citace sama nezaručuje správný výklad.
+
+### Data a provoz
+
+- Kurzový modul obsahuje ověřovaný runtime balíček se zpracovanými dokumenty a indexem. Při prvním otevření připraví data a připnuté vyhledávací modely; studený start může trvat déle.
+- Vyhledávání nevyžaduje Groq API klíč. Generování vyžaduje serverové nastavení provozovatele (`GROQ_API_KEY`, volitelně `GROQ_MODEL`); skutečné hodnoty nepatří do repozitáře.
+- Free tier má sdílené limity. Při chybě generování nebo vyčerpání kvóty zůstávají nalezené zdroje dostupné. Úspěšné lokální testy nejsou potvrzením kvality všech veřejných odpovědí.
+- Veřejná aplikace **neobsahuje původní kurzová PDF**, pouze jejich zpracované textové úryvky. Originály jsou autorským majetkem Coders Lab a jsou určeny studentům a absolventům kurzu; proto zde není veřejný odkaz na jejich stažení.
+
+### Dokumentace pro lektora
+
+Sekce **36. Projekt: ML Librarian → ML Projekt Librarian** vypráví příběh od záměru přes plánování a experimenty po poučení. Obsahuje původní roadmapu, checklist, implementační plán, slepé uličky, odkazy na kurzové metody, čtyři notebooky ke stažení a odkazy do Google Colab. Výsledky a známá omezení jsou odlišeny od nezávislé přejímky kvality.
+
+Zdrojový vývoj Librariana probíhá v [samostatném repozitáři ML_Librarian](https://github.com/Kilitar/ML_Librarian). Složka `components/ml_librarian/` je verzovaný export, nikoli další nezávislá implementace. Historický integrační postup je v [docs/ML_LIBRARIAN_INTEGRATION.md](docs/ML_LIBRARIAN_INTEGRATION.md); jeho starší části mohou popisovat již nahrazenou navigaci nebo konfiguraci. Aktuální implementaci určují `app.py` a export komponenty.
+
+## 🙏 Poděkování
+
+Děkuji **Coders Lab** za kurz a inspiraci k praktickým experimentům a **Monice** za vedení kurzu a předávání zkušeností. Děkuji také kolegům z kurzu, kteří aplikaci používali a dávali zpětnou vazbu.
