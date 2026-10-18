@@ -407,3 +407,5 @@ Tento projekt je určen pro vzdělávací a studijní účely v rámci studia Da
 ## Integrovaný ML Librarian
 
 V navigaci **36. Projekt: ML Librarian** jsou stránky vyhledávání a dokumentace pro lektora. Modul běží uvnitř stejné aplikace; lektor nezadává API klíč ani model. Jednorázové serverové nastavení a postup aktualizace jsou v [docs/ML_LIBRARIAN_INTEGRATION.md](docs/ML_LIBRARIAN_INTEGRATION.md). Zdrojový vývoj zůstává v odděleném repozitáři ML_Librarian.
+
+Librarian je dostupný také přes plovoucí tlačítko **📚 Librarian** vpravo dole na všech stránkách kurzu. Panel zachovává odeslaný dotaz, výsledky a odpověď při přechodu mezi lekcemi; dokumentace pro lektora zůstává samostatnou stránkou.

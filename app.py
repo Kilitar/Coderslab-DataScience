@@ -620,6 +620,10 @@ nav = st.navigation(
     }
 )
 
+# Common host entrypoint keeps the dock available across course pages.
+from components.ml_librarian.dock import render_dock
+render_dock()
+
 nav.run()
 
 

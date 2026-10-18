@@ -48,3 +48,8 @@ course navigation/search parity and local HTTP are recorded in the source repo
 handoff. Linux/Python3.11/cloud memory/hosted URL and live Groq answer quality
 remain unverified until the existing deployment rebuilds with secrets. Current
 lecturer layout is integrated unchanged; redesign is a later user review task.
+
+
+## Right-hand dock
+
+The course common entrypoint renders a floating Librarian launcher at bottom-right before nav.run(). Open it without leaving the lesson. Submitted query, filters, results and answer persist in session memory across closing/navigation. Closed dock does not initialize search; dock/full-page share one cached index. Instructor documentation remains separate. See components/ml_librarian/docs/RIGHT_DOCK.md for validation and styling limits. Desktop/mobile CSS still requires visual review.
