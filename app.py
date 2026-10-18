@@ -318,8 +318,7 @@ p_modern_ml_rag = st.Page("views/06_modern_ml_rag_agents.py", title="Moderní ML
 
 # Hierarchická navigace přehledně členěná dle tematických bloků
 # Integrovaný RAG modul – implementace je verzovaná v components/ml_librarian.
-p_librarian = st.Page("views/07_ml_librarian.py", title="ML Librarian: Vyhledávání a odpovědi", icon="🔬", url_path="ml_librarian")
-p_librarian_lecturer = st.Page("views/07_ml_librarian_lecturer.py", title="ML Librarian: Pro lektora", icon="📖", url_path="ml_librarian_lecturer")
+p_librarian_lecturer = st.Page("views/07_ml_librarian_lecturer.py", title="ML Projekt Librarian", icon="📖", url_path="ml_librarian_lecturer")
 
 nav = st.navigation(
     {
@@ -616,7 +615,7 @@ nav = st.navigation(
         "35. Moderní ML 2026: RAG & AI Agenti": [
             p_modern_ml_rag,
         ],
-        "36. Projekt: ML Librarian": [p_librarian, p_librarian_lecturer],
+        "36. Projekt: ML Librarian": [p_librarian_lecturer],
     }
 )
 
